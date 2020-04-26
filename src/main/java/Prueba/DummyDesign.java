@@ -8,4 +8,7 @@ public class DummyDesign {
 	public int integrante3() {
 		return 3;
 	}
+	public int integrante4(){
+		return 4;
+	}
 }
