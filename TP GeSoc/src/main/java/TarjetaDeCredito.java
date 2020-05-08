@@ -8,7 +8,7 @@ public class TarjetaDeCredito implements MedioDePago{
 	int codigoSeguridad;
 	int cuotas;
 	
-	void abonarOperacion(float valor) {
+	public void abonarOperacion(float valor) {
 		
 	}
 
@@ -17,4 +17,5 @@ public class TarjetaDeCredito implements MedioDePago{
 /*TODO
  * Agregar clases de todos los tipos definidos por mercadoLibre: https://www.mercadopago.com.ar/developers/es/guides/localization/payment-methods/ 
  *  |- Usar herencia.
- *  |- Pensar otra alternativa con composición.
+ *  |- Pensar otra alternativa con composicion.
+*/

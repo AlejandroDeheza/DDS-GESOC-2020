@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntidadJuridica {
 	String razonSocial;
@@ -12,5 +14,5 @@ public class EntidadJuridica {
 }
 
 public enum CategoriaEntidadJuridica{
-	OSC, MICRO_EMPRESA, PEQUEÑA_EMPRESA, EMPRESA_MEDIANA_TRAMO_1, EMPRESA_MEDIANA_TRAMO_2;
+	OSC, MICRO_EMPRESA, PEQUENIA_EMPRESA, EMPRESA_MEDIANA_TRAMO_1, EMPRESA_MEDIANA_TRAMO_2;
 }

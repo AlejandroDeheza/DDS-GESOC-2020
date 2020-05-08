@@ -1,3 +1,7 @@
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 public class OperacionDeEgreso {
 	int codDocumentoComercial;
 	Date fechaOperacion;
@@ -7,6 +11,7 @@ public class OperacionDeEgreso {
 	
 	
 	public float valorTotal() {
+		return codDocumentoComercial;
 		//Se calcula recorriendo la lista de items.
 	};
 	

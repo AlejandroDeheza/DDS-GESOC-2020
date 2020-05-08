@@ -5,7 +5,7 @@ public class TarjetaDeDebito implements MedioDePago{
     String titular;
     int codigoSeguridad;
     
-    void abonarOperacion(float valor) {
+    public void abonarOperacion(float valor) {
     }
 
 }

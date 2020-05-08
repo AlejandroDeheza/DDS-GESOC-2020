@@ -10,6 +10,6 @@ public class Usuario {
 
 }
 
-public enum TipoUsuario{
+enum TipoUsuario{
 	ADMIN, ESTANDAR;
 }
