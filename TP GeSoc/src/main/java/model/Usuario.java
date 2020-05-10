@@ -2,8 +2,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 public class Usuario {
 	String username;
 	String password;
@@ -12,11 +10,8 @@ public class Usuario {
 	
 	Usuario(String username, String password, TipoUsuario tipoUser){
 		this.username=username;
-		validadorPasswords.instance().validarPassword(password, passwordsUsadas);
-			
-		
 		this.password=password;
-		agregarPasswordUsada(password);
+        agregarPasswordUsada(password);
 		this.tipoUser=tipoUser;
 	}
 
@@ -24,8 +19,9 @@ public class Usuario {
 		this.passwordsUsadas.add(password);
 	}
 	
-}
-
-enum TipoUsuario{
-	ADMIN, ESTANDAR;
+	public void cambiarContraseña(String password) {
+		validadorPasswords.instance().validarPassword(password, passwordsUsadas);
+		this.password=password;
+		this.passwordsUsadas.add(password);
+	}
 }
