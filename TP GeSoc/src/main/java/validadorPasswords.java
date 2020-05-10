@@ -1,40 +1,82 @@
 import java.io.BufferedReader;
+import java.io.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class validadorPasswords {
-	private static final validadorPasswords INSTANCE = new validadorPasswords(); //No se por qué me insiste con la exception acá
-	private BufferedReader archivoPasswords = new BufferedReader(this.archivoPasswords());
+	private static final validadorPasswords INSTANCE = new validadorPasswords(); //No se por quï¿½ me insiste con la exception acï¿½
+	private BufferedReader archivoPasswords;
 	private List<String> listaPasswords = new ArrayList<String>();
 	
-	private validadorPasswords() throws Exception {
+	private validadorPasswords() {
+		this.setArchivoPasswords();
 		this.leerArchivo(listaPasswords,  archivoPasswords);
 	}
 	
+
 	static validadorPasswords instance() {
 		return INSTANCE;
 	}
 	
 	
-	/* Valida que las contraseñas no pertenezcan a la lista de las 10k contraseñas más comunes */
-	boolean validarPassword(String password, List<String> passwordsUsadas) throws Exception{				
-		return listaPasswords.stream().allMatch(unaPassword -> unaPassword != password) //Que la contraseña no pertenezca a las 10k mas usadas
-			   && password.length() >= 8 // Que la contraseña tenga por lo menos 8 caracteres
-			   && passwordsUsadas.stream().allMatch(unaPassword -> unaPassword != password); //Que la contraseña no se haya usado anteriormente
+	/* Valida que las contraseï¿½as no pertenezcan a la lista de las 10k contraseï¿½as mï¿½s comunes */
+	void validarPassword(String password, List<String> passwordsUsadas){				
+		validarQueNoSeaComun(password); //Que la contraseï¿½a no pertenezca a las 10k mas usadas
+	    validarQueTengaLongitudApropiada(password); // Que la contraseï¿½a tenga por lo menos 8 caracteres
+	    validarQueNoSeHayaUsadoAntes(password, passwordsUsadas); //Que la contraseï¿½a no se haya usado anteriormente
 			   
-			   //TODO: Nico | Faltaría un metodo más de control. Deberíamos sacar cada termino del && en un método individual para mayor declaratividad.
+			   //TODO: Nico | Faltarï¿½a un metodo mï¿½s de control. Deberï¿½amos sacar cada termino del && en un mï¿½todo individual para mayor declaratividad.
+	}
+
+	private boolean validarQueNoSeHayaUsadoAntes(String password, List<String> passwordsUsadas) {
+		if(!passwordsUsadas.stream().allMatch(unaPassword -> unaPassword != password))
+		{
+			throw new contraseÃ±aUsadaPreviamenteException();
+			
+		}
+		return true;
+	}
+
+	private boolean validarQueTengaLongitudApropiada(String password) {
+		if(password.length() < 8)
+		{
+			throw new longitudDeContraseÃ±aBajaException();
+		}
+		return true;
+	}
+
+	private boolean validarQueNoSeaComun(String password) {
+		if(listaPasswords.stream().allMatch(unaPassword -> unaPassword != password)) {
+			throw new contraseÃ±aComunException();
+		}
+		return true;
 	}
 	
-	List<String> leerArchivo(List<String> lista, BufferedReader archivo) throws Exception {
+	List<String> leerArchivo(List<String> lista, BufferedReader archivo){
 		for(int i = 1; i <= 10000; i++) {
+			try {
 			lista.add(archivo.readLine());
+			}
+			catch(IOException e) {
+				
+			}
 		}
 		return lista;
 	}
 	
-	private FileReader archivoPasswords() throws FileNotFoundException {
+	private FileReader archivoPasswords() throws FileNotFoundException{
 		return new FileReader("./././Assets/10k-most-common.txt");
+		
+	}
+	
+	void setArchivoPasswords() {
+		try {
+			archivoPasswords=new BufferedReader(this.archivoPasswords());
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("El archivo especificado no se encuentra en la carpeta");
+		}	
 	}
 }

@@ -17,7 +17,7 @@ public class BuilderUsuario {
 		this.tipo=tipo;
 	}
 	Usuario crearUsuario() {
-		return new Usuario (username,password,tipo);
+			return new Usuario(username,password,tipo);
 	}
 
 }

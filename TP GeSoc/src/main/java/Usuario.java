@@ -9,14 +9,13 @@ public class Usuario {
 	private List<String> passwordsUsadas = new ArrayList<String>();
 	TipoUsuario tipoUser;
 	
-	Usuario(String username, String password, TipoUsuario tipoUser) throws Exception{
+	Usuario(String username, String password, TipoUsuario tipoUser){
 		this.username=username;
-		if(validadorPasswords.instance().validarPassword(password, passwordsUsadas)) {
-			this.password=password;
-		}
-		else { 
-			throw new RuntimeErrorException(null, "Contrasenia inválida"); 
-		}
+		validadorPasswords.instance().validarPassword(password, passwordsUsadas);
+			
+		
+		this.password=password;
+		agregarPasswordUsada(password);
 		this.tipoUser=tipoUser;
 	}
 
