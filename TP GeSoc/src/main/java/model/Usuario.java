@@ -19,7 +19,7 @@ public class Usuario {
 		this.passwordsUsadas.add(password);
 	}
 	
-	public void cambiarContraseña(String password) {
+	public void cambiarContrasenia(String password) {
 		validadorPasswords.instance().validarPassword(password, passwordsUsadas);
 		this.password=password;
 		this.passwordsUsadas.add(password);

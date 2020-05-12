@@ -1,4 +1,6 @@
-package Testing;
+//package model;
+
+import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import exceptions.*;
@@ -20,10 +22,10 @@ public class TestsNuevosUsuarios {
 		  }
 		 
 		  @Test
-		  public void setearContraseñaNormalEnBuilder() {
+		  public void setearContraseniaNormalEnBuilder() {
 			  builder = new BuilderUsuario();
-			  builder.setPassword("ContraseñaLarga");
-			  Assert.assertEquals("ContraseñaLarga",builder.getPassword());
+			  builder.setPassword("qiehgyfiiyrt");
+			  Assert.assertEquals("qiehgyfiiyrt",builder.getPassword());
 		  }
 		  
 		  @Test
@@ -42,23 +44,23 @@ public class TestsNuevosUsuarios {
 		  
 		  
 		  @Test(expected = longitudDeContraseniaBajaException.class)
-		  public void setearContraseñaCorta() {
+		  public void setearContraseniaCorta() {
 			  builder = new BuilderUsuario();
 			  builder.setPassword("Holi");
 		  }
 
 		  @Test(expected = contraseniaUsadaPreviamenteException.class)
-		  public void setearContraseñaYaUsada() {
+		  public void setearContraseniaYaUsada() {
 			 builder = new BuilderUsuario();
-		     builder.setPassword("ContraseñaLarga");
+		     builder.setPassword("qiehgyfiiyrt");
 		     builder.setTipo(TipoUsuario.ADMIN);
 		     builder.setUsername("Jorge");
 		     usuario=builder.crearUsuario();
-		     usuario.cambiarContraseña("ContraseñaLarga");
+		     usuario.cambiarContrasenia("qiehgyfiiyrt");
 		  }
 		  
-		  @Test(expected = contraseniaComunException.class)
-		  public void setearContraseñaComun() {
+		  @Test (expected = contraseniaComunException.class)
+		  public void setearContraseniaComun() {
 			  builder = new BuilderUsuario();
 			  builder.setPassword("password");
 		  }
