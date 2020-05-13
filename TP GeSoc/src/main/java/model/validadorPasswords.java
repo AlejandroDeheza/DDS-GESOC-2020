@@ -30,8 +30,28 @@ public class validadorPasswords {
 	    validarQueTengaLongitudApropiada(password); // Que la contrase�a tenga por lo menos 8 caracteres
 	    validarQueNoSeHayaUsadoAntes(password, passwordsUsadas); //Que la contrase�a no se haya usado anteriormente
 	    validarQueNoSeaComun(password); //Que la contrase�a no pertenezca a las 10k mas usadas <--------------------------------ROMPE
-			   
+	    validarQueTengaAlgunaMayuscula(password);
+	    validarQueTengaAlgunaMinuscula(password);
+	    validarQueTengaAlgunNumero(password);	   
 			   //TODO: Nico | Faltar�a un metodo m�s de control. Deber�amos sacar cada termino del && en un m�todo individual para mayor declaratividad.
+	}
+	private void validarQueTengaAlgunaMinuscula(String password) {
+		if(password.chars().filter(Caracter -> Character.isLowerCase(Caracter)).count()==0) {
+			throw new contraseniaSinMinusculaException();
+		}
+	}
+
+
+	private void validarQueTengaAlgunaMayuscula(String password) {
+		if(password.chars().filter(Caracter -> Character.isUpperCase(Caracter)).count()==0) {
+			throw new contraseniaSinMayusculaException();
+		}
+	}
+	private void validarQueTengaAlgunNumero(String password) {
+		if(password.chars().filter(Caracter -> Character.isDigit(Caracter)).count()==0){
+			throw new contraseniaSinNumeroException();
+			
+		}
 	}
 
 	private void validarQueNoSeHayaUsadoAntes(String password, List<String> passwordsUsadas) {

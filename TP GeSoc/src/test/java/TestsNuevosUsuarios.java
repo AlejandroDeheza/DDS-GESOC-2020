@@ -24,8 +24,8 @@ public class TestsNuevosUsuarios {
 		  @Test
 		  public void setearContraseniaNormalEnBuilder() {
 			  builder = new BuilderUsuario();
-			  builder.setPassword("qiehgyfiiyrt");
-			  Assert.assertEquals("qiehgyfiiyrt",builder.getPassword());
+			  builder.setPassword("qiehgWfiiyrt26");
+			  Assert.assertEquals("qiehgWfiiyrt26",builder.getPassword());
 		  }
 		  
 		  @Test
@@ -52,11 +52,11 @@ public class TestsNuevosUsuarios {
 		  @Test(expected = contraseniaUsadaPreviamenteException.class)
 		  public void setearContraseniaYaUsada() {
 			 builder = new BuilderUsuario();
-		     builder.setPassword("qiehgyfiiyrt");
+		     builder.setPassword("qiehgyWfiiyrt2");
 		     builder.setTipo(TipoUsuario.ADMIN);
 		     builder.setUsername("Jorge");
 		     usuario=builder.crearUsuario();
-		     usuario.cambiarContrasenia("qiehgyfiiyrt");
+		     usuario.cambiarContrasenia("qiehgyWfiiyrt2");
 		  }
 		  
 		  @Test (expected = contraseniaComunException.class)
@@ -64,6 +64,22 @@ public class TestsNuevosUsuarios {
 			  builder = new BuilderUsuario();
 			  builder.setPassword("password");
 		  }
-
-
+		  
+		  @Test (expected = contraseniaSinMayusculaException.class)
+		  public void setearContraseniaSinMayuscula() {
+			  builder = new BuilderUsuario();
+			  builder.setPassword("qwrpoqwirpqworiqpwori");
+		  }
+		  
+		  @Test (expected = contraseniaSinNumeroException.class)
+		  public void setearContraseniaSinNumero() {
+			  builder = new BuilderUsuario();
+			  builder.setPassword("QWRasdqwRWQsafG");
+		  }
+		  
+		  @Test (expected = contraseniaSinMinusculaException.class)
+		  public void setearContraseniaSinMinuscula() {
+			  builder = new BuilderUsuario();
+			  builder.setPassword("GASLKASJGLQPR25126");
+		  }
 }
