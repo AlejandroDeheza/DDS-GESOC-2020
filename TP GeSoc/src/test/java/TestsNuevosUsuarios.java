@@ -1,8 +1,5 @@
 //package model;
 
-import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
 import exceptions.*;
 import model.*;
 
@@ -62,6 +59,13 @@ public class TestsNuevosUsuarios {
 		  @Test (expected = contraseniaComunException.class)
 		  public void setearContraseniaComun() {
 			  builder = new BuilderUsuario();
+			  builder.setPassword("dickhead");
+		  }
+		 
+		  
+		  @Test (expected = contraseniaComunException.class)
+		  public void setearContraseniaComun2() {
+			  builder = new BuilderUsuario();
 			  builder.setPassword("password");
 		  }
 		  
@@ -82,4 +86,5 @@ public class TestsNuevosUsuarios {
 			  builder = new BuilderUsuario();
 			  builder.setPassword("GASLKASJGLQPR25126");
 		  }
+		  
 }
