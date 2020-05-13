@@ -38,7 +38,7 @@ public class validadorPasswords {
 		if(passwordsUsadas==null) {
 			return;
 		}
-		if(!passwordsUsadas.stream().allMatch(unaPassword -> unaPassword != password))
+		if(passwordsUsadas.stream().anyMatch(unaPassword -> unaPassword.contentEquals(password)))
 		{
 			throw new contraseniaUsadaPreviamenteException();
 		}
