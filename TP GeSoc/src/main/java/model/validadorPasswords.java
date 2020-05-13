@@ -52,7 +52,7 @@ public class validadorPasswords {
 	}
 
 	private void validarQueNoSeaComun(String password) {
-		if(listaPasswords.stream().anyMatch(unaPassword -> unaPassword == password)) {
+		if(listaPasswords.stream().anyMatch(unaPassword -> unaPassword.contentEquals(password))) {
 			throw new contraseniaComunException();
 		}
 	}
