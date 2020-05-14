@@ -1,4 +1,5 @@
 package model;
-public enum Tipo {
+
+public enum TipoDocumentoComercial {
 	FACTURA, TICKET, RECIBO;
 }

@@ -1,14 +1,14 @@
 package model;
+
 public class Proveedor {
 	String razonSocial;
 	String direccionPostal;
-	int dni;
-	
-	
-	public Proveedor(String razonSocial, String direccionPostal, int dni) {
+	int cuil;
+
+	public Proveedor(String razonSocial, String direccionPostal, int cuil) {
 		this.razonSocial = razonSocial;
 		this.direccionPostal = direccionPostal;
-		this.dni = dni;
+		this.cuil = cuil;
 	}
 
 	public String getRazonSocial() {
@@ -27,12 +27,12 @@ public class Proveedor {
 		this.direccionPostal = direccionPostal;
 	}
 
-	public int getdni() {
-		return dni;
+	public int getCuil() {
+		return cuil;
 	}
 
-	public void setdni(int dni) {
-		this.dni = dni;
+	public void setCuil(int cuil) {
+		this.cuil = cuil;
 	}
-	
+
 }

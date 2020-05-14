@@ -1,5 +1,6 @@
-package model;public class DocumentoComercial {
-	int ID;
-	Tipo tipoDoc;
-}
+package model;
 
+public class DocumentoComercial {
+	int ID;
+	TipoDocumentoComercial tipoDoc;
+}
