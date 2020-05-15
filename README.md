@@ -122,11 +122,11 @@ Calcular el tipo de empresa según lo [estipulado por la AFIP](https://pymes.afi
 
 + Ventajas
 
-no hace falta actualizar el tipo de organización, se genera calculando el valor de las ventas totales anuales
+No hace falta actualizar el tipo de organización, se genera calculando el valor de las ventas totales anuales
 
 + Desventajas
 
-todavía no tenemos la información suficiente para poder calcular ese valor
+Todavía no tenemos la información suficiente para poder calcular ese valor
 <br/>
 <br/>
 
