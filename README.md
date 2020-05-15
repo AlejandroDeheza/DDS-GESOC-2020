@@ -18,6 +18,8 @@ Delegamos el conocimiento de esos 2 atributos a otra clase y no a la clase “Op
 + Desventajas
 
 Estaríamos creando objetos sin funcionalidades que solo almacenan datos, algo que se puede hacer en una base de datos.
+<br/>
+<br/>
 
 
 ### 2. Proveedores de una operación de egreso
@@ -30,6 +32,8 @@ Nos da mas flexibilidad a la hora de generar una OperacionDeEgreso. Podemos rela
 + Desventajas
 
 Podríamos estar modelando algo que no se valla a usar.
+<br/>
+<br/>
 
 
 ### 3. DNI en vez de CUIL
@@ -42,18 +46,17 @@ Podemos usar una variable long en vez de int
 + Desventajas
 
 Puede haber colisiones entre DNIs. Es mas confiable usar un CUIL
+<br/>
+<br/>
 
 
 ### 4. Mas tipos de documentos comerciales
-Añadir al enum “TipoDocumentoComercial” más tipos como: 
-
-remito, nota de débito, nota de crédito
+Añadir al enum “TipoDocumentoComercial” más tipos como: **remito, nota de débito, nota de crédito**
 
 Según lo [referenciado](http://www.mundoit.com.ar/documentos-comerciales-de-una-empresa/) en el enunciado del TP.
+<br/>
 
-Y:
-
-Presupuesto, nota de venta y resumen de cuenta.
+Y: **Presupuesto, nota de venta y resumen de cuenta.**
 
 Tal como se puede apreciar en la siguiente captura del libro “La organización y sus sistemas de información” de la profesora Pollo Cattaneo. Ya que, en una operación de egreso de una organización, se pueden recibir esos tipos de documentos:
  
@@ -64,6 +67,8 @@ Nos da mas flexibilidad para adaptar el proyecto a varias organizaciones
 + Desventajas
 
 Podríamos estar generando tipos que no vallamos a usar. Podría estar fuera del alcance del proyecto.
+<br/>
+<br/>
 
 
 ### 5. Método de pago con Cheque
@@ -76,6 +81,8 @@ Se agrega flexibilidad a la hora de generar operaciones de egreso.
 + Desventajas
 
 No respetan los medios de pago de mercado libre.
+<br/>
+<br/>
 
 
 ### 6. Relación bidireccional entre Entidad Jurídica y Entidad Base
@@ -89,6 +96,8 @@ Permite que se puedan mandar mensajes entre las instancias de las 2 clases
 
 Puede que por el momento no sea muy útil, ya que no conocemos el comportamiento de ambas entidades.
 Puede ocurrir que, por una mala sincronización, quede una referencia libre o vacía.
+<br/>
+<br/>
  
 
 ### 7. Clasificación de Empresas en tiempo de ejecución
@@ -101,6 +110,8 @@ no hace falta actualizar el tipo de organización, se genera calculando el valor
 + Desventajas
 
 todavía no tenemos la información suficiente para poder calcular ese valor
+<br/>
+<br/>
 
 
 ### 8. Doble validación de contraseña
@@ -113,4 +124,8 @@ Permite que se valide la contraseña si se genera un usuario directamente con el
 + Desventajas
 
 El mismo código se ejecuta 2 veces en caso de que se creé un usuario con el Builder.
+<br/>
+<br/>
+
+
 
