@@ -49,7 +49,7 @@ Podemos usar una variable int en vez de long
 
 Puede haber colisiones entre DNIs. Es más confiable usar un CUIL
 
-**Cualquiera de estos datos se puede representar también como un string, siendo que no se va a operar numericamente con el**
+**Cualquiera de estos datos se puede representar también como un string, siendo que no se va a operar numericamente con el.**
 <br/>
 <br/>
 
@@ -74,7 +74,7 @@ Nos da más flexibilidad para adaptar el proyecto a varias organizaciones
 
 + Desventajas
 
-Podríamos estar generando tipos que no vallamos a usar. Podría estar fuera del alcance del proyecto.
+Podríamos estar generando tipos que no vayamos a usar. Podría estar fuera del alcance del proyecto.
 <br/>
 <br/>
 
@@ -141,6 +141,8 @@ Permite que se valide la contraseña si se genera un usuario directamente con el
 + Desventajas
 
 El mismo código se ejecuta 2 veces en caso de que se creé un usuario con el Builder.
+
+**De todas formas, esta validación no deberia ser necesaria porque externamente no va a haber acceso a ese metodo. "Confiar en el adentro, desconfiar en afuera" - Diseño del manejo de errores.**
 <br/>
 <br/>
 
