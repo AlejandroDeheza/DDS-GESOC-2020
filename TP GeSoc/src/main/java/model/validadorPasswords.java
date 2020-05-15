@@ -1,11 +1,7 @@
 package model;
 import exceptions.*;
 
-
-import java.io.BufferedReader;
 import java.io.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,13 +74,15 @@ public class validadorPasswords {
 	}
 	
 	List<String> leerArchivo(List<String> lista, BufferedReader archivo){
-		for(int i = 1; i <= 10000; i++) {
-			try {
-			lista.add(archivo.readLine());
+		
+		try {
+			for(int i = 1; i <= 10000; i++) {
+				lista.add(archivo.readLine());
+			}
+			archivo.close();
 			}
 			catch(IOException e) {
 			}
-		}
 		return lista;
 	}
 	
