@@ -152,6 +152,8 @@ En *validadorPasswords* utilizamos el patrón Singleton, ya que, al no tener un 
 
 Sin embargo, no habría problema en generar una nueva instancia de *validadorPasswords* cada vez que se desee crear una nueva contraseña.
 
+También podríamos realizar inyección de dependencias, enviando el validador de passwords como parametro del constructor del builder, al momento de crearlo. 
+
 En *builderOperacionDeEgreso* y *builderUsuario* utilizamos el patrón builder, ya que vamos a tener diferentes representaciones del objeto a construir y dicho patrón nos permite tener un mayor control sobre el proceso de construcción. 
 
 De todas formas, no es algo imprescindible en este momento, por lo que podríamos optar por usar otras formas de construir estos objetos. 
