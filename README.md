@@ -146,5 +146,15 @@ El mismo código se ejecuta 2 veces en caso de que se creé un usuario con el Bu
 <br/>
 <br/>
 
+**Otras consideraciones:**
+En *validadorPasswords* utilizamos el patrón Singleton, ya que, al no tener un estado mutable y solo realizar operaciones de chequeo, no trae mayores complicaciones y ahorra tiempo computacional, al evitar tener que releer el archivo de contraseñas cada vez que se genera una nueva instancia. 
+
+Sin embargo, no habría problema en generar una nueva instancia de *validadorPasswords* cada vez que se desee crear una nueva contraseña.
+
+En *builderOperacionDeEgreso* y *builderUsuario* utilizamos el patrón builder, ya que vamos a tener diferentes representaciones del objeto a construir y dicho patrón nos permite tener un mayor control sobre el proceso de construcción. 
+
+De todas formas, no es algo imprescindible en este momento, por lo que podríamos optar por usar otras formas de construir estos objetos. 
+
+
 
 
