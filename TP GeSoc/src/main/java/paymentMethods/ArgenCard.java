@@ -4,5 +4,5 @@ import model.IDMedioDePago;
 import model.TarjetaDeCredito;
 
 public class ArgenCard extends TarjetaDeCredito {
-	IDMedioDePago idMedio = IDMedioDePago.ARGENCARD;
+	IDMedioDePago idMedioDePago = IDMedioDePago.ARGENCARD;
 }
