@@ -11,7 +11,7 @@ public class Organizacion {
 		this.entidadesBase = entidadesBase;
 	}
 
-	public List<EntidadJuridica> getEntidadesJuridicas() {
+	public List<EntidadJuridica> getEntidadesJuridicas(){
 		return entidadesJuridicas;
 	}
 
