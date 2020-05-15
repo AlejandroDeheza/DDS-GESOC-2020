@@ -27,7 +27,7 @@ Crear una lista para representar un conjunto de Proveedores para una misma opera
 
 + Ventajas
 
-Nos da mas flexibilidad a la hora de generar una OperacionDeEgreso. Podemos relacionar uno o varios proveedores con una misma operación. 
+Nos da más flexibilidad a la hora de generar una OperacionDeEgreso. Podemos relacionar uno o varios proveedores con una misma operación. 
 
 + Desventajas
 
@@ -37,7 +37,7 @@ Podríamos estar modelando algo que no se valla a usar.
 
 
 ### 3. DNI en vez de CUIL
-Usar numero de DNI en vez de CUIL como atributo para un Proveedor.
+Usar número de DNI en vez de CUIL como atributo para un Proveedor.
 
 + Ventajas
 
@@ -45,12 +45,12 @@ Podemos usar una variable long en vez de int
 
 + Desventajas
 
-Puede haber colisiones entre DNIs. Es mas confiable usar un CUIL
+Puede haber colisiones entre DNIs. Es más confiable usar un CUIL
 <br/>
 <br/>
 
 
-### 4. Mas tipos de documentos comerciales
+### 4. Más tipos de documentos comerciales
 Añadir al enum “TipoDocumentoComercial” más tipos como: **remito, nota de débito, nota de crédito**
 
 Según lo [referenciado](http://www.mundoit.com.ar/documentos-comerciales-de-una-empresa/) en el enunciado del TP.
@@ -59,10 +59,12 @@ Según lo [referenciado](http://www.mundoit.com.ar/documentos-comerciales-de-una
 Y: **Presupuesto, nota de venta y resumen de cuenta.**
 
 Tal como se puede apreciar en la siguiente captura del libro “La organización y sus sistemas de información” de la profesora Pollo Cattaneo. Ya que, en una operación de egreso de una organización, se pueden recibir esos tipos de documentos:
+
+<img src="TP GeSoc/Imagenes/documentosComerciales.png">
  
 + Ventajas
 
-Nos da mas flexibilidad para adaptar el proyecto a varias organizaciones
+Nos da más flexibilidad para adaptar el proyecto a varias organizaciones
 
 + Desventajas
 
@@ -88,6 +90,8 @@ No respetan los medios de pago de mercado libre.
 ### 6. Relación bidireccional entre Entidad Jurídica y Entidad Base
 Generar una relación bidireccional entre ambas entidades. Se podría inicializar una referencia de Entidad base a Entidad Jurídica cuando las primeras son agregadas a la lista de entidades asociadas a la Entidad Jurídica. Así una Entidad base conoce a la única entidad jurídica a la que está asociada; a la vez que una entidad jurídica conoce a todas las entidades base que tiene asociadas (en su lista). Un ejemplo grafico de lo que se trata de decir extraído de “Módulo 02: Referencias. Estado. Compartir objetos. Identidad.” del prof. Dodino:
 
+<img src="TP GeSoc/Imagenes/relacionBidireccional.png">
+
 + Ventajas
 
 Permite que se puedan mandar mensajes entre las instancias de las 2 clases
@@ -96,6 +100,9 @@ Permite que se puedan mandar mensajes entre las instancias de las 2 clases
 
 Puede que por el momento no sea muy útil, ya que no conocemos el comportamiento de ambas entidades.
 Puede ocurrir que, por una mala sincronización, quede una referencia libre o vacía.
+
+<img src="TP GeSoc/Imagenes/relacionBidireccionalDesventaja.png" width=400>
+
 <br/>
 <br/>
  
