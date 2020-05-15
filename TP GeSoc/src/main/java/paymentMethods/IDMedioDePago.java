@@ -1,4 +1,5 @@
-package model;
+package paymentMethods;
+
 public enum IDMedioDePago{
 	VISA, MASTER, AMEX, DINERS, NARANJA, NATIVA, SHOPPING, 
 	CENCOSUD, CMR_MASTER, ARGENCARD,CORDIAL,CORDOBESA,CABAL,
