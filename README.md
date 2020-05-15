@@ -142,7 +142,7 @@ Permite que se valide la contraseña si se genera un usuario directamente con el
 
 El mismo código se ejecuta 2 veces en caso de que se creé un usuario con el Builder.
 
-**De todas formas, esta validación no deberia ser necesaria porque externamente no va a haber acceso a ese metodo. "Confiar en el adentro, desconfiar en afuera" - Diseño del manejo de errores.**
+**De todas formas, esta validación no deberia ser necesaria porque externamente no va a haber acceso a ese metodo. "Confiar en el adentro, desconfiar del afuera" - Diseño del manejo de errores.**
 <br/>
 <br/>
 
