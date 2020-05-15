@@ -12,9 +12,11 @@
 Crear una clase para representar un documento comercial. Que tenga de atributos “tipoDocumentoComercial” y “numeroDocumento”
 
 + Ventajas
+
 Delegamos el conocimiento de esos 2 atributos a otra clase y no a la clase “OperaciónDeEgreso”
 
 + Desventajas
+
 Estaríamos creando objetos sin funcionalidades que solo almacenan datos, algo que se puede hacer en una base de datos.
 
 
@@ -22,9 +24,11 @@ Estaríamos creando objetos sin funcionalidades que solo almacenan datos, algo q
 Crear una lista para representar un conjunto de Proveedores para una misma operación de egreso. Cambiando en clase “OperacionDeEgreso” el atributo “Proveedor proveedor” por “List<EntidadBase> proveedores”.
 
 + Ventajas
+
 Nos da mas flexibilidad a la hora de generar una OperacionDeEgreso. Podemos relacionar uno o varios proveedores con una misma operación. 
 
 + Desventajas
+
 Podríamos estar modelando algo que no se valla a usar.
 
 
@@ -32,25 +36,33 @@ Podríamos estar modelando algo que no se valla a usar.
 Usar numero de DNI en vez de CUIL como atributo para un Proveedor.
 
 + Ventajas
+
 Podemos usar una variable long en vez de int
 
 + Desventajas
+
 Puede haber colisiones entre DNIs. Es mas confiable usar un CUIL
 
 
 ### 4. Mas tipos de documentos comerciales
 Añadir al enum “TipoDocumentoComercial” más tipos como: 
+
 remito, nota de débito, nota de crédito
-Según lo [referenciado](http://www.mundoit.com.ar/documentos-comerciales-de-una-empresa/) en el enunciado del TP:
+
+Según lo [referenciado](http://www.mundoit.com.ar/documentos-comerciales-de-una-empresa/) en el enunciado del TP.
 
 Y:
+
 Presupuesto, nota de venta y resumen de cuenta.
-Tal como se puede apreciar en la siguiente captura del libro “La organización y sus sistemas de información” de la profesora Pollo Cattaneo. Ya que, en una operación de egreso de una organización, se pueden recibir esos tipos de documentos.
+
+Tal como se puede apreciar en la siguiente captura del libro “La organización y sus sistemas de información” de la profesora Pollo Cattaneo. Ya que, en una operación de egreso de una organización, se pueden recibir esos tipos de documentos:
  
 + Ventajas
+
 Nos da mas flexibilidad para adaptar el proyecto a varias organizaciones
 
 + Desventajas
+
 Podríamos estar generando tipos que no vallamos a usar. Podría estar fuera del alcance del proyecto.
 
 
@@ -58,9 +70,11 @@ Podríamos estar generando tipos que no vallamos a usar. Podría estar fuera del
 Agregar un método de pago por cheque, tal como se ejemplifica en el punto 5 del enunciado
 
 + Ventajas
+
 Se agrega flexibilidad a la hora de generar operaciones de egreso.
 
 + Desventajas
+
 No respetan los medios de pago de mercado libre.
 
 
@@ -68,20 +82,24 @@ No respetan los medios de pago de mercado libre.
 Generar una relación bidireccional entre ambas entidades. Se podría inicializar una referencia de Entidad base a Entidad Jurídica cuando las primeras son agregadas a la lista de entidades asociadas a la Entidad Jurídica. Así una Entidad base conoce a la única entidad jurídica a la que está asociada; a la vez que una entidad jurídica conoce a todas las entidades base que tiene asociadas (en su lista). Un ejemplo grafico de lo que se trata de decir extraído de “Módulo 02: Referencias. Estado. Compartir objetos. Identidad.” del prof. Dodino:
 
 + Ventajas
+
 Permite que se puedan mandar mensajes entre las instancias de las 2 clases
 
 + Desventajas
+
 Puede que por el momento no sea muy útil, ya que no conocemos el comportamiento de ambas entidades.
 Puede ocurrir que, por una mala sincronización, quede una referencia libre o vacía.
  
 
 ### 7. Clasificación de Empresas en tiempo de ejecución
-Calcular el tipo de empresa según lo [estipulado por la AFIP](https://pymes.afip.gob.ar/estiloAFIP/pymes/ayuda/default.asp):
+Calcular el tipo de empresa según lo [estipulado por la AFIP](https://pymes.afip.gob.ar/estiloAFIP/pymes/ayuda/default.asp)
 
 + Ventajas
+
 no hace falta actualizar el tipo de organización, se genera calculando el valor de las ventas totales anuales
 
 + Desventajas
+
 todavía no tenemos la información suficiente para poder calcular ese valor
 
 
@@ -89,8 +107,10 @@ todavía no tenemos la información suficiente para poder calcular ese valor
 Agregar una validación extra al constructor de la clase “Usuario” además del que esta el “BuilderUsuario”
 
 + Ventajas
+
 Permite que se valide la contraseña si se genera un usuario directamente con el constructor en vez de con el Builder. Algo que puede pasar no intencionalmente.
 
 + Desventajas
+
 El mismo código se ejecuta 2 veces en caso de que se creé un usuario con el Builder.
 
