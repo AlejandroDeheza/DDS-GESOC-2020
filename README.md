@@ -33,7 +33,7 @@ Nos da más flexibilidad a la hora de generar una OperacionDeEgreso. Podemos rel
 
 + Desventajas
 
-Podríamos estar modelando algo que no se valla a usar.
+Podríamos estar modelando algo que no se vaya a usar.
 <br/>
 <br/>
 
@@ -43,11 +43,13 @@ Usar número de DNI en vez de CUIL como atributo para un Proveedor.
 
 + Ventajas
 
-Podemos usar una variable long en vez de int
+Podemos usar una variable int en vez de long 
 
 + Desventajas
 
 Puede haber colisiones entre DNIs. Es más confiable usar un CUIL
+
+**Cualquiera de estos datos se puede representar también como un string, siendo que no se va a operar numericamente con el**
 <br/>
 <br/>
 
