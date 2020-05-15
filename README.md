@@ -5,8 +5,10 @@
 
 ---
 
+<p align="center"> 
 
 # ALTERNATIVAS
+</p>
 
 ### 1. Clase DocumentoComercial
 Crear una clase para representar un documento comercial. Que tenga de atributos “tipoDocumentoComercial” y “numeroDocumento”
@@ -60,8 +62,10 @@ Y: **Presupuesto, nota de venta y resumen de cuenta.**
 
 Tal como se puede apreciar en la siguiente captura del libro “La organización y sus sistemas de información” de la profesora Pollo Cattaneo. Ya que, en una operación de egreso de una organización, se pueden recibir esos tipos de documentos:
 
+<p align="center"> 
 <img src="TP GeSoc/Imagenes/documentosComerciales.png">
- 
+</p>
+
 + Ventajas
 
 Nos da más flexibilidad para adaptar el proyecto a varias organizaciones
@@ -90,7 +94,9 @@ No respetan los medios de pago de mercado libre.
 ### 6. Relación bidireccional entre Entidad Jurídica y Entidad Base
 Generar una relación bidireccional entre ambas entidades. Se podría inicializar una referencia de Entidad base a Entidad Jurídica cuando las primeras son agregadas a la lista de entidades asociadas a la Entidad Jurídica. Así una Entidad base conoce a la única entidad jurídica a la que está asociada; a la vez que una entidad jurídica conoce a todas las entidades base que tiene asociadas (en su lista). Un ejemplo grafico de lo que se trata de decir extraído de “Módulo 02: Referencias. Estado. Compartir objetos. Identidad.” del prof. Dodino:
 
+<p align="center"> 
 <img src="TP GeSoc/Imagenes/relacionBidireccional.png">
+</p>
 
 + Ventajas
 
@@ -101,7 +107,9 @@ Permite que se puedan mandar mensajes entre las instancias de las 2 clases
 Puede que por el momento no sea muy útil, ya que no conocemos el comportamiento de ambas entidades.
 Puede ocurrir que, por una mala sincronización, quede una referencia libre o vacía.
 
-<img src="TP GeSoc/Imagenes/relacionBidireccionalDesventaja.png" width=400>
+<p align="center"> 
+<img src="TP GeSoc/Imagenes/relacionBidireccionalDesventaja.png" width=500>
+</p>
 
 <br/>
 <br/>
