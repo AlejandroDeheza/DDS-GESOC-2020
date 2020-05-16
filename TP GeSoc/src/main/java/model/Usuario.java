@@ -1,27 +1,29 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
 	String username;
-	String password;
-	private List<String> passwordsUsadas = new ArrayList<String>();
+	String hashedPassword;
+	private List<String> hashedPasswordUsadas = new ArrayList<String>();
 	TipoUsuario tipoUser;
+	Hasher hasher = new Hasher();
+
+	Usuario(String username, String hashedPassword, TipoUsuario tipoUser) {
+		this.username = username;
+		this.hashedPassword = hashedPassword;
+		agregarPasswordUsada();
+		this.tipoUser = tipoUser;
+	}
 	
-	Usuario(String username, String password, TipoUsuario tipoUser){
-		this.username=username;
-		this.password=password;
-        agregarPasswordUsada(password);
-		this.tipoUser=tipoUser;
+	private void agregarPasswordUsada() {
+		hashedPasswordUsadas.add(hashedPassword);
 	}
 
-	void agregarPasswordUsada(String password) {
-		this.passwordsUsadas.add(password);
-	}
-	
 	public void cambiarContrasenia(String password) {
-		validadorPasswords.instance().validarPassword(password, passwordsUsadas);
-		this.password=password;
-		this.passwordsUsadas.add(password);
+		validadorPasswords.instance().validarPassword(password, hashedPasswordUsadas);
+		this.hashedPassword = hasher.hashBcrypt(password);
+		agregarPasswordUsada();
 	}
 }

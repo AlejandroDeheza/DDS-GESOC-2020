@@ -10,6 +10,7 @@ public class validadorPasswords {
 	private static final validadorPasswords INSTANCE = new validadorPasswords(); // No se por qu� me insiste con la exception ac�
 	private BufferedReader archivoPasswords;
 	private List<String> listaPasswords = new ArrayList<String>();
+	Hasher hasher = new Hasher();
 
 	private validadorPasswords() {
 		this.setArchivoPasswords();
@@ -52,7 +53,8 @@ public class validadorPasswords {
 		if (passwordsUsadas == null) {
 			return;
 		}
-		if (passwordsUsadas.stream().anyMatch(unaPassword -> unaPassword.contentEquals(password))) {
+		if (passwordsUsadas.stream().anyMatch(
+				unaPasswordUsada -> hasher.sonCorrespondientes(password, unaPasswordUsada))) {
 			throw new contraseniaUsadaPreviamenteException();
 		}
 	}

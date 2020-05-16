@@ -23,7 +23,7 @@ public class TestsNuevosUsuarios {
 	@Test
 	public void setearContraseniaNormalEnBuilder() {
 		builder.setPassword("qiehgWfiiyrt26");
-		Assert.assertEquals("qiehgWfiiyrt26", builder.getPassword());
+		Assert.assertNotEquals("qiehgWfiiyrt26", builder.getHashedPassword());
 	}
 
 	@Test
