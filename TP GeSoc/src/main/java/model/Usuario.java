@@ -22,7 +22,9 @@ public class Usuario {
 	}
 
 	public void cambiarContrasenia(String password) {
-		validadorPasswords.instance().validarPassword(password, hashedPasswordUsadas);
+		ValidarTodo validador = new ValidarTodo();
+		
+		validador.validar(password,hashedPasswordUsadas);
 		this.hashedPassword = hasher.hashBcrypt(password);
 		agregarPasswordUsada();
 	}

@@ -1,7 +1,7 @@
 package model;
 
 public class TarjetaDeCredito implements MedioDePago {
-	TipoMedioDePago codTipoMedioDaPago = TipoMedioDePago.CREDIT_CARD;
+	//TipoMedioDePago codTipoMedioDePago = TipoMedioDePago.CREDIT_CARD;
 
 	int numeroTarjeta;
 	String titular;

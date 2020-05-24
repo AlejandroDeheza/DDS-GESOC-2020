@@ -12,10 +12,10 @@ public class BuilderUsuario {
 		this.username = username;
 	}
 
-	public void setPassword(String password) {	//dejo nombre "setPasword" para que 
-								//sea mas facil para el usuario llamar al metodo
-								//al ingresar los datos
-		validadorPasswords.instance().validarPassword(password, null);
+	public void setPassword(String password) {
+		ValidarTodo validador = new ValidarTodo();
+		
+		validador.validar(password,null);
 		this.hashedPassword = hasher.hashBcrypt(password);
 	}
 

@@ -33,8 +33,10 @@ public class TestsNuevosUsuarios {
 	}
 
 	@Test(expected = longitudDeContraseniaBajaException.class)
-	public void setearContraseniaCorta() {
-		builder.setPassword("Holi");
+	public void validarContraseniaCorta() {
+		ValidadorLongitudApropiada validador = new ValidadorLongitudApropiada();
+		
+		validador.validar("Holi",null);
 	}
 
 	@Test(expected = contraseniaUsadaPreviamenteException.class)

@@ -6,14 +6,14 @@ import java.util.List;
 import exceptions.*;
 
 public class BuilderOperacionDeEgreso {
-	int codDocumentoComercial;
+	DocumentoComercial codDocumentoComercial;
 	Date fechaOperacion;
 	MedioDePago medio;
 	List<Item> items = new ArrayList<>();
 	Organizacion organizacion;
 	Proveedor proveedor;
 
-	public void setCodDocumentoComercial(int codDocumentoComercial) {
+	public void setCodDocumentoComercial(DocumentoComercial codDocumentoComercial) {
 		this.codDocumentoComercial = codDocumentoComercial;
 	}
 
