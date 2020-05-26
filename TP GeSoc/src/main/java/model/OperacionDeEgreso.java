@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OperacionDeEgreso {
-	DocumentoComercial codDocumentoComercial;
+	DocumentoComercial documentoComercial;
 	Date fechaOperacion;
 	MedioDePago medio;
 	List<Item> items = new ArrayList<>();
@@ -13,12 +13,12 @@ public class OperacionDeEgreso {
 	Proveedor proveedor;
 
 	public void setCodDocumentoComercial(DocumentoComercial codDocumentoComercial) {
-		this.codDocumentoComercial = codDocumentoComercial;
+		this.documentoComercial = codDocumentoComercial;
 	}
 
 	public OperacionDeEgreso(DocumentoComercial codDocumentoComercial, Date fechaOperacion, MedioDePago medio, List<Item> items,
 			Organizacion organizacion, Proveedor proveedor) {
-		this.codDocumentoComercial = codDocumentoComercial;
+		this.documentoComercial = codDocumentoComercial;
 		this.fechaOperacion = fechaOperacion;
 		this.medio = medio;
 		this.items = items;
