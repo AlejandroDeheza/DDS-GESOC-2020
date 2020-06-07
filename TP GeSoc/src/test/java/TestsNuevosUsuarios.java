@@ -1,5 +1,8 @@
 import exceptions.*;
 import model.*;
+
+import java.security.NoSuchAlgorithmException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +24,7 @@ public class TestsNuevosUsuarios {
 	}
 	
 	@Test
-	public void setearContraseniaNormalEnBuilder() {
+	public void setearContraseniaNormalEnBuilder() throws NoSuchAlgorithmException{
 		builder.setPassword("qiehgWfiiyrt26");
 		Assert.assertNotEquals("qiehgWfiiyrt26", builder.getHashedPassword());
 	}
@@ -40,7 +43,7 @@ public class TestsNuevosUsuarios {
 	}
 
 	@Test(expected = contraseniaUsadaPreviamenteException.class)
-	public void setearContraseniaYaUsada() {
+	public void setearContraseniaYaUsada() throws NoSuchAlgorithmException{
 		builder.setPassword("qiehgyWfiiyrt2");
 		builder.setTipo(TipoUsuario.ADMIN);
 		builder.setUsername("Jorge");
@@ -49,22 +52,22 @@ public class TestsNuevosUsuarios {
 	}
 
 	@Test(expected = contraseniaComunException.class)
-	public void setearContraseniaComun() {
+	public void setearContraseniaComun() throws NoSuchAlgorithmException{
 		builder.setPassword("password");
 	}
 
 	@Test(expected = contraseniaSinMayusculaException.class)
-	public void setearContraseniaSinMayuscula() {
+	public void setearContraseniaSinMayuscula() throws NoSuchAlgorithmException{
 		builder.setPassword("qwrpoqwirpqworiqpwori");
 	}
 
 	@Test(expected = contraseniaSinMinusculaException.class)
-	public void setearContraseniaSinMinuscula() {
+	public void setearContraseniaSinMinuscula() throws NoSuchAlgorithmException{
 		builder.setPassword("GASLKASJGLQPR25126");
 	}
 
 	@Test(expected = contraseniaSinNumeroException.class)
-	public void setearContraseniaSinNumero() {
+	public void setearContraseniaSinNumero() throws NoSuchAlgorithmException{
 		builder.setPassword("QWRasdqwRWQsafG");
 	}
 }

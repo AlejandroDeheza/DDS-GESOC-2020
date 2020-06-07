@@ -1,8 +1,11 @@
 package model;
 
+import java.security.NoSuchAlgorithmException;
+
 public class BuilderUsuario {
 	String username;
 	String hashedPassword;
+	String salt;
 	TipoUsuario tipo;
 	Hasher hasher = new Hasher();
 
@@ -12,11 +15,13 @@ public class BuilderUsuario {
 		this.username = username;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password) throws NoSuchAlgorithmException //revisar esta excepcion, TODO
+	{
 		ValidarTodo validador = new ValidarTodo();
 		
-		validador.validar(password,null);
-		this.hashedPassword = hasher.hashBcrypt(password);
+		validador.validar(password, null);
+		this.salt = hasher.generarSalt();
+		this.hashedPassword = hasher.hashSHA512(password, this.salt);
 	}
 
 	public void setTipo(TipoUsuario tipo) {
@@ -36,7 +41,7 @@ public class BuilderUsuario {
 	}
 
 	public Usuario crearUsuario() {
-		return new Usuario(username, hashedPassword, tipo);
+		return new Usuario(username, tipo, hashedPassword, salt);
 	}
 
 }

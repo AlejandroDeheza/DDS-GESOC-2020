@@ -6,7 +6,7 @@ import java.util.List;
 public class ValidarTodo implements Validador{
 	public List<Validador> validaciones = new ArrayList<Validador>();
 	
-	public void validar(String password, List<String> passAnteriores) {
+	public void validar(String password, List<String[]> passAnteriores) {
 		validaciones.stream().forEach(validacion -> validacion.validar(password, passAnteriores));
 	}
 	

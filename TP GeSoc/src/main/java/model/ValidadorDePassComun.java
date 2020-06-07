@@ -22,7 +22,7 @@ public class ValidadorDePassComun implements Validador{
 	}
 
 	@Override
-	public void validar(String password, List<String> passwordsUsadas) {
+	public void validar(String password, List<String[]> passwordsUsadas) {
 		if (listaPasswords.stream().anyMatch(unaPassword -> unaPassword.contentEquals(password))) {
 			throw new contraseniaComunException();
 		}
