@@ -1,23 +1,23 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import exceptions.*;
 
 public class BuilderOperacionDeEgreso {
-	DocumentoComercial codDocumentoComercial;
-	Date fechaOperacion;
-	MedioDePago medio;
-	List<Item> items = new ArrayList<>();
-	Organizacion organizacion;
-	Proveedor proveedor;
+	private DocumentoComercial codDocumentoComercial;
+	private LocalDateTime fechaOperacion;
+	private MedioDePago medio;
+	private List<Item> items = new ArrayList<>();
+	private Organizacion organizacion;
+	private Proveedor proveedor;
 
 	public void setCodDocumentoComercial(DocumentoComercial codDocumentoComercial) {
 		this.codDocumentoComercial = codDocumentoComercial;
 	}
 
-	public void setFechaOperacion(Date fechaOperacion) {
+	public void setFechaOperacion(LocalDateTime fechaOperacion) {
 		this.fechaOperacion = fechaOperacion;
 	}
 

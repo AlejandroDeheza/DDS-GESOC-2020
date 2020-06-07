@@ -2,9 +2,9 @@ package model;
 
 public class TarjetaDeDebito implements MedioDePago {
 	//TipoMedioDePago codTipoMedioDaPago = TipoMedioDePago.DEBIT_CARD;
-	int numeroTarjeta;
-	String titular;
-	int codigoSeguridad;
+	private int numeroTarjeta;
+	private String titular;
+	private int codigoSeguridad;
 
 	public void abonarOperacion(float valor) {
 	}

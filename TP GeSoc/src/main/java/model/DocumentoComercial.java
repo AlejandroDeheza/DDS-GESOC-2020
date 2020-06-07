@@ -1,6 +1,6 @@
 package model;
 
 public class DocumentoComercial {
-	int ID;
-	TipoDocumentoComercial tipoDoc;
+	private int ID;
+	private TipoDocumentoComercial tipoDoc;
 }

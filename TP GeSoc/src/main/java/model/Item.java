@@ -1,7 +1,8 @@
 package model;
+
 public class Item {
-	int valor;
-	String descripcion;
+	private int valor;
+	private String descripcion;
 	
 	public Item(int valor, String descripcion) {
 		this.valor = valor;
@@ -9,11 +10,11 @@ public class Item {
 	}
 
 	public int getValor() {
-		return valor;
+		return this.valor;
 	}
 
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
 
 }

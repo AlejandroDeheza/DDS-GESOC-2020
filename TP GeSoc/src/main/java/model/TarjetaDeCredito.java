@@ -3,10 +3,10 @@ package model;
 public class TarjetaDeCredito implements MedioDePago {
 	//TipoMedioDePago codTipoMedioDePago = TipoMedioDePago.CREDIT_CARD;
 
-	int numeroTarjeta;
-	String titular;
-	int codigoSeguridad;
-	int cuotas;
+	private int numeroTarjeta;
+	private String titular;
+	private int codigoSeguridad;
+	private int cuotas;
 
 	public void abonarOperacion(float valor) {
 

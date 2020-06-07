@@ -1,8 +1,8 @@
 package model;
 public class EntidadBase {
-	String nombreFicticio;
-	String descripcion;
-	EntidadJuridica entidadJuridica;
+	private String nombreFicticio;
+	private String descripcion;
+	private EntidadJuridica entidadJuridica;
 	
 	public EntidadBase(String nombreFicticio, String descripcion) {
 

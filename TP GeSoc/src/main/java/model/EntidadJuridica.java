@@ -1,12 +1,12 @@
 package model;
 
 public class EntidadJuridica {
-	String razonSocial;
-	String nombreFicticio;
-	int cuit;
-	String direccionPostal;
-	int codInscIGJ; //Opcional
-	CategoriaEntidadJuridica categoriaEntidad; //Opcionalmente se reemplazara por una intefaz
+	private String razonSocial;
+	private String nombreFicticio;
+	private int cuit;
+	private String direccionPostal;
+	private int codInscIGJ; //Opcional
+	private CategoriaEntidadJuridica categoriaEntidad; //Opcionalmente se reemplazara por una intefaz
 	
 	public EntidadJuridica(String razonSocial, String nombreFicticio, int cuit, String direccionPostal, int codInscIGJ,
 			 CategoriaEntidadJuridica categoriaEntidad) {

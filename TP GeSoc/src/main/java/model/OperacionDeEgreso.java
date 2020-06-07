@@ -1,22 +1,22 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OperacionDeEgreso {
-	DocumentoComercial documentoComercial;
-	Date fechaOperacion;
-	MedioDePago medio;
-	List<Item> items = new ArrayList<>();
-	Organizacion organizacion;
-	Proveedor proveedor;
+	private DocumentoComercial documentoComercial;
+	private LocalDateTime fechaOperacion;
+	private MedioDePago medio;
+	private List<Item> items = new ArrayList<>();
+	private Organizacion organizacion;
+	private Proveedor proveedor;
 
 	public void setCodDocumentoComercial(DocumentoComercial codDocumentoComercial) {
 		this.documentoComercial = codDocumentoComercial;
 	}
 
-	public OperacionDeEgreso(DocumentoComercial codDocumentoComercial, Date fechaOperacion, MedioDePago medio, List<Item> items,
+	public OperacionDeEgreso(DocumentoComercial codDocumentoComercial, LocalDateTime fechaOperacion, MedioDePago medio, List<Item> items,
 			Organizacion organizacion, Proveedor proveedor) {
 		this.documentoComercial = codDocumentoComercial;
 		this.fechaOperacion = fechaOperacion;

@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Organizacion {
-	List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
-	List<EntidadBase> entidadesBase = new ArrayList<>();
+	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
+	private List<EntidadBase> entidadesBase = new ArrayList<>();
 	
 	public Organizacion(List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase) {
 		this.entidadesJuridicas = entidadesJuridicas;
@@ -12,7 +12,7 @@ public class Organizacion {
 	}
 
 	public List<EntidadJuridica> getEntidadesJuridicas(){
-		return entidadesJuridicas;
+		return this.entidadesJuridicas;
 	}
 
 	public void setEntidadesJuridicas(List<EntidadJuridica> entidadesJuridicas) {
@@ -20,7 +20,7 @@ public class Organizacion {
 	}
 
 	public List<EntidadBase> getEntidadesBase() {
-		return entidadesBase;
+		return this.entidadesBase;
 	}
 
 	public void setEntidadesBase(List<EntidadBase> entidadesBase) {

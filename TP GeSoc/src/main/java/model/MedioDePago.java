@@ -1,5 +1,5 @@
 package model;
 
 public interface MedioDePago {
-	void abonarOperacion(float valor);
+	public void abonarOperacion(float valor);
 }

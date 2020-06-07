@@ -1,9 +1,9 @@
 package model;
 
 public class Proveedor {
-	String razonSocial;
-	String direccionPostal;
-	int cuil;
+	private String razonSocial;
+	private String direccionPostal;
+	private int cuil;
 
 	public Proveedor(String razonSocial, String direccionPostal, int cuil) {
 		this.razonSocial = razonSocial;
@@ -12,7 +12,7 @@ public class Proveedor {
 	}
 
 	public String getRazonSocial() {
-		return razonSocial;
+		return this.razonSocial;
 	}
 
 	public void setRazonSocial(String razonSocial) {
@@ -20,7 +20,7 @@ public class Proveedor {
 	}
 
 	public String getDireccionPostal() {
-		return direccionPostal;
+		return this.direccionPostal;
 	}
 
 	public void setDireccionPostal(String direccionPostal) {
@@ -28,7 +28,7 @@ public class Proveedor {
 	}
 
 	public int getCuil() {
-		return cuil;
+		return this.cuil;
 	}
 
 	public void setCuil(int cuil) {
