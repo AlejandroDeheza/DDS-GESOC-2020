@@ -1,5 +1,6 @@
 import exceptions.*;
-import model.*;
+import usuarios.*;
+import validacionesContraseñas.*;
 
 import java.security.NoSuchAlgorithmException;
 

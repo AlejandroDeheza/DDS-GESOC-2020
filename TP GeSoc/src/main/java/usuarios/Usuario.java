@@ -1,8 +1,10 @@
-package model;
+package usuarios;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import validacionesContraseñas.ValidarTodo;
 
 public class Usuario {
 	private String username;

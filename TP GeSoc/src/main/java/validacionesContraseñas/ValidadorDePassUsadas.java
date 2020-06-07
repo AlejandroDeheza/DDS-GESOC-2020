@@ -1,8 +1,9 @@
-package model;
+package validacionesContraseñas;
 
 import java.util.List;
 import java.util.ArrayList;
 import exceptions.contraseniaUsadaPreviamenteException;
+import usuarios.Hasher;
 
 public class ValidadorDePassUsadas implements Validador {
 	private List<String[]> passwordsUsadas = new ArrayList<>();

@@ -1,4 +1,4 @@
-package model;
+package usuarios;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

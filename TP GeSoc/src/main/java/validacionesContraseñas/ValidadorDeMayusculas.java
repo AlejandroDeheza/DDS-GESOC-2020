@@ -1,4 +1,4 @@
-package model;
+package validacionesContraseñas;
 
 import exceptions.contraseniaSinMayusculaException;
 

@@ -12,11 +12,12 @@ public class TestsOperacionDeEgreso {
 
 	private BuilderOperacionDeEgreso builder;
 	private OperacionDeEgreso operacion;
-	private List<Item> items = new ArrayList<>();
+	private List<Item> items;
 
 	@Before
 	public void init() {
 		builder = new BuilderOperacionDeEgreso();
+		items = new ArrayList<>();
 	}
 
 	@Test

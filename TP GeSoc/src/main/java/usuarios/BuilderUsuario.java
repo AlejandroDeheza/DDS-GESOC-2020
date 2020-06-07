@@ -1,6 +1,8 @@
-package model;
+package usuarios;
 
 import java.security.NoSuchAlgorithmException;
+
+import validacionesContraseñas.ValidarTodo;
 
 public class BuilderUsuario {
 	private String username;

@@ -1,9 +1,9 @@
-package model;
+package validacionesContraseñas;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidarTodo implements Validador{
+public class ValidarTodo{
 	private List<Validador> validaciones = new ArrayList<Validador>();
 	
 	public ValidarTodo(List<String[]> passwordsUsadas) {

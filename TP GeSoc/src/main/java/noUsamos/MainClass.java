@@ -1,4 +1,4 @@
-package model;
+package noUsamos;
 public class MainClass {
 
 	public static void main(String[] args) {
