@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 public class Hasher {
 
-	public String hashSHA512(String passwordToHash, String salt) 
+	public static String hashSHA512(String passwordToHash, String salt) 
 	{
 		String hashedPassword = null;
 		try {
@@ -27,12 +27,12 @@ public class Hasher {
 		return hashedPassword;
 	}
 	
-	public Boolean sonCorrespondientes(String password, String[] hashedPasswordWithSalt) 
+	public static Boolean sonCorrespondientes(String password, String[] hashedPasswordWithSalt) 
 	{
 		return hashSHA512(password, hashedPasswordWithSalt[1]) == hashedPasswordWithSalt[0];
 	}
 	
-	public String generarSalt() throws NoSuchAlgorithmException
+	public static String generarSalt() throws NoSuchAlgorithmException
 	{
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 		byte[] salt = new byte[16];

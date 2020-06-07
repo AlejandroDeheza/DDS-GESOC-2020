@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ValidarTodo implements Validador{
-	public List<Validador> validaciones = new ArrayList<Validador>();
+	private List<Validador> validaciones = new ArrayList<Validador>();
 	
 	public ValidarTodo(List<String[]> passwordsUsadas) {
 		this.validaciones.add(new ValidadorLongitudApropiada());

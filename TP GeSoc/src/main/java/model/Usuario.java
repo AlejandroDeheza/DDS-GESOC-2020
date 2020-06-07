@@ -10,7 +10,6 @@ public class Usuario {
 	private String hashedPasswordActual;
 	private String saltActual;
 	private List<String[]> hashedPasswordUsadasConSalt = new ArrayList<String[]>();
-	private Hasher hasher = new Hasher();
 
 	public Usuario(String username, TipoUsuario tipoUser, String hashedPassword, String salt) {
 		this.username = username;
@@ -32,8 +31,8 @@ public class Usuario {
 		ValidarTodo validador = new ValidarTodo(this.hashedPasswordUsadasConSalt);
 		
 		validador.validar(password);
-		this.saltActual = hasher.generarSalt();
-		this.hashedPasswordActual = hasher.hashSHA512(password, this.saltActual);
+		this.saltActual = Hasher.generarSalt();
+		this.hashedPasswordActual = Hasher.hashSHA512(password, this.saltActual);
 		this.agregarPasswordUsada();
 	}
 }

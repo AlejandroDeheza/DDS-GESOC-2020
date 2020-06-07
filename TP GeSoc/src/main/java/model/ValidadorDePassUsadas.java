@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import exceptions.contraseniaUsadaPreviamenteException;
 
 public class ValidadorDePassUsadas implements Validador {
-	Hasher hasher = new Hasher();
 	private List<String[]> passwordsUsadas = new ArrayList<>();
 	
 	public ValidadorDePassUsadas(List<String[]> passwordsUsadas){
@@ -17,7 +16,7 @@ public class ValidadorDePassUsadas implements Validador {
 			return;
 		}
 		if (this.passwordsUsadas.stream().anyMatch(
-				unaPasswordUsadaConSalt -> hasher.sonCorrespondientes(password, unaPasswordUsadaConSalt))) {
+				unaPasswordUsadaConSalt -> Hasher.sonCorrespondientes(password, unaPasswordUsadaConSalt))) {
 			throw new contraseniaUsadaPreviamenteException();
 		}
 	}

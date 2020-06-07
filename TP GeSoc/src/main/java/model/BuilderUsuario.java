@@ -7,7 +7,6 @@ public class BuilderUsuario {
 	private String hashedPassword;
 	private String salt;
 	private TipoUsuario tipo;
-	private Hasher hasher = new Hasher();
 
 	public void setUsername(String username) {
 		// Validar que no exista previamente (queda a futuro)
@@ -20,8 +19,8 @@ public class BuilderUsuario {
 		ValidarTodo validador = new ValidarTodo(null);
 		
 		validador.validar(password);
-		this.salt = hasher.generarSalt();
-		this.hashedPassword = hasher.hashSHA512(password, this.salt);
+		this.salt = Hasher.generarSalt();
+		this.hashedPassword = Hasher.hashSHA512(password, this.salt);
 	}
 
 	public void setTipo(TipoUsuario tipo) {

@@ -9,7 +9,6 @@ import java.util.List;
 public class ValidadorDePassComun implements Validador{
 	private static final ValidadorDePassComun INSTANCE = new ValidadorDePassComun(); // No se por qu� me insiste con la exception ac�
 	private List<String> listaPasswords = new ArrayList<String>();
-	Hasher hasher = new Hasher();
 	private BufferedReader archivoPasswords;
 	
 	private ValidadorDePassComun() {
