@@ -27,9 +27,12 @@ public class Hasher {
 		return hashedPassword;
 	}
 	
-	public static Boolean sonCorrespondientes(String password, String[] hashedPasswordWithSalt) 
+	public static Boolean sonCorrespondientes(String passwordIngresada, String[] hashedPasswordWithSalt) 
 	{
-		return hashSHA512(password, hashedPasswordWithSalt[1]) == hashedPasswordWithSalt[0];
+		String storedHash = hashedPasswordWithSalt[0];
+		String storedSalt = hashedPasswordWithSalt[1];
+		String hashedpassword = hashSHA512(passwordIngresada, storedSalt);
+		return hashedpassword.equals(storedHash);
 	}
 	
 	public static String generarSalt() throws NoSuchAlgorithmException
