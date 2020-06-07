@@ -17,12 +17,11 @@ public class ValidadorDePassComun implements Validador{
 		this.leerArchivo(listaPasswords, archivoPasswords);
 	}
 
-	static ValidadorDePassComun instance() {
+	public static ValidadorDePassComun instance() {
 		return INSTANCE;
 	}
 
-	@Override
-	public void validar(String password, List<String[]> passwordsUsadas) {
+	public void validar(String password) {
 		if (listaPasswords.stream().anyMatch(unaPassword -> unaPassword.contentEquals(password))) {
 			throw new contraseniaComunException();
 		}

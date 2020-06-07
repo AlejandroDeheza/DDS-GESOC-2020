@@ -3,11 +3,11 @@ package model;
 import java.security.NoSuchAlgorithmException;
 
 public class BuilderUsuario {
-	String username;
-	String hashedPassword;
-	String salt;
-	TipoUsuario tipo;
-	Hasher hasher = new Hasher();
+	private String username;
+	private String hashedPassword;
+	private String salt;
+	private TipoUsuario tipo;
+	private Hasher hasher = new Hasher();
 
 	public void setUsername(String username) {
 		// Validar que no exista previamente (queda a futuro)
@@ -15,11 +15,11 @@ public class BuilderUsuario {
 		this.username = username;
 	}
 
-	public void setPassword(String password) throws NoSuchAlgorithmException //revisar esta excepcion, TODO
+	public void setPassword(String password) throws NoSuchAlgorithmException
 	{
-		ValidarTodo validador = new ValidarTodo();
+		ValidarTodo validador = new ValidarTodo(null);
 		
-		validador.validar(password, null);
+		validador.validar(password);
 		this.salt = hasher.generarSalt();
 		this.hashedPassword = hasher.hashSHA512(password, this.salt);
 	}
@@ -29,16 +29,16 @@ public class BuilderUsuario {
 	}
 
 	public TipoUsuario getTipo() {
-		return tipo;
+		return this.tipo;
 	}
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public String getHashedPassword() {
-		return hashedPassword;
-	}
+		return this.hashedPassword;
+	}// este metodo no deberia ser posible. Solo lo usamos para un test
 
 	public Usuario crearUsuario() {
 		return new Usuario(username, tipo, hashedPassword, salt);

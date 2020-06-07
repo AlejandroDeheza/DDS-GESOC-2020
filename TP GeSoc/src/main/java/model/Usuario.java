@@ -12,7 +12,7 @@ public class Usuario {
 	private List<String[]> hashedPasswordUsadasConSalt = new ArrayList<String[]>();
 	private Hasher hasher = new Hasher();
 
-	Usuario(String username, TipoUsuario tipoUser, String hashedPassword, String salt) {
+	public Usuario(String username, TipoUsuario tipoUser, String hashedPassword, String salt) {
 		this.username = username;
 		this.tipoUser = tipoUser;
 		this.hashedPasswordActual = hashedPassword;
@@ -29,11 +29,11 @@ public class Usuario {
 
 	public void cambiarContrasenia(String password) throws NoSuchAlgorithmException
 	{
-		ValidarTodo validador = new ValidarTodo();
+		ValidarTodo validador = new ValidarTodo(this.hashedPasswordUsadasConSalt);
 		
-		validador.validar(password, this.hashedPasswordUsadasConSalt);
+		validador.validar(password);
 		this.saltActual = hasher.generarSalt();
 		this.hashedPasswordActual = hasher.hashSHA512(password, this.saltActual);
-		agregarPasswordUsada();
+		this.agregarPasswordUsada();
 	}
 }

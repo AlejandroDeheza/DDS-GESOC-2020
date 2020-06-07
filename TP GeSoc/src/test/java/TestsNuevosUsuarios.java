@@ -39,7 +39,7 @@ public class TestsNuevosUsuarios {
 	public void validarContraseniaCorta() {
 		ValidadorLongitudApropiada validador = new ValidadorLongitudApropiada();
 		
-		validador.validar("Holi",null);
+		validador.validar("Holi");
 	}
 
 	@Test(expected = contraseniaUsadaPreviamenteException.class)
