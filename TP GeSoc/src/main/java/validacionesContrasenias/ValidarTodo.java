@@ -18,4 +18,9 @@ public class ValidarTodo{
 	public void validar(String password) {
 		this.validaciones.stream().forEach(validacion -> validacion.validar(password));
 	}
+	
+	public void setValidadorDePassComun(ValidadorDePassComun validadorImpostor) {
+		this.validaciones.remove(ValidadorDePassComun.instance());
+		this.validaciones.add(validadorImpostor);
+	}// Esto es solo para meter el IMPOSTOR nada mas. Esto es para las pruebas
 }

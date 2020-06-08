@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +7,7 @@ import exceptions.*;
 import usuarios.Hasher;
 import validacionesContrasenias.*;
 
-public class TestValidacionesDeContraseniaYHasher {
+public class TestValidacionesDeContrasenia {
 	
 	private String[] passConSalt;
 	private ArrayList<String[]> passUsadas;
@@ -36,50 +35,6 @@ public class TestValidacionesDeContraseniaYHasher {
 		passUsadas = new ArrayList<>();
 	}
 	
-	
-	
-	// tests del hasher //
-	
-	@Test
-	public void elHasherCreaSaltsAleatorios() {
-		String unaSalt = Hasher.generarSalt();
-		String otraSalt = Hasher.generarSalt();
-		Assert.assertFalse(unaSalt.equals(otraSalt));
-	}
-	
-	@Test
-	public void elHasherCreaHashsNoAleatoriosConLaMismaSalt() {
-		String salt = Hasher.generarSalt();
-		String unHash = Hasher.hashSHA512("contraseña", salt);
-		String otroHash = Hasher.hashSHA512("contraseña", salt);
-		Assert.assertTrue(unHash.equals(otroHash));
-	}
-	
-	@Test
-	public void elHasherCreaHashsAleatoriosConDistintasSalt() {
-		String unHash = Hasher.hashSHA512("contraseña", Hasher.generarSalt());
-		String otroHash = Hasher.hashSHA512("contraseña", Hasher.generarSalt());
-		Assert.assertFalse(unHash.equals(otroHash));
-	}
-	
-	@Test
-	public void elHasherComparaCorrectamenteContraseñaCorrecta() {
-		String password = "contraseña";
-		String[] passConSalt = generarHashYSalt(password);
-		Assert.assertTrue(Hasher.sonCorrespondientes(password, passConSalt));
-	}
-	
-	@Test
-	public void elHasherComparaCorrrectamenteContraseñaIncorrecta() {
-		String password = "contraseña";
-		String[] passConSalt = generarHashYSalt(password);
-		Assert.assertFalse(Hasher.sonCorrespondientes("otracosa", passConSalt));
-	}
-	
-	
-	
-	// tests de validaciones de contraseñas //
-	
 	@Test(expected = contraseniaUsadaPreviamenteException.class)
 	public void validarContraseniaYaUsada() {
 		String password = "contraseña";
@@ -91,7 +46,7 @@ public class TestValidacionesDeContraseniaYHasher {
 	public void validarContraseniaNoUsada() {
 		String password = "contraseña";
 		String[] passConSalt = generarHashYSalt(password);
-		validarContraseniaEstandoUsada("otraCosa", passConSalt);
+		validarContraseniaEstandoUsada("otraContrasenia", passConSalt);
 	}
 	
 	@Test(expected = longitudDeContraseniaBajaException.class)
@@ -102,8 +57,7 @@ public class TestValidacionesDeContraseniaYHasher {
 
 	@Test(expected = contraseniaComunException.class)
 	public void validarContraseniaComun() {
-		ValidadorDePassComun validador = ValidadorDePassComun.instance();
-		validador.validar("password");
+		ValidadorDePassComun.instance().validar("password");
 	}
 
 	@Test(expected = contraseniaSinMayusculaException.class)
@@ -125,9 +79,9 @@ public class TestValidacionesDeContraseniaYHasher {
 	}
 	
 	@Test
-	public void validarContraseñaCompletamente() {
+	public void validarContraseniaCompletamente() {
 		ValidarTodo validador = new ValidarTodo(null);
 		validador.validar("qiehgyWfiiyrt2");
 	}
-
+	
 }

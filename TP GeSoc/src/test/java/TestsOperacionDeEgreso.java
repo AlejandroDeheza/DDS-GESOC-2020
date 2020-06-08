@@ -4,7 +4,7 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class TestsOperacionDeEgreso {
 		builder.setItems(items);
 		// no seteamos los demas atributos porque no nos interesan.
 		operacion = builder.registrarOperacion();
-		Assert.assertEquals(600, operacion.valorTotal(), 0);
+		assertEquals(600, operacion.valorTotal(), 0);
 	}
 
 	@Test(expected = listaDeItemsVaciaException.class)
