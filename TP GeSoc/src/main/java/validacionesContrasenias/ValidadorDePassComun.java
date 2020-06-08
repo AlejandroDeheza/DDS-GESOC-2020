@@ -1,4 +1,4 @@
-package validacionesContraseñas;
+package validacionesContrasenias;
 
 import exceptions.*;
 
@@ -34,20 +34,24 @@ public class ValidadorDePassComun implements Validador{
 			}
 			archivo.close();
 		} catch (IOException e) {
+			throw new entradaSalidaDeArchivoException(
+				"Algo salio mal al usar leerArchivo() en clase ValidadorDePassComun", e);
 		}
 		return lista;
 	}
 
 	private FileReader archivoPasswords() throws FileNotFoundException {
 		return new FileReader("./././Assets/10k-most-common.txt");
-
 	}
 
-	private void setArchivoPasswords() {
+	private void setArchivoPasswords(){
+		
 		try {
 			archivoPasswords = new BufferedReader(this.archivoPasswords());
 		} catch (FileNotFoundException e) {
-			System.out.println("El archivo especificado no se encuentra en la carpeta");
+			throw new aperturaArchivoException(
+				"Algo salio mal al usar setArchivoPasswords() en clase ValidadorDePassComun", e);
 		}
+
 	}
 }

@@ -3,6 +3,7 @@ package usuarios;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import exceptions.hasherException;
 
 public class Hasher {
 
@@ -22,7 +23,8 @@ public class Hasher {
 		} 
 		catch (NoSuchAlgorithmException e) 
 		{
-			e.printStackTrace();
+			throw new hasherException(
+			"Algo salio mal al usar el Hasher", e);
 		}
 		return hashedPassword;
 	}
@@ -35,9 +37,17 @@ public class Hasher {
 		return hashedpassword.equals(storedHash);
 	}
 	
-	public static String generarSalt() throws NoSuchAlgorithmException
+	public static String generarSalt()
 	{
-		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+		SecureRandom sr;
+		
+		try {
+			sr = SecureRandom.getInstance("SHA1PRNG");
+		} catch (NoSuchAlgorithmException e) {
+			throw new hasherException(
+			"Algo salio mal al usar el Hasher", e);
+		}
+		
 		byte[] salt = new byte[16];
 		sr.nextBytes(salt);
 		return salt.toString();

@@ -1,4 +1,3 @@
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -7,14 +6,14 @@ import org.junit.Test;
 
 import exceptions.*;
 import usuarios.Hasher;
-import validacionesContraseñas.*;
+import validacionesContrasenias.*;
 
 public class TestValidacionesDeContraseniaYHasher {
 	
 	private String[] passConSalt;
 	private ArrayList<String[]> passUsadas;
 	
-	private String[] generarHashYSalt(String password) throws NoSuchAlgorithmException
+	private String[] generarHashYSalt(String password)
 	{
 		String salt = Hasher.generarSalt();
 		String hashedPassword = Hasher.hashSHA512(password, salt);
@@ -42,14 +41,14 @@ public class TestValidacionesDeContraseniaYHasher {
 	// tests del hasher //
 	
 	@Test
-	public void elHasherCreaSaltsAleatorios() throws NoSuchAlgorithmException{
+	public void elHasherCreaSaltsAleatorios() {
 		String unaSalt = Hasher.generarSalt();
 		String otraSalt = Hasher.generarSalt();
 		Assert.assertFalse(unaSalt.equals(otraSalt));
 	}
 	
 	@Test
-	public void elHasherCreaHashsNoAleatoriosConLaMismaSalt() throws NoSuchAlgorithmException{
+	public void elHasherCreaHashsNoAleatoriosConLaMismaSalt() {
 		String salt = Hasher.generarSalt();
 		String unHash = Hasher.hashSHA512("contraseña", salt);
 		String otroHash = Hasher.hashSHA512("contraseña", salt);
@@ -57,21 +56,21 @@ public class TestValidacionesDeContraseniaYHasher {
 	}
 	
 	@Test
-	public void elHasherCreaHashsAleatoriosConDistintasSalt() throws NoSuchAlgorithmException{
+	public void elHasherCreaHashsAleatoriosConDistintasSalt() {
 		String unHash = Hasher.hashSHA512("contraseña", Hasher.generarSalt());
 		String otroHash = Hasher.hashSHA512("contraseña", Hasher.generarSalt());
 		Assert.assertFalse(unHash.equals(otroHash));
 	}
 	
 	@Test
-	public void elHasherComparaCorrectamenteContraseñaCorrecta() throws NoSuchAlgorithmException{
+	public void elHasherComparaCorrectamenteContraseñaCorrecta() {
 		String password = "contraseña";
 		String[] passConSalt = generarHashYSalt(password);
 		Assert.assertTrue(Hasher.sonCorrespondientes(password, passConSalt));
 	}
 	
 	@Test
-	public void elHasherComparaCorrrectamenteContraseñaIncorrecta() throws NoSuchAlgorithmException{
+	public void elHasherComparaCorrrectamenteContraseñaIncorrecta() {
 		String password = "contraseña";
 		String[] passConSalt = generarHashYSalt(password);
 		Assert.assertFalse(Hasher.sonCorrespondientes("otracosa", passConSalt));
@@ -82,14 +81,14 @@ public class TestValidacionesDeContraseniaYHasher {
 	// tests de validaciones de contraseñas //
 	
 	@Test(expected = contraseniaUsadaPreviamenteException.class)
-	public void validarContraseniaYaUsada() throws NoSuchAlgorithmException{
+	public void validarContraseniaYaUsada() {
 		String password = "contraseña";
 		String[] passConSalt = generarHashYSalt(password);
 		validarContraseniaEstandoUsada(password, passConSalt);
 	}
 	
 	@Test
-	public void validarContraseniaNoUsada() throws NoSuchAlgorithmException{
+	public void validarContraseniaNoUsada() {
 		String password = "contraseña";
 		String[] passConSalt = generarHashYSalt(password);
 		validarContraseniaEstandoUsada("otraCosa", passConSalt);

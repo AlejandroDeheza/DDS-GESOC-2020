@@ -1,4 +1,4 @@
-package validacionesContraseñas;
+package validacionesContrasenias;
 
 import exceptions.longitudDeContraseniaBajaException;
 

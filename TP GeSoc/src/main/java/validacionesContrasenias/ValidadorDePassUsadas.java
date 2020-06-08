@@ -1,4 +1,4 @@
-package validacionesContraseñas;
+package validacionesContrasenias;
 
 import java.util.List;
 import java.util.ArrayList;

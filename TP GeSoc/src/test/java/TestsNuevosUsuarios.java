@@ -1,6 +1,5 @@
 import exceptions.*;
 import usuarios.*;
-import java.security.NoSuchAlgorithmException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class TestsNuevosUsuarios {
 	}
 	
 	@Test
-	public void setearContraseniaNormalEnBuilder() throws NoSuchAlgorithmException{
+	public void setearContraseniaNormalEnBuilder() {
 		builder.setPassword("qiehgWfiiyrt26");
 		Assert.assertNotEquals("qiehgWfiiyrt26", builder.getHashedPassword());
 	}
@@ -34,7 +33,7 @@ public class TestsNuevosUsuarios {
 	}
 
 	@Test(expected = contraseniaUsadaPreviamenteException.class)
-	public void setearContraseniaYaUsada() throws NoSuchAlgorithmException{
+	public void setearContraseniaYaUsada() {
 		builder.setPassword("qiehgyWfiiyrt2");
 		//no seteamos lo demas porque no nos interesa
 		usuario = builder.crearUsuario();

@@ -1,8 +1,6 @@
 package usuarios;
 
-import java.security.NoSuchAlgorithmException;
-
-import validacionesContraseñas.ValidarTodo;
+import validacionesContrasenias.ValidarTodo;
 
 public class BuilderUsuario {
 	private String username;
@@ -16,7 +14,7 @@ public class BuilderUsuario {
 		this.username = username;
 	}
 
-	public void setPassword(String password) throws NoSuchAlgorithmException
+	public void setPassword(String password)
 	{
 		ValidarTodo validador = new ValidarTodo(null);
 		

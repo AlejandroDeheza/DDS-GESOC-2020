@@ -1,10 +1,9 @@
 package usuarios;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
-import validacionesContraseñas.ValidarTodo;
+import validacionesContrasenias.ValidarTodo;
 
 public class Usuario {
 	private String username;
@@ -28,7 +27,7 @@ public class Usuario {
 		this.hashedPasswordUsadasConSalt.add(passConSalt);
 	}
 
-	public void cambiarContrasenia(String password) throws NoSuchAlgorithmException
+	public void cambiarContrasenia(String password)
 	{
 		ValidarTodo validador = new ValidarTodo(this.hashedPasswordUsadasConSalt);
 		
