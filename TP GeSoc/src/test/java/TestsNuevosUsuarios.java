@@ -1,9 +1,6 @@
 import exceptions.*;
 import usuarios.*;
-import validacionesContraseñas.*;
-
 import java.security.NoSuchAlgorithmException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,39 +33,12 @@ public class TestsNuevosUsuarios {
 		Assert.assertEquals(TipoUsuario.ADMIN, builder.getTipo());
 	}
 
-	@Test(expected = longitudDeContraseniaBajaException.class)
-	public void validarContraseniaCorta() {
-		ValidadorLongitudApropiada validador = new ValidadorLongitudApropiada();
-		
-		validador.validar("Holi");
-	}
-
 	@Test(expected = contraseniaUsadaPreviamenteException.class)
 	public void setearContraseniaYaUsada() throws NoSuchAlgorithmException{
 		builder.setPassword("qiehgyWfiiyrt2");
-		builder.setTipo(TipoUsuario.ADMIN);
-		builder.setUsername("Jorge");
+		//no seteamos lo demas porque no nos interesa
 		usuario = builder.crearUsuario();
 		usuario.cambiarContrasenia("qiehgyWfiiyrt2");
 	}
 
-	@Test(expected = contraseniaComunException.class)
-	public void setearContraseniaComun() throws NoSuchAlgorithmException{
-		builder.setPassword("password");
-	}
-
-	@Test(expected = contraseniaSinMayusculaException.class)
-	public void setearContraseniaSinMayuscula() throws NoSuchAlgorithmException{
-		builder.setPassword("qwrpoqwirpqworiqpwori");
-	}
-
-	@Test(expected = contraseniaSinMinusculaException.class)
-	public void setearContraseniaSinMinuscula() throws NoSuchAlgorithmException{
-		builder.setPassword("GASLKASJGLQPR25126");
-	}
-
-	@Test(expected = contraseniaSinNumeroException.class)
-	public void setearContraseniaSinNumero() throws NoSuchAlgorithmException{
-		builder.setPassword("QWRasdqwRWQsafG");
-	}
 }
