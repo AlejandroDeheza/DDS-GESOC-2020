@@ -65,7 +65,7 @@ Y: **Presupuesto, nota de venta y resumen de cuenta.**
 Tal como se puede apreciar en la siguiente captura del libro “La organización y sus sistemas de información” de la profesora Pollo Cattaneo. Ya que, en una operación de egreso de una organización, se pueden recibir esos tipos de documentos:
 
 <p align="center"> 
-<img src="TP GeSoc/Entrega 1/Imagenes/documentosComerciales.png">
+<img src="Imagenes/documentosComerciales.png">
 </p>
 
 + Ventajas
@@ -97,7 +97,7 @@ No respetan los medios de pago de mercado libre.
 Generar una relación bidireccional entre ambas entidades. Se podría inicializar una referencia de Entidad base a Entidad Jurídica cuando las primeras son agregadas a la lista de entidades asociadas a la Entidad Jurídica. Así una Entidad base conoce a la única entidad jurídica a la que está asociada; a la vez que una entidad jurídica conoce a todas las entidades base que tiene asociadas (en su lista). Un ejemplo grafico de lo que se trata de decir extraído de “Módulo 02: Referencias. Estado. Compartir objetos. Identidad.” del prof. Dodino:
 
 <p align="center"> 
-<img src="TP GeSoc/Entrega 1/Imagenes/relacionBidireccional.png">
+<img src="Imagenes/relacionBidireccional.png">
 </p>
 
 + Ventajas
@@ -110,7 +110,7 @@ Puede que por el momento no sea muy útil, ya que no conocemos el comportamiento
 Puede ocurrir que, por una mala sincronización, quede una referencia libre o vacía.
 
 <p align="center"> 
-<img src="TP GeSoc/Entrega 1/Imagenes/relacionBidireccionalDesventaja.png" width=500>
+<img src="Imagenes/relacionBidireccionalDesventaja.png" width=500>
 </p>
 
 <br/>
