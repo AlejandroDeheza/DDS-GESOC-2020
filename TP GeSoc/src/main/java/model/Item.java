@@ -4,7 +4,7 @@ public class Item {
 	private int valor;
 	private String descripcion;
 	
-	public Item(int valor, String descripcion) {
+	public Item(int valor, String descripcion,OperacionDeEgreso operacionAsociada ) {
 		this.valor = valor;
 		this.descripcion = descripcion;
 	}
@@ -16,5 +16,7 @@ public class Item {
 	public String getDescripcion() {
 		return this.descripcion;
 	}
+
+
 
 }

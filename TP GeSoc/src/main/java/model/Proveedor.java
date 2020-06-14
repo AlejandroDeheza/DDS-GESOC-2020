@@ -2,10 +2,10 @@ package model;
 
 public class Proveedor {
 	private String razonSocial;
-	private String direccionPostal;
+	private DireccionPostal direccionPostal;
 	private int cuil;
 
-	public Proveedor(String razonSocial, String direccionPostal, int cuil) {
+	public Proveedor(String razonSocial, DireccionPostal direccionPostal, int cuil) {
 		this.razonSocial = razonSocial;
 		this.direccionPostal = direccionPostal;
 		this.cuil = cuil;
@@ -19,11 +19,11 @@ public class Proveedor {
 		this.razonSocial = razonSocial;
 	}
 
-	public String getDireccionPostal() {
+	public DireccionPostal getDireccionPostal() {
 		return this.direccionPostal;
 	}
 
-	public void setDireccionPostal(String direccionPostal) {
+	public void setDireccionPostal(DireccionPostal direccionPostal) {
 		this.direccionPostal = direccionPostal;
 	}
 
