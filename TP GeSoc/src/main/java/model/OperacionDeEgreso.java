@@ -53,6 +53,7 @@ public class OperacionDeEgreso {
 	public BigDecimal menorPrecioDePresupuestos() {
 		return presupuestos.stream().map(presupuesto -> presupuesto.valorTotal()).min(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
 	}
+	
 	/*
 	public void validarConsistenciaConPresupuesto() {
 		if(!presupuestos.stream().anyMatch(presupuesto -> presupuesto.getItems().containsAll(items)))

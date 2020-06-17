@@ -25,12 +25,15 @@ public class TestsOperacionesDeEgreso {
 	     ListaItems2 = new ArrayList<>();
 	     ListaItems3 = new ArrayList<>();
 	     
+	     //Items compra
 		 item1 = new Item(new BigDecimal(20), "Item A");
 		 item2 = new Item(new BigDecimal(30), "Item B");
 		 item3 = new Item(new BigDecimal(40), "Item C");
+		 //Items presupuesto 1
 		 item4 = new Item(new BigDecimal(20), "Item A");
 		 item5 = new Item(new BigDecimal(30), "Item B");
 		 item6 = new Item(new BigDecimal(40), "Item C");
+		 //Items presupuesto 2
 		 item7 = new Item(new BigDecimal(30), "Item A");
 		 item8 = new Item(new BigDecimal(30), "Item B");
 		 item9 = new Item(new BigDecimal(40), "Item C");
