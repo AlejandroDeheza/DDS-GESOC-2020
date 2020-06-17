@@ -7,16 +7,20 @@ import javax.ws.rs.core.MediaType;
 
 public class DireccionPostal {
 	String calle, altura, piso, depto, ciudad, provincia, pais;
-	
-	ClientResponse dataPaises;
-	public void infoPais() {
-		dataPaises =  Client.create()
-	    	       .resource("https://api.mercadolibre.com/")
-	    	       .path("classified_locations/countries")
-	    	       .accept(MediaType.APPLICATION_JSON) 
-	    	       .get(ClientResponse.class);
-	
+
+	public DireccionPostal(String calle, String altura, String piso, String depto, String ciudad, String provincia,
+			String pais) {
+
+		this.calle = calle;
+		this.altura = altura;
+		this.piso = piso;
+		this.depto = depto;
+		this.ciudad = ciudad;
+		this.provincia = provincia;
+		this.pais = pais;
 	}
 	
+	
+		
 
 }
