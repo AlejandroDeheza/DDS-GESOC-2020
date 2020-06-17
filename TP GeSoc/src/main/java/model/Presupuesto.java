@@ -2,6 +2,7 @@ package model;
 
 import exceptions.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,9 @@ public class Presupuesto {
 	
 	private List<Item> items = new ArrayList<>();
 	
-	public float valorTotal() {
-		return (float) this.items.stream().mapToDouble(a -> a.getValor()).sum();
-    }
+	public BigDecimal valorTotal() {
+		return this.items.stream().map(i -> i.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
+	}
 
 	public List<Item> getItems() {
 		return items;

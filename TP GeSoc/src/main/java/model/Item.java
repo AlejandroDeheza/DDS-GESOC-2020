@@ -1,15 +1,17 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class Item {
-	private int valor;
+	private BigDecimal valor;
 	private String descripcion;
 	
-	public Item(int valor, String descripcion,OperacionDeEgreso operacionAsociada ) {
+	public Item(BigDecimal valor, String descripcion) {
 		this.valor = valor;
 		this.descripcion = descripcion;
 	}
 
-	public int getValor() {
+	public BigDecimal getValor() {
 		return this.valor;
 	}
 
@@ -17,6 +19,7 @@ public class Item {
 		return this.descripcion;
 	}
 
-
-
+	public boolean equals(Item item) {
+		return this.valor.equals(item.valor) && this.descripcion.equals(item.descripcion);
+	}
 }
