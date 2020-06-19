@@ -2,15 +2,11 @@ package model;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
-import java.util.HashMap;
-
 import javax.ws.rs.core.MediaType;
 
 import org.json.*;
 
-public class MercadoLibreApi implements InfoDireccionPostal {
+public class MercadoLibreApi implements InfoDeUbicacion {
 	
 	public ClientResponse ObtenerJSON(String Url) {
 		ClientResponse data = Client.create()
@@ -21,8 +17,8 @@ public class MercadoLibreApi implements InfoDireccionPostal {
 		return data;
 	}
 		
-	@Override
-	public JSONObject obtenerInfoPais(String Pais) {
+	
+	public JSONObject obtenerJSONPais(String Pais) {
 		String idPais = null;
 		
 		ClientResponse data = ObtenerJSON("/classified_locations/countries");
@@ -41,9 +37,9 @@ public class MercadoLibreApi implements InfoDireccionPostal {
 	}
 
 
-	@Override
-	public JSONObject obtenerInfoProvincia(String Provincia, String Pais) {
-		JSONObject infoPais = obtenerInfoPais(Pais);
+	
+	public JSONObject obtenerJSONProvincia(String Provincia, String Pais) {
+		JSONObject infoPais = obtenerJSONPais(Pais);
 		String idProvincia = null;
 		
 		JSONArray listaProvincias = infoPais.getJSONArray("states");
@@ -59,9 +55,9 @@ public class MercadoLibreApi implements InfoDireccionPostal {
 
 	}
 
-	@Override
-	public JSONObject obtenerInfoCiudad(String Ciudad, String Provincia, String Pais) {
-		JSONObject infoProvincia = obtenerInfoProvincia(Provincia,Pais);
+	
+	public JSONObject obtenerJSONCiudad(String Ciudad, String Provincia, String Pais) {
+		JSONObject infoProvincia = obtenerJSONProvincia(Provincia,Pais);
 		String idCiudad = null;
 		
 		JSONArray listaCiudades = infoProvincia.getJSONArray("cities");
@@ -78,9 +74,29 @@ public class MercadoLibreApi implements InfoDireccionPostal {
 		
 	}
 	
-	public JSONObject obtenerInfoMoneda(String Pais){
-		JSONObject infoPais = obtenerInfoPais(Pais);
+	public JSONObject obtenerJSONMoneda(String Pais){
+		JSONObject infoPais = obtenerJSONPais(Pais);
 		
 		return new JSONObject(ObtenerJSON("/currencies/" + infoPais.getString("currency_id")).getEntity(String.class));
+	}
+	
+	@Override
+	public String obtenerInfoPais(String Pais) {
+		return obtenerJSONPais(Pais).toString();
+	}
+	
+	@Override
+	public String obtenerInfoProvincia(String Provincia, String Pais) {
+		return obtenerJSONProvincia(Provincia, Pais).toString();
+	}
+	
+	@Override
+	public String obtenerInfoCiudad(String Ciudad, String Provincia, String Pais) {
+		return obtenerJSONCiudad(Ciudad, Provincia, Pais).toString();
+	}
+	
+	@Override
+	public String obtenerInfoMoneda(String Pais) {
+		return obtenerJSONMoneda(Pais).toString();
 	}
 }

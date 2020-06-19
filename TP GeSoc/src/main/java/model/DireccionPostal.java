@@ -1,26 +1,20 @@
 package model;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
-import javax.ws.rs.core.MediaType;
 
 public class DireccionPostal {
-	String calle, altura, piso, depto, ciudad, provincia, pais;
+	Direccion direccion;
+	Ubicacion ubicacion;
 
-	public DireccionPostal(String calle, String altura, String piso, String depto, String ciudad, String provincia,
-			String pais) {
-
-		this.calle = calle;
-		this.altura = altura;
-		this.piso = piso;
-		this.depto = depto;
-		this.ciudad = ciudad;
-		this.provincia = provincia;
-		this.pais = pais;
+	public Ubicacion getUbicacion() {
+		return ubicacion;
 	}
-	
-	
-		
+
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
+	public DireccionPostal(Direccion direccion, Ubicacion ubicacion) {
+		this.direccion = direccion;
+		this.ubicacion = ubicacion;
+	}		
 
 }

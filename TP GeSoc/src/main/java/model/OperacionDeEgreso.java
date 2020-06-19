@@ -26,9 +26,11 @@ public class OperacionDeEgreso {
 		this.documentoComercial = codDocumentoComercial;
 	}
 
+	//*******USADO PARA TESTING*******//
 	public OperacionDeEgreso(List<Item> items) {
 		this.items=items;
 	}
+	
 	public OperacionDeEgreso(DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, MedioDePago medio,
 			List<Item> items, Organizacion organizacion, Proveedor proveedor, List<Presupuesto> presupuestos,
 			List<Usuario> revisores) {
@@ -83,6 +85,10 @@ public class OperacionDeEgreso {
 	
 	public boolean esValida() {
 		return estaBasadaEnAlgunPresupuesto() && tieneLaSuficienteCantidadDePresupuestos() && seEligioElPresupuestoMasBarato();
+	}
+	
+	public void altaDeUnRevisor(Usuario revisorNuevo) {
+		revisores.add(revisorNuevo);
 	}
 
 }
