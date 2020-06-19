@@ -62,7 +62,8 @@ Los Usuarios revisores podrian ver facilmente los resultados de las validaciones
 
 + Desventajas
 
-TODO
+Se agrega complejidad al diseño.
+
 <br/>
 <br/>
 
