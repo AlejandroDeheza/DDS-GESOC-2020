@@ -63,7 +63,6 @@ Los Usuarios revisores podrian ver facilmente los resultados de las validaciones
 + Desventajas
 
 Se agrega complejidad al diseño.
-
 <br/>
 <br/>
 
@@ -77,7 +76,6 @@ Se podrian agregar mas revisores a una Compra despues de que esta sea creada.
 + Desventajas
 
 Podria generar problemas de seguridad.
-
 <br/>
 <br/>
 
