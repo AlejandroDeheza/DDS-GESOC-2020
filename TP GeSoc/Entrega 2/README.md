@@ -67,7 +67,6 @@ Se agrega complejidad al diseño.
 <br/>
 <br/>
 
-
 ### 5. Setter para revisores de Compra
 Agregar un setter para agregar revisores a una Compra
 
