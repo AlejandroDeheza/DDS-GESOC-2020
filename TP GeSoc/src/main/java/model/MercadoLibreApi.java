@@ -78,12 +78,9 @@ public class MercadoLibreApi implements InfoDireccionPostal {
 		
 	}
 	
-	
 	public JSONObject obtenerInfoMoneda(String Pais){
 		JSONObject infoPais = obtenerInfoPais(Pais);
 		
 		return new JSONObject(ObtenerJSON("/currencies/" + infoPais.getString("currency_id")).getEntity(String.class));
-	
 	}
-
 }

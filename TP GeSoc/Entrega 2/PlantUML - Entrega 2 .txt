@@ -1,0 +1,93 @@
+@startuml
+class OperacionDeEgreso{
+fechaOperacion
+presupuestosMinimos
+valorTotal()
+menorPrecioDePresupuestos()
+estaBasadaEnAlgunPresupuesto()
+tieneLaSuficienteCantidadDePresupuestos() 
+seEligioElPresupuestoMasBarato()
+enviarMensajeARevisores(Mensaje mensaje)
+esValida() 
+}
+class Presupuesto{
+valorTotal()
+}
+class Item{
+valor
+descripcion
+}
+class DocumentoComercial{
+ID
+}
+enum TipoDocumentoComercial{
+FACTURA
+TICKET
+RECIBO
+}
+class Mensaje{
+cuerpo
+}
+interface MedioDePago{
+abonarOperacion(valor)
+}
+class Organizacion{
+...
+...()
+}
+class Usuario{
+username
+hashedPasswordActual
+saltActual
+hashedPasswordUsadasConSalt
+agregarPasswordUsada()
+cambiarContrasenia()
+recibirMensaje(Mensaje)
+}
+enum TipoUsuario{
+ADMIN
+ESTANDAR
+}
+
+class Proveedor{
+razonSocial
+cuil
+}
+class DireccionPostal{
+calle
+altura
+piso
+depto
+ciudad
+provincia
+pais
+}
+
+interface InfoDireccionPostal{
+obtenerInfoPais(pais)
+obtenerInfoProvincia(provincia,pais)
+obtenerInfoCiudad(ciudad,provincia,pais)
+}
+
+class MercadoLibreApi{
+obtenerJSON(url)
+obtenerInfoPais(pais)
+obtenerInfoProvincia(provincia,pais)
+obtenerInfoCiudad(ciudad,provincia,pais)
+}
+
+OperacionDeEgreso ..> Mensaje
+OperacionDeEgreso --> "*" Item: items
+OperacionDeEgreso --> "1" DocumentoComercial: documentoComercial
+OperacionDeEgreso -->"1" MedioDePago: medio  
+OperacionDeEgreso --> "1" Organizacion: organizacion
+OperacionDeEgreso --> "1" Proveedor: proveedor
+OperacionDeEgreso --> "*" Presupuesto: presupuestos
+OperacionDeEgreso --> "*" Usuario: revisores
+Presupuesto --> "*" Item: items
+DocumentoComercial --> "1" TipoDocumentoComercial: tipoDoc 
+Usuario --> "*" Mensaje: mensajes
+Usuario --> "1" TipoUsuario: tipoUser
+Proveedor --> "1" DireccionPostal: direccionPostal
+MercadoLibreApi ..|> InfoDireccionPostal
+@enduml
