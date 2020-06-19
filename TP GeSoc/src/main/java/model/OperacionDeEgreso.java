@@ -82,6 +82,8 @@ public class OperacionDeEgreso {
 	public void compraValidada() {
 		revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje("Se ha validado la compra"))); //Aca podriamos pasarle el ID de la compra, o la compra en si, para que sepa que hacer. 
 	}
+	//TODO 
+	// *Agregar mandar mensaje cuando las compras son rechazadas.
 	
 	public boolean esValida() {
 		return estaBasadaEnAlgunPresupuesto() && tieneLaSuficienteCantidadDePresupuestos() && seEligioElPresupuestoMasBarato();

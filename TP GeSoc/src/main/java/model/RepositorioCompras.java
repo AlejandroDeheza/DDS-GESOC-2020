@@ -24,5 +24,8 @@ public final class RepositorioCompras {
 		comprasAceptadas.addAll(comprasValidas);
 		comprasValidas.forEach(compra -> compra.compraValidada());
 		comprasPendientes.removeAll(comprasValidas);
+		
+		//TODO
+		// *Agregar que a las compras pendientes les mande el mensaje "Compra Invalida".
 	}
 }
