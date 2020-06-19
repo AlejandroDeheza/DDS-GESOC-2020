@@ -22,7 +22,7 @@ public final class RepositorioCompras {
 	public void validarComprasPendientes() {
 		List<OperacionDeEgreso> comprasValidas = comprasPendientes.stream().filter(compra -> compra.esValida()).collect(Collectors.toList());
 		comprasAceptadas.addAll(comprasValidas);
-		comprasValidas.forEach(compra -> compra.enviarMensajeARevisores(new Mensaje("Se valido la compra"))); //Habria que enviar tambien el identificador de la compra
+		comprasValidas.forEach(compra -> compra.compraValidada());
 		comprasPendientes.removeAll(comprasValidas);
 	}
 }

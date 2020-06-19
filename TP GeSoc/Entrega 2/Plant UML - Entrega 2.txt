@@ -7,7 +7,7 @@ menorPrecioDePresupuestos()
 estaBasadaEnAlgunPresupuesto()
 tieneLaSuficienteCantidadDePresupuestos() 
 seEligioElPresupuestoMasBarato()
-enviarMensajeARevisores(Mensaje mensaje)
+compraValidada()
 esValida() 
 }
 class Presupuesto{
@@ -76,6 +76,12 @@ obtenerInfoCiudad(ciudad,provincia,pais)
 obtenerMoneda(pais)
 }
 
+class RepositorioCompras{
+INSTANCE
+agregarNuevaCompra(compra)
+validarComprasPendientes()
+}
+
 class Direccion{
 calle
 altura
@@ -109,4 +115,6 @@ InfoDeUbicacion <|.. MercadoLibreApi
 DireccionPostal --> "1" Direccion: direccion
 DireccionPostal --> "1" Ubicacion: ubicacion
 Ubicacion ..> InfoDeUbicacion
+RepositorioCompras --> "*" OperacionDeEgreso: comprasPendientes
+RepositorioCompras --> "*" OperacionDeEgreso: comprasAceptadas
 @enduml

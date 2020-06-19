@@ -79,8 +79,8 @@ public class OperacionDeEgreso {
 	public boolean seEligioElPresupuestoMasBarato() {
 		return menorPrecioDePresupuestos().equals(this.valorTotal());
 	}
-	public void enviarMensajeARevisores(Mensaje mensaje) {
-		revisores.forEach(revisor -> revisor.recibirMensaje(mensaje));
+	public void compraValidada() {
+		revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje("Se ha validado la compra"))); //Aca podriamos pasarle el ID de la compra, o la compra en si, para que sepa que hacer. 
 	}
 	
 	public boolean esValida() {
