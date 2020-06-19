@@ -12,21 +12,21 @@ Las listas de items de un Presupuesto y Operacion de egreso deben ser iguales pa
 
 + Ventajas
 
-Es mas simple respetar esos 2 requerimientos. Punto 2 y 3.b
+Es mas simple respetar esos 2 requerimientos. Punto 2 y 3.b.
 
 + Desventajas
 
-No sabemos si se ajusta a las necesdades del usuario
+No sabemos si se ajusta a las necesdades del usuario.
 <br/>
 <br/>
 
 
 ### 2. Configuracion de Presupuesto
-Validar que la **lista** de items que se intenta usar al instanciar un Presupuesto, sea igual a una **lista** de items de alguna Compra pendiente en el repositorioCompras. Y que ademas se agregue ese Presupuesto (luego de validar la lista) en la lista de presupuestos de dicha Compra.
+Validar que la **lista** de items que se intenta usar al instanciar un Presupuesto, sea igual a una **lista** de items de alguna Compra pendiente en el repositorioCompras. Y que ademas se agregue ese Presupuesto (en el mismo constructor del Presupuesto) en la lista de presupuestos de dicha Compra.
 
 + Ventajas
 
-TODO
+Se garantiza que no es posible cargar presupuestos si previamente no se cargó el egreso correspondiente. Tambien evitamos crear Presupuestos que no sean validos. Ademas, automaticamente se agrega el Presupuesto a la Operacion de egreso necesaria.
 
 + Desventajas
 
@@ -37,14 +37,14 @@ TODO
 
 ### 3. Atributos de un Presupuesto
 Agregar como atributos de un Presupuesto:
-* Documento comercial
-* Medio de pago
-* Organizacion
-* Proveedor
+    - Documento comercial
+    - Medio de pago
+    - Organizacion
+    - Proveedor
 
 + Ventajas
 
-TODO
+Podriamos validar de manera mas precisa si un Presupuesto se corresponde con una Compra
 
 + Desventajas
 
@@ -58,7 +58,7 @@ Un Mensaje podria contener la lista de Compras aceptadas y una lista de Compras 
 
 + Ventajas
 
-Los Usuarios revisores podrian conocer exactamente que Compras fueron aceptadas y cuales rechazadas
+Los Usuarios revisores podrian ver facilmente los resultados de las validaciones y conocer exactamente que Compras fueron aceptadas y cuales rechazadas.
 
 + Desventajas
 
@@ -67,21 +67,7 @@ TODO
 <br/>
 
 
-### 5. Requerimiento 3.c
-Comparar Presupuestos en vez de valores totales en "seEligioElPresupuestoMasBarato()" en clase Operacion de egreso.
-
-+ Ventajas
-
-TODO
-
-+ Desventajas
-
-TODO
-<br/>
-<br/>
-
-
-### 6. Setter para revisores de Compra
+### 5. Setter para revisores de Compra
 Agregar un setter para agregar revisores a una Compra
 
 + Ventajas
@@ -90,7 +76,7 @@ Se podrian agregar mas revisores a una Compra despues de que esta sea creada.
 
 + Desventajas
 
-Podria generar problemas de seguridad
+Podria generar problemas de seguridad.
 
 <br/>
 <br/>
