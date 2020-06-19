@@ -30,7 +30,7 @@ Se garantiza que no es posible cargar presupuestos si previamente no se cargó e
 
 + Desventajas
 
-TODO
+Se genera acomplamiento no deseado entre el Presupuesto y la Operacion De Egreso.
 <br/>
 <br/>
 
@@ -48,7 +48,7 @@ Podriamos validar de manera mas precisa si un Presupuesto se corresponde con una
 
 + Desventajas
 
-TODO
+Estariamos repitiendo atributos que ya tiene la Operacion De Egreso.
 <br/>
 <br/>
 
