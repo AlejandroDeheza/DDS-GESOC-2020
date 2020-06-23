@@ -20,7 +20,7 @@ public class Item {
 	}
 
 	public boolean equals(Item item) {
-		return this.valor.equals(item.valor) && this.descripcion.equals(item.descripcion);
+		return this.descripcion.equals(item.descripcion);
 	}
 	
 }

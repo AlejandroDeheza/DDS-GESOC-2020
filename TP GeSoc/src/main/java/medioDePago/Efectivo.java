@@ -1,4 +1,4 @@
-package model;
+package medioDePago;
 
 public class Efectivo implements MedioDePago {
 	//TipoMedioDePago codTipoMedioDaPago = TipoMedioDePago.CASH;

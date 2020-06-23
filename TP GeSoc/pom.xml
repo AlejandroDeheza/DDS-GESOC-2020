@@ -20,15 +20,15 @@
 		</dependency>
 
 		<dependency>
-		        <groupId>com.sun.jersey</groupId>
-                        <artifactId>jersey-client</artifactId>
-                        <version>1.19.4</version>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.19.4</version>
 		</dependency>
 
 		<dependency>
-    			<groupId>org.json</groupId>
-    			<artifactId>json</artifactId>
-    			<version>20200518</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20200518</version>
 		</dependency>
 
 	</dependencies>
@@ -44,27 +44,27 @@
 				</configuration>
 			</plugin>
 
-<plugin>
-      <artifactId>maven-assembly-plugin</artifactId>
-      <executions>
-        <execution>
-          <phase>package</phase>
-          <goals>
-            <goal>single</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <descriptorRefs>
-          <descriptorRef>jar-with-dependencies</descriptorRef>
-        </descriptorRefs>
-        <archive>
-          <manifest>
-            <mainClass>ClasePrincipal.MainClass</mainClass>
-          </manifest>
-        </archive>
-      </configuration>
-    </plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>ClasePrincipal.MainClass</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 
 		</plugins>
 	</build>

@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import usuarios.*;
 
 public final class RepositorioCompras {
 	private List<OperacionDeEgreso> comprasPendientes = new ArrayList<>();
@@ -16,16 +15,18 @@ public final class RepositorioCompras {
 	}
 	
 	public void agregarNuevaCompra(OperacionDeEgreso compra) {
-		comprasPendientes.add(compra);
+		this.comprasPendientes.add(compra);
+	}
+	
+	private List<OperacionDeEgreso> comprasValidas() {
+		return this.comprasPendientes.stream().filter(compra -> compra.esValida()).collect(Collectors.toList());
 	}
 	
 	public void validarComprasPendientes() {
-		List<OperacionDeEgreso> comprasValidas = comprasPendientes.stream().filter(compra -> compra.esValida()).collect(Collectors.toList());
-		comprasAceptadas.addAll(comprasValidas);
-		comprasValidas.forEach(compra -> compra.compraValidada());
-		comprasPendientes.removeAll(comprasValidas);
-		
-		//TODO
-		// *Agregar que a las compras pendientes les mande el mensaje "Compra Invalida".
+		List<OperacionDeEgreso> comprasValidas = this.comprasValidas();
+		this.comprasAceptadas.addAll(comprasValidas);
+		comprasValidas.forEach(compra -> compra.notificarRevisores("La compra es valida"));
+		this.comprasPendientes.removeAll(comprasValidas);
+		this.comprasPendientes.forEach(compra -> compra.notificarRevisores("La compra NO es valida"));
 	}
 }

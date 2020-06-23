@@ -1,5 +1,7 @@
 package model;
 
+import ubicacion.DireccionPostal;
+
 public class Proveedor {
 	private String razonSocial;
 	private DireccionPostal direccionPostal;

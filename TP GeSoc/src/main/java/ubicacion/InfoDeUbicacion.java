@@ -1,4 +1,4 @@
-package model;
+package ubicacion;
 
 public interface InfoDeUbicacion{
 	public String obtenerInfoPais(String Pais);

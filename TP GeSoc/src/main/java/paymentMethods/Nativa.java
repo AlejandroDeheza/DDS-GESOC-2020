@@ -1,6 +1,6 @@
 package paymentMethods;
 
-import model.TarjetaDeCredito;
+import medioDePago.TarjetaDeCredito;
 
 public class Nativa extends TarjetaDeCredito {
 	IDMedioDePago idMedioDePago = IDMedioDePago.NATIVA;

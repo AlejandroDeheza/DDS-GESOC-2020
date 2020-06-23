@@ -1,4 +1,4 @@
-package model;
+package medioDePago;
 
 public class CajeroAutomatico implements MedioDePago {
 	//TipoMedioDePago codTipoMedioDePago = TipoMedioDePago.ATM;

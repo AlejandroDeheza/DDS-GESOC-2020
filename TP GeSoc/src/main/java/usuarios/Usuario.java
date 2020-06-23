@@ -39,6 +39,6 @@ public class Usuario {
 	}
 	
 	public void recibirMensaje(Mensaje mensaje) {
-		mensajes.add(mensaje);
+		this.mensajes.add(mensaje);
 	}
 }

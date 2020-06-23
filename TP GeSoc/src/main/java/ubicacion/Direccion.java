@@ -1,7 +1,7 @@
-package model;
+package ubicacion;
 
 public class Direccion {
-	String calle, altura, piso, depto;
+	private String calle, altura, piso, depto;
 	
 	public Direccion(String unaCalle, String unaAltura, String unPiso, String unDepto) {
 		this.calle = unaCalle;

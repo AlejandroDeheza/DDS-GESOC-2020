@@ -1,11 +1,11 @@
-package model;
+package ubicacion;
 
 public class DireccionPostal {
-	Direccion direccion;
-	Ubicacion ubicacion;
+	private Direccion direccion;
+	private Ubicacion ubicacion;
 
 	public Ubicacion getUbicacion() {
-		return ubicacion;
+		return this.ubicacion;
 	}
 
 	public void setUbicacion(Ubicacion ubicacion) {

@@ -1,6 +1,6 @@
 package paymentMethods;
 
-import model.DineroEnCuenta;
+import medioDePago.DineroEnCuenta;
 
 public class AccountMoney extends DineroEnCuenta {
 	IDMedioDePago idMedioDePago = IDMedioDePago.ACCOUNT_MONEY;

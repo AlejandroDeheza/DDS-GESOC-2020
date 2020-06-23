@@ -1,4 +1,4 @@
-package model;
+package organizacion;
 public class EntidadBase {
 	private String nombreFicticio;
 	private String descripcion;

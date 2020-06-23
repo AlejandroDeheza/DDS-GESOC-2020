@@ -1,5 +1,3 @@
-
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +6,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.*;
 import model.*;
-import usuarios.TipoUsuario;
 
 public class TestsOperacionesDeEgreso {
 	
 	List<Item> ListaItems, ListaItems2, ListaItems3;
 	Item item1, item2, item3, item4, item5, item6, item7, item8, item9;
-	Presupuesto presupuesto1, presupuesto2;
+	Presupuesto presupuesto1;
 	OperacionDeEgreso operacion1;
 
 	@Before
@@ -50,12 +46,12 @@ public class TestsOperacionesDeEgreso {
 		 ListaItems3.add(item7);
 		 ListaItems3.add(item8);
 		 
-		 presupuesto1 = new Presupuesto(ListaItems);
-		 presupuesto2 = new Presupuesto(ListaItems3);
+		 presupuesto1 = new Presupuesto(ListaItems, null, null, null); //Solo deberiamos hacer esto en un test...
+		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
 		 
-		 operacion1 = new OperacionDeEgreso(ListaItems2);
-		 operacion1.agregarNuevoPresupuesto(presupuesto1);
-		 operacion1.agregarNuevoPresupuesto(presupuesto2);
+		 operacion1 = new OperacionDeEgreso(ListaItems2, null, null, null, null, null, null, null);
+		 operacion1.agregarNuevoPresupuesto(ListaItems, null, null);
+		 operacion1.agregarNuevoPresupuesto(ListaItems3, null, null);
 	}
 	
 	@Test

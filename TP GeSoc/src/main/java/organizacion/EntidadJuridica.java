@@ -1,4 +1,4 @@
-package model;
+package organizacion;
 
 public class EntidadJuridica {
 	private String razonSocial;

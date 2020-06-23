@@ -1,4 +1,4 @@
-package model;
+package medioDePago;
 
 public class TarjetaDeCredito implements MedioDePago {
 	//TipoMedioDePago codTipoMedioDePago = TipoMedioDePago.CREDIT_CARD;
