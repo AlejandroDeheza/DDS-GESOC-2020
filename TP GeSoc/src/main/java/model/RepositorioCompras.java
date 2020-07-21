@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class RepositorioCompras {
-	private List<OperacionDeEgreso> comprasPendientes = new ArrayList<>();
-	private List<OperacionDeEgreso> comprasAceptadas = new ArrayList<>();
+	public List<OperacionDeEgreso> comprasPendientes = new ArrayList<>();
+	public List<OperacionDeEgreso> comprasAceptadas = new ArrayList<>();
 	
 	private static final RepositorioCompras INSTANCE = new RepositorioCompras();
 	
@@ -18,6 +18,11 @@ public final class RepositorioCompras {
 		this.comprasPendientes.add(compra);
 	}
 	
+	public void validarComprasPendientes() {
+		this.comprasPendientes.stream().forEach(compra -> compra.validarCompra());
+	}
+	
+	/*
 	private List<OperacionDeEgreso> comprasValidas() {
 		return this.comprasPendientes.stream().filter(compra -> compra.esValida()).collect(Collectors.toList());
 	}
@@ -28,5 +33,7 @@ public final class RepositorioCompras {
 		comprasValidas.forEach(compra -> compra.notificarRevisores("La compra es valida"));
 		this.comprasPendientes.removeAll(comprasValidas);
 		this.comprasPendientes.forEach(compra -> compra.notificarRevisores("La compra NO es valida"));
-	}
+	}*/
+	
+	
 }

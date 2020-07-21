@@ -6,6 +6,7 @@ import exceptions.*;
 import medioDePago.MedioDePago;
 import organizacion.Organizacion;
 import usuarios.*;
+import validacionesOperaciones.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,9 +20,11 @@ public class OperacionDeEgreso {
 	private MedioDePago medio;
 	private Organizacion organizacion;
 	private Proveedor proveedor;
-	private List<Presupuesto> presupuestos = new ArrayList<>();
+	public List<Presupuesto> presupuestos = new ArrayList<>();
 	private List<Usuario> revisores = new ArrayList<>();
-	private final int presupuestosMinimos = 1;
+	private List<ValidadorDeOperaciones> validacionesVigentes = new ArrayList<>();
+	public List<EtiquetaOperacion> etiquetas = new ArrayList<>();
+	public final int presupuestosMinimos = 1;
 	private static int CantidadInstancias = 0;
 	private int IDOperacionDeEgreso;
 
@@ -38,10 +41,22 @@ public class OperacionDeEgreso {
 		this.revisores = revisores;
 		CantidadInstancias++;
 		this.IDOperacionDeEgreso = CantidadInstancias;
+		
+		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
+		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
+		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 	}
 	
 	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
 		this.documentoComercial = codDocumentoComercial;
+	}
+	
+	public void agregarEtiqueta(EtiquetaOperacion etiqueta) {
+		etiquetas.add(etiqueta);
+	}
+	
+	public boolean contiene(Item item) {
+		return this.items.stream().anyMatch(i -> i.equals(item));
 	}
 	
 	public void agregarNuevoPresupuesto(List<Item> items, DocumentoComercial documento, Proveedor proveedorEmisor) {
@@ -49,6 +64,7 @@ public class OperacionDeEgreso {
 		if(!this.contieneTodosLos(items)) {
 			throw new PresupuestoInvalidoException();
 		}
+		
 		Presupuesto presupuesto = new Presupuesto(items, documento, this.organizacion, proveedorEmisor);
 		this.presupuestos.add(presupuesto);
 	}//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
@@ -65,55 +81,45 @@ public class OperacionDeEgreso {
 	private boolean contieneTodosLos(List<Item> items) {
 		return items.stream().allMatch(item -> this.contiene(item));
 	}
-	
-	
-	
-	
 
+	/*
 	public boolean tieneLaSuficienteCantidadDePresupuestos() {
 		return this.presupuestos.size() >= this.presupuestosMinimos;
-	}
+	}*/
 
-	
-	
-	
-	
-	private boolean contiene(Item item) {
-		return this.items.stream().anyMatch(i -> i.equals(item));
-	}
-	
+	/*
 	private boolean contieneTodosLosItemsDe(Presupuesto presupuesto) {
 		return presupuesto.getItems().stream().allMatch(item -> this.contiene(item));
 	}
 	
 	public boolean estaBasadaEnAlgunPresupuesto() {
 		return this.presupuestos.stream().anyMatch(presupuesto -> this.contieneTodosLosItemsDe(presupuesto));
-	}
+	}*/
 	
-	
-	
-
-	
+	/*
 	private BigDecimal menorPrecioDePresupuestos() {
 		return this.presupuestos.stream().map(presupuesto -> presupuesto.valorTotal()).min(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
 	}
 	
 	public boolean seEligioElPresupuestoMasBarato() {
 		return this.menorPrecioDePresupuestos().equals(this.valorTotal());
-	}
+	}*/
+	
 
-	
-	
-	
-	
 	public boolean esValida() {
-		return this.estaBasadaEnAlgunPresupuesto() && 
-			   this.tieneLaSuficienteCantidadDePresupuestos() && 
-			   this.seEligioElPresupuestoMasBarato();
+		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasoCorrectamente(this));
 	}
 	
-	
-	
+	public void validarCompra() {
+		if(this.esValida()) {
+			RepositorioCompras.instance().comprasPendientes.remove(this);
+			RepositorioCompras.instance().comprasAceptadas.add(this);
+			notificarRevisores("La operacion fue validada correctamente");
+		}
+		else {
+			notificarRevisores("La operación no es valida");
+		}
+	}
 	
 	
 	public void notificarRevisores(String mensaje) {
