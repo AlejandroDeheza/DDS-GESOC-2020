@@ -3,6 +3,7 @@ package organizacion;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.CategoriaEntidad;
 import model.OperacionDeEgreso;
 
 public class EntidadBase {
@@ -10,7 +11,9 @@ public class EntidadBase {
 	private String descripcion;
 	private EntidadJuridica entidadJuridica;
 	private List<OperacionDeEgreso> egresos = new ArrayList<>();
+	public CategoriaEntidad categoriaEntidad;
 	
+	/*
 	public EntidadBase(String nombreFicticio, String descripcion) {
 
 		this.nombreFicticio = nombreFicticio;
@@ -21,7 +24,10 @@ public class EntidadBase {
 		this.nombreFicticio = nombreFicticio;
 		this.descripcion = descripcion;
 		this.entidadJuridica = entidadJuridica;
-	}
+	}*/
+	
+	
+	
 	
 	
 
