@@ -81,8 +81,6 @@ public class TestsRepositorioDeCompras {
 
 	}
 	
-	//TODO - Cargar el repositorio con algunas operaciones validas y otras invalidas, correr la validación y chequear que se muevan de la lista de pendientes a la de aceptadas solo las operaciones
-	//		 validas
 	@Test
 	public void ejecutarValidacionDeOperaciones() {
 		RepositorioCompras.instance().validarComprasPendientes();

@@ -33,11 +33,6 @@ public class MercadoLibreApi implements InfoDeUbicacion {
 		return new JSONObject(ObtenerJSON(enlace + idObjetivo).getEntity(String.class));
 	}
 	
-	
-	
-	
-	
-	
 	public JSONObject obtenerJSONPais(String Pais) {
 		
 		ClientResponse data = ObtenerJSON("/classified_locations/countries");
@@ -63,10 +58,6 @@ public class MercadoLibreApi implements InfoDeUbicacion {
 		JSONObject infoPais = obtenerJSONPais(Pais);
 		return new JSONObject(ObtenerJSON("/currencies/" + infoPais.getString("currency_id")).getEntity(String.class));
 	}
-	
-	
-	
-	
 	
 	//No hace falta usar @override cuando usamos una Interface
 	public String obtenerInfoPais(String Pais) {

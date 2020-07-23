@@ -15,38 +15,26 @@ public class TestsOperacionesDeEgreso {
 	Item item1, item2, item3, item4, item5, item6, item7, item8, item9;
 	Presupuesto presupuesto1;
 	OperacionDeEgreso operacion1;
+	
+	public List<Item> crearListaDeTresItems(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC){
+		List <Item> ListaItems = new ArrayList<>();
+		Item item1 = new Item(valorA, "Item A");
+		Item item2 = new Item(valorB, "Item B");
+		Item item3 = new Item(valorC, "Item C");
 
-	@Before
-	public void init() {
-	     ListaItems = new ArrayList<>();
-	     ListaItems2 = new ArrayList<>();
-	     ListaItems3 = new ArrayList<>();
-	     
-	     //Items compra
-		 item1 = new Item(new BigDecimal(20), "Item A");
-		 item2 = new Item(new BigDecimal(30), "Item B");
-		 item3 = new Item(new BigDecimal(40), "Item C");
-		 //Items presupuesto 1
-		 item4 = new Item(new BigDecimal(20), "Item A");
-		 item5 = new Item(new BigDecimal(30), "Item B");
-		 item6 = new Item(new BigDecimal(40), "Item C");
-		 //Items presupuesto 2
-		 item7 = new Item(new BigDecimal(30), "Item A");
-		 item8 = new Item(new BigDecimal(30), "Item B");
-		 item9 = new Item(new BigDecimal(40), "Item C");
-		 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);
 		 ListaItems.add(item3);
 	
-		 ListaItems2.add(item5);
-		 ListaItems2.add(item4);
-		 ListaItems2.add(item6);
-		 
-		 ListaItems3.add(item9);
-		 ListaItems3.add(item7);
-		 ListaItems3.add(item8);
-		 
+		return ListaItems;
+	}
+
+	@Before
+	public void init() {
+	     ListaItems = crearListaDeTresItems(new BigDecimal(20),new BigDecimal(30),new BigDecimal(40));
+	     ListaItems2 = crearListaDeTresItems(new BigDecimal(20),new BigDecimal(30),new BigDecimal(40));
+	     ListaItems3 = crearListaDeTresItems(new BigDecimal(30),new BigDecimal(30),new BigDecimal(40));
+	     
 		 presupuesto1 = new Presupuesto(ListaItems, null, null, null); //Solo deberiamos hacer esto en un test...
 		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
 		 
@@ -81,7 +69,4 @@ public class TestsOperacionesDeEgreso {
 	public void laOperacionEsValidaSiContemplaTodasLasValidaciones() {
 		Assert.assertTrue(operacion1.esValida());
 	}
-	
-	
-
 }
