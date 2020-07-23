@@ -14,7 +14,6 @@ public class Presupuesto {
 	private Proveedor proveedor;
 	
 	public Presupuesto(List<Item> items, DocumentoComercial documento, Organizacion organizacionReceptora, Proveedor proveedorEmisor) {
-		
 		this.items = items;
 		this.documentoComercial = documento;
 		this.organizacion = organizacionReceptora;

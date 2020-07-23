@@ -3,6 +3,7 @@ package ClasePrincipal;
 import java.util.Scanner;
 
 import model.*;
+import repositorios.RepositorioCompras;
 
 public class MainClass {
 

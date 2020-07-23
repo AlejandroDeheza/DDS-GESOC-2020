@@ -1,7 +1,7 @@
 package model;
 public class EtiquetaOperacion {
-	String texto;
-	EtiquetaOperacion (String textoDeLaEtiqueta){
+	public String texto;
+	public EtiquetaOperacion (String textoDeLaEtiqueta){
 		texto=textoDeLaEtiqueta.toUpperCase();
 	}
 }

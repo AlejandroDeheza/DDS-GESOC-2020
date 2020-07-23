@@ -6,12 +6,28 @@ import java.util.List;
 import model.CategoriaEntidad;
 import model.OperacionDeEgreso;
 
-public class EntidadBase {
-	private String nombreFicticio;
+public class EntidadBase extends Entidad{
 	private String descripcion;
-	private EntidadJuridica entidadJuridica;
-	private List<OperacionDeEgreso> egresos = new ArrayList<>();
-	public CategoriaEntidad categoriaEntidad;
+	public EntidadJuridica entidadJuridica;
+	
+	public void setEntidadJuridica(EntidadJuridica entidadJuridica) {
+		this.entidadJuridica=entidadJuridica;
+	}
+	
+	public EntidadBase() {
+		
+	}
+	public EntidadBase (int ID, String nombreFicticio, CategoriaEntidad categoriaEntidad, String descripcion, EntidadJuridica entidadJuridica) {
+		this.ID=ID;
+		this.nombreFicticio=nombreFicticio;
+		this.categoriaEntidad=categoriaEntidad;
+		this.descripcion=descripcion;
+		this.entidadJuridica=entidadJuridica;
+	}
+
+	public void asociarAEntidadJuridica (EntidadJuridica entidadJuridica) {
+		this.categoriaEntidad.asociarAEntidadJuridica(this, entidadJuridica);
+	}
 	
 	/*
 	public EntidadBase(String nombreFicticio, String descripcion) {

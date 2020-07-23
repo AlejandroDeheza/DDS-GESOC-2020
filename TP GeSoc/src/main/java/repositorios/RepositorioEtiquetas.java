@@ -1,13 +1,15 @@
-package model;
+package repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EtiquetasDeOperaciones {
+import model.EtiquetaOperacion;
+
+public class RepositorioEtiquetas {
 	public List<EtiquetaOperacion> etiquetasDelSistema = new ArrayList<>();
-	private static final EtiquetasDeOperaciones INSTANCE = new EtiquetasDeOperaciones();
+	private static final RepositorioEtiquetas INSTANCE = new RepositorioEtiquetas();
 	
-	public static final EtiquetasDeOperaciones instance() {
+	public static final RepositorioEtiquetas instance() {
 		return INSTANCE;
 	}
 	

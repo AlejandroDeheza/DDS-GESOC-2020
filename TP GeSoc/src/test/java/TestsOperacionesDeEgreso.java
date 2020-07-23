@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.*;
+import validacionesOperaciones.*;
 
 public class TestsOperacionesDeEgreso {
 	
@@ -58,20 +59,24 @@ public class TestsOperacionesDeEgreso {
 	public void elValorTotalDelPresupuestoEsLaSumaDelValorDeSusItems() {
 		Assert.assertEquals(presupuesto1.valorTotal(),new BigDecimal(90));
 	}
-	/*
+	
 	@Test
 	public void losItemsDeLaOperacionCoincidenConLosDeAlgunoDeSusPresupuestos() {
-		Assert.assertTrue(operacion1.estaBasadaEnAlgunPresupuesto());
+		ValidarQueLaOperacionContengaTodosLosItems validacion = new ValidarQueLaOperacionContengaTodosLosItems();
+		Assert.assertTrue(validacion.pasoCorrectamente(operacion1));
 	}
+
 	@Test
 	public void laOperacionTieneLaCantidadMinimaDePresupuestosQueRequiere() {
-		Assert.assertTrue(operacion1.tieneLaSuficienteCantidadDePresupuestos());
+		ValidarQueSeHayaElegidoElPresupuestoMasBarato validacion = new ValidarQueSeHayaElegidoElPresupuestoMasBarato();
+		Assert.assertTrue(validacion.pasoCorrectamente(operacion1));
 	}
 	@Test
 	public void losItemsCoincidenConLosDelPresupuestoDeMenorValor() {
-		Assert.assertTrue(operacion1.seEligioElPresupuestoMasBarato());
+		ValidarQueTengaLaSuficienteCantidadDePresupuestos validacion = new ValidarQueTengaLaSuficienteCantidadDePresupuestos();
+		Assert.assertTrue(validacion.pasoCorrectamente(operacion1));
 	}
-	*/
+	
 	@Test
 	public void laOperacionEsValidaSiContemplaTodasLasValidaciones() {
 		Assert.assertTrue(operacion1.esValida());

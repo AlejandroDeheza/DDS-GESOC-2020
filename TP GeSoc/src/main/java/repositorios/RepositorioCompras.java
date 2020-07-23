@@ -1,11 +1,14 @@
-package model;
+package repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.OperacionDeEgreso;
+
 public final class RepositorioCompras {
 	public List<OperacionDeEgreso> comprasPendientes = new ArrayList<>();
+	public List<OperacionDeEgreso> comprasValidadas = new ArrayList<>();
 	public List<OperacionDeEgreso> comprasAceptadas = new ArrayList<>();
 	
 	private static final RepositorioCompras INSTANCE = new RepositorioCompras();
@@ -18,10 +21,15 @@ public final class RepositorioCompras {
 		this.comprasPendientes.add(compra);
 	}
 	
+	
+	
 	public void validarComprasPendientes() {
 		this.comprasPendientes.stream().forEach(compra -> compra.validarCompra());
+		this.comprasAceptadas.addAll(this.comprasValidadas);
+		this.comprasPendientes.removeAll(this.comprasValidadas);
+		this.comprasValidadas.clear();
 	}
-	
+
 	/*
 	private List<OperacionDeEgreso> comprasValidas() {
 		return this.comprasPendientes.stream().filter(compra -> compra.esValida()).collect(Collectors.toList());
@@ -30,10 +38,8 @@ public final class RepositorioCompras {
 	public void validarComprasPendientes() {
 		List<OperacionDeEgreso> comprasValidas = this.comprasValidas();
 		this.comprasAceptadas.addAll(comprasValidas);
-		comprasValidas.forEach(compra -> compra.notificarRevisores("La compra es valida"));
 		this.comprasPendientes.removeAll(comprasValidas);
-		this.comprasPendientes.forEach(compra -> compra.notificarRevisores("La compra NO es valida"));
-	}*/
-	
+	}
+	*/
 	
 }

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import exceptions.*;
 import medioDePago.MedioDePago;
 import organizacion.Organizacion;
+import repositorios.RepositorioCompras;
 import usuarios.*;
 import validacionesOperaciones.*;
 
@@ -26,8 +27,16 @@ public class OperacionDeEgreso {
 	public List<EtiquetaOperacion> etiquetas = new ArrayList<>();
 	public final int presupuestosMinimos = 1;
 	private static int CantidadInstancias = 0;
-	private int IDOperacionDeEgreso;
+	public int IDOperacionDeEgreso;
 
+	
+	public OperacionDeEgreso(List<Item> items) {
+		this.items = items;
+		
+		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
+		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
+		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
+	}
 	public OperacionDeEgreso(List<Item> items, DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, 
 			MedioDePago medio, Organizacion organizacion, Proveedor proveedor, List<Presupuesto> presupuestos,
 			List<Usuario> revisores) {
@@ -81,39 +90,14 @@ public class OperacionDeEgreso {
 	private boolean contieneTodosLos(List<Item> items) {
 		return items.stream().allMatch(item -> this.contiene(item));
 	}
-
-	/*
-	public boolean tieneLaSuficienteCantidadDePresupuestos() {
-		return this.presupuestos.size() >= this.presupuestosMinimos;
-	}*/
-
-	/*
-	private boolean contieneTodosLosItemsDe(Presupuesto presupuesto) {
-		return presupuesto.getItems().stream().allMatch(item -> this.contiene(item));
-	}
 	
-	public boolean estaBasadaEnAlgunPresupuesto() {
-		return this.presupuestos.stream().anyMatch(presupuesto -> this.contieneTodosLosItemsDe(presupuesto));
-	}*/
-	
-	/*
-	private BigDecimal menorPrecioDePresupuestos() {
-		return this.presupuestos.stream().map(presupuesto -> presupuesto.valorTotal()).min(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
-	}
-	
-	public boolean seEligioElPresupuestoMasBarato() {
-		return this.menorPrecioDePresupuestos().equals(this.valorTotal());
-	}*/
-	
-
 	public boolean esValida() {
 		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasoCorrectamente(this));
 	}
 	
 	public void validarCompra() {
 		if(this.esValida()) {
-			RepositorioCompras.instance().comprasPendientes.remove(this);
-			RepositorioCompras.instance().comprasAceptadas.add(this);
+			RepositorioCompras.instance().comprasValidadas.add(this);
 			notificarRevisores("La operacion fue validada correctamente");
 		}
 		else {
