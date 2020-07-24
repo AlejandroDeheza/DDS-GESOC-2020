@@ -3,16 +3,16 @@ package model;
 import java.math.BigDecimal;
 
 public class Item {
-	private BigDecimal valor;
+	private Moneda moneda;
 	private String descripcion;
 	
-	public Item(BigDecimal valor, String descripcion) {
-		this.valor = valor;
+	public Item(Moneda moneda, String descripcion) {
+		this.moneda = moneda;
 		this.descripcion = descripcion;
 	}
 
-	public BigDecimal getValor() {
-		return this.valor;
+	public Moneda getMoneda() {
+		return this.moneda;
 	}
 
 	public String getDescripcion() {

@@ -4,4 +4,7 @@ public class EtiquetaOperacion {
 	public EtiquetaOperacion (String textoDeLaEtiqueta){
 		texto=textoDeLaEtiqueta.toUpperCase();
 	}
+	public void setTexto(String textoDeLaEtiqueta) {
+		texto=textoDeLaEtiqueta.toUpperCase();
+	}
 }

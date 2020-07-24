@@ -16,11 +16,15 @@ public class TestsOperacionesDeEgreso {
 	Presupuesto presupuesto1;
 	OperacionDeEgreso operacion1;
 	
-	public List<Item> crearListaDeTresItems(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC){
+	public Moneda crearMoneda(Double monto) {
+		return new Moneda(monto,"ARS");
+	}
+	
+	public List<Item> crearListaDeTresItems(Double valorA, Double valorB, Double valorC){
 		List <Item> ListaItems = new ArrayList<>();
-		Item item1 = new Item(valorA, "Item A");
-		Item item2 = new Item(valorB, "Item B");
-		Item item3 = new Item(valorC, "Item C");
+		Item item1 = new Item(crearMoneda(valorA), "Item A");
+		Item item2 = new Item(crearMoneda(valorB), "Item B");
+		Item item3 = new Item(crearMoneda(valorC), "Item C");
 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);
@@ -31,14 +35,14 @@ public class TestsOperacionesDeEgreso {
 
 	@Before
 	public void init() {
-	     ListaItems = crearListaDeTresItems(new BigDecimal(20),new BigDecimal(30),new BigDecimal(40));
-	     ListaItems2 = crearListaDeTresItems(new BigDecimal(20),new BigDecimal(30),new BigDecimal(40));
-	     ListaItems3 = crearListaDeTresItems(new BigDecimal(30),new BigDecimal(30),new BigDecimal(40));
+	     ListaItems = crearListaDeTresItems(20.0,30.0,40.0);
+	     ListaItems2 = crearListaDeTresItems(20.0,30.0,40.0);
+	     ListaItems3 = crearListaDeTresItems(30.0,30.0,40.0);
 	     
 		 presupuesto1 = new Presupuesto(ListaItems, null, null, null); //Solo deberiamos hacer esto en un test...
 		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
 		 
-		 operacion1 = new OperacionDeEgreso(ListaItems2, null, null, null, null, null, null, null);
+		 operacion1 = new OperacionDeEgreso(ListaItems2);
 		 operacion1.agregarNuevoPresupuesto(ListaItems, null, null);
 		 operacion1.agregarNuevoPresupuesto(ListaItems3, null, null);
 	}

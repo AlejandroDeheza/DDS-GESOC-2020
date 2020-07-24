@@ -19,11 +19,15 @@ public class TestsRepositorioDeCompras {
 	OperacionDeEgreso operacionInvalida2;
 	OperacionDeEgreso operacionInvalida3;
 	
-	public List<Item> crearListaDeTresItems(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC){
+	public Moneda crearMoneda(Double monto) {
+		return new Moneda(monto,"ARS");
+	}
+	
+	public List<Item> crearListaDeTresItems(Double valorA, Double valorB, Double valorC){
 		List <Item> ListaItems = new ArrayList<>();
-		Item item1 = new Item(valorA, "Item A");
-		Item item2 = new Item(valorB, "Item B");
-		Item item3 = new Item(valorC, "Item C");
+		Item item1 = new Item(crearMoneda(valorA), "Item A");
+		Item item2 = new Item(crearMoneda(valorB), "Item B");
+		Item item3 = new Item(crearMoneda(valorC), "Item C");
 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);
@@ -32,11 +36,11 @@ public class TestsRepositorioDeCompras {
 		return ListaItems;
 	}
 	
-	public List<Item> crearListaDeOtrosTresItems(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC){
+	public List<Item> crearListaDeOtrosTresItems(Double valorA, Double valorB, Double valorC){
 		List <Item> ListaItems = new ArrayList<>();
-		Item item1 = new Item(valorA, "Item X");
-		Item item2 = new Item(valorB, "Item Y");
-		Item item3 = new Item(valorC, "Item Z");
+		Item item1 = new Item(crearMoneda(valorA), "Item X");
+		Item item2 = new Item(crearMoneda(valorB), "Item Y");
+		Item item3 = new Item(crearMoneda(valorC), "Item Z");
 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);
@@ -45,7 +49,7 @@ public class TestsRepositorioDeCompras {
 		return ListaItems;
 	}
 	
-	public OperacionDeEgreso crearOperacionDeEgreso(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC) {
+	public OperacionDeEgreso crearOperacionDeEgreso(Double valorA, Double valorB, Double valorC) {
 		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC));
 	}
 	
@@ -56,22 +60,22 @@ public class TestsRepositorioDeCompras {
 	@Before
 	public void init() {
 		
-		operacionValida1 = new OperacionDeEgreso(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15)));
-		operacionValida1.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15))));
+		operacionValida1 = crearOperacionDeEgreso(5.0,10.0,15.0);
+		operacionValida1.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
 		
-		operacionValida2 = new OperacionDeEgreso(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15)));
-		operacionValida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15))));
-		operacionValida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(16))));
+		operacionValida2 = crearOperacionDeEgreso(5.0,10.0,15.0);
+		operacionValida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionValida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
-		operacionInvalida1 = new OperacionDeEgreso(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15)));
+		operacionInvalida1 = crearOperacionDeEgreso(5.0,10.0,15.0);
 		
-		operacionInvalida2 = new OperacionDeEgreso(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(16)));
-		operacionInvalida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15))));
-		operacionInvalida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(16))));
+		operacionInvalida2 = crearOperacionDeEgreso(5.0,10.0,16.0);
+		operacionInvalida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionInvalida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
-		operacionInvalida3 = new OperacionDeEgreso(crearListaDeOtrosTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(16)));
-		operacionInvalida3.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(15))));
-		operacionInvalida3.presupuestos.add(crearPresupuesto(crearListaDeTresItems(new BigDecimal(5),new BigDecimal(10), new BigDecimal(16))));
+		operacionInvalida3 = new OperacionDeEgreso(crearListaDeOtrosTresItems(5.0,10.0,15.0));
+		operacionInvalida3.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionInvalida3.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
 		RepositorioCompras.instance().comprasPendientes.add(operacionInvalida1);
 		RepositorioCompras.instance().comprasPendientes.add(operacionValida1);
@@ -84,7 +88,10 @@ public class TestsRepositorioDeCompras {
 	@Test
 	public void ejecutarValidacionDeOperaciones() {
 		RepositorioCompras.instance().validarComprasPendientes();
-		Assert.assertEquals(RepositorioCompras.instance().comprasAceptadas.size(),2);
+		List<OperacionDeEgreso> listaEsperada = new ArrayList<>();
+		listaEsperada.add(operacionValida1);
+		listaEsperada.add(operacionValida2);
+		Assert.assertEquals(RepositorioCompras.instance().comprasAceptadas,listaEsperada);
 	}
 
 }

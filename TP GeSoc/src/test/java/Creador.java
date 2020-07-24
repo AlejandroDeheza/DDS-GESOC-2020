@@ -6,11 +6,15 @@ import model.*;
 
 public class Creador {
 	
+	
+	public Moneda crearMoneda(Double monto) {
+		return new Moneda(monto,"ARS");
+	}
 	public List<Item> crearListaDeTresItems(){
 		List <Item> ListaItems = new ArrayList<>();
-		Item item1 = new Item(new BigDecimal(20), "Item A");
-		Item item2 = new Item(new BigDecimal(30), "Item B");
-		Item item3 = new Item(new BigDecimal(40), "Item C");
+		Item item1 = new Item(crearMoneda(20.0), "Item A");
+		Item item2 = new Item(crearMoneda(30.0), "Item B");
+		Item item3 = new Item(crearMoneda(40.0), "Item C");
 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);

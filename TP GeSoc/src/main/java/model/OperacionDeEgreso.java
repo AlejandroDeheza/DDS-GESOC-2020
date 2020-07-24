@@ -76,7 +76,8 @@ public class OperacionDeEgreso {
 		
 		Presupuesto presupuesto = new Presupuesto(items, documento, this.organizacion, proveedorEmisor);
 		this.presupuestos.add(presupuesto);
-	}//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
+	}
+	//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
 	//Así respetamos el punto 2 de la entrega 2.
 	
 	public void altaDeUnRevisor(Usuario revisorNuevo) {
@@ -84,7 +85,7 @@ public class OperacionDeEgreso {
 	}
 
 	public BigDecimal valorTotal() {
-		return this.items.stream().map(i -> i.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
+		return this.items.stream().map(item -> item.getMoneda().monto).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 	
 	private boolean contieneTodosLos(List<Item> items) {

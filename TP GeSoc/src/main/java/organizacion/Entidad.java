@@ -26,6 +26,10 @@ public abstract class Entidad {
 		return this.egresosConEtiqueta(etiqueta).stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 	
+	public BigDecimal gastosTotales() {
+		return this.egresos.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
+	}
+	
 	public void setCategoriaEntidad(CategoriaEntidad categoriaEntidad) {
 		this.categoriaEntidad=categoriaEntidad;
 	}

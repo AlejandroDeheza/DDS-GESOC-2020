@@ -22,7 +22,7 @@ public class Presupuesto {
 	//Así respetamos el punto 2 de la entrega 2.
 	
 	public BigDecimal valorTotal() {
-		return this.items.stream().map(i -> i.getValor()).reduce(BigDecimal.ZERO,BigDecimal::add);
+		return this.items.stream().map(i -> i.getMoneda().monto).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 
 	public List<Item> getItems() {

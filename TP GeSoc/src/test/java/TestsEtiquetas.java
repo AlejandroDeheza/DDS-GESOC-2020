@@ -13,11 +13,15 @@ public class TestsEtiquetas {
 	
 	EntidadBase entidad;
 	
-	public List<Item> crearListaDeTresItems(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC){
+	public Moneda crearMoneda(Double monto) {
+		return new Moneda(monto,"ARS");
+	}
+	
+	public List<Item> crearListaDeTresItems(Double valorA, Double valorB, Double valorC){
 		List <Item> ListaItems = new ArrayList<>();
-		Item item1 = new Item(valorA, "Item A");
-		Item item2 = new Item(valorB, "Item B");
-		Item item3 = new Item(valorC, "Item C");
+		Item item1 = new Item(crearMoneda(valorA), "Item A");
+		Item item2 = new Item(crearMoneda(valorB), "Item B");
+		Item item3 = new Item(crearMoneda(valorC), "Item C");
 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);
@@ -26,18 +30,18 @@ public class TestsEtiquetas {
 		return ListaItems;
 	}
 	
-	public OperacionDeEgreso crearOperacionDeEgreso(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC) {
-		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC),null,null,null,null,null,null,null);
+	public OperacionDeEgreso crearOperacionDeEgreso(Double valorA, Double valorB, Double valorC) {
+		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC));
 	}
 	
 	public EntidadBase armarEntidadBase() {
 		EntidadBase entidadBase = new EntidadBase();
 		
-		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(new BigDecimal(10),new BigDecimal(20),new BigDecimal(30));
+		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion1.agregarEtiqueta(new EtiquetaOperacion("A"));
-		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(new BigDecimal(10),new BigDecimal(20),new BigDecimal(30));
+		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion2.agregarEtiqueta(new EtiquetaOperacion("B"));
-		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(new BigDecimal(5),new BigDecimal(10),new BigDecimal(20));
+		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(5.0,10.0,20.0);
 		operacion3.agregarEtiqueta(new EtiquetaOperacion("A"));
 		
 		//entidadBase.setCategoriaEntidad(new CategoriaEntidad(null,"CATEGORIA_SIN_VALIDACIONES"));
@@ -61,6 +65,5 @@ public class TestsEtiquetas {
 	public void seCalculaElGastoGeneradoPorLosEgresosDeUnaEntidadQueTienenCiertaEtiqueta() {
 		Assert.assertEquals(entidad.gastosDeEtiqueta(new EtiquetaOperacion("a")),new BigDecimal(95));
 	}
-	
-	//TODO - Agregar tests para el repo de etiquetas
+
 }

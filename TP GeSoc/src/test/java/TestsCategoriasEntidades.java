@@ -9,6 +9,7 @@ import org.junit.Test;
 import exceptions.*;
 import model.*;
 import organizacion.*;
+import repositorios.RepositorioCategoriasDeEntidades;
 import validacionesEntidades.ValidacionEntidad;
 import validacionesEntidades.ValidarNuevosEgresos;
 import validacionesEntidades.ValidarPoderAgregarEntidadesBaseAJuridica;
@@ -18,15 +19,16 @@ public class TestsCategoriasEntidades {
 	
 	EntidadBase entidadBase1;
 	EntidadJuridica entidadJuridica1;
+	CategoriaEntidad categoriaEgresos, categoriaJuridica, categoriaBase, categoriaSinComportamiento;
 	
 	public EntidadBase armarEntidadBase() {
 		EntidadBase entidadBase = new EntidadBase();
 		
-		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(new BigDecimal(10),new BigDecimal(20),new BigDecimal(30));
+		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion1.agregarEtiqueta(new EtiquetaOperacion("A"));
-		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(new BigDecimal(10),new BigDecimal(20),new BigDecimal(30));
+		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion2.agregarEtiqueta(new EtiquetaOperacion("B"));
-		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(new BigDecimal(5),new BigDecimal(10),new BigDecimal(20));
+		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(5.0,10.0,20.0);
 		operacion3.agregarEtiqueta(new EtiquetaOperacion("A"));
 		
 		//entidadBase.setCategoriaEntidad(new CategoriaEntidad(null,"CATEGORIA_SIN_VALIDACIONES"));
@@ -41,11 +43,11 @@ public class TestsCategoriasEntidades {
 	public EntidadJuridica armarEntidadJuridica() {
 		EntidadJuridica entidadJuridica = new EntidadJuridica();
 		
-		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(new BigDecimal(10),new BigDecimal(20),new BigDecimal(30));
+		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion1.agregarEtiqueta(new EtiquetaOperacion("A"));
-		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(new BigDecimal(10),new BigDecimal(20),new BigDecimal(30));
+		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion2.agregarEtiqueta(new EtiquetaOperacion("B"));
-		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(new BigDecimal(5),new BigDecimal(10),new BigDecimal(20));
+		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(5.0,10.0,20.0);
 		operacion3.agregarEtiqueta(new EtiquetaOperacion("A"));
 		
 		entidadJuridica.egresos.add(operacion1);
@@ -54,11 +56,14 @@ public class TestsCategoriasEntidades {
 		
 		return entidadJuridica;
 	}
-	public List<Item> crearListaDeTresItems(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC){
+	public Moneda crearMoneda(Double monto) {
+		return new Moneda(monto,"ARS");
+	}
+	public List<Item> crearListaDeTresItems(Double valorA, Double valorB, Double valorC){
 		List <Item> ListaItems = new ArrayList<>();
-		Item item1 = new Item(valorA, "Item A");
-		Item item2 = new Item(valorB, "Item B");
-		Item item3 = new Item(valorC, "Item C");
+		Item item1 = new Item(crearMoneda(valorA), "Item A");
+		Item item2 = new Item(crearMoneda(valorB), "Item B");
+		Item item3 = new Item(crearMoneda(valorC), "Item C");
 
 		 ListaItems.add(item1);
 		 ListaItems.add(item2);
@@ -86,16 +91,19 @@ public class TestsCategoriasEntidades {
 		return validaciones;
 	}
 	public CategoriaEntidad crearCategoriaQueReestringeEgresos() {
-		return new CategoriaEntidad(crearListaDeValidacionesEgresos(),"categoria1");
+		return new CategoriaEntidad(crearListaDeValidacionesEgresos(),"categoriaParaEgresos");
 	}
 	public CategoriaEntidad crearCategoriaQueReestringeAsociarseAUnaJuridica() {
-		return new CategoriaEntidad(crearListaDeValidacionesBase(),"categoria2");
+		return new CategoriaEntidad(crearListaDeValidacionesBase(),"categoriaParaBase");
 	}
 	public CategoriaEntidad crearCategoriaQueImpideAUnaJuridicaAsociarBases() {
-		return new CategoriaEntidad(crearListaDeValidacionesJuridica(),"categoria3");
+		return new CategoriaEntidad(crearListaDeValidacionesJuridica(),"categoriaParaJuridica");
 	}
-	public OperacionDeEgreso crearOperacionDeEgreso(BigDecimal valorA, BigDecimal valorB, BigDecimal valorC) {
-		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC),null,null,null,null,null,null,null);
+	public CategoriaEntidad crearCategoriaSinComportamiento() {
+		return new CategoriaEntidad(new ArrayList<>(),"categoriaSinComportamiento");
+	}
+	public OperacionDeEgreso crearOperacionDeEgreso(Double valorA, Double valorB, Double valorC) {
+		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC));
 	}
 	
 	@Before
@@ -105,13 +113,22 @@ public class TestsCategoriasEntidades {
 		entidadBase1 = new EntidadBase();
 		entidadBase1.setCategoriaEntidad(new CategoriaEntidad(crearListaDeValidacionesVacia(),"Categoria_sin_restricciones"));
 		
+		categoriaEgresos = crearCategoriaQueReestringeEgresos();
+		categoriaJuridica = crearCategoriaQueImpideAUnaJuridicaAsociarBases();
+		categoriaBase = crearCategoriaQueReestringeAsociarseAUnaJuridica();
+		categoriaSinComportamiento = crearCategoriaSinComportamiento();
+		
+		RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(categoriaEgresos);
+		RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(categoriaJuridica);
+		RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(categoriaBase);
+		RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(categoriaSinComportamiento);
 	}
 	
 	@Test(expected = LaCantidadDeEgresosSuperaElMontoMaximoException.class)
 	public void noSePuedeAgregarUnEgresoSiSeSuperaElMontoMaximoAcumulado() {
 		EntidadBase entidadBase = armarEntidadBase();
 		entidadBase.setCategoriaEntidad(crearCategoriaQueReestringeEgresos());
-		entidadBase.agregarOperacionDeEgreso(crearOperacionDeEgreso(new BigDecimal(100),new BigDecimal(100),new BigDecimal(100)));
+		entidadBase.agregarOperacionDeEgreso(crearOperacionDeEgreso(100.0,100.0,100.0));
 	}
 	
 	@Test(expected = LaEntidadBaseNoPuedeAsociarseALaEntidadJuridicaException.class)
@@ -128,6 +145,14 @@ public class TestsCategoriasEntidades {
 		entidadBase1.asociarAEntidadJuridica(entidadJuridica);
 	}
 	
-	//TODO - Agregar test para el repo de categorias
+	@Test(expected = LaCantidadDeEgresosSuperaElMontoMaximoException.class)
+	public void elComportamientoDeUnaEntidadVariaAlModificarSuCategoria() {
+		EntidadBase entidadBase = armarEntidadBase();
+		entidadBase.setCategoriaEntidad(categoriaSinComportamiento);
+		entidadBase.agregarOperacionDeEgreso(crearOperacionDeEgreso(100.0,100.0,100.0));
+		Assert.assertEquals(entidadBase.gastosTotales(), new BigDecimal(455));
+		RepositorioCategoriasDeEntidades.instance().modificarCategoria(crearListaDeValidacionesEgresos(), "categoriasincomportamiento");
+		entidadBase.agregarOperacionDeEgreso(crearOperacionDeEgreso(1.0,1.0,1.0));
+	}
 
 }
