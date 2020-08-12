@@ -22,4 +22,14 @@ public class Moneda {
 		return currency;
 	}
 	
+	public BigDecimal valorEnPesos(){
+		InfoDeUbicacionYMoneda api = new MercadoLibreApi();
+		
+		System.out.println(api.obtenerRatioAPesos(currency).toString());
+		
+		BigDecimal ratio = api.obtenerRatioAPesos(currency).getBigDecimal("ratio");
+		
+		return monto.multiply(ratio);
+	}
+	
 }

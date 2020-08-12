@@ -2,10 +2,11 @@ package model;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 import ubicacion.InfoDeUbicacionYMoneda;
 
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.*;
 
 import org.json.*;
 
@@ -15,6 +16,16 @@ public class MercadoLibreApi implements InfoDeUbicacionYMoneda {
 		ClientResponse data = Client.create()
 				.resource("https://api.mercadolibre.com/")
 				.path(Url)
+				.accept(MediaType.APPLICATION_JSON) 
+				.get(ClientResponse.class);
+		return data;
+	}
+	
+	public ClientResponse obtenerJSON(String Url,MultivaluedMap<String,String> params) {
+		ClientResponse data = Client.create()
+				.resource("https://api.mercadolibre.com/")
+				.path(Url)
+				.queryParams(params)
 				.accept(MediaType.APPLICATION_JSON) 
 				.get(ClientResponse.class);
 		return data;
@@ -60,7 +71,12 @@ public class MercadoLibreApi implements InfoDeUbicacionYMoneda {
 	}
 	
 	public JSONObject obtenerRatioAPesos(String idMoneda){		
-		return new JSONObject(obtenerJSON("/currency_conversions/search?from=" + idMoneda + "&to=ARS").getEntity(String.class));
+		MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
+		
+		queryParams.add("from",idMoneda);
+		queryParams.add("to","ARS");
+		
+		return new JSONObject(obtenerJSON("/currency_conversions/search",queryParams).getEntity(String.class));
 	}
 	
 	public JSONArray obtenerMonedas() {

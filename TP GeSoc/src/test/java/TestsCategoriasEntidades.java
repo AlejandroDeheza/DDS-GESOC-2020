@@ -6,14 +6,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import comportamientoEntidad.*;
 import exceptions.*;
 import model.*;
 import organizacion.*;
 import repositorios.RepositorioCategoriasDeEntidades;
-import validacionesEntidades.ValidacionEntidad;
-import validacionesEntidades.ValidarNuevosEgresos;
-import validacionesEntidades.ValidarPoderAgregarEntidadesBaseAJuridica;
-import validacionesEntidades.ValidarPoderAsociarEntidadBaseAJuridica;
 
 public class TestsCategoriasEntidades {
 	
@@ -71,23 +68,23 @@ public class TestsCategoriasEntidades {
 	
 		return ListaItems;
 	}
-	public List<ValidacionEntidad> crearListaDeValidacionesEgresos(){
-		List<ValidacionEntidad> validaciones = new ArrayList<>();
-		validaciones.add(new ValidarNuevosEgresos(new BigDecimal(200)));
+	public List<Comportamiento> crearListaDeValidacionesEgresos(){
+		List<Comportamiento> validaciones = new ArrayList<>();
+		validaciones.add(new PoderAgregarEgresos(new BigDecimal(200)));
 		return validaciones;
 	}
-	public List<ValidacionEntidad> crearListaDeValidacionesJuridica(){
-		List<ValidacionEntidad> validaciones = new ArrayList<>();
-		validaciones.add(new ValidarPoderAgregarEntidadesBaseAJuridica());
+	public List<Comportamiento> crearListaDeValidacionesJuridica(){
+		List<Comportamiento> validaciones = new ArrayList<>();
+		validaciones.add(new PoderAgregarEntidadesBaseAJuridica());
 		return validaciones;
 	}
-	public List<ValidacionEntidad> crearListaDeValidacionesBase(){
-		List<ValidacionEntidad> validaciones = new ArrayList<>();
-		validaciones.add(new ValidarPoderAsociarEntidadBaseAJuridica(entidadJuridica1));
+	public List<Comportamiento> crearListaDeValidacionesBase(){
+		List<Comportamiento> validaciones = new ArrayList<>();
+		validaciones.add(new PoderAsociarEntidadJuridicaABase(entidadJuridica1));
 		return validaciones;
 	}
-	public List<ValidacionEntidad> crearListaDeValidacionesVacia(){
-		List<ValidacionEntidad> validaciones = new ArrayList<>();
+	public List<Comportamiento> crearListaDeValidacionesVacia(){
+		List<Comportamiento> validaciones = new ArrayList<>();
 		return validaciones;
 	}
 	public CategoriaEntidad crearCategoriaQueReestringeEgresos() {
