@@ -17,6 +17,7 @@ public class EntidadBase extends Entidad{
 	public EntidadBase() {
 		
 	}
+	
 	public EntidadBase (int ID, String nombreFicticio, CategoriaEntidad categoriaEntidad, String descripcion, EntidadJuridica entidadJuridica) {
 		this.ID=ID;
 		this.nombreFicticio=nombreFicticio;
