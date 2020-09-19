@@ -3,12 +3,28 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
 import comportamientoEntidad.*;
 import exceptions.*;
 import organizacion.*;
 
+@Entity
+@Table(name = "Categoria_entidades")
 public class CategoriaEntidad {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
 	public String texto;
+	
+	@ManyToMany
+	@JoinTable(
+	        name = "Comportamiento_aplicado", 
+	        joinColumns = { @JoinColumn(name = "id_categoria") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "id_comportamiento") }
+	    )
 	List<Comportamiento> comportamientos = new ArrayList<>();
 	
 	public CategoriaEntidad(List<Comportamiento> comportamientos, String texto){

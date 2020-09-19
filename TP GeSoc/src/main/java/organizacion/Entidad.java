@@ -5,13 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.*;
+
 import model.*;
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Entidad {
-	public int ID;
+	@Id
+	@GeneratedValue
+	public Long id;
+	
 	public String nombreFicticio;
+	
+	@OneToMany
+	@JoinColumn(name = "Entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
+	
+	@ManyToOne
 	public CategoriaEntidad categoriaEntidad;
 	
 	public void agregarOperacionDeEgreso(OperacionDeEgreso egreso) {

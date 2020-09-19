@@ -2,8 +2,11 @@ package model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Embeddable;
+
 import ubicacion.InfoDeUbicacionYMoneda;
 
+@Embeddable
 public class Moneda {
 
 	BigDecimal monto;

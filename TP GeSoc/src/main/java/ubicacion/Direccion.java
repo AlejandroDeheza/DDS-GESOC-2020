@@ -1,5 +1,8 @@
 package ubicacion;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Direccion {
 	private String calle, altura, piso, depto;
 	

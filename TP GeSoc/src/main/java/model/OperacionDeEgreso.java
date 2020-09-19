@@ -10,71 +10,93 @@ import usuarios.*;
 import validacionesOperaciones.*;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "Operaciones_De_Egreso")
 public class OperacionDeEgreso {
 	
-	private List<Item> items = new ArrayList<>();
-	private DocumentoComercial documentoComercial;
-	private LocalDateTime fechaOperacion;
-	private MedioDePago medio;
-	private Organizacion organizacion;
-	private Proveedor proveedor;
-	public List<Presupuesto> presupuestos = new ArrayList<>();
-	private List<Usuario> revisores = new ArrayList<>();
-	private List<ValidadorDeOperaciones> validacionesVigentes = new ArrayList<>();
-	public List<EtiquetaOperacion> etiquetas = new ArrayList<>();
-	public final int presupuestosMinimos = 1;
-	private static int CantidadInstancias = 0;
-	public int IDOperacionDeEgreso;
-
+	@Id
+	@GeneratedValue
+	private Long id;
 	
-	public OperacionDeEgreso(List<Item> items) {
-		this.items = items;
+//	@OneToOne
+//	private DocumentoComercial documentoComercial;
+	
+	@Transient
+	private MedioDePago medio;
+	//No sabemos q hacer con esto
+	
+	@OneToOne
+	private Presupuesto presupuestoElegido;
+
+
+	private LocalDateTime fechaOperacion;
+	
+	@OneToMany
+	@JoinColumn(name = "operacion_asociada")
+	public List<Presupuesto> presupuestos = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(
+	        name = "Revisor", 
+	        joinColumns = { @JoinColumn(name = "id_operacion_de_egreso") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "id_usuario") }
+	    )
+	private List<Usuario> revisores = new ArrayList<>();
+	
+	@Transient
+	private List<ValidadorDeOperaciones> validacionesVigentes = new ArrayList<>();
+	
+	@ElementCollection
+	public List<EtiquetaOperacion> etiquetas = new ArrayList<>();
+	
+	public final int presupuestosMinimos = 1;
+		
+	public Presupuesto getPresupuestoElegido() {
+		return presupuestoElegido;
+	}
+	
+	public void setPresupuestoElegido(Presupuesto presupuestoElegido) {
+		this.presupuestoElegido = presupuestoElegido;
+	}
+	
+	public OperacionDeEgreso() {
+
 		
 		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
 		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
 		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 	}
-	public OperacionDeEgreso(List<Item> items, DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, 
-			MedioDePago medio, Organizacion organizacion, Proveedor proveedor, List<Presupuesto> presupuestos,
+	
+	public OperacionDeEgreso(LocalDateTime fechaOperacion, MedioDePago medio, List<Presupuesto> presupuestos,
 			List<Usuario> revisores) {
-		
-		this.items = items;
-		this.documentoComercial = documentoComercial;
+
 		this.fechaOperacion = fechaOperacion;
 		this.medio = medio;
-		this.organizacion = organizacion;
-		this.proveedor = proveedor;
+
 		this.revisores = revisores;
-		CantidadInstancias++;
-		this.IDOperacionDeEgreso = CantidadInstancias;
+
 		
 		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
 		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
 		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 	}
-	
-	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
-		this.documentoComercial = codDocumentoComercial;
-	}
-	
+
 	public void agregarEtiqueta(EtiquetaOperacion etiqueta) {
 		etiquetas.add(etiqueta);
 	}
 	
-	public boolean contiene(Item item) {
-		return this.items.stream().anyMatch(i -> i.equals(item));
-	}
-	
 	public void agregarNuevoPresupuesto(List<Item> items, DocumentoComercial documento, Proveedor proveedorEmisor) {
-
-		if(!this.contieneTodosLos(items)) {
-			throw new PresupuestoInvalidoException();
-		}
+//
+//		if(!this.contieneTodosLos(items)) {
+//			throw new PresupuestoInvalidoException();
+//		}
 		
-		Presupuesto presupuesto = new Presupuesto(items, documento, this.organizacion, proveedorEmisor);
+		Presupuesto presupuesto = new Presupuesto(items, documento, proveedorEmisor);
 		this.presupuestos.add(presupuesto);
 	}
 	//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
@@ -85,12 +107,15 @@ public class OperacionDeEgreso {
 	}
 
 	public BigDecimal valorTotal() {
-		return this.items.stream().map(item -> item.getMoneda().monto).reduce(BigDecimal.ZERO,BigDecimal::add);
+		return this.presupuestoElegido.valorTotal();
+//		return this.items.stream().map(item -> item.getMoneda().monto).reduce(BigDecimal.ZERO,BigDecimal::add);
+
 	}
 	
-	private boolean contieneTodosLos(List<Item> items) {
-		return items.stream().allMatch(item -> this.contiene(item));
-	}
+//	private boolean contieneTodosLos(List<Item> items) {
+//
+//		return items.stream().allMatch(item -> this.contiene(item));
+//	}
 	
 	public boolean esValida() {
 		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasoCorrectamente(this));
@@ -108,6 +133,6 @@ public class OperacionDeEgreso {
 	
 	
 	public void notificarRevisores(String mensaje) {
-		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(mensaje + ", " + this.IDOperacionDeEgreso))); 
+		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(mensaje + ", " + this.id))); 
 	}
 }

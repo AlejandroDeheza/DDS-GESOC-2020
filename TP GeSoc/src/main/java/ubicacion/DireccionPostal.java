@@ -1,7 +1,13 @@
 package ubicacion;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class DireccionPostal {
+	@Embedded
 	private Direccion direccion;
+	@Embedded
 	private Ubicacion ubicacion;
 
 	public Ubicacion getUbicacion() {

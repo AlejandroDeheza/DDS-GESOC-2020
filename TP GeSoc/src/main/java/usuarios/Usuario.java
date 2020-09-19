@@ -3,14 +3,30 @@ package usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
 import validacionesContrasenias.ValidarTodo;
 
+@Entity
+@Table(name = "Usuarios")
 public class Usuario {
+	@Id
+	@GeneratedValue
+	private Long id;
+	
 	private String username;
+	
+	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoUser;
+	
 	private String hashedPasswordActual;
+	
 	private String saltActual;
+	
+	@ElementCollection
 	private List<String[]> hashedPasswordUsadasConSalt = new ArrayList<String[]>(); 
+	
+	@ElementCollection
 	private List<Mensaje> mensajes = new ArrayList<>();
 
 	public Usuario(String username, TipoUsuario tipoUser, String hashedPassword, String salt) {

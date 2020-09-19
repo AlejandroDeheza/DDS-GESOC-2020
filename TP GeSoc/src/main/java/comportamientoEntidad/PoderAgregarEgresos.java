@@ -2,10 +2,16 @@ package comportamientoEntidad;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import exceptions.LaCantidadDeEgresosSuperaElMontoMaximoException;
 import model.OperacionDeEgreso;
 import organizacion.Entidad;
 
+@Entity
+@DiscriminatorValue("Eg")
 public class PoderAgregarEgresos extends Comportamiento{
 	public BigDecimal montoMaximoEgresos;
 	

@@ -106,7 +106,7 @@ public class TestsCategoriasEntidades {
 	@Before
 	public void init() {
 		entidadJuridica1 = new EntidadJuridica();
-		entidadJuridica1.ID = 1;
+		entidadJuridica1.id = 1;
 		entidadBase1 = new EntidadBase();
 		entidadBase1.setCategoriaEntidad(new CategoriaEntidad(crearListaDeValidacionesVacia(),"Categoria_sin_restricciones"));
 		

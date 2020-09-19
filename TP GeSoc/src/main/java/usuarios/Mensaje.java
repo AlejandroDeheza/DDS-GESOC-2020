@@ -1,5 +1,8 @@
 package usuarios;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Mensaje {
 	private String cuerpo;
 

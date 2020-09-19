@@ -1,5 +1,8 @@
 package ubicacion;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Ubicacion {
 	private String pais, provincia, ciudad;
 	
