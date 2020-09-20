@@ -2,9 +2,23 @@ package organizacion;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Organizaciones")
 public class Organizacion {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	
+	@OneToMany
+	@JoinColumn(name = "id_organizacion")
 	private List<Entidad> entidades = new ArrayList<>();
+	
 	private String descripcion;
+	public Organizacion() {}
 	/*
 	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
 	private List<EntidadBase> entidadesBase = new ArrayList<>();

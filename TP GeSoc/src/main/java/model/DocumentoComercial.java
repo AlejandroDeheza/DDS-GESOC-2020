@@ -1,11 +1,23 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class DocumentoComercial {
-	private int ID;
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Enumerated(EnumType.STRING)
 	private TipoDocumentoComercial tipoDoc;
 	
-	public DocumentoComercial(int ID, TipoDocumentoComercial tipoDoc){
-		this.ID=ID;
+	public DocumentoComercial(TipoDocumentoComercial tipoDoc){
 		this.tipoDoc=tipoDoc;
 	}
+	
+	public DocumentoComercial(){
+		
+	}
+	
 }

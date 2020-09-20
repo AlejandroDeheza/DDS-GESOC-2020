@@ -2,8 +2,11 @@ package model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Embeddable;
+
 import ubicacion.InfoDeUbicacionYMoneda;
 
+@Embeddable
 public class Moneda {
 
 	BigDecimal monto;
@@ -21,6 +24,7 @@ public class Moneda {
 	public String currency() {
 		return currency;
 	}
+	public Moneda() {}
 	
 	public BigDecimal valorEnPesos(){
 		InfoDeUbicacionYMoneda api = new MercadoLibreApi();

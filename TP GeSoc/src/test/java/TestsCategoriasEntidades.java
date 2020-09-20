@@ -106,7 +106,6 @@ public class TestsCategoriasEntidades {
 	@Before
 	public void init() {
 		entidadJuridica1 = new EntidadJuridica();
-		entidadJuridica1.ID = 1;
 		entidadBase1 = new EntidadBase();
 		entidadBase1.setCategoriaEntidad(new CategoriaEntidad(crearListaDeValidacionesVacia(),"Categoria_sin_restricciones"));
 		
@@ -126,6 +125,7 @@ public class TestsCategoriasEntidades {
 		EntidadBase entidadBase = armarEntidadBase();
 		entidadBase.setCategoriaEntidad(crearCategoriaQueReestringeEgresos());
 		entidadBase.agregarOperacionDeEgreso(crearOperacionDeEgreso(100.0,100.0,100.0));
+		System.out.println(entidadBase.gastosTotales());
 	}
 	
 	@Test(expected = LaEntidadBaseNoPuedeAsociarseALaEntidadJuridicaException.class)
@@ -139,8 +139,9 @@ public class TestsCategoriasEntidades {
 	public void noSePuedenAsociarEntidadesBaseAUnaDeterminadaEntidadJuridica() {
 		EntidadJuridica entidadJuridica = armarEntidadJuridica();
 		entidadJuridica.setCategoriaEntidad(crearCategoriaQueImpideAUnaJuridicaAsociarBases());
-		entidadBase1.asociarAEntidadJuridica(entidadJuridica);
+		entidadJuridica.asociarEntidadBase(entidadBase1);
 	}
+	
 	
 	@Test(expected = LaCantidadDeEgresosSuperaElMontoMaximoException.class)
 	public void elComportamientoDeUnaEntidadVariaAlModificarSuCategoria() {
@@ -151,5 +152,4 @@ public class TestsCategoriasEntidades {
 		RepositorioCategoriasDeEntidades.instance().modificarCategoria(crearListaDeValidacionesEgresos(), "categoriasincomportamiento");
 		entidadBase.agregarOperacionDeEgreso(crearOperacionDeEgreso(1.0,1.0,1.0));
 	}
-
 }

@@ -54,7 +54,7 @@ public class TestsRepositorioDeCompras {
 	}
 	
 	public Presupuesto crearPresupuesto(List<Item> listaDeItems) {
-		return new Presupuesto(listaDeItems,null,null,null);
+		return new Presupuesto(listaDeItems,null,null);
 	}
 
 	@Before

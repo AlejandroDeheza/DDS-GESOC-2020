@@ -39,7 +39,7 @@ public class TestsOperacionesDeEgreso {
 	     ListaItems2 = crearListaDeTresItems(20.0,30.0,40.0);
 	     ListaItems3 = crearListaDeTresItems(30.0,30.0,40.0);
 	     
-		 presupuesto1 = new Presupuesto(ListaItems, null, null, null); //Solo deberiamos hacer esto en un test...
+		 presupuesto1 = new Presupuesto(ListaItems, null,  null); //Solo deberiamos hacer esto en un test...
 		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
 		 
 		 operacion1 = new OperacionDeEgreso(ListaItems2);

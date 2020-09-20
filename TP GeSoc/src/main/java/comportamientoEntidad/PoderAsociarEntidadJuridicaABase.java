@@ -1,14 +1,20 @@
 package comportamientoEntidad;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 import exceptions.LaEntidadBaseNoPuedeAsociarseALaEntidadJuridicaException;
 import organizacion.EntidadBase;
 import organizacion.EntidadJuridica;
 
+@Entity
+@DiscriminatorValue("Ej")
 public class PoderAsociarEntidadJuridicaABase extends Comportamiento {
 
+	@ManyToOne
 	EntidadJuridica entidadALaQueNoPuedePertenecer;
-	
-	
 	
 	public PoderAsociarEntidadJuridicaABase(EntidadJuridica entidadALaQueNoPuedePertenecer) {
 		this.entidadALaQueNoPuedePertenecer = entidadALaQueNoPuedePertenecer;
@@ -22,7 +28,10 @@ public class PoderAsociarEntidadJuridicaABase extends Comportamiento {
 	
 	@Override
 	public void alAgregarEntidad(EntidadBase entidadB,EntidadJuridica entidadJ){	
-		if(entidadJ.ID != entidadALaQueNoPuedePertenecer.ID)
+		if(entidadJ.id == entidadALaQueNoPuedePertenecer.id)
 			throw new LaEntidadBaseNoPuedeAsociarseALaEntidadJuridicaException();
+	}
+	
+	public PoderAsociarEntidadJuridicaABase() {
 	}
 }

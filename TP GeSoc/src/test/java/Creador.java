@@ -22,8 +22,8 @@ public class Creador {
 	
 		return ListaItems;
 	}
-	public DocumentoComercial crearDocumentoComercial(int ID) {
-		return new DocumentoComercial (ID,TipoDocumentoComercial.FACTURA);
+	public DocumentoComercial crearDocumentoComercial(TipoDocumentoComercial tipo) {
+		return new DocumentoComercial (tipo);
 	}
 	
 	/*

@@ -2,8 +2,19 @@ package model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "Items")
 public class Item {
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Embedded
 	private Moneda moneda;
+	
 	private String descripcion;
 	
 	public Item(Moneda moneda, String descripcion) {
@@ -22,5 +33,7 @@ public class Item {
 	public boolean equals(Item item) {
 		return this.descripcion.equals(item.descripcion);
 	}
-	
+	public Item() {
+		
+	}
 }

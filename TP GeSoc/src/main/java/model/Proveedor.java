@@ -1,10 +1,22 @@
 package model;
 
+import javax.persistence.*;
+
 import ubicacion.DireccionPostal;
 
+@Entity
+@Table(name = "Proveedores")
 public class Proveedor {
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+
 	private String razonSocial;
+
+	@Embedded
 	private DireccionPostal direccionPostal;
+	
 	private int cuil;
 
 	public Proveedor(String razonSocial, DireccionPostal direccionPostal, int cuil) {
@@ -36,5 +48,7 @@ public class Proveedor {
 	public void setCuil(int cuil) {
 		this.cuil = cuil;
 	}
+	
+	public Proveedor() {}
 
 }
