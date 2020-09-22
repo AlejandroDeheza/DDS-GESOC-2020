@@ -25,13 +25,13 @@ public class RepositorioCategoriasDeEntidades {
 		categoriasDelSistema.add(nuevaCategoria);
 	}
 	
-	public void modificarCategoria(List<Comportamiento> comportamientos, String texto) {
-		CategoriaEntidad categoriaAModificar = categoriasDelSistema.stream().filter(categoria -> categoria.texto.equals(texto.toUpperCase())).collect(Collectors.toList()).get(0);
+	public void modificarCategoria(List<Comportamiento> comportamientos, String descripcion) {
+		CategoriaEntidad categoriaAModificar = categoriasDelSistema.stream().filter(categoria -> categoria.descripcion.equals(descripcion.toUpperCase())).collect(Collectors.toList()).get(0);
 		categoriaAModificar.setComportamientos(comportamientos);
 	}
 	
-	public void eliminarCategoria(String texto) {
-		categoriasDelSistema.removeIf(categoria -> categoria.texto.equals(texto.toUpperCase()));
+	public void eliminarCategoria(String descripcion) {
+		categoriasDelSistema.removeIf(categoria -> categoria.descripcion.equals(descripcion.toUpperCase()));
 	}
 
 }
