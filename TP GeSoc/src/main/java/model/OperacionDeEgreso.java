@@ -21,6 +21,7 @@ public class OperacionDeEgreso {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id_operacion")
 	private Long id;
 	
 	@OneToMany
@@ -28,6 +29,7 @@ public class OperacionDeEgreso {
 	private List<Item> items = new ArrayList<>();
 	
 	@OneToOne
+	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")
 	private DocumentoComercial documentoComercial;
 	
 	@Column(name = "fecha_operacion")
@@ -38,6 +40,7 @@ public class OperacionDeEgreso {
 	private IDMedioDePago medio;
 
 	@ManyToOne
+	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 	
 	@OneToMany
@@ -45,13 +48,20 @@ public class OperacionDeEgreso {
 	public List<Presupuesto> presupuestos = new ArrayList<>();
 	
 	@ManyToMany
-	@JoinTable(name = "revisor_operacion")
+	@JoinTable(name = "revisor_operacion",
+			joinColumns=
+            @JoinColumn(name="id_operacion", referencedColumnName="id_operacion"),
+            inverseJoinColumns=
+            @JoinColumn(name="id_revisor", referencedColumnName="id_usuario")
+    )
 	private List<Usuario> revisores = new ArrayList<>();
 	
 	@Transient
 	private List<ValidadorDeOperaciones> validacionesVigentes = new ArrayList<>();
 	
 	@ElementCollection
+	@CollectionTable(name = "etiquetas_operaciones",
+					 joinColumns=@JoinColumn(name = "id_operacion"))
 	public List<EtiquetaOperacion> etiquetas = new ArrayList<>();
 	
 	@Column(name = "presupuestos_minimos")

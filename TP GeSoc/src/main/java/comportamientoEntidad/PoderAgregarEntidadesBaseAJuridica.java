@@ -9,12 +9,11 @@ import javax.persistence.Entity;
 import exceptions.*;
 
 @Entity
-@DiscriminatorValue("Eb")
+@DiscriminatorValue("LIMITAR_AGREGADO_BASES")
 public class PoderAgregarEntidadesBaseAJuridica extends Comportamiento{
 
 	@Override
 	public void alAgregarEntidad(EntidadBase entidadB, EntidadJuridica entidadJ) {
-		System.out.println("aca");
 		throw new LaEntidadJuridicaNoAdmiteEntidadesBaseException();
 	}
 	

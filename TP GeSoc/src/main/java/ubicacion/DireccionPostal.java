@@ -17,6 +17,7 @@ public class DireccionPostal {
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+	
 	public DireccionPostal() {}
 	
 	public DireccionPostal(Direccion direccion, Ubicacion ubicacion) {

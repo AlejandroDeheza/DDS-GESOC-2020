@@ -9,11 +9,12 @@ import model.CategoriaEntidad;
 import model.OperacionDeEgreso;
 
 @Entity
-@Table(name = "Entidades_Base")
+@Table(name = "entidades_base")
 public class EntidadBase extends Entidad{
 	private String descripcion;
 	
 	@ManyToOne
+	@JoinColumn(name = "entidad_juridica")
 	public EntidadJuridica entidadJuridica;
 	
 	public void setEntidadJuridica(EntidadJuridica entidadJuridica) {

@@ -6,21 +6,26 @@ import java.util.List;
 import javax.persistence.*;
 
 import model.CategoriaEntidad;
+import ubicacion.DireccionPostal;
 
 
 @Entity
-@Table(name = "Entidades_juridicas")
+@Table(name = "entidades_juridicas")
 public class EntidadJuridica extends Entidad {
 	
+	@Column(name = "razon_social")
 	private String razonSocial;
 	
 	private int cuit;
 	
-	private String direccionPostal;
+	@Embedded
+	private DireccionPostal direccionPostal;
 	
+	@Column(name = "cod_inscripcion_IGJ")
 	private int codInscIGJ; //Opcional
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "categoria_juridica")
 	private CategoriaEntidadJuridica categoriaEntidadJuridica; //Opcionalmente se reemplazara por una intefaz
 //	public boolean tieneAsociadasEntidadesBase = false;
 	
@@ -28,7 +33,7 @@ public class EntidadJuridica extends Entidad {
 		
 	}
 
-	public EntidadJuridica (String nombreFicticio, CategoriaEntidad categoriaEntidad, String razonSocial, int cuit, String direccionPostal, int codInscIGJ,
+	public EntidadJuridica (String nombreFicticio, CategoriaEntidad categoriaEntidad, String razonSocial, int cuit, DireccionPostal direccionPostal, int codInscIGJ,
 			CategoriaEntidadJuridica categoriaEntidadJuridica) {
 		
 		this.nombreFicticio=nombreFicticio;

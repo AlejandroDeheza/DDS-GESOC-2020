@@ -9,18 +9,23 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "Presupuestos")
+@Table (name = "presupuestos")
 public class Presupuesto {
 	@Id
 	@GeneratedValue
+	@Column(name = "id_presupuesto")
 	Long id;
 	
 	@OneToMany
-	@JoinColumn(name = "Presupesto_asociado")
+	@JoinColumn(name = "presupesto_asociado")
 	private List<Item> items = new ArrayList<>();
+	
 	@OneToOne
+	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")
 	private DocumentoComercial documentoComercial;
+	
 	@ManyToOne
+	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 	
 	public Presupuesto(List<Item> items, DocumentoComercial documento,  Proveedor proveedorEmisor) {

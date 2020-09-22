@@ -10,18 +10,20 @@ import exceptions.*;
 import organizacion.*;
 
 @Entity
-@Table(name = "Categoria_entidades")
+@Table(name = "categoria_entidades")
 public class CategoriaEntidad {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id_categoria_entidad")
 	private Long id;
 	
-	public String texto;
+	@Column(name = "descripcion")
+	public String descripcion;
 	
 	@ManyToMany
 	@JoinTable(
-	        name = "Comportamiento_aplicado", 
+	        name = "comportamientos_aplicados", 
 	        joinColumns = { @JoinColumn(name = "id_categoria") }, 
 	        inverseJoinColumns = { @JoinColumn(name = "id_comportamiento") }
 	    )
@@ -30,7 +32,7 @@ public class CategoriaEntidad {
 	public CategoriaEntidad() {}
 	public CategoriaEntidad(List<Comportamiento> comportamientos, String texto){
 		this.comportamientos = comportamientos;
-		this.texto = texto.toUpperCase();
+		this.descripcion = texto.toUpperCase();
 	}
 	
 	public void setComportamientos(List<Comportamiento> comportamientos) {

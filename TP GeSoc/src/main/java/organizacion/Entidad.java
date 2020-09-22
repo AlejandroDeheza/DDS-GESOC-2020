@@ -10,19 +10,23 @@ import javax.persistence.*;
 import model.*;
 
 @Entity
+@Table(name = "entidades")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Entidad {
 	@Id
 	@GeneratedValue
+	@Column(name = "id_entidad")
 	public Long id;
 	
+	@Column(name = "nombre_ficticio")
 	public String nombreFicticio;
 	
 	@OneToMany
-	@JoinColumn(name = "Entidad")
+	@JoinColumn(name = "entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
 	
 	@ManyToOne
+	@JoinColumn(name = "categoria_entidad", referencedColumnName = "id_categoria_entidad")
 	public CategoriaEntidad categoriaEntidad;
 	
 	public void agregarOperacionDeEgreso(OperacionDeEgreso egreso) {

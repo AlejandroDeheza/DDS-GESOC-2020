@@ -5,11 +5,12 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Organizaciones")
+@Table(name = "organizaciones")
 public class Organizacion {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id_organizacion")
 	private Long id;
 	
 	
@@ -19,6 +20,7 @@ public class Organizacion {
 	
 	private String descripcion;
 	public Organizacion() {}
+	
 	/*
 	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
 	private List<EntidadBase> entidadesBase = new ArrayList<>();

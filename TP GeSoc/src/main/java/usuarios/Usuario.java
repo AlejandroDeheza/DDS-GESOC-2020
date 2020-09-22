@@ -8,25 +8,36 @@ import javax.persistence.*;
 import validacionesContrasenias.ValidarTodo;
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 public class Usuario {
 	@Id
 	@GeneratedValue
+	@Column(name = "id_usuario")
 	private Long id;
 	
+	@Column(name = "nombre_usuario")
 	private String username;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_usuario")
 	private TipoUsuario tipoUser;
 	
+	@Column(name = "password")
 	private String hashedPasswordActual;
 	
+	@Column(name = "salt")
 	private String saltActual;
 	
 	@ElementCollection
+	@CollectionTable(name = "passwords_historicas",
+					 joinColumns=@JoinColumn(name = "id_usuario"))
+	@Column(name = "password")
 	private List<String[]> hashedPasswordUsadasConSalt = new ArrayList<String[]>(); 
 	
 	@ElementCollection
+	@CollectionTable(name = "mensajes_usuarios",
+					 joinColumns=@JoinColumn(name = "id_usuario"))
+	@Column(name = "mensaje")
 	private List<Mensaje> mensajes = new ArrayList<>();
 	
 	public Usuario() {}

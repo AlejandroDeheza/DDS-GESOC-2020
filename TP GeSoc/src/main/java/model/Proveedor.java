@@ -5,17 +5,19 @@ import javax.persistence.*;
 import ubicacion.DireccionPostal;
 
 @Entity
-@Table(name = "Proveedores")
+@Table(name = "proveedores")
 public class Proveedor {
 	@Id
 	@GeneratedValue
+	@Column(name = "id_proveedor")
 	private Long id;
 	
-
+	@Column(name = "razon_social")
 	private String razonSocial;
 
 	@Embedded
 	private DireccionPostal direccionPostal;
+	
 	
 	private int cuil;
 

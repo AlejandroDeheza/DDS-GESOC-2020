@@ -2,10 +2,14 @@ package db;
 
 import static org.junit.Assert.*;
 
+import javax.persistence.*;
+
+
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
+import usuarios.Mensaje;
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
 
@@ -13,11 +17,14 @@ public class Inserts extends AbstractPersistenceTest implements WithGlobalEntity
 
 	@Test
 	public void contextUp() {
-		Usuario usuario1 = new Usuario();
-		usuario1.setUsername("Pepe");
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 		
-		entityManager().persist(usuario1);
-		entityManager().flush();
+		Usuario usuario = new Usuario("Pepe",TipoUsuario.ADMIN,"Asd123","qwe");
+		usuario.recibirMensaje(new Mensaje("Dando de alta usuario"));
+		
+		em.getTransaction().begin();
+		em.persist(usuario);
+		em.getTransaction().commit();
 		
 	}
 

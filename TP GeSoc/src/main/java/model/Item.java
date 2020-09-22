@@ -6,10 +6,11 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "Items")
+@Table(name = "items")
 public class Item {
 	@Id
 	@GeneratedValue
+	@Column(name = "id_item")
 	private Long id;
 	
 	@Embedded
