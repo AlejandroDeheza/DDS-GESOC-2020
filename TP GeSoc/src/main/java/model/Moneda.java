@@ -26,12 +26,11 @@ public class Moneda {
 	}
 	public Moneda() {}
 	
-	public BigDecimal valorEnPesos(){
-		InfoDeUbicacionYMoneda api = new MercadoLibreApi();
+	public BigDecimal valorEnPesos(InfoDeUbicacionYMoneda apiMoneda){
+			
+		System.out.println(apiMoneda.obtenerRatioAPesos(currency).toString());
 		
-		System.out.println(api.obtenerRatioAPesos(currency).toString());
-		
-		BigDecimal ratio = api.obtenerRatioAPesos(currency).getBigDecimal("ratio");
+		BigDecimal ratio = apiMoneda.obtenerRatioAPesos(currency).getBigDecimal("ratio");
 		
 		return monto.multiply(ratio);
 	}

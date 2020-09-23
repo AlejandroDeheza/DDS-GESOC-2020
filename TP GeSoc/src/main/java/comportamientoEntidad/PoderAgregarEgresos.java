@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import exceptions.LaCantidadDeEgresosSuperaElMontoMaximoException;
+import exceptions.*;
 import model.OperacionDeEgreso;
 import organizacion.Entidad;
 

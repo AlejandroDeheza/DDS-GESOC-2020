@@ -71,6 +71,14 @@ public class OperacionDeEgreso {
 	@Column(name = "estado_operacion")
 	private EstadoOperacion estado;
 	
+	public EstadoOperacion getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoOperacion estado) {
+		this.estado = estado;
+	}
+
 	public OperacionDeEgreso() {}
 	
 	public OperacionDeEgreso(List<Item> items) {
@@ -95,11 +103,7 @@ public class OperacionDeEgreso {
 		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
 		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 	}
-	
-	public void setEstadoOperacion(EstadoOperacion estado) {
-		this.estado = estado;
-	}
-	
+		
 	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
 		this.documentoComercial = codDocumentoComercial;
 	}
@@ -139,17 +143,6 @@ public class OperacionDeEgreso {
 	public boolean esValida() {
 		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasoCorrectamente(this));
 	}
-	
-	public void validarCompra() {
-		if(this.esValida()) {
-			RepositorioCompras.instance().comprasValidadas.add(this);
-			notificarRevisores("La operacion fue validada correctamente");
-		}
-		else {
-			notificarRevisores("La operación no es valida");
-		}
-	}
-	
 	
 	public void notificarRevisores(String mensaje) {
 		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(mensaje + ", " + this.id))); 

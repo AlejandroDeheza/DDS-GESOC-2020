@@ -7,12 +7,17 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import model.CategoriaEntidad;
+import model.EstadoOperacion;
 import model.OperacionDeEgreso;
 
 public final class RepositorioCompras {
 	public List<OperacionDeEgreso> comprasPendientes = new ArrayList<>();
-	public List<OperacionDeEgreso> comprasValidadas = new ArrayList<>();
-	public List<OperacionDeEgreso> comprasAceptadas = new ArrayList<>();
+//	public List<OperacionDeEgreso> comprasValidadas = new ArrayList<>();
+//	public List<OperacionDeEgreso> comprasAceptadas = new ArrayList<>();
 	
 	private static final RepositorioCompras INSTANCE = new RepositorioCompras();
 	
@@ -29,25 +34,32 @@ public final class RepositorioCompras {
 		
 		this.comprasPendientes.add(compra);
 	}
-	
-
-	public void validarComprasPendientes() {
-		this.comprasPendientes.stream().forEach(compra -> compra.validarCompra());
-		this.comprasAceptadas.addAll(this.comprasValidadas);
-		this.comprasPendientes.removeAll(this.comprasValidadas);
-		this.comprasValidadas.clear();
-	}
-
-	/*
-	private List<OperacionDeEgreso> comprasValidas() {
-		return this.comprasPendientes.stream().filter(compra -> compra.esValida()).collect(Collectors.toList());
+	public void persistirCompras(List<OperacionDeEgreso> compras){
+		
+		compras.stream().forEach(compra -> this.agregarNuevaCompra(compra));
 	}
 	
-	public void validarComprasPendientes() {
-		List<OperacionDeEgreso> comprasValidas = this.comprasValidas();
-		this.comprasAceptadas.addAll(comprasValidas);
-		this.comprasPendientes.removeAll(comprasValidas);
+	public void validarComprasPendientes() {	
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE estado = 'PENDIENTE'").list();
+		
+		compras.stream().forEach(compra -> this.validarCompra(compra));
+		
+		this.persistirCompras(compras);
 	}
-	*/
 	
+	public void validarCompra(OperacionDeEgreso compra) {
+		if(compra.esValida()) {
+			//Aca tenemos que cambiarle el atributo a ACEPTADA.
+			compra.setEstado(EstadoOperacion.APROBADA);
+			compra.notificarRevisores("La operacion fue validada correctamente");
+		}
+		else {
+			//Aca tenemos que cambiarle el atributo a RECHAZADA.
+			compra.setEstado(EstadoOperacion.RECHAZADA);
+			
+			compra.notificarRevisores("La operación no es valida");
+		}
+	}
 }
