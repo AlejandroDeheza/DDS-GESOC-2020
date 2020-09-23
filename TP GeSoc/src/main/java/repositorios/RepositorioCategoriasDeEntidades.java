@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import comportamientoEntidad.Comportamiento;
 import model.CategoriaEntidad;
 
@@ -16,12 +24,15 @@ public class RepositorioCategoriasDeEntidades {
 		return INSTANCE;
 	}
 	
-	/*
-	public void crearNuevaCategoria(List<ValidacionEntidad> validaciones, String texto) {
-		categoriasDelSistema.add(new CategoriaEntidad(validaciones,texto));
-	}*/
-	
+
 	public void agregarNuevaCategoria(CategoriaEntidad nuevaCategoria) {
+
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		
+		em.getTransaction().begin();
+		em.persist(nuevaCategoria);
+		em.getTransaction().commit();
+		
 		categoriasDelSistema.add(nuevaCategoria);
 	}
 	
@@ -31,7 +42,23 @@ public class RepositorioCategoriasDeEntidades {
 	}
 	
 	public void eliminarCategoria(String descripcion) {
+		
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		em.getTransaction().begin();
+		em.createQuery("DELETE FROM CategoriaEntidad WHERE descripcion='"+descripcion+"'").executeUpdate();
+		em.getTransaction().commit();
+		em.close();
+		
 		categoriasDelSistema.removeIf(categoria -> categoria.descripcion.equals(descripcion.toUpperCase()));
+	}
+	
+	public List<CategoriaEntidad> obtenerCategorias() {
+		
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<CategoriaEntidad> categoriasDelSistema = session.createQuery("FROM CategoriaEntidad").list();
+		return categoriasDelSistema;
+		
 	}
 
 }

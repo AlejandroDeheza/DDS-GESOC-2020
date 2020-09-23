@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
 import model.OperacionDeEgreso;
 
 public final class RepositorioCompras {
@@ -18,11 +21,16 @@ public final class RepositorioCompras {
 	}
 	
 	public void agregarNuevaCompra(OperacionDeEgreso compra) {
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		
+		em.getTransaction().begin();
+		em.persist(compra);
+		em.getTransaction().commit();
+		
 		this.comprasPendientes.add(compra);
 	}
 	
-	
-	
+
 	public void validarComprasPendientes() {
 		this.comprasPendientes.stream().forEach(compra -> compra.validarCompra());
 		this.comprasAceptadas.addAll(this.comprasValidadas);
