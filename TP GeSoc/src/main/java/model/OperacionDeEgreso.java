@@ -67,6 +67,9 @@ public class OperacionDeEgreso {
 	@Column(name = "presupuestos_minimos")
 	public final int presupuestosMinimos = 1;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "estado_operacion")
+	private EstadoOperacion estado;
 	
 	public OperacionDeEgreso() {}
 	
@@ -91,6 +94,10 @@ public class OperacionDeEgreso {
 		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
 		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
 		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
+	}
+	
+	public void setEstadoOperacion(EstadoOperacion estado) {
+		this.estado = estado;
 	}
 	
 	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
