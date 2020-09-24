@@ -24,11 +24,12 @@ public class OperacionDeEgreso {
 	@Column(name = "id_operacion")
 	private Long id;
 	
-	@OneToMany
+
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
 	private List<Item> items = new ArrayList<>();
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")
 	private DocumentoComercial documentoComercial;
 	
@@ -43,7 +44,7 @@ public class OperacionDeEgreso {
 	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
 	public List<Presupuesto> presupuestos = new ArrayList<>();
 	
@@ -69,10 +70,14 @@ public class OperacionDeEgreso {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "estado_operacion")
-	private EstadoOperacion estado;
+	private EstadoOperacion estado = EstadoOperacion.PENDIENTE;
 	
 	public EstadoOperacion getEstado() {
 		return estado;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public void setEstado(EstadoOperacion estado) {
@@ -98,6 +103,7 @@ public class OperacionDeEgreso {
 		this.medio = medio;
 		this.proveedor = proveedor;
 		this.revisores = revisores;
+		//this.estado = EstadoOperacion.PENDIENTE;
 		
 		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
 		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());

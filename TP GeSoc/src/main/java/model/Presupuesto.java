@@ -16,11 +16,11 @@ public class Presupuesto {
 	@Column(name = "id_presupuesto")
 	Long id;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "presupesto_asociado")
 	private List<Item> items = new ArrayList<>();
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")
 	private DocumentoComercial documentoComercial;
 	

@@ -5,6 +5,9 @@ bin
 generated*
 .settings
 
+\TP GeSoc\src\main\resources\META-INF\
+persistence.xml
+
 
 
 ### Java ###
