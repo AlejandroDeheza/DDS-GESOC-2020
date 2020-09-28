@@ -34,11 +34,21 @@ public final class RepositorioCompras {
 		
 		this.comprasPendientes.add(compra);
 	}
+	
 	public void persistirCompras(List<OperacionDeEgreso> compras){
 		
 		compras.stream().forEach(compra -> this.agregarNuevaCompra(compra));
 	}
 	
+	public List<OperacionDeEgreso> obtenerOperacionesPendientes(){
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE estado = 'PENDIENTE'").list();
+		
+		return compras;
+	}
+	
+	//Extraer a objeto validador de OperacionesDeEgreso.
 	public void validarComprasPendientes() {	
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
@@ -59,7 +69,7 @@ public final class RepositorioCompras {
 			//Aca tenemos que cambiarle el atributo a RECHAZADA.
 			compra.setEstado(EstadoOperacion.RECHAZADA);
 			
-			compra.notificarRevisores("La operación no es valida");
+			compra.notificarRevisores("La operacion no es valida");
 		}
 	}
 }

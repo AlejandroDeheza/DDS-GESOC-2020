@@ -21,7 +21,7 @@ public class CategoriaEntidad {
 	@Column(name = "descripcion")
 	public String descripcion;
 	
-	@ManyToMany
+	@ManyToMany(cascade =  {CascadeType.ALL})
 	@JoinTable(
 	        name = "comportamientos_aplicados", 
 	        joinColumns = { @JoinColumn(name = "id_categoria") }, 

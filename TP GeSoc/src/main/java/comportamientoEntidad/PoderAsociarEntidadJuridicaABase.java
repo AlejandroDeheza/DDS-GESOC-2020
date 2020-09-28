@@ -1,5 +1,6 @@
 package comportamientoEntidad;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -15,7 +16,7 @@ import organizacion.EntidadJuridica;
 @DiscriminatorValue("IMPEDIR_ASOCIAR_JURIDICA")
 public class PoderAsociarEntidadJuridicaABase extends Comportamiento {
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_bloqueada")
 	EntidadJuridica entidadALaQueNoPuedePertenecer;
 	

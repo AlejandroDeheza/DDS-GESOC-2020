@@ -48,6 +48,10 @@ public class OperacionDeEgreso {
 	@JoinColumn(name = "operacion_asociada")
 	public List<Presupuesto> presupuestos = new ArrayList<>();
 	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@Column(name = "presupuesto_elegido")
+	public Presupuesto presupuestoElegido;
+	
 	@ManyToMany
 	@JoinTable(name = "revisor_operacion",
 			joinColumns=
