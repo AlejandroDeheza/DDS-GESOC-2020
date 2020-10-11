@@ -55,18 +55,18 @@ public class TestsOperacionesDeEgreso {
 	@Test
 	public void losItemsDeLaOperacionCoincidenConLosDeAlgunoDeSusPresupuestos() {
 		ValidarQueLaOperacionContengaTodosLosItems validacion = new ValidarQueLaOperacionContengaTodosLosItems();
-		Assert.assertTrue(validacion.pasoCorrectamente(operacion1));
+		Assert.assertTrue(validacion.pasaLaValidacion(operacion1));
 	}
 
 	@Test
 	public void laOperacionTieneLaCantidadMinimaDePresupuestosQueRequiere() {
 		ValidarQueSeHayaElegidoElPresupuestoMasBarato validacion = new ValidarQueSeHayaElegidoElPresupuestoMasBarato();
-		Assert.assertTrue(validacion.pasoCorrectamente(operacion1));
+		Assert.assertTrue(validacion.pasaLaValidacion(operacion1));
 	}
 	@Test
 	public void losItemsCoincidenConLosDelPresupuestoDeMenorValor() {
 		ValidarQueTengaLaSuficienteCantidadDePresupuestos validacion = new ValidarQueTengaLaSuficienteCantidadDePresupuestos();
-		Assert.assertTrue(validacion.pasoCorrectamente(operacion1));
+		Assert.assertTrue(validacion.pasaLaValidacion(operacion1));
 	}
 	
 	@Test

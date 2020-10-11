@@ -21,9 +21,9 @@ public class RepositorioEtiquetas {
 		
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 		EtiquetaOperacion etiqueta = new EtiquetaOperacion(texto);
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(etiqueta);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		etiquetasDelSistema.add(etiqueta);
 		
 	}
@@ -31,9 +31,9 @@ public class RepositorioEtiquetas {
 	public void agregarNuevaEtiqueta(EtiquetaOperacion nuevaEtiqueta) {
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 		
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(nuevaEtiqueta);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		
 		etiquetasDelSistema.add(nuevaEtiqueta);
 	}
@@ -46,10 +46,10 @@ public class RepositorioEtiquetas {
 	public void eliminarEtiqueta(String texto) {
 		
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.createQuery("DELETE FROM EtiquetaOperacion WHERE texto='"+texto+"'").executeUpdate();
-		em.getTransaction().commit();
-		em.close();
+		//em.getTransaction().commit();
+		//em.close();
 		etiquetasDelSistema.removeIf(etiqueta -> etiqueta.texto.equals(texto.toUpperCase()));
 		
 	}

@@ -29,9 +29,9 @@ public class RepositorioCategoriasDeEntidades {
 
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 		
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(nuevaCategoria);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		
 		categoriasDelSistema.add(nuevaCategoria);
 	}
@@ -44,10 +44,10 @@ public class RepositorioCategoriasDeEntidades {
 	public void eliminarCategoria(String descripcion) {
 		
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.createQuery("DELETE FROM CategoriaEntidad WHERE descripcion='"+descripcion+"'").executeUpdate();
-		em.getTransaction().commit();
-		em.close();
+		//em.getTransaction().commit();
+		//em.close();
 		
 		categoriasDelSistema.removeIf(categoria -> categoria.descripcion.equals(descripcion.toUpperCase()));
 	}

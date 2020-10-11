@@ -15,9 +15,6 @@ import model.EstadoOperacion;
 import model.OperacionDeEgreso;
 
 public final class RepositorioCompras {
-	public List<OperacionDeEgreso> comprasPendientes = new ArrayList<>();
-//	public List<OperacionDeEgreso> comprasValidadas = new ArrayList<>();
-//	public List<OperacionDeEgreso> comprasAceptadas = new ArrayList<>();
 	
 	private static final RepositorioCompras INSTANCE = new RepositorioCompras();
 	
@@ -25,31 +22,35 @@ public final class RepositorioCompras {
 		return INSTANCE;
 	}
 	
-	public void agregarNuevaCompra(OperacionDeEgreso compra) {
+	public void persistirCompra(OperacionDeEgreso compra) {
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
 		em.persist(compra);
-		em.getTransaction().commit();
-		
-		this.comprasPendientes.add(compra);
 	}
 	
-	public void persistirCompras(List<OperacionDeEgreso> compras){
-		
-		compras.stream().forEach(compra -> this.agregarNuevaCompra(compra));
+	public void agregarCompras(List<OperacionDeEgreso> compras){
+		compras.stream().forEach(compra -> this.persistirCompra(compra));
 	}
 	
-	public List<OperacionDeEgreso> obtenerOperacionesPendientes(){
+	public List<OperacionDeEgreso> obtenerTodasLasOperaciones(){
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
-		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE estado = 'PENDIENTE'").list();
-		
+		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso").list();
 		return compras;
 	}
 	
+	public List<OperacionDeEgreso> obtenerOperaciones(String condicion){
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE " + condicion).list();
+		return compras;
+	}
+	
+	public void actualizarOperaciones() {
+		//TODO - Ver como hacemos esto 
+	}
+	
 	//Extraer a objeto validador de OperacionesDeEgreso.
-	public void validarComprasPendientes() {	
+	/*public void validarComprasPendientes() {	
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE estado = 'PENDIENTE'").list();
@@ -71,5 +72,5 @@ public final class RepositorioCompras {
 			
 			compra.notificarRevisores("La operacion no es valida");
 		}
-	}
+	}*/
 }

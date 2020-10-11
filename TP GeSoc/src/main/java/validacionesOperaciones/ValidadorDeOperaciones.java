@@ -1,9 +1,24 @@
 package validacionesOperaciones;
 
-import model.OperacionDeEgreso;
+import java.util.List;
 
-public interface ValidadorDeOperaciones {
+import model.EstadoOperacion;
+import model.OperacionDeEgreso;
+import repositorios.RepositorioCompras;
+
+public class ValidadorDeOperaciones {
 	
-	public boolean pasoCorrectamente(OperacionDeEgreso operacion);
+	void ejecutar() {
+		//Pedirle las operaciones al repo
+		List<OperacionDeEgreso> comprasPendientes = RepositorioCompras.instance().obtenerOperaciones("estado = 'PENDIENTE'");
+		//Validarlas
+		comprasPendientes.stream().forEach( (c) -> {
+			if (c.esValida())
+			 c.setEstado(EstadoOperacion.APROBADA);
+		}
+		);
+		//TODO - Actualizarlas en el repo, ¿como hacemos?
+		 
+	}
 
 }

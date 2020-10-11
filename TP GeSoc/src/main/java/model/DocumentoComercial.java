@@ -2,12 +2,13 @@ package model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "documentos_comerciales")
+/*@Entity
+@Table(name = "documentos_comerciales")*/
+@Embeddable
 public class DocumentoComercial {
 	
-	@Id
-	@GeneratedValue
+	/*@Id
+	@GeneratedValue*/
 	@Column(name = "id_documento_comercial")
 	private Long id;
 	

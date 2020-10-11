@@ -20,8 +20,9 @@ public class Presupuesto {
 	@JoinColumn(name = "presupesto_asociado")
 	private List<Item> items = new ArrayList<>();
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")
+	/*@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")*/
+	@Embedded
 	private DocumentoComercial documentoComercial;
 	
 	@ManyToOne

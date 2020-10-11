@@ -23,14 +23,15 @@ public class OperacionDeEgreso {
 	@GeneratedValue
 	@Column(name = "id_operacion")
 	private Long id;
-	
+
 
 	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
 	private List<Item> items = new ArrayList<>();
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")
+	/*@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "documento_comercial", referencedColumnName = "id_documento_comercial")*/
+	@Embedded
 	private DocumentoComercial documentoComercial;
 	
 	@Column(name = "fecha_operacion")
@@ -62,7 +63,7 @@ public class OperacionDeEgreso {
 	private List<Usuario> revisores = new ArrayList<>();
 	
 	@Transient
-	private List<ValidadorDeOperaciones> validacionesVigentes = new ArrayList<>();
+	private List<ValidacionDeOperaciones> validacionesVigentes = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "etiquetas_operaciones",
@@ -90,16 +91,13 @@ public class OperacionDeEgreso {
 
 	public OperacionDeEgreso() {}
 	
-	public OperacionDeEgreso(List<Item> items) {
+	public OperacionDeEgreso(List<Item> items, List<ValidacionDeOperaciones> validaciones) {
 		this.items = items;
-		
-		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
-		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
-		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
+		validacionesVigentes=validaciones;
 	}
 	public OperacionDeEgreso(List<Item> items, DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, 
 			IDMedioDePago medio, Proveedor proveedor, List<Presupuesto> presupuestos,
-			List<Usuario> revisores) {
+			List<Usuario> revisores,List<ValidacionDeOperaciones> validaciones) {
 		
 		this.items = items;
 		this.documentoComercial = documentoComercial;
@@ -109,9 +107,7 @@ public class OperacionDeEgreso {
 		this.revisores = revisores;
 		//this.estado = EstadoOperacion.PENDIENTE;
 		
-		validacionesVigentes.add(new ValidarQueLaOperacionContengaTodosLosItems());
-		validacionesVigentes.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
-		validacionesVigentes.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
+		validacionesVigentes=validaciones;
 	}
 		
 	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
@@ -122,23 +118,22 @@ public class OperacionDeEgreso {
 		etiquetas.add(etiqueta);
 	}
 	
-	public boolean contiene(Item item) {
-		return this.items.stream().anyMatch(i -> i.equals(item));
-	}
-	
-	public void agregarNuevoPresupuesto(List<Item> items, DocumentoComercial documento, Proveedor proveedorEmisor) {
+	public void agregarNuevoPresupuesto(Presupuesto presupuesto) {
 
-		if(!this.contieneTodosLos(items)) {
+		if(!this.contieneTodos(presupuesto.getItems())) {
 			throw new PresupuestoInvalidoException();
 		}
 		
-		Presupuesto presupuesto = new Presupuesto(items, documento, proveedorEmisor);
 		this.presupuestos.add(presupuesto);
 	}
 	//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
 	//Así respetamos el punto 2 de la entrega 2.
 	
-	public void altaDeUnRevisor(Usuario revisorNuevo) {
+	public void setPresupuestoElegido(Presupuesto presupuesto) {
+		this.presupuestoElegido = presupuesto;
+	}
+	
+	public void agregarRevisor(Usuario revisorNuevo) {
 		this.revisores.add(revisorNuevo);
 	}
 
@@ -146,12 +141,16 @@ public class OperacionDeEgreso {
 		return this.items.stream().map(item -> item.getMoneda().monto).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 	
-	private boolean contieneTodosLos(List<Item> items) {
+	public boolean contiene(Item item) {
+		return this.items.stream().anyMatch(i -> i.equals(item));
+	}
+
+	private boolean contieneTodos(List<Item> items) {
 		return items.stream().allMatch(item -> this.contiene(item));
 	}
 	
 	public boolean esValida() {
-		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasoCorrectamente(this));
+		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasaLaValidacion(this));
 	}
 	
 	public void notificarRevisores(String mensaje) {
