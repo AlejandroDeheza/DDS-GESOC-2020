@@ -1,19 +1,16 @@
 package validacionesOperaciones;
 
-import java.math.BigDecimal;
-import java.util.Comparator;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 import model.OperacionDeEgreso;
 
-public class ValidarQueSeHayaElegidoElPresupuestoMasBarato implements ValidacionDeOperaciones{
-	
-	private BigDecimal menorPrecioDePresupuestos(OperacionDeEgreso operacion) {
-		return operacion.presupuestos.stream().map(presupuesto -> presupuesto.valorTotal()).min(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
-	}
+@Entity
+@DiscriminatorValue("presupuesto_mas_barato")
+public class ValidarQueSeHayaElegidoElPresupuestoMasBarato extends ValidacionDeOperaciones{
 	
 	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
-		//return this.menorPrecioDePresupuestos(operacion).equals(operacion.valorTotal());
-		return operacion.presupuestosMinimos==0 || this.menorPrecioDePresupuestos(operacion).equals(operacion.presupuestoElegido.valorTotal());
+		return operacion.presupuestosMinimos==0 || operacion.menorPrecioDePresupuestos().equals(operacion.valorTotalDelPresupuestoElegido());
 	}
 
 }

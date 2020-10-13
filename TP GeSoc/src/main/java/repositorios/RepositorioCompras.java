@@ -49,28 +49,4 @@ public final class RepositorioCompras {
 		//TODO - Ver como hacemos esto 
 	}
 	
-	//Extraer a objeto validador de OperacionesDeEgreso.
-	/*public void validarComprasPendientes() {	
-		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
-		Session session = sessionFactory.openSession();
-		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE estado = 'PENDIENTE'").list();
-		
-		compras.stream().forEach(compra -> this.validarCompra(compra));
-		
-		this.persistirCompras(compras);
-	}
-	
-	public void validarCompra(OperacionDeEgreso compra) {
-		if(compra.esValida()) {
-			//Aca tenemos que cambiarle el atributo a ACEPTADA.
-			compra.setEstado(EstadoOperacion.APROBADA);
-			compra.notificarRevisores("La operacion fue validada correctamente");
-		}
-		else {
-			//Aca tenemos que cambiarle el atributo a RECHAZADA.
-			compra.setEstado(EstadoOperacion.RECHAZADA);
-			
-			compra.notificarRevisores("La operacion no es valida");
-		}
-	}*/
 }

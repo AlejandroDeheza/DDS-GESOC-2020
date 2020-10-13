@@ -62,7 +62,8 @@ public class OperacionDeEgreso {
     )
 	private List<Usuario> revisores = new ArrayList<>();
 	
-	@Transient
+	@OneToMany(cascade = {CascadeType.ALL})
+	@Column(name = "validaciones_asociadas")
 	private List<ValidacionDeOperaciones> validacionesVigentes = new ArrayList<>();
 	
 	@ElementCollection
@@ -147,6 +148,22 @@ public class OperacionDeEgreso {
 
 	private boolean contieneTodos(List<Item> items) {
 		return items.stream().allMatch(item -> this.contiene(item));
+	}
+	
+	public boolean contieneTodosLosItemsDelPresupuesto() {
+		return presupuestoElegido.getItems().stream().allMatch(item -> this.contiene(item));
+	}
+	
+	public BigDecimal menorPrecioDePresupuestos() {
+		return this.presupuestos.stream().map(presupuesto -> presupuesto.valorTotal()).min(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
+	}
+	
+	public BigDecimal valorTotalDelPresupuestoElegido() {
+		return presupuestoElegido.valorTotal();
+	}
+	
+	public int cantidadDePresupuestos() {
+		return this.presupuestos.size();
 	}
 	
 	public boolean esValida() {

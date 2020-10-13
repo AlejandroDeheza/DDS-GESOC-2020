@@ -5,13 +5,15 @@ import java.util.concurrent.*;
 
 import model.*;
 import repositorios.RepositorioCompras;
+import validacionesOperaciones.ValidadorDeCompras;
 
 public class MainClass implements Runnable{
 	
 	public void run() {
 		
 		System.out.println("Ejecutando validacion de compras...");
-		RepositorioCompras.instance().validarComprasPendientes();
+		ValidadorDeCompras validador = new ValidadorDeCompras();
+		validador.validarComprasPendientes();
 	    System.out.println("Compras validadas.\n");
 	}
 

@@ -1,17 +1,17 @@
 package validacionesOperaciones;
 
-import model.OperacionDeEgreso;
-import model.Presupuesto;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-public class ValidarQueLaOperacionContengaTodosLosItems implements ValidacionDeOperaciones {
-	
-	private boolean contieneTodosLosItemsDe(Presupuesto presupuesto, OperacionDeEgreso operacion) {
-		return presupuesto.getItems().stream().allMatch(item -> operacion.contiene(item));
-	}
+import model.OperacionDeEgreso;
+
+
+@Entity
+@DiscriminatorValue("contega_todos_los_items")
+public class ValidarQueLaOperacionContengaTodosLosItems extends ValidacionDeOperaciones {
 	
 	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
-		//return operacion.presupuestos.stream().anyMatch(presupuesto -> this.contieneTodosLosItemsDe(presupuesto,operacion));
-		return operacion.presupuestosMinimos == 0 || contieneTodosLosItemsDe(operacion.presupuestoElegido,operacion);
+		return operacion.presupuestosMinimos == 0 || operacion.contieneTodosLosItemsDelPresupuesto();
 	}
 
 }
