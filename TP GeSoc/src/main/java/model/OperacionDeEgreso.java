@@ -1,7 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import exceptions.*;
 import organizacion.Organizacion;
 import paymentMethods.IDMedioDePago;
@@ -37,7 +37,7 @@ public class OperacionDeEgreso {
 	private DocumentoComercial documentoComercial;
 	
 	@Column(name = "fecha_operacion")
-	private LocalDateTime fechaOperacion;
+	private LocalDate fechaOperacion;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "medio_de_pago")
@@ -130,7 +130,7 @@ public class OperacionDeEgreso {
 
 	public OperacionDeEgreso(List<Item> items,
 							 DocumentoComercial documentoComercial,
-							 LocalDateTime fechaOperacion, 
+							 LocalDate fechaOperacion, 
 							 IDMedioDePago medio,
 							 Proveedor proveedor, 
 							 List<Presupuesto> presupuestos,

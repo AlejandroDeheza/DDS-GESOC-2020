@@ -128,7 +128,7 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		OperacionDeEgreso operacion1 = new OperacionDeEgreso(
 				crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)),
 				new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
-				LocalDateTime.now(),
+				LocalDate.now(),
 				IDMedioDePago.ACCOUNT_MONEY,
 				crearProveedor(),
 				listaPresupuestos,
@@ -147,7 +147,7 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		OperacionDeEgreso operacion2 = new OperacionDeEgreso(
 				crearLista3Items(crearItem("X",20.0), crearItem("X",30.0), crearItem("Y",40.0)),
 				new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
-				LocalDateTime.now(),
+				LocalDate.now(),
 				IDMedioDePago.AMEX,
 				crearProveedor(),
 				listaPresupuestos2,
@@ -169,7 +169,7 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		OperacionDeEgreso operacion3 = new OperacionDeEgreso(
 				crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)),
 				new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
-				LocalDateTime.now(),
+				LocalDate.now(),
 				IDMedioDePago.ARGENCARD,
 				crearProveedor(),
 				listaPresupuestos3,
