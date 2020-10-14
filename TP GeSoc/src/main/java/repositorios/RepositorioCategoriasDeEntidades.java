@@ -32,7 +32,7 @@ public class RepositorioCategoriasDeEntidades {
 		em.getTransaction().begin();
 		em.persist(nuevaCategoria);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 		//categoriasDelSistema.add(nuevaCategoria);
 	}
 	
@@ -48,7 +48,7 @@ public class RepositorioCategoriasDeEntidades {
 		em.getTransaction().begin();
 		em.merge(nuevaCategoria);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 	}
 	
 	public void eliminarCategoria(CategoriaEntidad nuevaCategoria) {
@@ -59,7 +59,7 @@ public class RepositorioCategoriasDeEntidades {
 		//em.createQuery("DELETE FROM CategoriaEntidad WHERE descripcion='"+descripcion+"'").executeUpdate();
 		em.remove(nuevaCategoria);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 		
 		//categoriasDelSistema.removeIf(categoria -> categoria.descripcion.equals(descripcion.toUpperCase()));
 	}
@@ -69,8 +69,8 @@ public class RepositorioCategoriasDeEntidades {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<CategoriaEntidad> categoriasDelSistema = session.createQuery("FROM CategoriaEntidad").list();
-		sessionFactory.close();
-		session.close();
+		//sessionFactory.close();
+		//session.close();
 		return categoriasDelSistema;
 		
 	}
@@ -80,8 +80,8 @@ public class RepositorioCategoriasDeEntidades {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<CategoriaEntidad> categoriasDelSistema = session.createQuery("FROM CategoriaEntidad WHERE " + query).list();
-		sessionFactory.close();
-		session.close();
+		//sessionFactory.close();
+		//session.close();
 		return categoriasDelSistema;
 		
 	}

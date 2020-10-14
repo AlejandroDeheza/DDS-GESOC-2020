@@ -24,7 +24,7 @@ public class RepositorioEtiquetas {
 	    em.getTransaction().begin();
 		em.persist(etiqueta);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 		//etiquetasDelSistema.add(etiqueta);	
 	}
 	
@@ -34,7 +34,7 @@ public class RepositorioEtiquetas {
 		em.getTransaction().begin();
 		em.persist(nuevaEtiqueta);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 		
 		//etiquetasDelSistema.add(nuevaEtiqueta);
 	}
@@ -49,7 +49,7 @@ public class RepositorioEtiquetas {
 		em.getTransaction().begin();
 		em.merge(etiqueta);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 	}
 	
 	public void eliminarEtiqueta(EtiquetaOperacion etiqueta) {
@@ -59,7 +59,7 @@ public class RepositorioEtiquetas {
 		//em.createQuery("DELETE FROM EtiquetaOperacion WHERE texto='"+texto+"'").executeUpdate();
 		em.remove(etiqueta);
 		em.getTransaction().commit();
-		em.close();
+		//em.close();
 		//etiquetasDelSistema.removeIf(etiqueta -> etiqueta.texto.equals(texto.toUpperCase()));
 		
 	}
