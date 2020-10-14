@@ -35,22 +35,5 @@ public class EntidadBase extends Entidad{
 	public void asociarAEntidadJuridica (EntidadJuridica entidadJuridica) {
 		this.categoriaEntidad.asociarAEntidadJuridica(this, entidadJuridica);
 	}
-	
-	/*
-	public EntidadBase(String nombreFicticio, String descripcion) {
-
-		this.nombreFicticio = nombreFicticio;
-		this.descripcion = descripcion;
-	}
-	
-	public EntidadBase(String nombreFicticio, String descripcion, EntidadJuridica entidadJuridica) {
-		this.nombreFicticio = nombreFicticio;
-		this.descripcion = descripcion;
-		this.entidadJuridica = entidadJuridica;
-	}*/
-
-	
-	
-	
 
 }

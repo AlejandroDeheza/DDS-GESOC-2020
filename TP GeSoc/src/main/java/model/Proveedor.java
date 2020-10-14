@@ -18,7 +18,6 @@ public class Proveedor {
 	@Embedded
 	private DireccionPostal direccionPostal;
 	
-	
 	private int cuil;
 
 	public Proveedor(String razonSocial, DireccionPostal direccionPostal, int cuil) {

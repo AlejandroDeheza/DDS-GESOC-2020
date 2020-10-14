@@ -7,11 +7,12 @@ import model.OperacionDeEgreso;
 
 
 @Entity
-@DiscriminatorValue("contega_todos_los_items")
+//@DiscriminatorValue("contega_todos_los_items")
+@DiscriminatorValue("CONTIENE_ITEMS")
 public class ValidarQueLaOperacionContengaTodosLosItems extends ValidacionDeOperaciones {
 	
 	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
-		return operacion.presupuestosMinimos == 0 || operacion.contieneTodosLosItemsDelPresupuesto();
+		return operacion.getPresupuestosMinimos() == 0 || operacion.contieneItemsDelPresupuesto(operacion.getPresupuestoElegido());
 	}
 
 }

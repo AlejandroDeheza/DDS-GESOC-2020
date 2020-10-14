@@ -19,11 +19,13 @@ import javax.persistence.*;
 @Table(name = "operaciones_de_egreso")
 public class OperacionDeEgreso {
 	
+	
+	//Atributos y persistencia
+	//---------------------------------------------------------------------------------------------------
 	@Id
 	@GeneratedValue
 	@Column(name = "id_operacion")
 	private Long id;
-
 
 	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
@@ -41,19 +43,19 @@ public class OperacionDeEgreso {
 	@Column(name = "medio_de_pago")
 	private IDMedioDePago medio;
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
-	public List<Presupuesto> presupuestos = new ArrayList<>();
+	private List<Presupuesto> presupuestos = new ArrayList<>();
 	
 	@OneToOne(cascade = {CascadeType.ALL})
-	@Column(name = "presupuesto_elegido")
-	public Presupuesto presupuestoElegido;
+	@JoinColumn(name = "presupuesto_elegido")
+	private Presupuesto presupuestoElegido;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "revisor_operacion",
 			joinColumns=
             @JoinColumn(name="id_operacion", referencedColumnName="id_operacion"),
@@ -63,96 +65,40 @@ public class OperacionDeEgreso {
 	private List<Usuario> revisores = new ArrayList<>();
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	@Column(name = "validaciones_asociadas")
+	@JoinColumn(name = "operacion_asociadas")
 	private List<ValidacionDeOperaciones> validacionesVigentes = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "etiquetas_operaciones",
 					 joinColumns=@JoinColumn(name = "id_operacion"))
-	public List<EtiquetaOperacion> etiquetas = new ArrayList<>();
+	private List<EtiquetaOperacion> etiquetas = new ArrayList<>();
 	
 	@Column(name = "presupuestos_minimos")
-	public final int presupuestosMinimos = 1;
+	private int presupuestosMinimos = 1;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "estado_operacion")
 	private EstadoOperacion estado = EstadoOperacion.PENDIENTE;
+	//---------------------------------------------------------------------------------------------------
 	
-	public EstadoOperacion getEstado() {
-		return estado;
-	}
+	//Responsabilidades de la clase
+	//---------------------------------------------------------------------------------------------------
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setEstado(EstadoOperacion estado) {
-		this.estado = estado;
-	}
-
-	public OperacionDeEgreso() {}
-	
-	public OperacionDeEgreso(List<Item> items, List<ValidacionDeOperaciones> validaciones) {
-		this.items = items;
-		validacionesVigentes=validaciones;
-	}
-	
-	public OperacionDeEgreso(List<Item> items, DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, 
-			IDMedioDePago medio, Proveedor proveedor, List<Presupuesto> presupuestos,
-			List<Usuario> revisores,List<ValidacionDeOperaciones> validaciones) {
-		
-		this.items = items;
-		this.documentoComercial = documentoComercial;
-		this.fechaOperacion = fechaOperacion;
-		this.medio = medio;
-		this.proveedor = proveedor;
-		this.revisores = revisores;
-		//this.estado = EstadoOperacion.PENDIENTE;
-		
-		validacionesVigentes=validaciones;
-	}
-		
-	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
-		this.documentoComercial = codDocumentoComercial;
-	}
-	
-	public void agregarEtiqueta(EtiquetaOperacion etiqueta) {
-		etiquetas.add(etiqueta);
-	}
-	
-	public void agregarNuevoPresupuesto(Presupuesto presupuesto) {
-
-		if(!this.contieneTodos(presupuesto.getItems())) {
-			throw new PresupuestoInvalidoException();
-		}
-		
-		this.presupuestos.add(presupuesto);
-	}
-	//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
-	//Así respetamos el punto 2 de la entrega 2.
-	
-	public void setPresupuestoElegido(Presupuesto presupuesto) {
-		this.presupuestoElegido = presupuesto;
-	}
-	
-	public void agregarRevisor(Usuario revisorNuevo) {
-		this.revisores.add(revisorNuevo);
-	}
-
 	public BigDecimal valorTotal() {
 		return this.items.stream().map(item -> item.getMoneda().monto).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 	
-	public boolean contiene(Item item) {
+	public boolean contieneItem(Item item) {
 		return this.items.stream().anyMatch(i -> i.equals(item));
 	}
 
-	private boolean contieneTodos(List<Item> items) {
-		return items.stream().allMatch(item -> this.contiene(item));
+	private boolean contieneItems(List<Item> items) {
+		return items.stream().allMatch(item -> this.contieneItem(item));
 	}
 	
-	public boolean contieneTodosLosItemsDelPresupuesto() {
-		return presupuestoElegido.getItems().stream().allMatch(item -> this.contiene(item));
+	public boolean contieneItemsDelPresupuesto(Presupuesto presupuesto) {
+		//return presupuesto.getItems().stream().allMatch(item -> this.contiene(item));
+		return contieneItems(presupuesto.getItems());
 	}
 	
 	public BigDecimal menorPrecioDePresupuestos() {
@@ -174,4 +120,90 @@ public class OperacionDeEgreso {
 	public void notificarRevisores(String mensaje) {
 		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(mensaje + ", " + this.id))); 
 	}
+	
+	//---------------------------------------------------------------------------------------------------
+	
+	//Constructores, getters y setters
+	//---------------------------------------------------------------------------------------------------
+	
+	public OperacionDeEgreso() {}
+
+	public OperacionDeEgreso(List<Item> items,
+							 DocumentoComercial documentoComercial,
+							 LocalDateTime fechaOperacion, 
+							 IDMedioDePago medio,
+							 Proveedor proveedor, 
+							 List<Presupuesto> presupuestos,
+							 Presupuesto presupuestoElegido,
+							 List<Usuario> revisores,
+							 List<ValidacionDeOperaciones> validacionesVigentes,
+							 List<EtiquetaOperacion> etiquetas,
+							 int presupuestosMinimos,
+							 EstadoOperacion estado) {
+		
+		this.items = items;
+		this.documentoComercial = documentoComercial;
+		this.fechaOperacion = fechaOperacion;
+		this.medio = medio;
+		this.proveedor = proveedor;
+		this.presupuestos = presupuestos;
+		this.presupuestoElegido = presupuestoElegido;
+		this.revisores = revisores;
+		this.validacionesVigentes = validacionesVigentes;
+		this.etiquetas = etiquetas;
+		this.presupuestosMinimos = presupuestosMinimos;
+		this.estado = estado;
+				
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public EstadoOperacion getEstado() {
+		return estado;
+	}
+	
+	public List<EtiquetaOperacion> getEtiquetas(){
+		return etiquetas;
+	}
+	
+	public Presupuesto getPresupuestoElegido() {
+		return presupuestoElegido;
+	}
+	
+	public int getPresupuestosMinimos() {
+		return presupuestosMinimos;
+	}
+	public void setEstado(EstadoOperacion estado) {
+		this.estado = estado;
+	}
+	
+	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
+		this.documentoComercial = codDocumentoComercial;
+	}
+	
+	public void agregarEtiqueta(EtiquetaOperacion etiqueta) {
+		etiquetas.add(etiqueta);
+	}
+	
+	public void agregarNuevoPresupuesto(Presupuesto presupuesto) {
+
+		if(!this.contieneItems(presupuesto.getItems())) {
+			throw new PresupuestoInvalidoException();
+		}
+		
+		this.presupuestos.add(presupuesto);
+	}
+	//Así siempre se agregan presupuestos validos. Deberia ser la unica forma de agregar presupuestos.
+	//Así respetamos el punto 2 de la entrega 2.
+	
+	public void setPresupuestoElegido(Presupuesto presupuesto) {
+		this.presupuestoElegido = presupuesto;
+	}
+	
+	public void agregarRevisor(Usuario revisorNuevo) {
+		this.revisores.add(revisorNuevo);
+	}
+	//---------------------------------------------------------------------------------------------------
+	
 }

@@ -25,7 +25,7 @@ public class Presupuesto {
 	@Embedded
 	private DocumentoComercial documentoComercial;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 	

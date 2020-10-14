@@ -7,11 +7,12 @@ import model.OperacionDeEgreso;
 
 
 @Entity
-@DiscriminatorValue("cantidad_de_presupuestos_suficiente")
+//@DiscriminatorValue("cantidad_de_presupuestos_suficiente")
+@DiscriminatorValue("CANT_PRESUPUESTOS")
 public class ValidarQueTengaLaSuficienteCantidadDePresupuestos extends ValidacionDeOperaciones {
 
 	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
-		return operacion.cantidadDePresupuestos() >= operacion.presupuestosMinimos;
+		return operacion.cantidadDePresupuestos() >= operacion.getPresupuestosMinimos();
 	}
 
 }

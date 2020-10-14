@@ -22,13 +22,17 @@ public final class RepositorioCompras {
 		return INSTANCE;
 	}
 	
-	public void persistirCompra(OperacionDeEgreso compra) {
+	public void agregarCompra(OperacionDeEgreso compra) {
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		 
+		em.getTransaction().begin();
 		em.persist(compra);
+		em.getTransaction().commit();
+		
 	}
 	
 	public void agregarCompras(List<OperacionDeEgreso> compras){
-		compras.stream().forEach(compra -> this.persistirCompra(compra));
+		compras.stream().forEach(compra -> this.agregarCompra(compra));
 	}
 	
 	public List<OperacionDeEgreso> obtenerTodasLasOperaciones(){
@@ -45,8 +49,20 @@ public final class RepositorioCompras {
 		return compras;
 	}
 	
-	public void actualizarOperaciones() {
-		//TODO - Ver como hacemos esto 
+	public void actualizarCompra(OperacionDeEgreso compra) {
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		 
+		em.getTransaction().begin();
+		em.merge(compra);
+		em.getTransaction().commit();
+	}
+	
+	public void eliminarCompra(OperacionDeEgreso compra) {
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		 
+		em.getTransaction().begin();
+		em.remove(compra);
+		em.getTransaction().commit();
 	}
 	
 }

@@ -25,11 +25,6 @@ public abstract class Entidad {
 	@JoinColumn(name = "entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
 	
-	//Necesario para TestEtiquetas
-	public List<OperacionDeEgreso> getEgresos() {
-		return egresos;
-	}
-
 	@ManyToOne
 	@JoinColumn(name = "categoria_entidad", referencedColumnName = "id_categoria_entidad")
 	public CategoriaEntidad categoriaEntidad;
@@ -39,16 +34,17 @@ public abstract class Entidad {
 	}
 	
 	public List<OperacionDeEgreso> egresosConEtiqueta(EtiquetaOperacion etiqueta) {
-		return egresos.stream().filter(egreso -> egreso.etiquetas.stream().anyMatch(eti -> eti.texto.equals(etiqueta.texto))).collect(Collectors.toList());
+		return egresos.stream().filter(egreso -> egreso.getEtiquetas().stream().anyMatch(eti -> eti.texto.equals(etiqueta.texto))).collect(Collectors.toList());
 	}
 	
+	/*
 	public BigDecimal gastosDeEtiqueta(EtiquetaOperacion etiqueta) {
 		return this.egresosConEtiqueta(etiqueta).stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 	
 	public BigDecimal gastosTotales() {
 		return this.egresos.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
-	}
+	}*/
 	
 	public void setCategoriaEntidad(CategoriaEntidad categoriaEntidad) {
 		this.categoriaEntidad=categoriaEntidad;
