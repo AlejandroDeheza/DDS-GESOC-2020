@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -147,9 +149,12 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		 
 		em.getTransaction().begin();
 		//em.persist(usuario);
-		Usuario usuario = em.find(Usuario.class,Long.valueOf(1));
-		usuario.setUsername("Jorgelinooooo");
-		em.merge(usuario);
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<Usuario> usuarios = session.createQuery("FROM Usuario WHERE username = 'Jorgelinooooo'").list();
+		Usuario u = usuarios.get(0);
+		u.setUsername("Mario");
+		em.merge(u);
 		
 		em.getTransaction().commit();
 		
