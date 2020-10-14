@@ -1,10 +1,14 @@
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.spy;
 
 import model.*;
 import organizacion.*;
@@ -30,19 +34,23 @@ public class TestsEtiquetas {
 		return ListaItems;
 	}
 	
-	public OperacionDeEgreso crearOperacionDeEgreso(Double valorA, Double valorB, Double valorC) {
+	/*public OperacionDeEgreso crearOperacionDeEgreso(Double valorA, Double valorB, Double valorC) {
 		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC));
-	}
+	}*/
 	
 	public EntidadBase armarEntidadBase() {
-		EntidadBase entidadBase = new EntidadBase();
+		EntidadBase entidadBase = spy(EntidadBase.class);
 		
-		OperacionDeEgreso operacion1 = crearOperacionDeEgreso(10.0,20.0,30.0);
+		/*OperacionDeEgreso operacion1 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion1.agregarEtiqueta(new EtiquetaOperacion("A"));
 		OperacionDeEgreso operacion2 = crearOperacionDeEgreso(10.0,20.0,30.0);
 		operacion2.agregarEtiqueta(new EtiquetaOperacion("B"));
 		OperacionDeEgreso operacion3 = crearOperacionDeEgreso(5.0,10.0,20.0);
-		operacion3.agregarEtiqueta(new EtiquetaOperacion("A"));
+		operacion3.agregarEtiqueta(new EtiquetaOperacion("A"));*/
+		
+		OperacionDeEgreso operacion1 = Mockito.mock(OperacionDeEgreso.class);
+		OperacionDeEgreso operacion2 = Mockito.mock(OperacionDeEgreso.class);
+		OperacionDeEgreso operacion3 = Mockito.mock(OperacionDeEgreso.class);
 		
 		//entidadBase.setCategoriaEntidad(new CategoriaEntidad(null,"CATEGORIA_SIN_VALIDACIONES"));
 		
@@ -63,7 +71,10 @@ public class TestsEtiquetas {
 	
 	@Test
 	public void seCalculaElGastoGeneradoPorLosEgresosDeUnaEntidadQueTienenCiertaEtiqueta() {
-		Assert.assertEquals(entidad.gastosDeEtiqueta(new EtiquetaOperacion("a")),new BigDecimal(95));
+		entidad.egresos.stream().forEach(egreso -> Mockito.when(egreso.valorTotal()).thenReturn(new BigDecimal(30.0)));
+		Mockito.doReturn(entidad.egresos).when(entidad.egresosConEtiqueta(new EtiquetaOperacion("a")));
+		
+		Assert.assertEquals(entidad.gastosDeEtiqueta(new EtiquetaOperacion("a")),new BigDecimal(90));
 	}
 
 }

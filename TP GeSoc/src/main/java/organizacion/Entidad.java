@@ -25,6 +25,11 @@ public abstract class Entidad {
 	@JoinColumn(name = "entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
 	
+	//Necesario para TestEtiquetas
+	public List<OperacionDeEgreso> getEgresos() {
+		return egresos;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "categoria_entidad", referencedColumnName = "id_categoria_entidad")
 	public CategoriaEntidad categoriaEntidad;

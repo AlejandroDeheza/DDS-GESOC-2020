@@ -96,6 +96,7 @@ public class OperacionDeEgreso {
 		this.items = items;
 		validacionesVigentes=validaciones;
 	}
+	
 	public OperacionDeEgreso(List<Item> items, DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, 
 			IDMedioDePago medio, Proveedor proveedor, List<Presupuesto> presupuestos,
 			List<Usuario> revisores,List<ValidacionDeOperaciones> validaciones) {
