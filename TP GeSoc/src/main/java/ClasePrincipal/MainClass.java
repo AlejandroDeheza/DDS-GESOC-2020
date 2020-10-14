@@ -5,25 +5,15 @@ import java.util.concurrent.*;
 
 import model.*;
 import repositorios.RepositorioCompras;
-import validacionesOperaciones.ValidadorDeCompras;
+import validacionesOperaciones.ValidadorDeOperaciones;
 
-public class MainClass implements Runnable{
+public class MainClass{
 	
-	public void run() {
-		
-		System.out.println("Ejecutando validacion de compras...");
-		ValidadorDeCompras validador = new ValidadorDeCompras();
-		validador.validarComprasPendientes();
-	    System.out.println("Compras validadas.\n");
-	}
-
 	public static void main(String[] args) {
-
 		ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-		Runnable tareaAEjecutar = new MainClass();
+		Runnable tareaAEjecutar = new ValidadorDeOperaciones();
 		int delayInicial = 5;
-		int delayPeriodico = 5;
+		int delayPeriodico = 30;
 		scheduler.scheduleAtFixedRate(tareaAEjecutar, delayInicial, delayPeriodico,TimeUnit.SECONDS);
-		
 	}
 }

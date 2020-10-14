@@ -10,7 +10,7 @@ import model.OperacionDeEgreso;
 @DiscriminatorValue("PRES_MAS_BARATO")
 public class ValidarQueSeHayaElegidoElPresupuestoMasBarato extends ValidacionDeOperaciones{
 	
-	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
+	public boolean operacionValida(OperacionDeEgreso operacion) {
 		return operacion.getPresupuestosMinimos()==0 || operacion.menorPrecioDePresupuestos().equals(operacion.valorTotalDelPresupuestoElegido());
 	}
 

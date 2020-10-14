@@ -16,7 +16,8 @@ public class DocumentoComercial {
 	@Column(name = "tipo_documento")
 	private TipoDocumentoComercial tipoDoc;
 	
-	public DocumentoComercial(TipoDocumentoComercial tipoDoc){
+	public DocumentoComercial(Long id, TipoDocumentoComercial tipoDoc){
+		this.id = id;
 		this.tipoDoc=tipoDoc;
 	}
 	

@@ -114,7 +114,7 @@ public class OperacionDeEgreso {
 	}
 	
 	public boolean esValida() {
-		return validacionesVigentes.stream().allMatch(validacion -> validacion.pasaLaValidacion(this));
+		return validacionesVigentes.stream().allMatch(validacion -> validacion.operacionValida(this));
 	}
 	
 	public void notificarRevisores(String mensaje) {

@@ -95,7 +95,7 @@ public class PersistenceTests extends AbstractPersistenceTest implements WithGlo
 	public void updateEstadoOperacion() {
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 						
-		RepositorioCompras.instance().agregarNuevaCompra(operacion1);
+		RepositorioCompras.instance().agregarCompra(operacion1);
 				
 		Long idDeCompra = operacion1.getId();
 		//TODO: validarComprasPendientes tira PersistenObjectException: detached entity passed to persist: model.OperacionDeEgreso

@@ -60,7 +60,7 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		
 	}
 	public Presupuesto crearPresupuesto(List<Item> items) {
-		DocumentoComercial documento = new DocumentoComercial(TipoDocumentoComercial.FACTURA);
+		DocumentoComercial documento = new DocumentoComercial(Long.valueOf(5),TipoDocumentoComercial.FACTURA);
 		Proveedor proveedor = crearProveedor();
 		return new Presupuesto(items,documento,proveedor);
 	}
@@ -73,11 +73,10 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		return presupuestos;
 	}
 	
-	
 	public Usuario crearUsuario(String username) {
 		return new Usuario(username, TipoUsuario.ESTANDAR, "123456",  "asd");
 	}
-	
+
 	public List<Usuario> crearLista3Usuarios(String user1, String user2, String user3){
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios.add(crearUsuario(user1));
@@ -122,41 +121,86 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 				 int presupuestosMinimos,
 				 EstadoOperacion estado) {*/
 
-		/*List<Presupuesto> listaPresupuestos = new ArrayList<>();
+		List<Presupuesto> listaPresupuestos = new ArrayList<>();
 		Presupuesto presupuesto = crearPresupuesto(crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)));
 		listaPresupuestos.add(presupuesto);
 		
-		OperacionDeEgreso operacionNueva = new OperacionDeEgreso(
+		OperacionDeEgreso operacion1 = new OperacionDeEgreso(
 				crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)),
-				new DocumentoComercial(TipoDocumentoComercial.FACTURA),
+				new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
 				LocalDateTime.now(),
 				IDMedioDePago.ACCOUNT_MONEY,
 				crearProveedor(),
 				listaPresupuestos,
 				presupuesto,
-				crearLista3Usuarios("Pepe","Maria","Jose"),
+				crearLista3Usuarios("Pepe","Daniela","Jose"),
+				crearListaValidaciones(),
+				crearListaEtiquetas(),
+				1,
+				EstadoOperacion.PENDIENTE
+				);
+	
+		List<Presupuesto> listaPresupuestos2 = new ArrayList<>();
+		Presupuesto presupuesto2 = crearPresupuesto(crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)));
+		listaPresupuestos2.add(presupuesto2);
+		
+		OperacionDeEgreso operacion2 = new OperacionDeEgreso(
+				crearLista3Items(crearItem("X",20.0), crearItem("X",30.0), crearItem("Y",40.0)),
+				new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
+				LocalDateTime.now(),
+				IDMedioDePago.AMEX,
+				crearProveedor(),
+				listaPresupuestos2,
+				presupuesto2,
+				crearLista3Usuarios("Pepe","Daniela","Jose"),
 				crearListaValidaciones(),
 				crearListaEtiquetas(),
 				1,
 				EstadoOperacion.PENDIENTE
 				);
 		
-		RepositorioCompras.instance().persistirCompra(operacionNueva);*/
+		
+		List<Presupuesto> listaPresupuestos3 = new ArrayList<>();
+		Presupuesto presupuesto3 = crearPresupuesto(crearLista3Items(crearItem("Z",30.0), crearItem("X",30.0), crearItem("Y",40.0)));
+		Presupuesto presupuesto4 = crearPresupuesto(crearLista3Items(crearItem("Z",40.0), crearItem("X",30.0), crearItem("Y",40.0)));
+		listaPresupuestos3.add(presupuesto3);
+		listaPresupuestos3.add(presupuesto4);
+		
+		OperacionDeEgreso operacion3 = new OperacionDeEgreso(
+				crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)),
+				new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
+				LocalDateTime.now(),
+				IDMedioDePago.ARGENCARD,
+				crearProveedor(),
+				listaPresupuestos3,
+				presupuesto4,
+				crearLista3Usuarios("Pepe","Daniela","Jose"),
+				crearListaValidaciones(),
+				crearListaEtiquetas(),
+				1,
+				EstadoOperacion.PENDIENTE
+				);
+		
+		RepositorioCompras.instance().agregarCompra(operacion1);
+
+		RepositorioCompras.instance().agregarCompra(operacion2);
+	
+		RepositorioCompras.instance().agregarCompra(operacion3);
 		
 		//Usuario usuario = crearUsuario("Jorge");
-		
+	    /*	
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 		 
 		em.getTransaction().begin();
 		//em.persist(usuario);
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
-		List<Usuario> usuarios = session.createQuery("FROM Usuario WHERE username = 'Jorgelinooooo'").list();
+		List<Usuario> usuarios = session.createQuery("FROM Usuario WHERE username = 'Mario'").list();
 		Usuario u = usuarios.get(0);
-		u.setUsername("Mario");
+		u.setUsername("Jorge");
 		em.merge(u);
 		
-		em.getTransaction().commit();
+		em.getTransaction().commit();*/
 		
 		
 		

@@ -23,6 +23,6 @@ public abstract class ValidacionDeOperaciones {
 	private Long id;
 	
 	
-	public abstract boolean pasaLaValidacion(OperacionDeEgreso operacion);
+	public abstract boolean operacionValida(OperacionDeEgreso operacion);
 
 }

@@ -11,7 +11,7 @@ import model.OperacionDeEgreso;
 @DiscriminatorValue("CANT_PRESUPUESTOS")
 public class ValidarQueTengaLaSuficienteCantidadDePresupuestos extends ValidacionDeOperaciones {
 
-	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
+	public boolean operacionValida(OperacionDeEgreso operacion) {
 		return operacion.cantidadDePresupuestos() >= operacion.getPresupuestosMinimos();
 	}
 

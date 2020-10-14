@@ -11,7 +11,7 @@ import model.OperacionDeEgreso;
 @DiscriminatorValue("CONTIENE_ITEMS")
 public class ValidarQueLaOperacionContengaTodosLosItems extends ValidacionDeOperaciones {
 	
-	public boolean pasaLaValidacion(OperacionDeEgreso operacion) {
+	public boolean operacionValida(OperacionDeEgreso operacion) {
 		return operacion.getPresupuestosMinimos() == 0 || operacion.contieneItemsDelPresupuesto(operacion.getPresupuestoElegido());
 	}
 
