@@ -37,14 +37,14 @@ public abstract class Entidad {
 		return egresos.stream().filter(egreso -> egreso.getEtiquetas().stream().anyMatch(eti -> eti.texto.equals(etiqueta.texto))).collect(Collectors.toList());
 	}
 	
-	/*
+	
 	public BigDecimal gastosDeEtiqueta(EtiquetaOperacion etiqueta) {
 		return this.egresosConEtiqueta(etiqueta).stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
 	
 	public BigDecimal gastosTotales() {
 		return this.egresos.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
-	}*/
+	}
 	
 	public void setCategoriaEntidad(CategoriaEntidad categoriaEntidad) {
 		this.categoriaEntidad=categoriaEntidad;

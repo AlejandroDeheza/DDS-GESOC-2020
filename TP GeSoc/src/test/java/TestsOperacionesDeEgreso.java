@@ -1,12 +1,16 @@
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import model.*;
+import paymentMethods.IDMedioDePago;
+import usuarios.Usuario;
 import validacionesOperaciones.*;
 
 public class TestsOperacionesDeEgreso {
@@ -19,6 +23,7 @@ public class TestsOperacionesDeEgreso {
 	public Moneda crearMoneda(Double monto) {
 		return new Moneda(monto,"ARS");
 	}
+	
 	
 	public List<Item> crearListaDeTresItems(Double valorA, Double valorB, Double valorC){
 		List <Item> ListaItems = new ArrayList<>();
@@ -41,11 +46,45 @@ public class TestsOperacionesDeEgreso {
 	     
 		 presupuesto1 = new Presupuesto(ListaItems, null,  null); //Solo deberiamos hacer esto en un test...
 		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
+
+		 //Mocks
+		 DocumentoComercial mockDocComercial = Mockito.mock(DocumentoComercial.class);
+		 //LocalDate mockFechaOperacion = Mockito.mock(LocalDate.class);
+		 //IDMedioDePago mockMedio = Mockito.mock(IDMedioDePago.class);
+		 Proveedor mockProveedor = Mockito.mock(Proveedor.class);
 		 
-		 operacion1 = new OperacionDeEgreso(ListaItems2);
-		 operacion1.agregarNuevoPresupuesto(ListaItems, null, null);
-		 operacion1.agregarNuevoPresupuesto(ListaItems3, null, null);
+		 Usuario mockUsuario = Mockito.mock(Usuario.class);
+		 List<Usuario> mockRevisores = new ArrayList<Usuario>();
+		 mockRevisores.add(mockUsuario);
+		 
+		 ValidarQueLaOperacionContengaTodosLosItems validacion = new ValidarQueLaOperacionContengaTodosLosItems();
+		 List<ValidacionDeOperaciones> listaValidacionesParaConstructor = new ArrayList<ValidacionDeOperaciones>();
+		 listaValidacionesParaConstructor.add(validacion);
+		 
+		 EtiquetaOperacion etiqueta = new EtiquetaOperacion("a");
+		 List<EtiquetaOperacion> listaEtiquetasParaConstructor = new ArrayList<EtiquetaOperacion>();
+		 listaEtiquetasParaConstructor.add(etiqueta);
+		 
+		 operacion1 = new OperacionDeEgreso(ListaItems2,
+				 							null,
+				 							null,
+				 							null,
+				 							null,
+				 							new ArrayList<Presupuesto>(),
+				 							null,
+				 							null,
+				 							new ArrayList<ValidacionDeOperaciones>(),
+				 							new ArrayList<EtiquetaOperacion>(),
+				 							1,
+				 							EstadoOperacion.PENDIENTE);
+		 
+		 operacion1.agregarNuevoPresupuesto(presupuesto1);
+		 operacion1.setPresupuestoElegido(presupuesto1);
+		 //operacion1.agregarNuevoPresupuesto(ListaItems3, null, null);
 	}
+	
+	//TODO: Nico | Consultar con grupo si las validaciones se corren desde adentro de la OpDeEgreso
+	//             o desde afuera.
 	
 	@Test
 	public void elValorTotalDelPresupuestoEsLaSumaDelValorDeSusItems() {
@@ -69,6 +108,7 @@ public class TestsOperacionesDeEgreso {
 		Assert.assertTrue(validacion.operacionValida(operacion1));
 	}
 	
+	//Nico | Revisar este test luego de resolver el TODO anterior.
 	@Test
 	public void laOperacionEsValidaSiContemplaTodasLasValidaciones() {
 		Assert.assertTrue(operacion1.esValida());

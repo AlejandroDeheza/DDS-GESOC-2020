@@ -40,7 +40,6 @@ public class CategoriaEntidad {
 	}
 	
 	public void agregarNuevoEgreso(Entidad entidad, OperacionDeEgreso egreso) {
-		System.out.println(comportamientos.size());
 		comportamientos.forEach(c -> c.alAgregarEgreso(entidad, egreso));
 		
 		entidad.egresos.add(egreso);

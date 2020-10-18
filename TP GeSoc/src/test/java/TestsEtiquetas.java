@@ -71,10 +71,12 @@ public class TestsEtiquetas {
 	
 	@Test
 	public void seCalculaElGastoGeneradoPorLosEgresosDeUnaEntidadQueTienenCiertaEtiqueta() {
-		entidad.egresos.stream().forEach(egreso -> Mockito.when(egreso.valorTotal()).thenReturn(new BigDecimal(30.0)));
-		Mockito.doReturn(entidad.egresos).when(entidad.egresosConEtiqueta(new EtiquetaOperacion("a")));
+		EtiquetaOperacion etiquetaPrueba = new EtiquetaOperacion("a");
 		
-		Assert.assertEquals(entidad.gastosDeEtiqueta(new EtiquetaOperacion("a")),new BigDecimal(90));
+		entidad.egresos.stream().forEach(egreso -> Mockito.when(egreso.valorTotal()).thenReturn(new BigDecimal(30.0)));
+		Mockito.doReturn(entidad.egresos).when(entidad).egresosConEtiqueta(etiquetaPrueba);
+		
+		Assert.assertEquals(new BigDecimal(90),entidad.gastosDeEtiqueta(etiquetaPrueba));
 	}
 
 }

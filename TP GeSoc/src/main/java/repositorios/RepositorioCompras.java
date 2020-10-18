@@ -22,16 +22,6 @@ public final class RepositorioCompras {
 		return INSTANCE;
 	}
 	
-	public void agregarCompra(OperacionDeEgreso compra) {
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		 
-		em.getTransaction().begin();
-		em.persist(compra);
-		em.getTransaction().commit();
-		//em.close();
-		
-	}
-	
 	public void agregarCompras(List<OperacionDeEgreso> compras){
 		compras.stream().forEach(compra -> this.agregarCompra(compra));
 	}
@@ -52,6 +42,17 @@ public final class RepositorioCompras {
 		//sessionFactory.close();
 		//session.close();
 		return compras;
+	}
+	
+
+	public void agregarCompra(OperacionDeEgreso compra) {
+		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
+		
+		em.getTransaction().begin();
+		em.persist(compra);
+		em.getTransaction().commit();
+		//em.close();
+		
 	}
 	
 	public void actualizarCompra(OperacionDeEgreso compra) {
