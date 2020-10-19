@@ -65,7 +65,7 @@ public class OperacionDeEgreso {
 	private List<Usuario> revisores = new ArrayList<>();
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "operacion_asociadas")
+	@JoinColumn(name = "operacion_asociada")
 	private List<ValidacionDeOperaciones> validacionesVigentes = new ArrayList<>();
 	
 	@ElementCollection

@@ -20,7 +20,7 @@ public class ValidadorDeOperaciones implements Runnable {
 		List<OperacionDeEgreso> comprasPendientes = RepositorioCompras.instance().obtenerOperaciones("estado = 'PENDIENTE'");
 		
 		comprasPendientes.stream().forEach(compra -> this.validarCompra(compra));
-	
+		
 	}
 	
 	public void validarCompra(OperacionDeEgreso compra) {
@@ -35,6 +35,7 @@ public class ValidadorDeOperaciones implements Runnable {
 		}
 		
 		RepositorioCompras.instance().actualizarCompra(compra);
+		
 	}
 	
 	

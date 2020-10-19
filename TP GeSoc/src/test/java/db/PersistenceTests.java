@@ -57,7 +57,7 @@ public class PersistenceTests extends AbstractPersistenceTest implements WithGlo
 		return ListaItems;
 	}
 
-	@Before
+	/*@Before
 	public void init() {
 	     ListaItems = crearListaDeTresItems(20.0,30.0,40.0);
 	     ListaItems2 = crearListaDeTresItems(20.0,30.0,40.0);
@@ -68,7 +68,7 @@ public class PersistenceTests extends AbstractPersistenceTest implements WithGlo
 		 operacion1 = new OperacionDeEgreso(ListaItems2);
 		 operacion1.agregarNuevoPresupuesto(ListaItems, null, null);
 		 operacion1.agregarNuevoPresupuesto(ListaItems3, null, null);
-	}
+	}*/
 	
 	/*@Test
 	public void contextUp() {
@@ -91,7 +91,7 @@ public class PersistenceTests extends AbstractPersistenceTest implements WithGlo
 
 	}
 	*/
-	@Test
+	/*@Test
 	public void updateEstadoOperacion() {
 		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 						
@@ -104,5 +104,5 @@ public class PersistenceTests extends AbstractPersistenceTest implements WithGlo
 		OperacionDeEgreso operacion2 = em.find(OperacionDeEgreso.class, idDeCompra);
 		
 		Assert.assertEquals(EstadoOperacion.APROBADA, operacion2.getEstado());	
-	}
+	}*/
 }

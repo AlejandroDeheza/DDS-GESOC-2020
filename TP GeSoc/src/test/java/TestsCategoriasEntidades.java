@@ -175,8 +175,9 @@ public class TestsCategoriasEntidades {
 	
 	
 	//TODO: Nico | Ver con el grupo.
-	/*
-	@Test(expected = LaCantidadDeEgresosSuperaElMontoMaximoException.class)
+	//La idea era que el comportamiento de una entidad cambie cuando cambiamos el comportamiento de la categoria que tiene asociada
+	
+	/*@Test(expected = LaCantidadDeEgresosSuperaElMontoMaximoException.class)
 	public void elComportamientoDeUnaEntidadVariaAlModificarSuCategoria() {	
 		OperacionDeEgreso operacion4 = Mockito.mock(OperacionDeEgreso.class);
 		OperacionDeEgreso operacion5 = Mockito.mock(OperacionDeEgreso.class);

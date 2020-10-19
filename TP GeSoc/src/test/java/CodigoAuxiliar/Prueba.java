@@ -202,8 +202,5 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		
 		em.getTransaction().commit();*/
 		
-		
-		
-		
 	}
 }
