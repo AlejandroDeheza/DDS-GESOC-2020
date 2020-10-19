@@ -5,11 +5,15 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import exceptions.*;
 import model.*;
 import organizacion.*;
 import repositorios.RepositorioCompras;
+import usuarios.Usuario;
+import validacionesOperaciones.ValidacionDeOperaciones;
+import validacionesOperaciones.ValidarQueLaOperacionContengaTodosLosItems;
 
 public class TestsRepositorioDeCompras {
 	
@@ -50,7 +54,46 @@ public class TestsRepositorioDeCompras {
 	}
 	
 	public OperacionDeEgreso crearOperacionDeEgreso(Double valorA, Double valorB, Double valorC) {
-		return new OperacionDeEgreso(crearListaDeTresItems(valorA,valorB,valorC));
+		OperacionDeEgreso operacion;
+		
+		List<Item> ListaItems = crearListaDeTresItems(valorA,valorB,valorC);
+	     
+		 Presupuesto presupuesto1 = new Presupuesto(ListaItems, null,  null); //Solo deberiamos hacer esto en un test...
+		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
+
+		 //Mocks
+		 DocumentoComercial mockDocComercial = Mockito.mock(DocumentoComercial.class);
+		 Proveedor mockProveedor = Mockito.mock(Proveedor.class);
+		 
+		 Usuario mockUsuario = Mockito.mock(Usuario.class);
+		 List<Usuario> mockRevisores = new ArrayList<Usuario>();
+		 mockRevisores.add(mockUsuario);
+		 
+		 ValidarQueLaOperacionContengaTodosLosItems validacion = new ValidarQueLaOperacionContengaTodosLosItems();
+		 List<ValidacionDeOperaciones> listaValidacionesParaConstructor = new ArrayList<ValidacionDeOperaciones>();
+		 listaValidacionesParaConstructor.add(validacion);
+		 
+		 EtiquetaOperacion etiqueta = new EtiquetaOperacion("a");
+		 List<EtiquetaOperacion> listaEtiquetasParaConstructor = new ArrayList<EtiquetaOperacion>();
+		 listaEtiquetasParaConstructor.add(etiqueta);
+		 
+		 operacion = new OperacionDeEgreso(ListaItems,
+				 							null,
+				 							null,
+				 							null,
+				 							null,
+				 							new ArrayList<Presupuesto>(),
+				 							null,
+				 							null,
+				 							new ArrayList<ValidacionDeOperaciones>(),
+				 							new ArrayList<EtiquetaOperacion>(),
+				 							1,
+				 							EstadoOperacion.PENDIENTE);
+		 
+		 operacion.agregarNuevoPresupuesto(presupuesto1);
+		 operacion.setPresupuestoElegido(presupuesto1);
+		 
+		 return operacion;
 	}
 	
 	public Presupuesto crearPresupuesto(List<Item> listaDeItems) {
@@ -61,38 +104,49 @@ public class TestsRepositorioDeCompras {
 	public void init() {
 		
 		operacionValida1 = crearOperacionDeEgreso(5.0,10.0,15.0);
-		operacionValida1.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionValida1.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
 		
 		operacionValida2 = crearOperacionDeEgreso(5.0,10.0,15.0);
-		operacionValida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
-		operacionValida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
+		operacionValida2.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionValida2.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
 		operacionInvalida1 = crearOperacionDeEgreso(5.0,10.0,15.0);
 		
 		operacionInvalida2 = crearOperacionDeEgreso(5.0,10.0,16.0);
-		operacionInvalida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
-		operacionInvalida2.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
+		operacionInvalida2.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionInvalida2.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
-		operacionInvalida3 = new OperacionDeEgreso(crearListaDeOtrosTresItems(5.0,10.0,15.0));
-		operacionInvalida3.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
-		operacionInvalida3.presupuestos.add(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
+		operacionInvalida3 = crearOperacionDeEgreso(5.0,10.0,15.0);
+		operacionInvalida3.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
+		operacionInvalida3.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
-		RepositorioCompras.instance().comprasPendientes.add(operacionInvalida1);
-		RepositorioCompras.instance().comprasPendientes.add(operacionValida1);
-		RepositorioCompras.instance().comprasPendientes.add(operacionInvalida3);
-		RepositorioCompras.instance().comprasPendientes.add(operacionInvalida2);
-		RepositorioCompras.instance().comprasPendientes.add(operacionValida2);
+		RepositorioCompras.instance().agregarCompra(operacionInvalida1);
+		RepositorioCompras.instance().agregarCompra(operacionValida1);
+		RepositorioCompras.instance().agregarCompra(operacionInvalida3);
+		RepositorioCompras.instance().agregarCompra(operacionInvalida2);
+		RepositorioCompras.instance().agregarCompra(operacionValida2);
+		
+		
 
 	}
 	//Comento este test ya que cambio el sistema de validacion.
 	
 //	@Test
-//	public void ejecutarValidacionDeOperaciones() {
+//	public void seApruebanLasOperacionesValidas() {
 //		RepositorioCompras.instance().validarComprasPendientes();
 //		List<OperacionDeEgreso> listaEsperada = new ArrayList<>();
 //		listaEsperada.add(operacionValida1);
 //		listaEsperada.add(operacionValida2);
-//		Assert.assertEquals(RepositorioCompras.instance().comprasAceptadas,listaEsperada);
+//		Assert.assertEquals(RepositorioCompras.instance().obtenerTodasLasOperaciones("estado_operacion = 'ACEPTADA'"),listaEsperada);
+//	}
+	
+//	@Test
+//	public void seRechazanLasOperacionesInvalidas() {
+//		RepositorioCompras.instance().validarComprasPendientes();
+//		List<OperacionDeEgreso> listaEsperada = new ArrayList<>();
+//		listaEsperada.add(operacionInvalida1);
+//		listaEsperada.add(operacionInvalida2);
+//		Assert.assertEquals(RepositorioCompras.instance().obtenerTodasLasOperaciones("estado_operacion = 'RECHAZADA'"),listaEsperada);
 //	}
 
 }
