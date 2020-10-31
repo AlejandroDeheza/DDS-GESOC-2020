@@ -1,0 +1,20 @@
+{{# partial "titulo" }}
+    <title xmlns="http://www.w3.org/1999/html">Gesoc - Login</title>
+{{/partial}}
+
+
+{{# partial "contenido" }}
+
+    <section>
+        <form method="POST" action="/login">
+            <label for="fname">Username:</label><br>
+            <input type="text" placeholder="Ingrese su nombre de usuario"><br>
+            <label for="lname">Password:</label><br>
+            <input type="password" placeholder="Ingrese contraseña"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+{{/partial}}
+
+{{> layout.html.hbs }}
