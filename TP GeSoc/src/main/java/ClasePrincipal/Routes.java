@@ -23,11 +23,11 @@ public class Routes {
 
 		//Consulta sobre objetos
 		Spark.get("/organizaciones", (request, response) -> organizacionController.getOrganizaciones(), engine);
-		Spark.get("/organizaciones/:id", (request, response) -> organizacionController.getOrganizacion(request, response), engine);
-		Spark.get("/organizaciones/:id/entidades", (request, response) -> entidadController.getEntidades(), engine);
-		Spark.get("/organizaciones/:id/entidades/:idEntidad", (request, response) -> entidadController.getEntidad(request,response), engine);
-		Spark.get("/organizaciones/:id/entidades/:idEntidad/operaciones", (request, response) -> operacionController.getOperaciones(), engine);
-		Spark.get("/organizaciones/:id/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
+		Spark.get("/organizaciones/:idOrg", (request, response) -> organizacionController.getOrganizacion(request, response), engine);
+		Spark.get("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.getEntidades(request,response), engine);
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadController.getEntidad(request,response), engine);
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.getOperaciones(request,response), engine);
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
 		Spark.get("/inbox", (request, response) -> usuarioController.getBandejaDeMensajes(request,response),engine);
 
 		//Cuando quieras crear una entidad se te hace un display de las categorias existentes.

@@ -25,6 +25,7 @@ public class Organizacion {
 	public String getDescripcion(){
 		return descripcion;
 	}
+	public Long getId(){return id;}
 	
 	/*
 	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();

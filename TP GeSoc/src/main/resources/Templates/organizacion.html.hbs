@@ -1,0 +1,22 @@
+{{# partial "titulo" }}
+    <title>GESOC - Organizacion</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    {{#organizacion}}
+    <section class="fondo-gris">
+        <h2>Organizacion: {{descripcion}}</h2>
+
+    <h3>Entidades asociadas:
+        <ul>
+        {{#entidades}}
+            <li>{{nombreFicticio}}</li>
+        {{/entidades}}
+        </ul>
+    </h3>
+        <a href="/organizaciones/{{id}}/entidades">"Listado completo"</a>
+    </section>
+    {{/organizacion}}
+{{/partial}}
+
+{{> layout.html.hbs }}

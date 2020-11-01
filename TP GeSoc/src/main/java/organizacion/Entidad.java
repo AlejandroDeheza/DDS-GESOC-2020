@@ -53,6 +53,10 @@ public abstract class Entidad {
 	public String getNombreFicticio(){
 		return nombreFicticio;
 	}
+
+	public Long getId(){
+		return id;
+	}
 	
 	
 }

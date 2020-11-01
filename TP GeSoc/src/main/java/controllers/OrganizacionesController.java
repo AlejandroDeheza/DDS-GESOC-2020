@@ -1,5 +1,6 @@
 package controllers;
 
+import repositorios.RepositorioEntidades;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
@@ -24,6 +25,11 @@ public class OrganizacionesController {
     }
 
     public ModelAndView getOrganizacion(Request request, Response response) {
-        return null;
+
+        Map<String, Object> modelo = new HashMap<>();
+        modelo.put("organizacion", RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + request.params(":idOrg")));
+        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("id_organizacion = " + request.params(":idOrg")));
+
+        return new ModelAndView(modelo, "organizacion.html.hbs");
     }
 }

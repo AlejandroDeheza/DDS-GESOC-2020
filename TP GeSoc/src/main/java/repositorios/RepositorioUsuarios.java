@@ -35,7 +35,7 @@ public class RepositorioUsuarios implements WithGlobalEntityManager {
     }
 
     public List<Usuario> obtenerUsuarios(String condicion){
-        SessionFactory sessionFactory = entityManager().unwrap(SessionFactory.class);
+        SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
         Session session = sessionFactory.openSession();
         List<Usuario> usuarios = session.createQuery("FROM Usuario WHERE " + condicion).list();
         return usuarios;

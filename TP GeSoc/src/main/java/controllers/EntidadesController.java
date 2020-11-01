@@ -14,12 +14,10 @@ public class EntidadesController {
         return null;
     }
 
-    public ModelAndView getEntidades() {
-
+    public ModelAndView getEntidades(Request request, Response response) {
 
         Map<String, Object> modelo = new HashMap<>();
-        //Obtener del repo las entidades donde el id_organizacion coincida con la organizacion en la que se este
-        modelo.put("entidades", RepositorioEntidades.instance().obtenerTodasLasEntidades());
+        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("id_organizacion = " + request.params(":idOrg") ));
 
         return new ModelAndView(modelo, "entidades.html.hbs");
     }

@@ -12,7 +12,7 @@ import java.util.Map;
 public class OperacionesController {
 
 
-    public ModelAndView getOperaciones() {
+    public ModelAndView getOperaciones(Request request, Response response) {
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las operaciones relacionadas a la entidad actual
         modelo.put("operaciones", RepositorioCompras.instance().obtenerTodasLasOperaciones());

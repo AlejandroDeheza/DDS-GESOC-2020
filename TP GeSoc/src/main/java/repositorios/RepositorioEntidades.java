@@ -30,7 +30,7 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
 	}
 
 	public List<Entidad> obtenerEntidades(String condicion){
-		SessionFactory sessionFactory = entityManager().unwrap(SessionFactory.class);
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<Entidad> entidades = session.createQuery("FROM Entidad WHERE " + condicion).list();
 		return entidades;
