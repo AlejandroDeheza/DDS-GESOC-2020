@@ -30,8 +30,6 @@ public final class RepositorioCompras {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso").list();
-		//sessionFactory.close();
-		//session.close();
 		return compras;
 	}
 	
@@ -39,8 +37,6 @@ public final class RepositorioCompras {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE " + condicion).list();
-		//sessionFactory.close();
-		//session.close();
 		return compras;
 	}
 	
@@ -51,7 +47,6 @@ public final class RepositorioCompras {
 		em.getTransaction().begin();
 		em.persist(compra);
 		em.getTransaction().commit();
-		//em.close();
 		
 	}
 	
@@ -70,7 +65,6 @@ public final class RepositorioCompras {
 		em.getTransaction().begin();
 		em.remove(compra);
 		em.getTransaction().commit();
-		//em.close();
 	}
 	
 }

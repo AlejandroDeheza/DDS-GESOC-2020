@@ -19,7 +19,12 @@ public class Organizacion {
 	private List<Entidad> entidades = new ArrayList<>();
 	
 	private String descripcion;
+
 	public Organizacion() {}
+
+	public String getDescripcion(){
+		return descripcion;
+	}
 	
 	/*
 	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();

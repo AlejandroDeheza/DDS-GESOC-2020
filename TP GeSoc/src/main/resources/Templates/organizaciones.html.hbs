@@ -1,0 +1,24 @@
+{{# partial "titulo" }}
+    <title>GESOC - Organizaciones</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h2>Organizaciones:</h2>
+
+        <form action="/organizaciones" method="GET">
+            Buscar por nombre
+            <input type="text" name="filtro" placeholder="Ingrese el nombre de la organizacion a buscar">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <ul>
+            {{#organizaciones}}
+                <li><a href="organizaciones/{{id}}">{{descripcion}}</a></li>
+            {{/organizaciones}}
+        </ul>
+
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}
