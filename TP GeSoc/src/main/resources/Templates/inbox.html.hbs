@@ -1,0 +1,24 @@
+{{# partial "titulo" }}
+    <title>GESOC - Mensajes</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h2>Mensajes:</h2>
+
+        <form action="/inbox" method="GET">
+            Buscar por palabra clave
+            <input type="text" name="filtro" placeholder="Ingrese palabra clave">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <ul>
+            {{#mensajes}}
+                <li><a href="inbox/{{id}}">{{cuerpo}}</a></li>
+            {{/mensajes}}
+        </ul>
+
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

@@ -12,9 +12,9 @@ import java.util.List;
 
 public class RepositorioOrganizaciones implements WithGlobalEntityManager {
 
-    private static final RepositorioCompras INSTANCE = new RepositorioCompras();
+    private static final RepositorioOrganizaciones INSTANCE = new RepositorioOrganizaciones();
 
-    public static final RepositorioCompras instance() {
+    public static final RepositorioOrganizaciones instance() {
         return INSTANCE;
     }
 

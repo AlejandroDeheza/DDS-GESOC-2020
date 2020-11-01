@@ -1,8 +1,13 @@
 package controllers;
 
+import repositorios.RepositorioOrganizaciones;
+import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UsuariosController {
 
@@ -16,6 +21,11 @@ public class UsuariosController {
     }
 
     public ModelAndView getBandejaDeMensajes(Request request, Response response) {
-        return null;
+
+        Map<String, Object> modelo = new HashMap<>();
+        //Hay que filtrar los usuarios segun el que este logeado
+        modelo.put("mensajes", RepositorioUsuarios.instance().obtenerTodosLosUsuarios());
+
+        return new ModelAndView(modelo, "inbox.html.hbs");
     }
 }

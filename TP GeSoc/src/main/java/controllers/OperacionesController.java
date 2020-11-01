@@ -1,17 +1,23 @@
 package controllers;
 
+import repositorios.RepositorioCompras;
+import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OperacionesController {
 
 
     public ModelAndView getOperaciones() {
-        //Pide al repo las operaciones
-        //Las lista? xd
+        Map<String, Object> modelo = new HashMap<>();
+        //Obtener del repo las operaciones relacionadas a la entidad actual
+        modelo.put("operaciones", RepositorioCompras.instance().obtenerTodasLasOperaciones());
 
-        return new ModelAndView(null, "");
+        return new ModelAndView(modelo, "operaciones.html.hbs");
     }
 
     public ModelAndView getFormOperaciones(){

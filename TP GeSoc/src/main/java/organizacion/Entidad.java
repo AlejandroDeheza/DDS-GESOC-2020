@@ -49,6 +49,10 @@ public abstract class Entidad {
 	public void setCategoriaEntidad(CategoriaEntidad categoriaEntidad) {
 		this.categoriaEntidad=categoriaEntidad;
 	}
+
+	public String getNombreFicticio(){
+		return nombreFicticio;
+	}
 	
 	
 }

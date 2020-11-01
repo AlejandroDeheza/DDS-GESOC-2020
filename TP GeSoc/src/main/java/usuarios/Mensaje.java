@@ -15,4 +15,8 @@ public class Mensaje {
 	public Mensaje(String cuerpo) {
 		this.cuerpo = cuerpo;
 	}
+
+	public String getCuerpo(){
+		return cuerpo;
+	}
 }
