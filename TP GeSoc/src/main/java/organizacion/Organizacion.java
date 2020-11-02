@@ -26,6 +26,9 @@ public class Organizacion {
 		return descripcion;
 	}
 	public Long getId(){return id;}
+	public void agregarEntidad(Entidad entidad){
+		entidades.add(entidad);
+	}
 	
 	/*
 	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();

@@ -6,6 +6,7 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.Entidad;
 import organizacion.EntidadBase;
 import organizacion.EntidadJuridica;
+import organizacion.Organizacion;
 import repositorios.RepositorioEntidades;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
@@ -18,7 +19,9 @@ import java.util.Map;
 public class EntidadesController implements WithGlobalEntityManager, TransactionalOps {
 
     public ModelAndView getFormEntidades(Request request, Response response) {
-        return new ModelAndView(null, "formulario-creacion-entidades.html.hbs");
+        Map<String, Object> modelo = new HashMap<>();
+        modelo.put("organizacion",request.params(":idOrg") );
+        return new ModelAndView(modelo, "formulario-creacion-entidades.html.hbs");
     }
 
     public ModelAndView getEntidades(Request request, Response response) {
@@ -37,10 +40,11 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
 
     public ModelAndView crearEntidad(Request request, Response response){
-        System.out.println("ACA");
+        Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
         String nombre = request.queryParams("nombre");
         String tipo = request.queryParams("tipo");
         String categoria  = request.queryParams("categoria");
+        Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
 
         Entidad nuevaEntidad;
 
@@ -56,9 +60,11 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
         nuevaEntidad.setNombreFicticio(nombre);
         nuevaEntidad.setCategoriaEntidad(nuevaCategoria);
+        organizacion.agregarEntidad(nuevaEntidad);
 
         withTransaction(() ->{
             RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
+            RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
         });
 
         /*Usuario usuario = getUsuarioLogueado(request);
@@ -73,7 +79,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             usuario.agregarConsultora(nueva);
         });*/
 
-        response.redirect("/organizacion/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
         return null;
     }
 }

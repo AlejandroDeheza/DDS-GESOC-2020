@@ -42,7 +42,7 @@ public class Routes {
 
 		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(), engine);
 
-		Spark.post("/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 
 		//TODO -- Hacer el handleSession cuando Roly suba lo suyo.
 		Spark.post("/login", (request, response) -> usuarioController.handleSesion(), engine);

@@ -39,6 +39,9 @@ public class RepositorioOrganizaciones implements WithGlobalEntityManager {
         entityManager().persist(organizacion);
     }
 
+    public void actualizarOrganizacion(Organizacion organizacion) {
+        entityManager().merge(organizacion);
+    }
 
     public void eliminarOrganizacion(Organizacion organizacion) {
         entityManager().remove(organizacion);

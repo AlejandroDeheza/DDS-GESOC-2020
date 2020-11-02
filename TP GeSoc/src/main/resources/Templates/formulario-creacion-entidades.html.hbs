@@ -3,9 +3,10 @@
 {{/partial}}
 
 {{# partial "contenido" }}
+
     <section class="fondo-gris">
         <h2>Nueva entidad</h2>
-        <form action="/entidades" method="POST">
+        <form action="/organizaciones/{{organizacion}}/entidades" method="POST">
             <div class="campo">
                 <span class="nombre-campo">Nombre ficticio:</span><input type="text" name="nombre" placeholder="Ingrese nombre">
             </div>
