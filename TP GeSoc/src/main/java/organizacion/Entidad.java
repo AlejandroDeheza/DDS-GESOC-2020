@@ -25,7 +25,7 @@ public abstract class Entidad {
 	@JoinColumn(name = "entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
 	
-	@ManyToOne
+	@ManyToOne(cascade =  {CascadeType.ALL})
 	@JoinColumn(name = "categoria_entidad", referencedColumnName = "id_categoria_entidad")
 	public CategoriaEntidad categoriaEntidad;
 	
@@ -57,6 +57,8 @@ public abstract class Entidad {
 	public Long getId(){
 		return id;
 	}
-	
-	
+
+	public void setNombreFicticio(String nombreFicticio) {
+		this.nombreFicticio = nombreFicticio;
+	}
 }

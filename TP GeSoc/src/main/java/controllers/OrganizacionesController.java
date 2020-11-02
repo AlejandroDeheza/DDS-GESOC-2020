@@ -32,4 +32,6 @@ public class OrganizacionesController {
 
         return new ModelAndView(modelo, "organizacion.html.hbs");
     }
+
+
 }

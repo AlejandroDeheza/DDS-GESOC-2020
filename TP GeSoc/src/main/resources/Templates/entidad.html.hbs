@@ -1,0 +1,13 @@
+{{# partial "titulo" }}
+    <title>GESOC - Entidad</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        {{#entidad}}
+        <h2>Entidad:{{nombreFicticio}}</h2>
+        {{/entidad}}
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

@@ -1,0 +1,23 @@
+{{# partial "titulo" }}
+    <title>Consultorea.me - Nueva entidad</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h2>Nueva entidad</h2>
+        <form action="/entidades" method="POST">
+            <div class="campo">
+                <span class="nombre-campo">Nombre ficticio:</span><input type="text" name="nombre" placeholder="Ingrese nombre">
+            </div>
+            <div class="campo">
+                <span class="nombre-campo">Tipo (base/juridica)</span><input type="text" name="tipo" >
+            </div>
+            <div class="campo">
+                <span class="nombre-campo">Categoria</span><input type="text" name="categoria" >
+            </div>
+            <input type="submit" value="Crear entidad">
+        </form>
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

@@ -24,20 +24,25 @@ public class Routes {
 		//Consulta sobre objetos
 		Spark.get("/organizaciones", (request, response) -> organizacionController.getOrganizaciones(), engine);
 		Spark.get("/organizaciones/:idOrg", (request, response) -> organizacionController.getOrganizacion(request, response), engine);
+
 		Spark.get("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.getEntidades(request,response), engine);
+		Spark.get("/organizaciones/:idOrg/entidades/nueva", (request, response) -> entidadController.getFormEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadController.getEntidad(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.getOperaciones(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
 		Spark.get("/inbox", (request, response) -> usuarioController.getBandejaDeMensajes(request,response),engine);
+
 
 		//Cuando quieras crear una entidad se te hace un display de las categorias existentes.
 		//Si queres agregar una categoria habria un boton de agregar.
 
 
 		//Creacion de objetos
-		Spark.get("/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(), engine);
-		Spark.get("/entidades/nueva", (request, response) -> entidadController.getFormEntidades(), engine);
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(), engine);
+
 		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(), engine);
+
+		Spark.post("/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 
 		//TODO -- Hacer el handleSession cuando Roly suba lo suyo.
 		Spark.post("/login", (request, response) -> usuarioController.handleSesion(), engine);

@@ -1,5 +1,11 @@
 package controllers;
 
+import model.CategoriaEntidad;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import organizacion.Entidad;
+import organizacion.EntidadBase;
+import organizacion.EntidadJuridica;
 import repositorios.RepositorioEntidades;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
@@ -9,9 +15,10 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntidadesController {
-    public ModelAndView getFormEntidades() {
-        return null;
+public class EntidadesController implements WithGlobalEntityManager, TransactionalOps {
+
+    public ModelAndView getFormEntidades(Request request, Response response) {
+        return new ModelAndView(null, "formulario-creacion-entidades.html.hbs");
     }
 
     public ModelAndView getEntidades(Request request, Response response) {
@@ -23,6 +30,50 @@ public class EntidadesController {
     }
 
     public ModelAndView getEntidad(Request request, Response response) {
+        Map<String, Object> modelo = new HashMap<>();
+        modelo.put("entidad", RepositorioEntidades.instance().obtenerEntidades("id_entidad = " + request.params(":idEntidad")));
+        return new ModelAndView(modelo, "entidad.html.hbs");
+    }
+
+
+    public ModelAndView crearEntidad(Request request, Response response){
+        System.out.println("ACA");
+        String nombre = request.queryParams("nombre");
+        String tipo = request.queryParams("tipo");
+        String categoria  = request.queryParams("categoria");
+
+        Entidad nuevaEntidad;
+
+        CategoriaEntidad nuevaCategoria = new CategoriaEntidad();
+        nuevaCategoria.setDescripcion(categoria);
+
+        if(tipo.equals("Base")){
+             nuevaEntidad = new EntidadBase();
+        }
+        else{
+             nuevaEntidad = new EntidadJuridica();
+        }
+
+        nuevaEntidad.setNombreFicticio(nombre);
+        nuevaEntidad.setCategoriaEntidad(nuevaCategoria);
+
+        withTransaction(() ->{
+            RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
+        });
+
+        /*Usuario usuario = getUsuarioLogueado(request);
+
+        if(usuario != null){
+            response.redirect("/login");
+        }*/
+
+       /* Entidad nueva = new Consultora(nombre,cantidadEmpleados);
+        withTransaction(() ->{
+            RepositorioConsultoras.instancia.agregar(nueva);
+            usuario.agregarConsultora(nueva);
+        });*/
+
+        response.redirect("/organizacion/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
         return null;
     }
 }

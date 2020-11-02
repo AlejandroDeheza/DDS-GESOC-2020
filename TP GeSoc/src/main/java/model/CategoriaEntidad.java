@@ -30,6 +30,7 @@ public class CategoriaEntidad {
 	List<Comportamiento> comportamientos = new ArrayList<>();
 	
 	public CategoriaEntidad() {}
+
 	public CategoriaEntidad(List<Comportamiento> comportamientos, String texto){
 		this.comportamientos = comportamientos;
 		this.descripcion = texto.toUpperCase();
@@ -38,7 +39,11 @@ public class CategoriaEntidad {
 	public void setComportamientos(List<Comportamiento> comportamientos) {
 		this.comportamientos=comportamientos;
 	}
-	
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public void agregarNuevoEgreso(Entidad entidad, OperacionDeEgreso egreso) {
 		comportamientos.forEach(c -> c.alAgregarEgreso(entidad, egreso));
 		
