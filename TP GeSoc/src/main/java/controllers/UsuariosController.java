@@ -5,6 +5,8 @@ import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import usuarios.Hasher;
+import usuarios.Usuario;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +18,18 @@ public class UsuariosController {
         return new ModelAndView(null,"login.html.hbs");
     }
 
-    public ModelAndView handleSesion(){
-        return new ModelAndView(null,null);
+    public ModelAndView handleSesion(Request request, Response response){
+
+        String password = request.queryParams("password");
+        String username = request.queryParams("username");
+        Usuario usuario = RepositorioUsuarios.instance().obtenerTodosLosUsuarios().stream()
+                .filter(u -> Hasher.sonCorrespondientes(password,u.getHashedPasswordActual()) && u.getUsername().equals(username)).findFirst().get();
+
+        request.session().attribute("idUsuario", usuario.getId());
+
+        response.redirect("/");
+
+        return null;
     }
 
     public ModelAndView getBandejaDeMensajes(Request request, Response response) {

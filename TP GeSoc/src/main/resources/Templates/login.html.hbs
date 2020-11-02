@@ -1,20 +1,22 @@
 {{# partial "titulo" }}
-    <title xmlns="http://www.w3.org/1999/html">Gesoc - Login</title>
+    <title>Consultorea.me - Login</title>
 {{/partial}}
 
-
 {{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h2>Iniciar Sesión</h2>
 
-    <section>
-        <form method="POST" action="/login">
-            <label for="fname">Username:</label><br>
-            <input type="text" placeholder="Ingrese su nombre de usuario"><br>
-            <label for="lname">Password:</label><br>
-            <input type="password" placeholder="Ingrese contraseña"><br><br>
-            <input type="submit" value="Submit">
+        <form action="/login" method="POST">
+            <div class="campo">
+                <span class="nombre-campo">Nombre de usuario:</span><input type="text" name="username" placeholder="Ingrese nombre de usuario">
+            </div>
+            <div class="campo">
+                <span class="nombre-campo">Contraseña:</span><input type="password" name="password" placeholder="Ingrese contraseña">
+            </div>
+            <input type="submit" value="Iniciar Sesión">
         </form>
-    </section>
 
+    </section>
 {{/partial}}
 
 {{> layout.html.hbs }}

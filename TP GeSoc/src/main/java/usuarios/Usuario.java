@@ -60,6 +60,16 @@ public class Usuario {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getUsername() {
+		return username;
+	}
+
+	public String [] getHashedPasswordActual() {
+		return new String[]{hashedPasswordActual};
+	}
+
+
+
 	public void cambiarContrasenia(String password)
 	{
 		ValidarTodo validador = new ValidarTodo(this.hashedPasswordUsadasConSalt);
@@ -72,5 +82,9 @@ public class Usuario {
 	
 	public void recibirMensaje(Mensaje mensaje) {
 		this.mensajes.add(mensaje);
+	}
+
+	public Long getId() {
+		return id;
 	}
 }

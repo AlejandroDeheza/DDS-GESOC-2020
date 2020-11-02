@@ -1,11 +1,24 @@
 package ClasePrincipal;
 import controllers.*;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import repositorios.RepositorioUsuarios;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+import usuarios.BuilderUsuario;
+import usuarios.TipoUsuario;
+import usuarios.Usuario;
 
-public class Routes {
+public class Routes implements WithGlobalEntityManager, TransactionalOps {
 	public static void main(String[] args) {
 		System.out.println("Iniciando servidor");
+
+		BuilderUsuario builderUsuario = new BuilderUsuario();
+		builderUsuario.setUsername("Goner");
+		builderUsuario.setPassword("LaWeaFome123");
+		builderUsuario.setTipo(TipoUsuario.ADMIN);
+		Usuario nuevoUsuario = builderUsuario.crearUsuario();
+		RepositorioUsuarios.instance().agregarUsuario(nuevoUsuario);
 		 
 		Spark.port(8080);
 		Spark.staticFileLocation("/resources/Public");
@@ -45,7 +58,7 @@ public class Routes {
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 
 		//TODO -- Hacer el handleSession cuando Roly suba lo suyo.
-		Spark.post("/login", (request, response) -> usuarioController.handleSesion(), engine);
+		Spark.post("/login", (request, response) -> usuarioController.handleSesion(request,response), engine);
 	     
 	}
 }
