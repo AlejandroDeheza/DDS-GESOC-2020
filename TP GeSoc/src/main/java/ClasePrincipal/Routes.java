@@ -14,7 +14,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		System.out.println("Iniciando servidor");
 
 		Spark.port(8080);
-		Spark.staticFileLocation("/resources/Public");
+		Spark.staticFileLocation("/public");
 
 		//Lleno la base con datos iniciales
 //		new Bootstrap().run();
