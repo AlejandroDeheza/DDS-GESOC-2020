@@ -18,7 +18,7 @@ public class UsuariosController {
         return new ModelAndView(null,"login.html.hbs");
     }
 
-    public ModelAndView handleSesion(Request request, Response response){
+    public ModelAndView handleSession(Request request, Response response){
 
         String password = request.queryParams("password");
         String username = request.queryParams("username");

@@ -5,9 +5,11 @@ import comportamientoEntidad.PoderAgregarEntidadesBaseAJuridica;
 import model.*;
 import organizacion.*;
 import paymentMethods.IDMedioDePago;
+import repositorios.RepositorioUsuarios;
 import ubicacion.Direccion;
 import ubicacion.DireccionPostal;
 import ubicacion.Ubicacion;
+import usuarios.BuilderUsuario;
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
 import validacionesOperaciones.ValidacionDeOperaciones;
@@ -20,7 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LlenarBase {
+public class Bootstrap {
     public Item crearItem(String descripcion, Double valor) {
         Moneda moneda = new Moneda(valor,"ARS");
         return new Item(moneda, descripcion);
@@ -193,9 +195,18 @@ public class LlenarBase {
         return listaOrganizaciones;
     }
 
-    public void run(String[] args){
-        List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+    private void agregarUsuarios() {
+        BuilderUsuario builderUsuario = new BuilderUsuario();
+        builderUsuario.setUsername("Goner");
+        builderUsuario.setPassword("LaWeaFome123");
+        builderUsuario.setTipo(TipoUsuario.ADMIN);
+        Usuario nuevoUsuario = builderUsuario.crearUsuario();
+        RepositorioUsuarios.instance().agregarUsuario(nuevoUsuario);
+    }
 
+    public void run(){
+        List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+        this.agregarUsuarios();
         //Aca si queremos cargar algo a la base tendriamos q llamar al Repositorio y meter cada cosa ahi.
     }
 }

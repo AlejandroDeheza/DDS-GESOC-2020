@@ -5,8 +5,6 @@ import java.util.List;
 import model.*;
 
 public class Creador {
-	
-	
 	public Moneda crearMoneda(Double monto) {
 		return new Moneda(monto,"ARS");
 	}

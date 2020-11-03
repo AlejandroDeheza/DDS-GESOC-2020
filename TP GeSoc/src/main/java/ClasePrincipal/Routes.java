@@ -13,16 +13,12 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 	public static void main(String[] args) {
 		System.out.println("Iniciando servidor");
 
-		BuilderUsuario builderUsuario = new BuilderUsuario();
-		builderUsuario.setUsername("Goner");
-		builderUsuario.setPassword("LaWeaFome123");
-		builderUsuario.setTipo(TipoUsuario.ADMIN);
-		Usuario nuevoUsuario = builderUsuario.crearUsuario();
-		RepositorioUsuarios.instance().agregarUsuario(nuevoUsuario);
-		 
 		Spark.port(8080);
 		Spark.staticFileLocation("/resources/Public");
-	     
+
+		//Lleno la base con datos iniciales
+		new Bootstrap().run();
+
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 	     
 		HomeController homeController = new HomeController();
@@ -37,7 +33,6 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		//Consulta sobre objetos
 		Spark.get("/organizaciones", (request, response) -> organizacionController.getOrganizaciones(), engine);
 		Spark.get("/organizaciones/:idOrg", (request, response) -> organizacionController.getOrganizacion(request, response), engine);
-
 		Spark.get("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.getEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/nueva", (request, response) -> entidadController.getFormEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadController.getEntidad(request,response), engine);
@@ -52,13 +47,11 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		//Creacion de objetos
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(), engine);
-
 		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(), engine);
 
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
-
 		//TODO -- Hacer el handleSession cuando Roly suba lo suyo.
-		Spark.post("/login", (request, response) -> usuarioController.handleSesion(request,response), engine);
+		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response), engine);
 	     
 	}
 }
