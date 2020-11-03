@@ -29,8 +29,7 @@ public class Organizacion {
 	public void agregarEntidad(Entidad entidad){
 		entidades.add(entidad);
 	}
-	
-	/*
+
 	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
 	private List<EntidadBase> entidadesBase = new ArrayList<>();
 	
@@ -54,5 +53,5 @@ public class Organizacion {
 
 	public void setEntidadesBase(List<EntidadBase> entidadesBase) {
 		this.entidadesBase = entidadesBase;
-	}*/
+	}
 }
