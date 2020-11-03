@@ -17,7 +17,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.staticFileLocation("/resources/Public");
 
 		//Lleno la base con datos iniciales
-		new Bootstrap().run();
+//		new Bootstrap().run();
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 	     

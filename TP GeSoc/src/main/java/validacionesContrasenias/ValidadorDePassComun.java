@@ -41,7 +41,7 @@ public class ValidadorDePassComun implements Validador{
 	}
 
 	private FileReader archivoPasswords() throws FileNotFoundException {
-		return new FileReader("./././Assets/10k-most-common.txt");
+		return new FileReader("assets/10k-most-common.txt");
 	}
 
 	private void setArchivoPasswords(){
