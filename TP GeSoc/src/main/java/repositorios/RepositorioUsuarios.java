@@ -46,4 +46,8 @@ public class RepositorioUsuarios implements WithGlobalEntityManager {
         entityManager().remove(usuario);
     }
 
+    public Usuario obtenerUsuario(long id){
+        return entityManager().find(Usuario.class, id);
+    }
+
 }

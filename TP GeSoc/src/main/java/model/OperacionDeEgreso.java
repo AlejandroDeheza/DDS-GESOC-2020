@@ -177,7 +177,10 @@ public class OperacionDeEgreso {
 	public void setEstado(EstadoOperacion estado) {
 		this.estado = estado;
 	}
-	
+
+	public String getProveedor(){
+		return proveedor.getRazonSocial();
+	}
 	public void setDocumentoComercial(DocumentoComercial codDocumentoComercial) {
 		this.documentoComercial = codDocumentoComercial;
 	}

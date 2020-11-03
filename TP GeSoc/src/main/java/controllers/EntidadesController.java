@@ -67,13 +67,13 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
         });
 
-        /*Usuario usuario = getUsuarioLogueado(request);
+       /* Usuario usuario = getUsuarioLogueado(request);
 
         if(usuario != null){
             response.redirect("/login");
-        }*/
+        }
 
-       /* Entidad nueva = new Consultora(nombre,cantidadEmpleados);
+       Entidad nueva = new Consultora(nombre,cantidadEmpleados);
         withTransaction(() ->{
             RepositorioConsultoras.instancia.agregar(nueva);
             usuario.agregarConsultora(nueva);

@@ -1,20 +1,15 @@
 package repositorios;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import model.CategoriaEntidad;
-import model.EstadoOperacion;
 import model.OperacionDeEgreso;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import usuarios.Usuario;
 
-public final class RepositorioCompras {
+
+public final class RepositorioCompras implements WithGlobalEntityManager {
 	
 	private static final RepositorioCompras INSTANCE = new RepositorioCompras();
 	
@@ -65,6 +60,10 @@ public final class RepositorioCompras {
 		em.getTransaction().begin();
 		em.remove(compra);
 		em.getTransaction().commit();
+	}
+
+	public OperacionDeEgreso buscar(int id){
+		return entityManager().find(OperacionDeEgreso.class, id);
 	}
 	
 }

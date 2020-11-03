@@ -1,0 +1,78 @@
+{{# partial "titulo" }}
+    <title>Gesoc - Detalle de Operacion</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section>
+        <div>
+            <span>Id:</span><span>{{id}}</span>
+        </div>
+        <div>
+            <span>Items:</span>
+            <ul>
+            {{#items}}
+                <li>{{nombre}}</li>
+            {{/items}}
+            </ul>
+        </div>
+        <div>
+            <span>Documento Comercial:</span><span>{{documentoComercial}}</span>
+        </div>
+        <div>
+            <span>Fecha de Operacion:</span><span>{{fechaOperacion}}</span>
+        </div>
+        <div>
+            <span>Medio de Pago:</span><span>{{medio}}</span>
+        </div>
+        <div>
+            <span>Proveedor:</span><span>{{proveedor}}</span>
+        </div>
+        <div>
+            <span>Presupuestos:</span>
+            <ul>
+                {{#presupuestos}}
+                    <li>{{id}}</li>
+                {{/presupuestos}}
+            </ul>
+        </div>
+        <div>
+            <!--Ver que onda con esto porke no puedo hacer display del objeto Presupuesto /-->
+            <span>Presupuesto Elegido:</span><span>{{presupuestoElegido}}</span>
+        </div>
+        <div>
+            <span>Presupuesto Elegido:</span><span>{{presupuestoElegido}}</span>
+        </div>
+        <div>
+            <span>Revisores:</span>
+            <ul>
+                {{#revisores}}
+                    <li>{{username}}</li>
+                {{/revisores}}
+            </ul>
+        </div>
+        <div>
+            <span>Validaciones:</span>
+            <ul>
+                {{#validaciones}}
+                    <li>{{id}}</li>
+                {{/validaciones}}
+            </ul>
+        </div>
+        <div>
+            <span>Etiquetas:</span>
+            <ul>
+                {{#etiquetas}}
+                    <li>{{texto}}</li>
+                {{/etiquetas}}
+            </ul>
+        </div>
+        <div>
+            <span>Presupuestos Minimos:</span><span>{{presupuestosMinimos}}</span>
+        </div>
+        <div>
+            <span>Estado de la Operacion:</span><span>{{estado}}</span>
+        </div>
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}
