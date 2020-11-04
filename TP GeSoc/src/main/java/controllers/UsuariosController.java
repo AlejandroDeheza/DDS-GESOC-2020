@@ -24,9 +24,12 @@ public class UsuariosController {
         String password = request.queryParams("password");
         String username = request.queryParams("username");
 
-        List<Usuario> posibleUsuario = RepositorioUsuarios.instance().obtenerUsuarios("nombre_usuario = " + username);
+        List<Usuario> posibleUsuario = RepositorioUsuarios.instance().obtenerUsuarios("nombre_usuario = '" + username + "'");
+
+//        Usuario posibleUsuario = RepositorioUsuarios.instance().obtenerUsuarioSegunNombre(username);
 
         if(posibleUsuario.isEmpty()) {
+//        if(posibleUsuario == null)
             //TODO HTTP Error code y redirect a pagina de error
             //Por ahora
             System.out.println("No existe el usuario");
