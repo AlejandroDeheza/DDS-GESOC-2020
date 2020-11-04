@@ -18,14 +18,14 @@ public abstract class Entidad {
 	@Column(name = "id_entidad")
 	public Long id;
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_organizacion", referencedColumnName = "id_organizacion")
 	public Organizacion organizacion;
 
 	@Column(name = "nombre_ficticio")
 	public String nombreFicticio;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
 	

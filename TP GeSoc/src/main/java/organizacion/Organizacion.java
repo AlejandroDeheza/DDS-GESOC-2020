@@ -16,7 +16,7 @@ public class Organizacion {
 	private Long id;
 	
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_organizacion")
 	private List<Entidad> entidades = new ArrayList<>();
 	
@@ -36,9 +36,12 @@ public class Organizacion {
 	private List<EntidadBase> entidadesBase = new ArrayList<>();*/
 	
 	
-	public Organizacion(List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase) {
-		this.entidades.addAll(entidadesJuridicas);
-		this.entidades.addAll(entidadesBase);
+	public Organizacion(String descripcion,List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase) {
+		if(!entidadesJuridicas.isEmpty())
+			this.entidades.addAll(entidadesJuridicas);
+		if(entidadesBase != null && !entidadesBase.isEmpty())
+			this.entidades.addAll(entidadesBase);
+		this.descripcion = descripcion;
 	}
 
 	/*public List<EntidadJuridica> getEntidadesJuridicas(){ return this.entidadesJuridicas; }

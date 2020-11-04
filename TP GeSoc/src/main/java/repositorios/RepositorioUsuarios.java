@@ -41,13 +41,6 @@ public class RepositorioUsuarios implements WithGlobalEntityManager {
         List<Usuario> usuarios = session.createQuery("FROM Usuario WHERE " + condicion).list();
         return usuarios;
     }
-//    public Object obtenerUsuarioSegunNombre(String nombre){
-//        SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
-//        Session session = sessionFactory.openSession();
-//        Query query = session.createQuery("FROM Usuario u WHERE u.nombre_usuario=:user").setParameter("user", nombre);
-//        Object usuario = query.uniqueResult();
-//        return usuario;
-//    }
 
     public void eliminarUsuario(Usuario usuario) {
         entityManager().remove(usuario);

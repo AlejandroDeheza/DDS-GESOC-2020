@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import organizacion.*;
+import usuarios.Usuario;
 
 import javax.persistence.Persistence;
 
@@ -51,10 +52,24 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<Entidad> entidades = new ArrayList<>();
-		entidades.addAll(session.createQuery("FROM Entidad INNER JOIN EntidadBase ON Entidad.id_entidad = EntidadBase.id_entidad WHERE " + condicion).list());
-		entidades.addAll(session.createQuery("FROM Entidad INNER JOIN EntidadBase ON Entidad.id_entidad = EntidadJuridica.id_entidad WHERE " + condicion).list());
+
+		entidades.addAll(session.createQuery("FROM Entidad WHERE " + condicion).list());
+
 		return entidades;
 	}
+
+	public Entidad obtenerEntidad(long id){
+		return entityManager().find(Entidad.class,id);
+	}
+
+	public EntidadBase obtenerEntidadBase(long id){
+		return entityManager().find(EntidadBase.class,id);
+	}
+
+	public EntidadJuridica obtenerEntidadJuridica(long id){
+		return entityManager().find(EntidadJuridica.class,id);
+	}
+
 	public void agregarEntidad(Entidad entidad) {
 		entityManager().persist(entidad);
 	}

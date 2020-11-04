@@ -7,6 +7,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
 import paymentMethods.IDMedioDePago;
+import repositorios.RepositorioOrganizaciones;
 import repositorios.RepositorioUsuarios;
 import ubicacion.Direccion;
 import ubicacion.DireccionPostal;
@@ -21,6 +22,7 @@ import validacionesOperaciones.ValidarQueSeHayaElegidoElPresupuestoMasBarato;
 import validacionesOperaciones.ValidarQueTengaLaSuficienteCantidadDePresupuestos;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -172,12 +174,17 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         listaEntidades.add(entidad1);
 
         List<Comportamiento> comportamientos2 = new ArrayList<Comportamiento>();
-        comportamientos2.add(new PoderAgregarEgresos());
+        comportamientos2.add(new PoderAgregarEgresos(new BigDecimal(2000)));
 
         Direccion direccion2 = new Direccion("Martines", "1232", "1", "D");
         DireccionPostal direccionPostal2 = new DireccionPostal(direccion2,ubicacion1);
-        EntidadJuridica entidad2 = new EntidadJuridica("Martilleros",new CategoriaEntidad(comportamientos2,"Poder agregar egresos"),"Martilleros SA",2012333119,direccionPostal1,1202, CategoriaEntidadJuridica.EMPRESA_MEDIANA_TRAMO_1);
+        EntidadJuridica entidad2 = new EntidadJuridica("Martilleros",new CategoriaEntidad(comportamientos2,"Poder agregar egresos"),"Martilleros SA",2012333119,direccionPostal2,1202, CategoriaEntidadJuridica.EMPRESA_MEDIANA_TRAMO_1);
         listaEntidades.add(entidad2);
+
+        List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+        entidad1.agregarOperacionDeEgreso(operacionDeEgreso.get(0));
+        entidad2.agregarOperacionDeEgreso(operacionDeEgreso.get(1));
+        entidad2.agregarOperacionDeEgreso(operacionDeEgreso.get(2));
 
         return listaEntidades;
     }
@@ -192,9 +199,16 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
 
         List<EntidadBase> eBase = new ArrayList<EntidadBase>();
         eBase.add(entidadBase);
-        listaOrganizaciones.add(new Organizacion(entidades.subList(0,0),null));
 
-        listaOrganizaciones.add(new Organizacion(entidades.subList(1,1),eBase));
+        List<EntidadJuridica> eJuridica = new ArrayList<EntidadJuridica>();
+        eJuridica.add(entidades.get(0));
+        List<EntidadJuridica> eJuridica2 = new ArrayList<EntidadJuridica>();
+        eJuridica.add(entidades.get(1));
+
+        listaOrganizaciones.add(new Organizacion("LaMejorOrganizacion",eJuridica,new ArrayList<EntidadBase>()));
+
+        listaOrganizaciones.add(new Organizacion("RamaEsUnGrande",eJuridica2,eBase));
+
         return listaOrganizaciones;
     }
 
@@ -211,10 +225,17 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
     }
 
     public void run(){
-        withTransaction(() ->{
+        /*withTransaction(() ->{
              List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
              this.agregarUsuarios();
+        });*/
+
+        withTransaction(() -> {
+            List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+            this.agregarUsuarios();
+
+            List<Organizacion> organizaciones = crearLista2Organizaciones();
+            RepositorioOrganizaciones.instance().agregarOrganizaciones(organizaciones);
         });
-        //Aca si queremos cargar algo a la base tendriamos q llamar al Repositorio y meter cada cosa ahi.
     }
 }

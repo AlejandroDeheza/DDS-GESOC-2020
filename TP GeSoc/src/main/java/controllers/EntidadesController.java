@@ -27,14 +27,26 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
     public ModelAndView getEntidades(Request request, Response response) {
 
         Map<String, Object> modelo = new HashMap<>();
-        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("id_organizacion = " + request.params(":idOrg") ));
+        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg") ));
 
         return new ModelAndView(modelo, "entidades.html.hbs");
     }
 
     public ModelAndView getEntidad(Request request, Response response) {
         Map<String, Object> modelo = new HashMap<>();
-        modelo.put("entidad", RepositorioEntidades.instance().obtenerEntidades("id_entidad = " + request.params(":idEntidad")));
+//        modelo.put("entidad", RepositorioEntidades.instance().obtenerEntidades("id_entidad = " + request.params(":idEntidad")));
+        modelo.put("entidad",RepositorioEntidades.instance().obtenerEntidad(Long.parseLong(request.params(":idEntidad"))));
+
+//        Entidad entidad = RepositorioEntidades.instance().obtenerEntidad(Long.parseLong(request.params(":idEntidad")));
+        EntidadBase entidadBase = RepositorioEntidades.instance().obtenerEntidadBase(Long.parseLong(request.params(":idEntidad")));
+
+        if(entidadBase != null){
+            modelo.put("entidadBase",entidadBase);
+        }
+        else{
+            modelo.put("entidadJuridica",RepositorioEntidades.instance().obtenerEntidadJuridica(Long.parseLong(request.params(":idEntidad"))));
+        }
+
         return new ModelAndView(modelo, "entidad.html.hbs");
     }
 

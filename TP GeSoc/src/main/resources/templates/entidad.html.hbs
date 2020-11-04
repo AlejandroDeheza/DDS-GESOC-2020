@@ -4,9 +4,12 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
-        {{#entidad}}
-        <h2>Entidad:{{nombreFicticio}}</h2>
-        {{/entidad}}
+        {{#entidadBase}}
+            <h2>EntidadBase:{{nombreFicticio}}</h2>
+        {{/entidadBase}}
+        {{#entidadJuridica}}
+            <h2>EntidadJuridica:{{nombreFicticio}}</h2>
+        {{/entidadJuridica}}
     </section>
 {{/partial}}
 

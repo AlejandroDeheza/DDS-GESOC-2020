@@ -27,8 +27,12 @@ public class OrganizacionesController {
     public ModelAndView getOrganizacion(Request request, Response response) {
 
         Map<String, Object> modelo = new HashMap<>();
+
         modelo.put("organizacion", RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + request.params(":idOrg")));
-        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("id_organizacion = " + request.params(":idOrg")));
+
+        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg")));
+
+//        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades(request.params(":idOrg")));
 
         return new ModelAndView(modelo, "organizacion.html.hbs");
     }

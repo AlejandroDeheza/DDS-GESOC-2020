@@ -13,7 +13,7 @@ import model.OperacionDeEgreso;
 public class EntidadBase extends Entidad{
 	private String descripcion;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_juridica")
 	public EntidadJuridica entidadJuridica;
 	
@@ -32,8 +32,11 @@ public class EntidadBase extends Entidad{
 		this.entidadJuridica=entidadJuridica;
 	}
 
-	public void asociarAEntidadJuridica (EntidadJuridica entidadJuridica) {
-		this.categoriaEntidad.asociarAEntidadJuridica(this, entidadJuridica);
+	public void asociarAEntidadJuridica (EntidadJuridica entidadJ) {
+		if(this.categoriaEntidad != null)
+			this.categoriaEntidad.asociarAEntidadJuridica(this, entidadJ);
+		else
+			entidadJuridica = entidadJ;
 	}
 
 }

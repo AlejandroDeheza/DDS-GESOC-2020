@@ -24,17 +24,14 @@ public class OperacionesController {
     }
 
     public ModelAndView getFormOperaciones(Request request, Response response){
-        if(!estaLogueado(request, response)){
+        if(!new UsuariosController().estaLogueado(request,response)){
             response.redirect("/login");
         }
         return new ModelAndView(null,"crearOperaciones.html.hbs");
     }
 
     public Object getOperacion(Request request, Response response, TemplateEngine engine) {
-
-        Usuario usuario = getUsuarioLogueado(request);
-
-        if(usuario != null){
+        if(!new UsuariosController().estaLogueado(request,response)){
             response.redirect("/login");
         }
 
@@ -45,28 +42,10 @@ public class OperacionesController {
             return compra != null ?
                     engine.render(new ModelAndView(compra, "detalle-operacion.html.hbs"))
                     : null;
-        } catch(NumberFormatException e){
+        }catch(NumberFormatException e){
             response.status(400);
             System.out.println("El id ingresado (" + idOperacion +") no es un número");
             return "Bad Request";
         }
-    }
-
-    private boolean estaLogueado(Request request, Response response) {
-        Usuario usuario = getUsuarioLogueado(request);
-
-        return usuario != null;
-    }
-
-    private Usuario getUsuarioLogueado(Request request) {
-        Long idUsuario = request.session().attribute("idUsuario");
-
-        Usuario usuario = null;
-
-        if(idUsuario != null){
-            usuario = RepositorioUsuarios.instance().obtenerUsuario(idUsuario);
-        }
-
-        return usuario;
     }
 }
