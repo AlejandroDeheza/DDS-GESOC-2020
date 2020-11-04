@@ -24,14 +24,14 @@ public final class RepositorioCompras implements WithGlobalEntityManager {
 	public List<OperacionDeEgreso> obtenerTodasLasOperaciones(){
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
-		List<OperacionDeEgreso> compras = session.createQuery("FROM operaciones_de_egreso").list();
+		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso").list();
 		return compras;
 	}
 	
 	public List<OperacionDeEgreso> obtenerOperaciones(String condicion){
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
-		List<OperacionDeEgreso> compras = session.createQuery("FROM operaciones_de_egreso WHERE " + condicion).list();
+		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE " + condicion).list();
 		return compras;
 	}
 	

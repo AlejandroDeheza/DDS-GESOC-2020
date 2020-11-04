@@ -17,7 +17,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.staticFileLocation("/public");
 
 		//Lleno la base con datos iniciales
-//		new Bootstrap().run();
+		new Bootstrap().run();
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 	     
@@ -51,7 +51,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 		//TODO -- Hacer el handleSession cuando Roly suba lo suyo.
-		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response), engine);
+		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response));
 	     
 	}
 }

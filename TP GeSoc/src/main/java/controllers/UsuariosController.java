@@ -9,6 +9,7 @@ import usuarios.Hasher;
 import usuarios.Usuario;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UsuariosController {
@@ -22,13 +23,27 @@ public class UsuariosController {
 
         String password = request.queryParams("password");
         String username = request.queryParams("username");
-        Usuario usuario = RepositorioUsuarios.instance().obtenerTodosLosUsuarios().stream()
-                .filter(u -> Hasher.sonCorrespondientes(password,u.getHashedPasswordActual()) && u.getUsername().equals(username)).findFirst().get();
+
+        List<Usuario> posibleUsuario = RepositorioUsuarios.instance().obtenerUsuarios("nombre_usuario = " + username);
+
+        if(posibleUsuario.isEmpty()) {
+            //TODO HTTP Error code y redirect a pagina de error
+            //Por ahora
+            System.out.println("No existe el usuario");
+            return null;
+        }
+
+        Usuario usuario = posibleUsuario.stream().findFirst().get();
+
+        if(!Hasher.sonCorrespondientes(password, usuario.getHashedPasswordActual())) {
+            //TODO HTTP Error code y redirect a pagina de error
+            //Por ahora
+            System.out.print("password incorrecta");
+            return null;
+        }
 
         request.session().attribute("idUsuario", usuario.getId());
-
         response.redirect("/");
-
         return null;
     }
 

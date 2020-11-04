@@ -1,4 +1,6 @@
 package organizacion;
+import repositorios.RepositorioEntidades;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class Organizacion {
 	
 	
 	@OneToMany
-	@JoinColumn(name = "id_organizacion")
+	@JoinColumn(name = "entidad_organizacion")
 	private List<Entidad> entidades = new ArrayList<>();
 	
 	private String descripcion;
@@ -30,28 +32,23 @@ public class Organizacion {
 		entidades.add(entidad);
 	}
 
-	private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
-	private List<EntidadBase> entidadesBase = new ArrayList<>();
+	/*private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
+	private List<EntidadBase> entidadesBase = new ArrayList<>();*/
 	
 	
 	public Organizacion(List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase) {
-		this.entidadesJuridicas = entidadesJuridicas;
-		this.entidadesBase = entidadesBase;
+		this.entidades.addAll(entidadesJuridicas);
+		this.entidades.addAll(entidadesBase);
 	}
 
-	public List<EntidadJuridica> getEntidadesJuridicas(){
-		return this.entidadesJuridicas;
-	}
+	/*public List<EntidadJuridica> getEntidadesJuridicas(){ return this.entidadesJuridicas; }
 
-	public void setEntidadesJuridicas(List<EntidadJuridica> entidadesJuridicas) {
-		this.entidadesJuridicas = entidadesJuridicas;
-	}
-
-	public List<EntidadBase> getEntidadesBase() {
-		return this.entidadesBase;
-	}
+	public List<EntidadBase> getEntidadesBase(){ return this.entidadesBase;	}
 
 	public void setEntidadesBase(List<EntidadBase> entidadesBase) {
 		this.entidadesBase = entidadesBase;
 	}
+
+	public void setEntidadesJuridicas(List<EntidadJuridica> entidadesJuridicas) { this.entidadesJuridicas = entidadesJuridicas; }*/
 }
+

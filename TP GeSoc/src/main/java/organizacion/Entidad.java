@@ -17,7 +17,11 @@ public abstract class Entidad {
 	@GeneratedValue
 	@Column(name = "id_entidad")
 	public Long id;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "entidad_organizacion", referencedColumnName = "id_organizacion")
+	public Organizacion organizacion;
+
 	@Column(name = "nombre_ficticio")
 	public String nombreFicticio;
 	
