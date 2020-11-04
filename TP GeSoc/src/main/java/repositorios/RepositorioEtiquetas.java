@@ -8,8 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import model.EtiquetaOperacion;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class RepositorioEtiquetas {
+public class RepositorioEtiquetas implements WithGlobalEntityManager {
 	//public List<EtiquetaOperacion> etiquetasDelSistema = new ArrayList<>();
 	private static final RepositorioEtiquetas INSTANCE = new RepositorioEtiquetas();
 	
@@ -18,50 +20,25 @@ public class RepositorioEtiquetas {
 	}
 	
 	public void crearNuevaEtiqueta(String texto) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
 		EtiquetaOperacion etiqueta = new EtiquetaOperacion(texto);
-	    em.getTransaction().begin();
-		em.persist(etiqueta);
-		em.getTransaction().commit();
-		//em.close();
-		//etiquetasDelSistema.add(etiqueta);	
+		entityManager().persist(etiqueta);
 	}
 	
 	public void agregarNuevaEtiqueta(EtiquetaOperacion nuevaEtiqueta) {
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(nuevaEtiqueta);
-		em.getTransaction().commit();
-		//em.close();
-		
-		//etiquetasDelSistema.add(nuevaEtiqueta);
+		entityManager().persist(nuevaEtiqueta);
 	}
 	
 	/*public void modificarEtiqueta(String textoOriginal, String textoNuevo) {
 		EtiquetaOperacion etiquetaAModificar = etiquetasDelSistema.stream().filter(etiqueta -> etiqueta.texto.equals(textoOriginal.toUpperCase())).collect(Collectors.toList()).get(0);
 		etiquetaAModificar.setTexto(textoNuevo);
 	}*/
+
 	public void modificarEtiqueta(EtiquetaOperacion etiqueta) {
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
-		em.merge(etiqueta);
-		em.getTransaction().commit();
-		//em.close();
+		entityManager().merge(etiqueta);
 	}
 	
 	public void eliminarEtiqueta(EtiquetaOperacion etiqueta) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		em.getTransaction().begin();
-		//em.createQuery("DELETE FROM EtiquetaOperacion WHERE texto='"+texto+"'").executeUpdate();
-		em.remove(etiqueta);
-		em.getTransaction().commit();
-		//em.close();
-		//etiquetasDelSistema.removeIf(etiqueta -> etiqueta.texto.equals(texto.toUpperCase()));
-		
+		entityManager().remove(etiqueta);
 	}
 
 }

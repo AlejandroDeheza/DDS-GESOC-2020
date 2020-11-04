@@ -8,6 +8,20 @@
     <img src="descarga.jpg" alt="F">
 </div>
 
+{{#if usuarioLogeado }}
+    <div>
+        <a href="/organizaciones">Organizaciones</a>
+        <a href="/inbox">Bandeja de mensajes</a>
+        <form action="/cerrarSesion" method="POST">
+            <input type="submit" value="Cerrar sesion" />
+        </form>
+    </div>
+{{else}}
+    <a href="/login">Inciar sesion</a>
+{{/if}}
+
 {{/partial}}
+
+
 
 {{> layout.html.hbs }}

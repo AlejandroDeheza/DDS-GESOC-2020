@@ -64,8 +64,15 @@ public class Usuario {
 		return username;
 	}
 
-	public String [] getHashedPasswordActual() {
-		return new String[]{hashedPasswordActual};
+	public String getHashedPasswordActual() {
+		return hashedPasswordActual;
+	}
+	public String getSaltActual(){
+		return saltActual;
+	}
+
+	public List<Mensaje> getMensajes() {
+		return mensajes;
 	}
 
 

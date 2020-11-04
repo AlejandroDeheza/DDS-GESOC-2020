@@ -25,9 +25,7 @@ public class RepositorioUsuarios implements WithGlobalEntityManager {
     }
 
     public void agregarUsuario(Usuario usuario) {
-        entityManager().getTransaction().begin();
         entityManager().persist(usuario);
-        entityManager().getTransaction().commit();
     }
 
     public List<Usuario> obtenerTodosLosUsuarios(){

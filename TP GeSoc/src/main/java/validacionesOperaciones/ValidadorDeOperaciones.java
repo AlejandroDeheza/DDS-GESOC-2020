@@ -4,9 +4,11 @@ import java.util.List;
 
 import model.EstadoOperacion;
 import model.OperacionDeEgreso;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import repositorios.RepositorioCompras;
 
-public class ValidadorDeOperaciones implements Runnable {
+public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager, TransactionalOps {
 
 	public void run() {
 		
@@ -33,9 +35,9 @@ public class ValidadorDeOperaciones implements Runnable {
 			compra.setEstado(EstadoOperacion.RECHAZADA);
 			compra.notificarRevisores("La operacion no es valida");
 		}
-		
-		RepositorioCompras.instance().actualizarCompra(compra);
-		
+		withTransaction(() ->{
+			RepositorioCompras.instance().actualizarCompra(compra);
+		});
 	}
 	
 	

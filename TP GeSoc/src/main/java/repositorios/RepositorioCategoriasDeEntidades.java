@@ -14,8 +14,9 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import comportamientoEntidad.Comportamiento;
 import model.CategoriaEntidad;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class RepositorioCategoriasDeEntidades {
+public class RepositorioCategoriasDeEntidades implements WithGlobalEntityManager {
 	//private List<CategoriaEntidad> categoriasDelSistema = new ArrayList<>();
 	
 	private static final RepositorioCategoriasDeEntidades INSTANCE = new RepositorioCategoriasDeEntidades();
@@ -26,14 +27,7 @@ public class RepositorioCategoriasDeEntidades {
 	
 
 	public void agregarNuevaCategoria(CategoriaEntidad nuevaCategoria) {
-
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(nuevaCategoria);
-		em.getTransaction().commit();
-		//em.close();
-		//categoriasDelSistema.add(nuevaCategoria);
+		entityManager().persist(nuevaCategoria);
 	}
 	
 	/*public void modificarCategoria(List<Comportamiento> comportamientos, String descripcion) {
@@ -42,26 +36,11 @@ public class RepositorioCategoriasDeEntidades {
 	}*/
 	
 	public void modificarCategoria(CategoriaEntidad nuevaCategoria) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
-		em.merge(nuevaCategoria);
-		em.getTransaction().commit();
-		//em.close();
+		entityManager().merge(nuevaCategoria);
 	}
 	
 	public void eliminarCategoria(CategoriaEntidad nuevaCategoria) {
-		
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
-		//em.createQuery("DELETE FROM CategoriaEntidad WHERE descripcion='"+descripcion+"'").executeUpdate();
-		em.remove(nuevaCategoria);
-		em.getTransaction().commit();
-		//em.close();
-		
-		//categoriasDelSistema.removeIf(categoria -> categoria.descripcion.equals(descripcion.toUpperCase()));
+		entityManager().remove(nuevaCategoria);
 	}
 	
 	public List<CategoriaEntidad> obtenerTodasLasCategorias() {
@@ -69,8 +48,6 @@ public class RepositorioCategoriasDeEntidades {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<CategoriaEntidad> categoriasDelSistema = session.createQuery("FROM CategoriaEntidad").list();
-		//sessionFactory.close();
-		//session.close();
 		return categoriasDelSistema;
 		
 	}
@@ -80,8 +57,6 @@ public class RepositorioCategoriasDeEntidades {
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();
 		List<CategoriaEntidad> categoriasDelSistema = session.createQuery("FROM CategoriaEntidad WHERE " + query).list();
-		//sessionFactory.close();
-		//session.close();
 		return categoriasDelSistema;
 		
 	}

@@ -16,7 +16,14 @@
             <input type="submit" value="Iniciar Sesión">
         </form>
 
+        {{#if loginFailed}}
+            <div>
+                <p style="color:#ff0000"> Usuario o contraseña incorrecta  </p>
+            </div>
+        {{/if}}
+
     </section>
+
 {{/partial}}
 
 {{> layout.html.hbs }}

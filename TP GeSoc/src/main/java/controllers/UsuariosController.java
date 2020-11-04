@@ -15,10 +15,24 @@ import java.util.Map;
 public class UsuariosController {
 
 
-    public ModelAndView getFormLogin() {
-        return new ModelAndView(null,"login.html.hbs");
+    public ModelAndView getFormLogin(Request request, Response response) {
+
+        Map<String, Object> modelo = new HashMap<>();
+        if(!request.params().isEmpty() && request.params(":status").equals("failed")){
+            modelo.put("loginFailed", true);
+        }
+        else
+        {
+            modelo.put("loginFailed", false);
+        }
+        return new ModelAndView(modelo,"login.html.hbs");
     }
 
+    public ModelAndView closeSession(Request request, Response response){
+        request.session().removeAttribute("idUsuario");
+        response.redirect("/");
+        return null;
+    }
     public ModelAndView handleSession(Request request, Response response){
 
         String password = request.queryParams("password");
@@ -32,16 +46,20 @@ public class UsuariosController {
 //        if(posibleUsuario == null)
             //TODO HTTP Error code y redirect a pagina de error
             //Por ahora
-            System.out.println("No existe el usuario");
+            response.redirect("/login/failed");
             return null;
         }
 
         Usuario usuario = posibleUsuario.stream().findFirst().get();
 
-        if(!Hasher.sonCorrespondientes(password, usuario.getHashedPasswordActual())) {
+        String[] passConSalt = new String[2];
+        passConSalt[0] = usuario.getHashedPasswordActual();
+        passConSalt[1] = usuario.getSaltActual();
+
+        if(!Hasher.sonCorrespondientes(password,passConSalt)) {
             //TODO HTTP Error code y redirect a pagina de error
             //Por ahora
-            System.out.print("password incorrecta");
+            response.redirect("/login/failed");
             return null;
         }
 
@@ -54,8 +72,31 @@ public class UsuariosController {
 
         Map<String, Object> modelo = new HashMap<>();
         //Hay que filtrar los usuarios segun el que este logeado
-        modelo.put("mensajes", RepositorioUsuarios.instance().obtenerTodosLosUsuarios());
+        Usuario usuarioLogeado = null;
+        if(estaLogueado(request,response)){
+            usuarioLogeado = getUsuarioLogueado(request);
+        }
+
+        modelo.put("mensajes", usuarioLogeado.getMensajes());
 
         return new ModelAndView(modelo, "inbox.html.hbs");
     }
+
+    public Usuario getUsuarioLogueado(Request request) {
+        Long idUsuario = request.session().attribute("idUsuario");
+
+        Usuario usuario = null;
+
+        if(idUsuario != null){
+            usuario = RepositorioUsuarios.instance().obtenerUsuario(idUsuario);
+        }
+
+        return usuario;
+    }
+
+    public boolean estaLogueado(Request request, Response response) {
+        Usuario usuario = getUsuarioLogueado(request);
+        return usuario != null;
+    }
+
 }

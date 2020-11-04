@@ -3,6 +3,8 @@ import comportamientoEntidad.Comportamiento;
 import comportamientoEntidad.PoderAgregarEgresos;
 import comportamientoEntidad.PoderAgregarEntidadesBaseAJuridica;
 import model.*;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
 import paymentMethods.IDMedioDePago;
 import repositorios.RepositorioUsuarios;
@@ -10,6 +12,7 @@ import ubicacion.Direccion;
 import ubicacion.DireccionPostal;
 import ubicacion.Ubicacion;
 import usuarios.BuilderUsuario;
+import usuarios.Mensaje;
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
 import validacionesOperaciones.ValidacionDeOperaciones;
@@ -22,7 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bootstrap {
+public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
     public Item crearItem(String descripcion, Double valor) {
         Moneda moneda = new Moneda(valor,"ARS");
         return new Item(moneda, descripcion);
@@ -201,12 +204,17 @@ public class Bootstrap {
         builderUsuario.setPassword("LaWeaFome123");
         builderUsuario.setTipo(TipoUsuario.ADMIN);
         Usuario nuevoUsuario = builderUsuario.crearUsuario();
+        nuevoUsuario.recibirMensaje(new Mensaje("Hola, ¿como va?"));
+        nuevoUsuario.recibirMensaje(new Mensaje("Probando"));
+        nuevoUsuario.recibirMensaje(new Mensaje("Otro mensajeee"));
         RepositorioUsuarios.instance().agregarUsuario(nuevoUsuario);
     }
 
     public void run(){
-        List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
-        this.agregarUsuarios();
+        withTransaction(() ->{
+             List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+             this.agregarUsuarios();
+        });
         //Aca si queremos cargar algo a la base tendriamos q llamar al Repositorio y meter cada cosa ahi.
     }
 }

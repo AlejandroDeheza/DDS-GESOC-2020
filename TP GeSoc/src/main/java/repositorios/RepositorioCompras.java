@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import model.OperacionDeEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import usuarios.Usuario;
 
 
@@ -37,29 +38,15 @@ public final class RepositorioCompras implements WithGlobalEntityManager {
 	
 
 	public void agregarCompra(OperacionDeEgreso compra) {
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(compra);
-		em.getTransaction().commit();
-		
+		entityManager().persist(compra);
 	}
 	
 	public void actualizarCompra(OperacionDeEgreso compra) {
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		 
-		em.getTransaction().begin();
-		em.merge(compra);
-		em.getTransaction().commit();
-		em.close();
+		entityManager().merge(compra);
 	}
 	
 	public void eliminarCompra(OperacionDeEgreso compra) {
-		EntityManager em = Persistence.createEntityManagerFactory("db").createEntityManager();
-		 
-		em.getTransaction().begin();
-		em.remove(compra);
-		em.getTransaction().commit();
+		entityManager().remove(compra);
 	}
 
 	public OperacionDeEgreso buscar(int id){
