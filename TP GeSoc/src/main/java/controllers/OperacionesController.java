@@ -35,10 +35,10 @@ public class OperacionesController {
     }
 
     public ModelAndView getOperacion(Request request, Response response) {
-        /*if (!new UsuariosController().estaLogueado(request, response)) {
+        if (!new UsuariosController().estaLogueado(request, response)) {
             response.redirect("/login");
             return null;
-        }*/
+        }
 
         Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 

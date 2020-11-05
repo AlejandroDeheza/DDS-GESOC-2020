@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/main.css">
 </head>
-
+<script src="/entidades.js"></script>
 {{# partial "contenido" }}
 
     <section class="fondo-gris">
@@ -13,28 +13,32 @@
         <form action="/organizaciones/{{organizacion}}/entidades" method="POST">
             <div class="campo">
                 <span class="nombre-campo">Nombre ficticio: </span>
-                <input type="text" name="nombre" placeholder="Ingrese nombre">
+                <input type="text" name="nombre" placeholder="Ingrese un Nombre">
             </div>
+            <input type="radio" name="tab" value="igotnone" onclick="show1();" />
+            Juridica
+            <input type="radio" name="tab" value="igottwo" onclick="show2();" />
+            Base
             <div class="campo">
-                <span class="nombre-campo">Tipo: </span>
-                <span class="nombre-campo">Base</span>
-                <input class="base-seleccionada" type="radio" name="tipo" value="Base" >
-                <span class="nombre-campo">Juridica</span>
-                <input class="juridica-seleccionada" type="radio" name="tipo" value="Juridica">
-                <div class="info-juridica">Info para cargar base</div>
-                <div class="info-base">Info para cargar juridica</div>
+                <div class="hide" id="div1" class="info-juridica">
+                    <input type="text" name="razon-social-juridica" placeholder="Ingrese Razon Social">
+                    <input type="number" name="cuit-juridica" placeholder="Ingrese Cuit">
+                    <input type="number" name="codigo-igj-juridica" placeholder="Ingrese Codigo de Inscripcion IGJ">
+                    <div>
+                        <span class="nombre-campo">Categoria Entidad Juridica: </span>
+                        <select name="categoria-entidad-juridica">
+                            {{#categoriasEntidadJuridicaDisponibles}}
+                                <option>{{DisplayName}}</option>
+                            {{/categoriasEntidadJuridicaDisponibles}}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="hide" id="div2" class="info-base">
+                    <input type="text" name="descripcion-base" placeholder="Ingrese Descripcion">
+                    <!--Aca falta la parte de asociarla a una entidad juridica-->
+                </div>
             </div>
-
-                <!--<div class="campo">
-                    <span class="nombre-campo">Categoria</span>
-                    <input list="Categorias">
-
-                    <datalist id="Categorias">
-                        {{#categoriasDisponibles}}
-                        <option value={{descripcion}}>
-                        {{/categoriasDisponibles}}
-                    </datalist>
-                </div>-->
 
             <div class="campo">
                 <span class="nombre-campo">Categoria: </span>
