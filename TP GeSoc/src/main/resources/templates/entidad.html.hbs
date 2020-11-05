@@ -12,7 +12,7 @@
              {{/categoria}}
              <li>Descripción: {{descripcion}}</li>
              {{#entidadJuridicaAsociada}}
-                 <li>Entidad juridica asociada:<a href="{{id}}">{{nombreFicticio}}</a></li>
+                 <li>Entidad juridica asociada: <a href="{{id}}">{{nombreFicticio}}</a></li>
              {{/entidadJuridicaAsociada}}
         {{/entidadBase}}
 
@@ -33,6 +33,8 @@
                 <li>Direccion: {{calle}} {{altura}} {{piso}} {{depto}}</li>
             {{/direccion}}
         {{/entidadJuridica}}
+
+        <div><a href="{{idEnt}}/operaciones">Ver operaciones de egreso</a></div>
     </section>
 {{/partial}}
 

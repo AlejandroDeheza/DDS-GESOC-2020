@@ -87,6 +87,8 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             modelo.put("direccion",entidadJuridica.getDireccionPostal().getDireccion());
             modelo.put("ubicacion",entidadJuridica.getDireccionPostal().getUbicacion());
         }
+        //modelo.put("idOrg", request.params(":idOrg"));
+        modelo.put("idEnt",request.params(":idEntidad"));
 
         return new ModelAndView(modelo, "entidad.html.hbs");
     }
