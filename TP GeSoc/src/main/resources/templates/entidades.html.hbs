@@ -6,10 +6,15 @@
     <section class="fondo-gris">
         <h2>Entidades:</h2>
 
-        <form action="/entidades" method="GET">
-            Buscar por nombre
-            <input type="text" name="filtro" placeholder="Ingrese el nombre de la entidad a buscar">
-            <input type="submit" value="Buscar">
+        <form action="/organizaciones/{{organizacion}}/entidades" method="GET">
+           Filtrar por categoria:
+            <select name="categoria">
+                <option value = "Cualquiera" selected>Cualquier categoria</option>
+                {{#categoriasDisponibles}}
+                    <option value={{id}}>{{descripcion}}</option>
+                {{/categoriasDisponibles}}
+            </select>
+            <input type="submit" value="Filtrar">
         </form>
 
         <ul>

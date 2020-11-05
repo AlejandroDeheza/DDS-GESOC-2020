@@ -7,15 +7,15 @@
     <section class="fondo-gris">
         <h2>Organizacion: {{descripcion}}</h2>
 
-    <h3>Entidades asociadas:
+        <!--<h3>Entidades asociadas:
         <ul>
-        {{#entidades}}
-            <li>{{nombreFicticio}}</li>
-        {{/entidades}}
+            {{#entidades}}
+                <li>{{nombreFicticio}}</li>
+            {{/entidades}}
         </ul>
-    </h3>
-        <a href="/organizaciones/{{id}}/entidades">"Listado completo"</a>
-        <a href="/organizaciones/{{id}}/entidades/nueva">"Crear nueva entidad"</a>
+        </h3>-->
+        <div><a href="/organizaciones/{{id}}/entidades">Listado de entidades</a></div>
+        <div><a href="/organizaciones/{{id}}/entidades/nueva">"Crear nueva entidad"</a></div>
     </section>
     {{/organizacion}}
 {{/partial}}

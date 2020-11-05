@@ -17,7 +17,9 @@ import ubicacion.Ubicacion;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EntidadesController implements WithGlobalEntityManager, TransactionalOps {
 
@@ -45,7 +47,18 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         }
 
         Map<String, Object> modelo = new HashMap<>();
-        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg") ));
+        String categoriaSeleccionada = request.queryParams("categoria");
+        if(categoriaSeleccionada!=null && !categoriaSeleccionada.equals("Cualquiera")) {
+            List<Entidad> entidadesAMostrar = RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg"))
+                    .stream().filter(e -> e.getCategoriaEntidad().getId() == Long.parseLong(request.queryParams("categoria"))).collect(Collectors.toList());
+            modelo.put("entidades",entidadesAMostrar);
+        }
+        else {
+            modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg")));
+        }
+
+        modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
+        modelo.put("organizacion",request.params(":idOrg"));
 
         return new ModelAndView(modelo, "entidades.html.hbs");
     }
