@@ -3,10 +3,7 @@ package controllers;
 import model.CategoriaEntidad;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import organizacion.Entidad;
-import organizacion.EntidadBase;
-import organizacion.EntidadJuridica;
-import organizacion.Organizacion;
+import organizacion.*;
 import repositorios.RepositorioCategoriasDeEntidades;
 import repositorios.RepositorioEntidades;
 import repositorios.RepositorioOrganizaciones;
@@ -14,6 +11,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +25,9 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("organizacion",request.params(":idOrg"));
+        //Aca habria que agregar la parte de cada entidad especifica juridica/base
         modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
+        modelo.put("categoriasEntidadJuridicaDisponibles", Arrays.asList(CategoriaEntidadJuridica.values()));
         return new ModelAndView(modelo, "formulario-creacion-entidades.html.hbs");
     }
 

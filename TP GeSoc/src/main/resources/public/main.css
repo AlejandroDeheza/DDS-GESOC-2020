@@ -51,3 +51,7 @@ footer.fondo-gris {
 .juridica-seleccionada:checked ~ .info-juridica{
     overflow: visible;
 }
+
+.hide{
+    display: none;
+}
