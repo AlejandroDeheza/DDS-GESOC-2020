@@ -34,22 +34,38 @@ public class OperacionesController {
         return new ModelAndView(null,"crearOperaciones.html.hbs");
     }
 
-    public Object getOperacion(Request request, Response response, TemplateEngine engine) {
-        if(!new UsuariosController().estaLogueado(request,response)){
+    public ModelAndView getOperacion(Request request, Response response) {
+        /*if (!new UsuariosController().estaLogueado(request, response)) {
             response.redirect("/login");
-        }
+            return null;
+        }*/
 
-        int idOperacion = Integer.parseInt(request.queryParams(":idOperacion"));
+        Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 
-        try{
+        try {
             OperacionDeEgreso compra = RepositorioCompras.instance().buscar(idOperacion);
-            return compra != null ?
-                    engine.render(new ModelAndView(compra, "detalle-operacion.html.hbs"))
-                    : null;
-        }catch(NumberFormatException e){
+            if (compra != null) {
+                Map<String, Object> detalleCompra = new HashMap<>();
+
+                detalleCompra.put("compra", compra);
+                detalleCompra.put("items", compra.getItems());
+                detalleCompra.put("documentoComercial", compra.getDocumentoComercial());
+                detalleCompra.put("proveedor", compra.getProveedor());
+                detalleCompra.put("presupuestos", compra.getPresupuestos());
+                detalleCompra.put("presupuestoElegido", compra.getPresupuestoElegido());
+                detalleCompra.put("revisores", compra.getRevisores());
+                detalleCompra.put("validaciones", compra.getValidaciones());
+                detalleCompra.put("etiquetas", compra.getEtiquetas());
+                detalleCompra.put("presupuestosMinimos", compra.getPresupuestosMinimos());
+                return new ModelAndView(detalleCompra, "detalle-operacion.html.hbs");
+            }
+        } catch (NumberFormatException e) {
             response.status(400);
-            System.out.println("El id ingresado (" + idOperacion +") no es un número");
-            return "Bad Request";
+            System.out.println("El id ingresado (" + idOperacion + ") no es un número");
+           // return "Bad Request";
+            return null;
         }
+        //Putea sin este return
+        return null;
     }
 }

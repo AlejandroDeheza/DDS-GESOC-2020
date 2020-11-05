@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Embeddable
 public class EtiquetaOperacion {
-	
+
 	@Column(name = "etiqueta")
 	public String texto;
 	
@@ -14,6 +14,7 @@ public class EtiquetaOperacion {
 	public void setTexto(String textoDeLaEtiqueta) {
 		texto=textoDeLaEtiqueta.toUpperCase();
 	}
+	public String getTexto() { return texto; }
 	
 	public EtiquetaOperacion() {}
 }

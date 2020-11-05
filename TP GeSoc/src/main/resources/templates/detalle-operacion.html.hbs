@@ -3,29 +3,39 @@
 {{/partial}}
 
 {{# partial "contenido" }}
-    <section>
+    <section class="fondo-gris">
         <div>
+            {{#compra}}
             <span>Id:</span><span>{{id}}</span>
+            {{/compra}}
         </div>
         <div>
             <span>Items:</span>
             <ul>
             {{#items}}
-                <li>{{nombre}}</li>
+                <li>{{descripcion}}</li>
             {{/items}}
             </ul>
         </div>
         <div>
-            <span>Documento Comercial:</span><span>{{documentoComercial}}</span>
+            {{#documentoComercial}}
+            <span>Documento Comercial:</span><span>{{id}}</span>
+            {{/documentoComercial}}
         </div>
         <div>
+            {{#compra}}
             <span>Fecha de Operacion:</span><span>{{fechaOperacion}}</span>
+            {{/compra}}
         </div>
         <div>
+            {{#compra}}
             <span>Medio de Pago:</span><span>{{medio}}</span>
+            {{/compra}}
         </div>
         <div>
-            <span>Proveedor:</span><span>{{proveedor}}</span>
+            {{#proveedor}}
+            <span>Proveedor:</span><span>{{razonSocial}}</span>
+            {{/proveedor}}
         </div>
         <div>
             <span>Presupuestos:</span>
@@ -37,10 +47,9 @@
         </div>
         <div>
             <!--Ver que onda con esto porke no puedo hacer display del objeto Presupuesto /-->
-            <span>Presupuesto Elegido:</span><span>{{presupuestoElegido}}</span>
-        </div>
-        <div>
-            <span>Presupuesto Elegido:</span><span>{{presupuestoElegido}}</span>
+            {{#presupuestoElegido}}
+            <span>Presupuesto Elegido:</span><span>{{id}}</span>
+            {{/presupuestoElegido}}
         </div>
         <div>
             <span>Revisores:</span>
@@ -67,10 +76,14 @@
             </ul>
         </div>
         <div>
+            {{#compra}}
             <span>Presupuestos Minimos:</span><span>{{presupuestosMinimos}}</span>
+            {{/compra}}
         </div>
         <div>
+            {{#compra}}
             <span>Estado de la Operacion:</span><span>{{estado}}</span>
+            {{/compra}}
         </div>
     </section>
 {{/partial}}

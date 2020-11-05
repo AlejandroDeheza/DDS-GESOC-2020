@@ -49,7 +49,7 @@ public final class RepositorioCompras implements WithGlobalEntityManager {
 		entityManager().remove(compra);
 	}
 
-	public OperacionDeEgreso buscar(int id){
+	public OperacionDeEgreso buscar(long id){
 		return entityManager().find(OperacionDeEgreso.class, id);
 	}
 	

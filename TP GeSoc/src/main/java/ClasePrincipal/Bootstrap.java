@@ -216,7 +216,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
     private void agregarUsuarios() {
         BuilderUsuario builderUsuario = new BuilderUsuario();
         builderUsuario.setUsername("Goner");
-        builderUsuario.setPassword("LaWeaFome123");
+        builderUsuario.setPassword("Tuvieja123");
         builderUsuario.setTipo(TipoUsuario.ADMIN);
         Usuario nuevoUsuario = builderUsuario.crearUsuario();
         nuevoUsuario.recibirMensaje(new Mensaje("Hola, ¿como va?"));

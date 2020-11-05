@@ -17,7 +17,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.staticFileLocation("/public");
 
 		//Lleno la base con datos iniciales
-		//new Bootstrap().run();
+		new Bootstrap().run();
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 	     
@@ -38,7 +38,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/organizaciones/:idOrg/entidades/nueva", (request, response) -> entidadController.getFormEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadController.getEntidad(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.getOperaciones(request,response), engine);
-		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response,engine));
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
 		Spark.get("/inbox", (request, response) -> usuarioController.getBandejaDeMensajes(request,response),engine);
 
 
