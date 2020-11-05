@@ -11,11 +11,20 @@ import java.util.Map;
 
 public class OrganizacionesController {
 
-    public ModelAndView getFormOrganizaciones() {
+    public ModelAndView getFormOrganizaciones(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
         return null;
     }
 
-    public ModelAndView getOrganizaciones() {
+    public ModelAndView getOrganizaciones(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
 
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las organizaciones
@@ -25,6 +34,10 @@ public class OrganizacionesController {
     }
 
     public ModelAndView getOrganizacion(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
 
         Map<String, Object> modelo = new HashMap<>();
 

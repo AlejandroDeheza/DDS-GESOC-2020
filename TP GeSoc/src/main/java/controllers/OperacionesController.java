@@ -16,6 +16,10 @@ public class OperacionesController {
 
 
     public ModelAndView getOperaciones(Request request, Response response) {
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las operaciones relacionadas a la entidad actual
         modelo.put("operaciones", RepositorioCompras.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));

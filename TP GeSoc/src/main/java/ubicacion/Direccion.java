@@ -14,5 +14,20 @@ public class Direccion {
 		this.piso = unPiso;
 		this.depto = unDepto;
 	}
-	
+
+	public String getCalle() {
+		return calle;
+	}
+
+	public String getAltura() {
+		return altura;
+	}
+
+	public String getPiso() {
+		return piso;
+	}
+
+	public String getDepto() {
+		return depto;
+	}
 }

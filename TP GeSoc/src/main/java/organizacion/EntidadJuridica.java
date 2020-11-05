@@ -44,12 +44,28 @@ public class EntidadJuridica extends Entidad {
 		this.codInscIGJ=codInscIGJ;
 		this.categoriaEntidadJuridica=categoriaEntidadJuridica;
 	}
-
-
 	public void asociarEntidadBase(EntidadBase entidadB){
 		this.categoriaEntidad.asociarNuevaEntidadBase(entidadB, this);
 	}
-	
-	
+
+	public String getRazonSocial(){
+		return razonSocial;
+	}
+
+	public int getCuit() {
+		return cuit;
+	}
+
+	public DireccionPostal getDireccionPostal() {
+		return direccionPostal;
+	}
+
+	public int getCodInscIGJ() {
+		return codInscIGJ;
+	}
+
+	public CategoriaEntidadJuridica getCategoriaEntidadJuridica() {
+		return categoriaEntidadJuridica;
+	}
 }
 

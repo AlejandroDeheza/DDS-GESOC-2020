@@ -29,10 +29,13 @@ public class UsuariosController {
     }
 
     public ModelAndView closeSession(Request request, Response response){
+
+
         request.session().removeAttribute("idUsuario");
         response.redirect("/");
         return null;
     }
+
     public ModelAndView handleSession(Request request, Response response){
 
         String password = request.queryParams("password");

@@ -39,4 +39,11 @@ public class EntidadBase extends Entidad{
 			entidadJuridica = entidadJ;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public EntidadJuridica getEntidadJuridica() {
+		return entidadJuridica;
+	}
 }

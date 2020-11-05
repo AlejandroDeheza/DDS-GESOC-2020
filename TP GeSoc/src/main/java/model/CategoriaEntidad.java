@@ -43,6 +43,9 @@ public class CategoriaEntidad {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	public String getDescripcion(){
+		return descripcion;
+	}
 
 	public void agregarNuevoEgreso(Entidad entidad, OperacionDeEgreso egreso) {
 		comportamientos.forEach(c -> c.alAgregarEgreso(entidad, egreso));

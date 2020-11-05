@@ -32,7 +32,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/login/:status", (request, response) -> usuarioController.getFormLogin(request,response), engine);
 
 		//Consulta sobre objetos
-		Spark.get("/organizaciones", (request, response) -> organizacionController.getOrganizaciones(), engine);
+		Spark.get("/organizaciones", (request, response) -> organizacionController.getOrganizaciones(request,response), engine);
 		Spark.get("/organizaciones/:idOrg", (request, response) -> organizacionController.getOrganizacion(request, response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.getEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/nueva", (request, response) -> entidadController.getFormEntidades(request,response), engine);
@@ -48,10 +48,9 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		//Creacion de objetos
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(request,response), engine);
-		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(), engine);
+		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(request, response), engine);
 
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
-		//TODO -- Hacer el handleSession cuando Roly suba lo suyo.
 		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response));
 		Spark.post("/cerrarSesion", (request, response) -> usuarioController.closeSession(request,response));
 	     

@@ -2,20 +2,51 @@
     <title>Consultorea.me - Nueva entidad</title>
 {{/partial}}
 
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+
 {{# partial "contenido" }}
 
     <section class="fondo-gris">
         <h2>Nueva entidad</h2>
         <form action="/organizaciones/{{organizacion}}/entidades" method="POST">
             <div class="campo">
-                <span class="nombre-campo">Nombre ficticio:</span><input type="text" name="nombre" placeholder="Ingrese nombre">
+                <span class="nombre-campo">Nombre ficticio: </span>
+                <input type="text" name="nombre" placeholder="Ingrese nombre">
             </div>
             <div class="campo">
-                <span class="nombre-campo">Tipo (base/juridica)</span><input type="text" name="tipo" >
+                <span class="nombre-campo">Tipo: </span>
+                <span class="nombre-campo">Base</span>
+                <input class="base-seleccionada" type="radio" name="tipo" value="Base" >
+                <span class="nombre-campo">Juridica</span>
+                <input class="juridica-seleccionada" type="radio" name="tipo" value="Juridica">
+                <div class="info-juridica">Info para cargar base</div>
+                <div class="info-base">Info para cargar juridica</div>
             </div>
+
+                <!--<div class="campo">
+                    <span class="nombre-campo">Categoria</span>
+                    <input list="Categorias">
+
+                    <datalist id="Categorias">
+                        {{#categoriasDisponibles}}
+                        <option value={{descripcion}}>
+                        {{/categoriasDisponibles}}
+                    </datalist>
+                </div>-->
+
             <div class="campo">
-                <span class="nombre-campo">Categoria</span><input type="text" name="categoria" >
+                <span class="nombre-campo">Categoria: </span>
+                <select name="categoria">
+                    {{#categoriasDisponibles}}
+                         <option value={{id}}>{{descripcion}}</option>
+                     {{/categoriasDisponibles}}
+                </select>
             </div>
+
+
+
             <input type="submit" value="Crear entidad">
         </form>
     </section>

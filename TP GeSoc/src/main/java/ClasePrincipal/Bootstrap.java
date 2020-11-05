@@ -7,6 +7,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
 import paymentMethods.IDMedioDePago;
+import repositorios.RepositorioCategoriasDeEntidades;
 import repositorios.RepositorioOrganizaciones;
 import repositorios.RepositorioUsuarios;
 import ubicacion.Direccion;
@@ -236,6 +237,17 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
 
             List<Organizacion> organizaciones = crearLista2Organizaciones();
             RepositorioOrganizaciones.instance().agregarOrganizaciones(organizaciones);
+
+            //Para probar listado
+            CategoriaEntidad cat1 = new CategoriaEntidad();
+            CategoriaEntidad cat2 = new CategoriaEntidad();
+            CategoriaEntidad cat3 = new CategoriaEntidad();
+            cat1.setDescripcion("CAT1");
+            cat2.setDescripcion("CAT2");
+            cat3.setDescripcion("CAT3");
+            RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(cat1);
+            RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(cat2);
+            RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(cat3);
         });
     }
 }

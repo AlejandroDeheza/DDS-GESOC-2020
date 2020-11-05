@@ -36,3 +36,18 @@ footer.fondo-gris {
     margin-right: auto;
     width: 26%;
 }
+
+.info-base {
+    overflow: hidden;
+}
+.info-juridica {
+    overflow: hidden;
+}
+
+.base-seleccionada:checked ~ .info-base{
+    overflow: visible;
+}
+
+.juridica-seleccionada:checked ~ .info-juridica{
+    overflow: visible;
+}

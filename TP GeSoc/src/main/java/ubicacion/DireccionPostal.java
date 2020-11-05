@@ -14,6 +14,10 @@ public class DireccionPostal {
 		return this.ubicacion;
 	}
 
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}

@@ -7,6 +7,7 @@ import organizacion.Entidad;
 import organizacion.EntidadBase;
 import organizacion.EntidadJuridica;
 import organizacion.Organizacion;
+import repositorios.RepositorioCategoriasDeEntidades;
 import repositorios.RepositorioEntidades;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
@@ -19,12 +20,22 @@ import java.util.Map;
 public class EntidadesController implements WithGlobalEntityManager, TransactionalOps {
 
     public ModelAndView getFormEntidades(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
         Map<String, Object> modelo = new HashMap<>();
-        modelo.put("organizacion",request.params(":idOrg") );
+        modelo.put("organizacion",request.params(":idOrg"));
+        modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
         return new ModelAndView(modelo, "formulario-creacion-entidades.html.hbs");
     }
 
     public ModelAndView getEntidades(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
 
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg") ));
@@ -33,18 +44,28 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
     }
 
     public ModelAndView getEntidad(Request request, Response response) {
-        Map<String, Object> modelo = new HashMap<>();
-//        modelo.put("entidad", RepositorioEntidades.instance().obtenerEntidades("id_entidad = " + request.params(":idEntidad")));
-        modelo.put("entidad",RepositorioEntidades.instance().obtenerEntidad(Long.parseLong(request.params(":idEntidad"))));
 
-//        Entidad entidad = RepositorioEntidades.instance().obtenerEntidad(Long.parseLong(request.params(":idEntidad")));
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
+        Map<String, Object> modelo = new HashMap<>();
+
+        //modelo.put("entidad",RepositorioEntidades.instance().obtenerEntidad(Long.parseLong(request.params(":idEntidad"))));
+
         EntidadBase entidadBase = RepositorioEntidades.instance().obtenerEntidadBase(Long.parseLong(request.params(":idEntidad")));
 
         if(entidadBase != null){
             modelo.put("entidadBase",entidadBase);
+            modelo.put("categoria",entidadBase.categoriaEntidad);
+            modelo.put("entidadJuridicaAsociada", entidadBase.getEntidadJuridica());
         }
         else{
-            modelo.put("entidadJuridica",RepositorioEntidades.instance().obtenerEntidadJuridica(Long.parseLong(request.params(":idEntidad"))));
+            EntidadJuridica entidadJuridica = RepositorioEntidades.instance().obtenerEntidadJuridica(Long.parseLong(request.params(":idEntidad")));
+            modelo.put("entidadJuridica",entidadJuridica);
+            modelo.put("categoria",entidadJuridica.categoriaEntidad);
+            modelo.put("direccion",entidadJuridica.getDireccionPostal().getDireccion());
+            modelo.put("ubicacion",entidadJuridica.getDireccionPostal().getUbicacion());
         }
 
         return new ModelAndView(modelo, "entidad.html.hbs");
@@ -52,6 +73,11 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
 
     public ModelAndView crearEntidad(Request request, Response response){
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
         Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
         String nombre = request.queryParams("nombre");
         String tipo = request.queryParams("tipo");

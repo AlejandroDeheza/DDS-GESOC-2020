@@ -5,10 +5,33 @@
 {{# partial "contenido" }}
     <section class="fondo-gris">
         {{#entidadBase}}
-            <h2>EntidadBase:{{nombreFicticio}}</h2>
+             <li>Tipo entidad: base</li>
+             <li>Nombre ficticio:{{nombreFicticio}}</li>
+             {{#categoria}}
+               <li>Categoria: {{descripcion}}</li>
+             {{/categoria}}
+             <li>Descripción :{{descripcion}}</li>
+             {{#entidadJuridicaAsociada}}
+                 <li>Entidad juridica asociada:<a href="{{id}}">{{nombreFicticio}}</a></li>
+             {{/entidadJuridicaAsociada}}
         {{/entidadBase}}
+
         {{#entidadJuridica}}
-            <h2>EntidadJuridica:{{nombreFicticio}}</h2>
+            <li>Tipo entidad: juridica</li>
+            <li>Nombre ficticio:{{nombreFicticio}}</li>
+            {{#categoria}}
+                <li>Categoria: {{descripcion}}</li>
+            {{/categoria}}
+            <li>Razon social: {{razonSocial}}</li>
+            <li>CUIT: {{cuit}}</li>
+            <li>Código inscripción IGJ: {{codInscIGJ}}</li>
+            <li>Categoria jurídica: {{categoriaEntidadJuridica}}</li>
+            {{#ubicacion}}
+                <li>Ubicacion: {{pais}} - {{provincia}} - {{ciudad}}</li>
+            {{/ubicacion}}
+            {{#direccion}}
+                <li>Direccion: {{calle}} {{altura}} {{piso}} {{depto}}</li>
+            {{/direccion}}
         {{/entidadJuridica}}
     </section>
 {{/partial}}

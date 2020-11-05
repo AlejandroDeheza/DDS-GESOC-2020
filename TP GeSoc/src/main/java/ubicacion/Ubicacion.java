@@ -14,4 +14,15 @@ public class Ubicacion {
 		this.ciudad = ciudad;
 	}
 
+	public String getPais() {
+		return pais;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
 }

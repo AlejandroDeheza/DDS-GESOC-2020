@@ -41,7 +41,6 @@ public abstract class Entidad {
 		return egresos.stream().filter(egreso -> egreso.getEtiquetas().stream().anyMatch(eti -> eti.texto.equals(etiqueta.texto))).collect(Collectors.toList());
 	}
 	
-	
 	public BigDecimal gastosDeEtiqueta(EtiquetaOperacion etiqueta) {
 		return this.egresosConEtiqueta(etiqueta).stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
 	}
@@ -60,6 +59,9 @@ public abstract class Entidad {
 
 	public Long getId(){
 		return id;
+	}
+	public CategoriaEntidad getCategoriaEntidad(){
+		return categoriaEntidad;
 	}
 
 	public void setNombreFicticio(String nombreFicticio) {
