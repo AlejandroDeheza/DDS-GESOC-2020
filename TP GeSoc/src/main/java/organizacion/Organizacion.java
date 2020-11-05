@@ -16,7 +16,7 @@ public class Organizacion {
 	private Long id;
 	
 	
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.PERSIST})
 	@JoinColumn(name = "entidad_organizacion")
 	private List<Entidad> entidades = new ArrayList<>();
 	

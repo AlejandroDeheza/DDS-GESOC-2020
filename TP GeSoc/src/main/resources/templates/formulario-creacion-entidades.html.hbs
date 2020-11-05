@@ -13,30 +13,56 @@
         <form action="/organizaciones/{{organizacion}}/entidades" method="POST">
             <div class="campo">
                 <span class="nombre-campo">Nombre ficticio: </span>
-                <input type="text" name="nombre" placeholder="Ingrese un Nombre">
+                <input type="text" name="nombreFicticio" placeholder="Ingrese un Nombre">
             </div>
-            <input type="radio" name="tab" value="igotnone" onclick="show1();" />
+            <input type="radio" name="tipo" value="Juridica" onclick="show1();" />
             Juridica
-            <input type="radio" name="tab" value="igottwo" onclick="show2();" />
+            <input type="radio" name="tipo" value="Base" onclick="show2();" />
             Base
             <div class="campo">
                 <div class="hide" id="div1" class="info-juridica">
-                    <input type="text" name="razon-social-juridica" placeholder="Ingrese Razon Social">
-                    <input type="number" name="cuit-juridica" placeholder="Ingrese Cuit">
-                    <input type="number" name="codigo-igj-juridica" placeholder="Ingrese Codigo de Inscripcion IGJ">
+                    <span class="nombre-campo">Razón social: </span>
+                    <input type="text" name="razon-social-juridica" placeholder="Ingrese razon Social">
+                    <span class="nombre-campo">CUIT: </span>
+                    <input type="number" name="cuit-juridica" placeholder="Ingrese CUIT">
+                    <span class="nombre-campo">Código de inscripción IGJ: </span>
+                    <input type="number" name="codigo-igj-juridica" placeholder="Ingrese codigo de inscripción IGJ">
                     <div>
-                        <span class="nombre-campo">Categoria Entidad Juridica: </span>
+                        <span class="nombre-campo">Categoria de entidad juridica: </span>
                         <select name="categoria-entidad-juridica">
                             {{#categoriasEntidadJuridicaDisponibles}}
                                 <option>{{DisplayName}}</option>
                             {{/categoriasEntidadJuridicaDisponibles}}
                         </select>
                     </div>
+                    <span class="nombre-campo">País: </span>
+                    <input type="text" name="pais" placeholder="Ingrese país">
+                    <span class="nombre-campo">Provincia: </span>
+                    <input type="text" name="provincia" placeholder="Ingrese provincia">
+                    <span class="nombre-campo">Ciudad: </span>
+                    <input type="text" name="ciudad" placeholder="Ingrese ciudad">
+                    <span class="nombre-campo">Calle: </span>
+                    <input type="text" name="calle" placeholder="Ingrese calle">
+                    <span class="nombre-campo">Altura: </span>
+                    <input type="number" name="altura" placeholder="Ingrese altura">
+                    <span class="nombre-campo">Piso: </span>
+                    <input type="number" name="piso" placeholder="Ingrese piso">
+                    <span class="nombre-campo">Departamento: </span>
+                    <input type="text" name="departamento" placeholder="Ingrese departamento">
+
                 </div>
 
                 <div class="hide" id="div2" class="info-base">
-                    <input type="text" name="descripcion-base" placeholder="Ingrese Descripcion">
+                    <span class="nombre-campo">Descripción: </span>
+                    <input type="text" name="descripcion-base" placeholder="Ingrese descripción">
                     <!--Aca falta la parte de asociarla a una entidad juridica-->
+                    <span class="nombre-campo">Entidad juridica asociada: </span>
+                    <select name="entidad-juridica-asociada">
+                        <option value="Ninguna" selected>Ninguna</option>
+                        {{#entidadesJuridicasDisponibles}}
+                            <option value={{id}}>{{nombreFicticio}}</option>
+                        {{/entidadesJuridicasDisponibles}}
+                    </select>
                 </div>
             </div>
 

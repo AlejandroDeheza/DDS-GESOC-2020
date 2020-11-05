@@ -67,5 +67,25 @@ public class EntidadJuridica extends Entidad {
 	public CategoriaEntidadJuridica getCategoriaEntidadJuridica() {
 		return categoriaEntidadJuridica;
 	}
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public void setCuit(int cuit) {
+		this.cuit = cuit;
+	}
+
+	public void setDireccionPostal(DireccionPostal direccionPostal) {
+		this.direccionPostal = direccionPostal;
+	}
+
+	public void setCodInscIGJ(int codInscIGJ) {
+		this.codInscIGJ = codInscIGJ;
+	}
+
+	public void setCategoriaEntidadJuridica(CategoriaEntidadJuridica categoriaEntidadJuridica) {
+		this.categoriaEntidadJuridica = categoriaEntidadJuridica;
+	}
 }
 

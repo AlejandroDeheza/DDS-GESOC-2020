@@ -48,6 +48,21 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
 		return entidadesJuridicas;
 	}
 
+
+	public List<EntidadJuridica> obtenerTodasLasEntidadesJuridicas(){
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<EntidadJuridica> entidadesJuridicas = session.createQuery("FROM EntidadJuridica").list();
+		return entidadesJuridicas;
+	}
+
+	public List<EntidadBase> obtenerTodasLasEntidadesBase(){
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List<EntidadBase> entidadesBase = session.createQuery("FROM EntidadBase").list();
+		return entidadesBase;
+	}
+
 	public List<Entidad> obtenerEntidades(String condicion){
 		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
 		Session session = sessionFactory.openSession();

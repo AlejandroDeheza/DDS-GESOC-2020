@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import model.OperacionDeEgreso;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -59,6 +60,10 @@ public class RepositorioCategoriasDeEntidades implements WithGlobalEntityManager
 		List<CategoriaEntidad> categoriasDelSistema = session.createQuery("FROM CategoriaEntidad WHERE " + query).list();
 		return categoriasDelSistema;
 		
+	}
+
+	public CategoriaEntidad buscar(long id){
+		return entityManager().find(CategoriaEntidad.class, id);
 	}
 
 }

@@ -18,9 +18,10 @@ public abstract class Entidad {
 	@Column(name = "id_entidad")
 	public Long id;
 
+	/*
 	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_organizacion", referencedColumnName = "id_organizacion")
-	public Organizacion organizacion;
+	public Organizacion organizacion;*/
 
 	@Column(name = "nombre_ficticio")
 	public String nombreFicticio;
@@ -66,5 +67,13 @@ public abstract class Entidad {
 
 	public void setNombreFicticio(String nombreFicticio) {
 		this.nombreFicticio = nombreFicticio;
+	}
+
+	/*public void setOrganizacion(Organizacion organizacion) {
+		this.organizacion = organizacion;
+	}*/
+
+	public void setEgresos(List<OperacionDeEgreso> egresos) {
+		this.egresos = egresos;
 	}
 }

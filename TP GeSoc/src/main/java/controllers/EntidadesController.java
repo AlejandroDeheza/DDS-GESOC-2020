@@ -1,6 +1,7 @@
 package controllers;
 
 import model.CategoriaEntidad;
+import model.MercadoLibreApi;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
@@ -10,6 +11,9 @@ import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import ubicacion.Direccion;
+import ubicacion.DireccionPostal;
+import ubicacion.Ubicacion;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,6 +32,9 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         //Aca habria que agregar la parte de cada entidad especifica juridica/base
         modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
         modelo.put("categoriasEntidadJuridicaDisponibles", Arrays.asList(CategoriaEntidadJuridica.values()));
+        modelo.put("entidadesJuridicasDisponibles", RepositorioEntidades.instance().obtenerTodasLasEntidadesJuridicas());
+
+        //TODO - ¿deberia enviarse la info de la API para generar un listado que permita cargar la ubicacion?
         return new ModelAndView(modelo, "formulario-creacion-entidades.html.hbs");
     }
 
@@ -73,51 +80,71 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
 
     public ModelAndView crearEntidad(Request request, Response response){
-
+        System.out.println("Entra aca");
         if(!new UsuariosController().estaLogueado(request,response)){
             response.redirect("/login");
         }
 
-        Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
-        String nombre = request.queryParams("nombre");
         String tipo = request.queryParams("tipo");
-        String categoria  = request.queryParams("categoria");
-        Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
-
-        Entidad nuevaEntidad;
-
-        CategoriaEntidad nuevaCategoria = new CategoriaEntidad();
-        nuevaCategoria.setDescripcion(categoria);
+        String nombreFicticio = request.queryParams("nombreFicticio");
+        Long idCategoria = Long.parseLong(request.queryParams("categoria"));
 
         if(tipo.equals("Base")){
-             nuevaEntidad = new EntidadBase();
+            EntidadBase nuevaEntidad = new EntidadBase();
+            nuevaEntidad.setNombreFicticio(nombreFicticio);
+            nuevaEntidad.setCategoriaEntidad(RepositorioCategoriasDeEntidades.instance().buscar(idCategoria));
+            nuevaEntidad.setDescripcion(request.queryParams("descripcion-base"));
+            if (!request.queryParams("entidad-juridica-asociada").equals("Ninguna"))
+            {
+                nuevaEntidad.setEntidadJuridica(RepositorioEntidades.instance().obtenerEntidadJuridica(Long.parseLong(request.queryParams("entidad-juridica-asociada"))));
+            }
+
+            Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
+            Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
+            organizacion.agregarEntidad(nuevaEntidad);
+
+            withTransaction(() ->{
+                RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
+                RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
+            });
+
+            response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
+
+        }
+        else if (tipo.equals("Juridica")){
+            EntidadJuridica nuevaEntidad = new EntidadJuridica();
+            nuevaEntidad.setNombreFicticio(nombreFicticio);
+            nuevaEntidad.setCategoriaEntidad(RepositorioCategoriasDeEntidades.instance().buscar(idCategoria));
+            nuevaEntidad.setCategoriaEntidadJuridica(CategoriaEntidadJuridica.valueOf(request.queryParams("categoria-entidad-juridica")));
+            nuevaEntidad.setCodInscIGJ(Integer.parseInt(request.queryParams("codigo-igj-juridica")));
+            nuevaEntidad.setCuit(Integer.parseInt(request.queryParams("cuit-juridica")));
+            nuevaEntidad.setRazonSocial(request.queryParams("razon-social-juridica"));
+
+            String pais = request.queryParams("pais");
+            String provincia = request.queryParams("provincia");
+            String ciudad = request.queryParams("ciudad");
+            String calle = request.queryParams("calle");
+            String altura = request.queryParams("altura");
+            String piso = request.queryParams("piso");
+            String departamento = request.queryParams("departamento");
+            nuevaEntidad.setDireccionPostal(new DireccionPostal(new Direccion(calle,altura,piso,departamento), new Ubicacion(pais,provincia,ciudad)));
+            //TODO - Los datos tendrian que salir de la API, ¿habra que hacer alguna conversion aca?
+
+            Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
+            Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
+            organizacion.agregarEntidad(nuevaEntidad);
+
+
+            withTransaction(() ->{
+                RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
+                RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
+            });
+            response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
         }
         else{
-             nuevaEntidad = new EntidadJuridica();
+            throw new RuntimeException("No se ha seleccionado tipo de entidad");
         }
 
-        nuevaEntidad.setNombreFicticio(nombre);
-        nuevaEntidad.setCategoriaEntidad(nuevaCategoria);
-        organizacion.agregarEntidad(nuevaEntidad);
-
-        withTransaction(() ->{
-            RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
-            RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
-        });
-
-       /* Usuario usuario = getUsuarioLogueado(request);
-
-        if(usuario != null){
-            response.redirect("/login");
-        }
-
-       Entidad nueva = new Consultora(nombre,cantidadEmpleados);
-        withTransaction(() ->{
-            RepositorioConsultoras.instancia.agregar(nueva);
-            usuario.agregarConsultora(nueva);
-        });*/
-
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
         return null;
     }
 }

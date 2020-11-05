@@ -35,6 +35,7 @@ public class CategoriaEntidad {
 		this.comportamientos = comportamientos;
 		this.descripcion = texto.toUpperCase();
 	}
+
 	
 	public void setComportamientos(List<Comportamiento> comportamientos) {
 		this.comportamientos=comportamientos;
@@ -64,5 +65,12 @@ public class CategoriaEntidad {
 		
 		entidadBase.asociarAEntidadJuridica(entidadJuridica);
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public List<Comportamiento> getComportamientos() {
+		return comportamientos;
+	}
 }
