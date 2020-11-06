@@ -13,5 +13,8 @@ public class ValidarQueSeHayaElegidoElPresupuestoMasBarato extends ValidacionDeO
 	public boolean operacionValida(OperacionDeEgreso operacion) {
 		return operacion.getPresupuestosMinimos()==0 || operacion.menorPrecioDePresupuestos().equals(operacion.valorTotalDelPresupuestoElegido());
 	}
+	public ValidarQueSeHayaElegidoElPresupuestoMasBarato(){
+		this.descripcion = "Validar que se haya elegido el presupuesto más barato de los disponibles";
+	}
 
 }

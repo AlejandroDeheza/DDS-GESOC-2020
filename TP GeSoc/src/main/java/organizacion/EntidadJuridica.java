@@ -1,11 +1,7 @@
 package organizacion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
 
-import model.CategoriaEntidad;
 import ubicacion.DireccionPostal;
 
 

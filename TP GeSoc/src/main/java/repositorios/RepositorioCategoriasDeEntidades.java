@@ -1,21 +1,13 @@
 package repositorios;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import model.OperacionDeEgreso;
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import comportamientoEntidad.Comportamiento;
-import model.CategoriaEntidad;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import organizacion.CategoriaEntidad;
 
 public class RepositorioCategoriasDeEntidades implements WithGlobalEntityManager {
 	//private List<CategoriaEntidad> categoriasDelSistema = new ArrayList<>();

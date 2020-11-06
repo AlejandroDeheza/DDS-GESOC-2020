@@ -21,8 +21,24 @@ public abstract class ValidacionDeOperaciones {
 	@GeneratedValue
 	@Column(name = "id_validacion")
 	private Long id;
-	
+
+	public String descripcion;
 	
 	public abstract boolean operacionValida(OperacionDeEgreso operacion);
 
+	public Long getId() {
+		return id;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

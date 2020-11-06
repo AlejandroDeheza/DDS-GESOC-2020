@@ -14,6 +14,10 @@ import spark.Request;
 import spark.Response;
 import spark.TemplateEngine;
 import usuarios.Usuario;
+import validacionesOperaciones.ValidacionDeOperaciones;
+import validacionesOperaciones.ValidarQueLaOperacionContengaTodosLosItems;
+import validacionesOperaciones.ValidarQueSeHayaElegidoElPresupuestoMasBarato;
+import validacionesOperaciones.ValidarQueTengaLaSuficienteCantidadDePresupuestos;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -92,6 +96,14 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
         IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
         int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
+
+        List<ValidacionDeOperaciones> validacionesActivas = new ArrayList<>();
+        if(request.queryParams("todosLosItems").equals("seleccionado"))
+            validacionesActivas.add(new ValidarQueLaOperacionContengaTodosLosItems());
+        if(request.queryParams("presupuestoBarato").equals("seleccionado"))
+            validacionesActivas.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
+        if(request.queryParams("cantidadMinima").equals("seleccionado"))
+            validacionesActivas.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 
         //Busco la etiqueta en el repositorio y la agrego a la lista.
         List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();

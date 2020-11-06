@@ -24,9 +24,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
     public Item crearItem(String descripcion, Double valor) {
@@ -198,17 +195,16 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         EntidadBase entidadBase = new EntidadBase("Jueves",null,"Me estoy muriendo del aburrimiento",null);
         entidades.get(1).asociarEntidadBase(entidadBase);
 
-        List<EntidadBase> eBase = new ArrayList<EntidadBase>();
-        eBase.add(entidadBase);
 
-        List<EntidadJuridica> eJuridica = new ArrayList<EntidadJuridica>();
+        List<Entidad> eJuridica = new ArrayList<>();
         eJuridica.add(entidades.get(0));
-        List<EntidadJuridica> eJuridica2 = new ArrayList<EntidadJuridica>();
+        List<Entidad> eJuridica2 = new ArrayList<>();
         eJuridica.add(entidades.get(1));
+        eJuridica.add(entidadBase);
 
-        listaOrganizaciones.add(new Organizacion("LaMejorOrganizacion",eJuridica,new ArrayList<EntidadBase>()));
+        listaOrganizaciones.add(new Organizacion("LaMejorOrganizacion","Una organización que es la mejor", eJuridica));
 
-        listaOrganizaciones.add(new Organizacion("RamaEsUnGrande",eJuridica2,eBase));
+        listaOrganizaciones.add(new Organizacion("RamaEsUnGrande","La organización de los pibes",eJuridica2));
 
         return listaOrganizaciones;
     }

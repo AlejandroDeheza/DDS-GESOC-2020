@@ -9,53 +9,55 @@
         <h2>Nueva operación de egreso</h2>
         <form action="/organizaciones/{{organizacion}}/entidades/{{entidad}}/operaciones" method="POST">
             <div class="campo">
-                <span class="nombre-campo">Fecha: </span>
-                <input type="date" name="fecha" placeholder="Ingrese fecha">
-            </div>
+                <span class="nombre-campo">Fecha: </span><br>
+                <input type="date" name="fecha">
+            </div><br>
             <div>
-               <span class="nombre-campo">Proveedor: </span>
+               <span class="nombre-campo">Proveedor: </span><br>
                <select name="proveedor">
                   {{#proveedores}}
                       <option value={{id}}>{{razonSocial}}</option>
                   {{/proveedores}}
                </select>
-            </div>
+            </div><br>
             <div>
-               <span class="nombre-campo">Documento comercial: </span>
+               <span class="nombre-campo">Documento comercial: </span><br>
                <select name="documentoComercial">
                   {{#tiposDocumentoComercial}}
                       <option>{{DisplayName}}</option>
                   {{/tiposDocumentoComercial}}
                </select>
-            </div>
+            </div><br>
             <div>
-               <span class="nombre-campo">Medio de pago: </span>
+               <span class="nombre-campo">Medio de pago: </span><br>
                <select name="medioDePago">
                   {{#mediosDePago}}
                        <option>{{displayName}}</option>
                   {{/mediosDePago}}
                </select>
-            </div>
+            </div><br>
             <div>
-               <span class="nombre-campo">Presupuestos mínimos </span>
+               <span class="nombre-campo">Presupuestos mínimos: </span><br>
                <input type="number" name="presupuestosMinimos" placeholder="Ejemplo: 1">
-            </div>
+            </div><br>
             <div>
-                <span class="nombre-campo">Etiqueta: </span>
+                <span class="nombre-campo">Etiqueta: </span><br>
                 <input list="etiquetas">
                 <datalist id="etiquetas">
                     {{#etiquetas}}
                         <option>{{texto}}</option>
                     {{/etiquetas}}
                 </datalist>
-
-                <!--select name="etiqueta">
-                    {{#etiquetas}}
-                        <option>{{texto}}</option>
-                    {{/etiquetas}}
-                </select-->
-            </div>
+            </div><br>
+            <div>
+                <span class="nombre-campo">Validaciones activas:</span><br>
+                <label><input type="checkbox" name="todosLosItems" value="seleccionado">Validar que la operación contenga todos los items del presupuesto elegido</label><br>
+                <label><input type="checkbox" name="presupuestoBarato" value="seleccionado">Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
+                <label><input type="checkbox" name="cantidadMinima" value="seleccionado">Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
+            </div><br><br>
+            <input type="submit" value="Crear operación">
         </form>
+
     </section>
     <!--<section>
         <h1>Items</h1>

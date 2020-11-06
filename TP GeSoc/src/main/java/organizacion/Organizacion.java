@@ -1,5 +1,4 @@
 package organizacion;
-import repositorios.RepositorioEntidades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,15 @@ public class Organizacion {
 	@JoinColumn(name = "entidad_organizacion")
 	private List<Entidad> entidades = new ArrayList<>();
 	
+	private String nombre;
 	private String descripcion;
 
 	public Organizacion() {}
 
-	public String getDescripcion(){
-		return descripcion;
+	public String getNombre(){
+		return nombre;
 	}
+	public String getDescripcion() {return descripcion;}
 	public Long getId(){return id;}
 	public void agregarEntidad(Entidad entidad){
 		entidades.add(entidad);
@@ -34,14 +35,20 @@ public class Organizacion {
 
 	/*private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
 	private List<EntidadBase> entidadesBase = new ArrayList<>();*/
-	
-	
-	public Organizacion(String descripcion,List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase) {
+
+
+	public Organizacion(String nombre, String descripcion, List<Entidad> entidades) {
+		this.entidades = entidades;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+
+	public Organizacion(String descripcion, List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase) {
 		if(!entidadesJuridicas.isEmpty())
 			this.entidades.addAll(entidadesJuridicas);
 		if(entidadesBase != null && !entidadesBase.isEmpty())
 			this.entidades.addAll(entidadesBase);
-		this.descripcion = descripcion;
+		this.nombre = descripcion;
 	}
 
 	/*public List<EntidadJuridica> getEntidadesJuridicas(){ return this.entidadesJuridicas; }

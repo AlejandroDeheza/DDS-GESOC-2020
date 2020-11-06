@@ -1,36 +1,15 @@
 package db;
 
-import static org.junit.Assert.*;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import comportamientoEntidad.Comportamiento;
-import model.CategoriaEntidad;
-import model.EstadoOperacion;
-import model.EtiquetaOperacion;
 import model.Item;
 import model.Moneda;
 import model.OperacionDeEgreso;
 import model.Presupuesto;
-import repositorios.RepositorioCategoriasDeEntidades;
-import repositorios.RepositorioCompras;
-import usuarios.Mensaje;
-import usuarios.TipoUsuario;
-import usuarios.Usuario;
 
 
 public class PersistenceTests extends AbstractPersistenceTest implements WithGlobalEntityManager {

@@ -1,7 +1,5 @@
 package controllers;
 
-import model.CategoriaEntidad;
-import model.MercadoLibreApi;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
@@ -50,7 +48,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         String categoriaSeleccionada = request.queryParams("categoria");
         if(categoriaSeleccionada!=null && !categoriaSeleccionada.equals("Cualquiera")) {
             List<Entidad> entidadesAMostrar = RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg"))
-                    .stream().filter(e -> e.getCategoriaEntidad().getId() == Long.parseLong(request.queryParams("categoria"))).collect(Collectors.toList());
+                    .stream().filter(e -> e.getCategoriaEntidad()!=null && e.getCategoriaEntidad().getId() == Long.parseLong(request.queryParams("categoria"))).collect(Collectors.toList());
             modelo.put("entidades",entidadesAMostrar);
         }
         else {

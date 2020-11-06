@@ -1,12 +1,6 @@
 package organizacion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
-
-import model.CategoriaEntidad;
-import model.OperacionDeEgreso;
 
 @Entity
 @Table(name = "entidades_base")

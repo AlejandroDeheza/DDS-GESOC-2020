@@ -2,7 +2,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import comportamientoEntidad.*;
 import exceptions.*;
 import model.*;
 import organizacion.*;
-import repositorios.RepositorioCategoriasDeEntidades;
 
 public class TestsCategoriasEntidades {
 	
