@@ -42,11 +42,18 @@
             </div>
             <div>
                 <span class="nombre-campo">Etiqueta: </span>
-                <select name="etiqueta">
+                <input list="etiquetas">
+                <datalist id="etiquetas">
                     {{#etiquetas}}
                         <option>{{texto}}</option>
                     {{/etiquetas}}
-                </select>
+                </datalist>
+
+                <!--select name="etiqueta">
+                    {{#etiquetas}}
+                        <option>{{texto}}</option>
+                    {{/etiquetas}}
+                </select-->
             </div>
         </form>
     </section>

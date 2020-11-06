@@ -40,9 +40,12 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("organizacion", request.params(":idOrg"));
         modelo.put("entidad", request.params("idEntidad"));
-        modelo.put("documentoComercial", Arrays.asList(TipoDocumentoComercial.values()));
-        modelo.put("medioDePago", Arrays.asList(IDMedioDePago.values()));
-        return new ModelAndView(null,"formulario-creacion-operaciones.html.hbs");
+        modelo.put("tiposDocumentoComercial", Arrays.asList(TipoDocumentoComercial.values()));
+        modelo.put("mediosDePago", Arrays.asList(IDMedioDePago.values()));
+        modelo.put("proveedores",RepositorioProveedores.instance().obtenerTodosLosProveedores());
+        List<EtiquetaOperacion> etiquetas = RepositorioEtiquetas.instance().obtenerTodasLasEtiquetas();
+        modelo.put("etiquetas",etiquetas);
+        return new ModelAndView(modelo,"formulario-creacion-operaciones.html.hbs");
     }
 
     public ModelAndView getOperacion(Request request, Response response) {

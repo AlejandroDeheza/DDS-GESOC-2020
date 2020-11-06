@@ -8,8 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import model.EtiquetaOperacion;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import organizacion.Organizacion;
 
 public class RepositorioEtiquetas implements WithGlobalEntityManager {
 	//public List<EtiquetaOperacion> etiquetasDelSistema = new ArrayList<>();
@@ -32,6 +35,21 @@ public class RepositorioEtiquetas implements WithGlobalEntityManager {
 		EtiquetaOperacion etiquetaAModificar = etiquetasDelSistema.stream().filter(etiqueta -> etiqueta.texto.equals(textoOriginal.toUpperCase())).collect(Collectors.toList()).get(0);
 		etiquetaAModificar.setTexto(textoNuevo);
 	}*/
+
+	public List<EtiquetaOperacion> obtenerTodasLasEtiquetas(){
+		SessionFactory sessionFactory = Persistence.createEntityManagerFactory("db").unwrap(SessionFactory.class);
+		Session session = sessionFactory.openSession();
+		List rows = session.createSQLQuery("SELECT DISTINCT etiqueta FROM Gesoc.dbo.etiquetas_operaciones").list();
+		List<EtiquetaOperacion> etiquetas = new ArrayList<>();
+		rows.forEach (
+			row -> {
+				EtiquetaOperacion etiquetaOperacion = new EtiquetaOperacion();
+				etiquetaOperacion.setTexto(row.toString());
+				etiquetas.add(etiquetaOperacion);
+			}
+		);
+		return etiquetas;
+	}
 
 	public void modificarEtiqueta(EtiquetaOperacion etiqueta) {
 		entityManager().merge(etiqueta);
