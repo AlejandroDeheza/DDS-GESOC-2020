@@ -14,7 +14,9 @@ public class EtiquetaOperacion {
 	public void setTexto(String textoDeLaEtiqueta) {
 		texto=textoDeLaEtiqueta.toUpperCase();
 	}
-	public String getTexto() { return texto; }
+	public String getTexto() {
+		return texto;
+	}
 	
 	public EtiquetaOperacion() {}
 }

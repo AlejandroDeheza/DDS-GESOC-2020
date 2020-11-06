@@ -41,4 +41,8 @@ public class RepositorioEtiquetas implements WithGlobalEntityManager {
 		entityManager().remove(etiqueta);
 	}
 
+	public EtiquetaOperacion encontrarEtiqueta(String texto) {
+		return entityManager().find(EtiquetaOperacion.class,texto);
+	}
+
 }

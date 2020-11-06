@@ -73,6 +73,16 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
 		return entidades;
 	}
 
+	public void actualizarEntidadBase(EntidadBase entidad) {
+		entityManager().merge(entidad);
+	}
+	public void actualizarEntidadJuridica(EntidadJuridica entidad) {
+		entityManager().merge(entidad);
+	}
+	public void actualizarEntidad(Entidad entidad) {
+		entityManager().merge(entidad);
+	}
+
 	public Entidad obtenerEntidad(long id){
 		return entityManager().find(Entidad.class,id);
 	}

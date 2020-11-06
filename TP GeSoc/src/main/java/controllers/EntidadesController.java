@@ -144,6 +144,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             String departamento = request.queryParams("departamento");
             nuevaEntidad.setDireccionPostal(new DireccionPostal(new Direccion(calle,altura,piso,departamento), new Ubicacion(pais,provincia,ciudad)));
             //TODO - Los datos tendrian que salir de la API, ¿habra que hacer alguna conversion aca?
+            //RAMA - Podriamos hacer algo con Js para que haya un dropdown list de lo q tenemos de la api.
 
             Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
             Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);

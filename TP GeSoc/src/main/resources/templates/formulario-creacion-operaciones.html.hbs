@@ -10,13 +10,13 @@
         <form action="/organizaciones/{{organizacion}}/entidades/{{entidad}}/operaciones" method="POST">
             <div class="campo">
                 <span class="nombre-campo">Fecha: </span>
-                <input type="date" name="nombreFicticio" placeholder="Ingrese fecha">
+                <input type="date" name="fecha" placeholder="Ingrese fecha">
             </div>
             <div>
                <span class="nombre-campo">Proveedor: </span>
                <select name="proveedor">
                   {{#proveedores}}
-                       <option>{{razonSocial}}</option>
+                      <option value={{id}}>{{razonSocial}}</option>
                   {{/proveedores}}
                </select>
             </div>
@@ -24,7 +24,7 @@
                <span class="nombre-campo">Documento comercial: </span>
                <select name="documentoComercial">
                   {{#tiposDocumentoComercial}}
-                       <option>{{razonSocial}}</option>
+                      <option>{{DisplayName}}</option>
                   {{/tiposDocumentoComercial}}
                </select>
             </div>
@@ -32,13 +32,13 @@
                <span class="nombre-campo">Medio de pago: </span>
                <select name="medioDePago">
                   {{#mediosDePago}}
-                       <option>{{medio}}</option>
+                       <option>{{displayName}}</option>
                   {{/mediosDePago}}
                </select>
             </div>
             <div>
                <span class="nombre-campo">Presupuestos mínimos </span>
-               <input type="text" name="presupuestosMinimo" placeholder="Ejemplo: 1">
+               <input type="number" name="presupuestosMinimos" placeholder="Ejemplo: 1">
             </div>
             <div>
                 <span class="nombre-campo">Etiqueta: </span>
@@ -53,6 +53,8 @@
     <!--<section>
         <h1>Items</h1>
          TODO // Hacer form para crear Items
+         TODO // Hacer form para cargar Validaciones
+         TODO // Hacer form para cargar mas de una etiqueta
         <form>
 
         </form>

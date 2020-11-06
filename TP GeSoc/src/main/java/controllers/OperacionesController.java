@@ -1,18 +1,24 @@
 package controllers;
 
-import model.OperacionDeEgreso;
-import repositorios.RepositorioCompras;
-import repositorios.RepositorioUsuarios;
+import medioDePago.MedioDePago;
+import model.*;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import organizacion.CategoriaEntidadJuridica;
+import organizacion.Entidad;
+import organizacion.Organizacion;
+import paymentMethods.IDMedioDePago;
+import repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateEngine;
 import usuarios.Usuario;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
-public class OperacionesController {
+public class OperacionesController implements WithGlobalEntityManager, TransactionalOps {
 
 
     public ModelAndView getOperaciones(Request request, Response response) {
@@ -34,7 +40,9 @@ public class OperacionesController {
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("organizacion", request.params(":idOrg"));
         modelo.put("entidad", request.params("idEntidad"));
-        return new ModelAndView(null,"crearOperaciones.html.hbs");
+        modelo.put("documentoComercial", Arrays.asList(TipoDocumentoComercial.values()));
+        modelo.put("medioDePago", Arrays.asList(IDMedioDePago.values()));
+        return new ModelAndView(null,"formulario-creacion-operaciones.html.hbs");
     }
 
     public ModelAndView getOperacion(Request request, Response response) {
@@ -72,7 +80,37 @@ public class OperacionesController {
         return null;
     }
     public ModelAndView crearOperacion(Request request, Response response){
-        //TODO - Implementar cuando esté hecho el formulario de creación
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
+        LocalDate fecha = LocalDate.parse(request.queryParams("fecha"));
+        Proveedor proveedor = entityManager().find(Proveedor.class, request.queryParams("proveedor"));
+        DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
+        IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
+        int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
+
+        //Busco la etiqueta en el repositorio y la agrego a la lista.
+        List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
+        etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));
+
+        // Me agrego por defecto a mi mismo como revisor.
+        List<Usuario> revisores = new ArrayList<Usuario>();
+        revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
+
+        OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso(null,docComercial,fecha,medioDePago,proveedor,null,
+                null,revisores,null,etiquetas,presupuestosMinimos,EstadoOperacion.PENDIENTE);
+
+        Long idEntidad = Long.valueOf(request.params(":idEntidad"));
+        Entidad entidad = RepositorioEntidades.instance().obtenerEntidad(idEntidad);
+        entidad.agregarOperacionDeEgreso(nuevaOperacion);
+
+        withTransaction(() ->{
+            RepositorioCompras.instance().agregarCompra(nuevaOperacion);
+            RepositorioEntidades.instance().actualizarEntidad(entidad);
+        });
+
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + nuevaOperacion.getId());
         return null;
     }
 }

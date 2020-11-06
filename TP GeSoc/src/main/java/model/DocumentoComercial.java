@@ -20,6 +20,9 @@ public class DocumentoComercial {
 		this.id = id;
 		this.tipoDoc=tipoDoc;
 	}
+	public DocumentoComercial(TipoDocumentoComercial tipoDoc){
+		this.tipoDoc=tipoDoc;
+	}
 	
 	public DocumentoComercial(){
 		

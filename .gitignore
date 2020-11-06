@@ -4,6 +4,7 @@
 bin
 generated*
 .settings
+.iml
 
 \TP GeSoc\src\main\resources\META-INF\
 persistence.xml

@@ -75,7 +75,7 @@ public class OperacionDeEgreso {
 
 	@Column(name = "presupuestos_minimos")
 	//Nico | wtf
-	private int presupuestosMinimos = 1;
+	private int presupuestosMinimos;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "estado_operacion")
