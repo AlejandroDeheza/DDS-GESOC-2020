@@ -118,8 +118,8 @@ public class OperacionDeEgreso {
 		return validacionesVigentes.stream().allMatch(validacion -> validacion.operacionValida(this));
 	}
 
-	public void notificarRevisores(String mensaje) {
-		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(mensaje + ", " + this.id)));
+	public void notificarRevisores(String asunto, String mensaje) {
+		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(asunto,mensaje + ", " + this.id,LocalDate.now())));
 	}
 
 	//---------------------------------------------------------------------------------------------------

@@ -11,6 +11,8 @@ import usuarios.Usuario;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class UsuariosController {
 
@@ -76,8 +78,18 @@ public class UsuariosController {
         if(estaLogueado(request,response)){
             usuarioLogeado = getUsuarioLogueado(request);
         }
+        else{
+            response.redirect("/login");
+        }
 
-        modelo.put("mensajes", usuarioLogeado.getMensajes());
+        String filtro = request.queryParams("filtro");
+
+        if(filtro!=null){
+            modelo.put("mensajes", usuarioLogeado.getMensajes().stream().
+                    filter(m -> m.getCuerpo().contains(filtro) || m.getAsunto().contains(filtro)).collect(Collectors.toList()));
+        }else{
+            modelo.put("mensajes", usuarioLogeado.getMensajes());
+        }
 
         return new ModelAndView(modelo, "inbox.html.hbs");
     }

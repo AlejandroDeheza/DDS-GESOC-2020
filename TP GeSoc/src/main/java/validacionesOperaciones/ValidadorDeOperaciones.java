@@ -29,11 +29,11 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 		
 		if(compra.esValida()) {
 			compra.setEstado(EstadoOperacion.APROBADA);
-			compra.notificarRevisores("La operacion fue validada correctamente");	
+			compra.notificarRevisores("Validacion compra Nº"+compra.getId(),"La operacion fue validada correctamente");
 		}
 		else {
 			compra.setEstado(EstadoOperacion.RECHAZADA);
-			compra.notificarRevisores("La operacion no es valida");
+			compra.notificarRevisores("Validacion compra Nº"+compra.getId(),"La operacion no es valida");
 		}
 		withTransaction(() ->{
 			RepositorioCompras.instance().actualizarCompra(compra);

@@ -2,6 +2,12 @@
     <title>GESOC - Mensajes</title>
 {{/partial}}
 
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+
 {{# partial "contenido" }}
     <section class="fondo-gris">
         <h2>Mensajes:</h2>
@@ -12,13 +18,33 @@
             <input type="submit" value="Buscar">
         </form>
 
-        <ul>
+        <table style=" table-layout: fixed;
+                       width: 100%;
+                       border-collapse: collapse;
+                       border: 3px solid #30377e;
+                       background: #9ba2a9;
+                       background: -moz-linear-gradient(top, #647077 0%, #a1b9c8 66%, #457ba0 100%);
+                       background: -webkit-linear-gradient(top, #86a3ba 0%, #859aac 66%, #5b8db7 100%);
+                       background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #6aa4cb 100%);
+                       border-bottom: 2px solid #444444;">
+            <tr>
+                <th>Asunto</th>
+                <th>Fecha</th>
+                <th>Cuerpo</th>
+            </tr>
             {{#mensajes}}
-                <li><a href="inbox/{{id}}">{{cuerpo}}</a></li>
+                <tr>
+                    <th style = "font-size: small">{{asunto}}</th>
+                    <th style = "font-size: small">{{fecha}}</th>
+                    <th style = "font-size: small">{{cuerpo}}</th>
+                </tr>
             {{/mensajes}}
-        </ul>
+        </table>
 
     </section>
+
+</html>
+
 {{/partial}}
 
 {{> layout.html.hbs }}

@@ -5,13 +5,13 @@
 
 {{# partial "contenido" }}
 
-    <section>
-        <form method="POST" action="/login">
-            <label for="fname">Username:</label><br>
-            <input type="text" placeholder="Ingrese su nombre de usuario"><br>
-            <label for="lname">Password:</label><br>
-            <input type="password" placeholder="Ingrese contraseña"><br><br>
-            <input type="submit" value="Submit">
+    <section class="fondo-gris">
+        <h2>Nueva operación de egreso</h2>
+        <form action="/organizaciones/{{organizacion}}/entidades/{{entidad}}/operaciones" method="POST">
+            <div class="campo">
+                <span class="nombre-campo">Fecha: </span>
+                <input type="date" name="nombreFicticio" placeholder="Ingrese fecha">
+            </div>
         </form>
     </section>
 

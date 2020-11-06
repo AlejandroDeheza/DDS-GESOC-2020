@@ -43,5 +43,18 @@ public class Presupuesto {
 	public List<Item> getItems() {
 		return this.items;
 	}
+
 	public Presupuesto() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public DocumentoComercial getDocumentoComercial() {
+		return documentoComercial;
+	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
 }

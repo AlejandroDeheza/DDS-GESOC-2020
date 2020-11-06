@@ -38,18 +38,19 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/organizaciones/:idOrg/entidades/nueva", (request, response) -> entidadController.getFormEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadController.getEntidad(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.getOperaciones(request,response), engine);
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
 		Spark.get("/inbox", (request, response) -> usuarioController.getBandejaDeMensajes(request,response),engine);
-
 
 		//Cuando quieras crear una entidad se te hace un display de las categorias existentes.
 		//Si queres agregar una categoria habria un boton de agregar.
 
 
 		//Creacion de objetos
-		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(request,response), engine);
+
 		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(request, response), engine);
 
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.crearOperacion(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response));
 		Spark.post("/cerrarSesion", (request, response) -> usuarioController.closeSession(request,response));

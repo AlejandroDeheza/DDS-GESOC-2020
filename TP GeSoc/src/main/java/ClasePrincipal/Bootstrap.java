@@ -17,16 +17,16 @@ import usuarios.BuilderUsuario;
 import usuarios.Mensaje;
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
-import validacionesOperaciones.ValidacionDeOperaciones;
-import validacionesOperaciones.ValidarQueLaOperacionContengaTodosLosItems;
-import validacionesOperaciones.ValidarQueSeHayaElegidoElPresupuestoMasBarato;
-import validacionesOperaciones.ValidarQueTengaLaSuficienteCantidadDePresupuestos;
+import validacionesOperaciones.*;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
     public Item crearItem(String descripcion, Double valor) {
@@ -219,9 +219,9 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         builderUsuario.setPassword("Tuvieja123");
         builderUsuario.setTipo(TipoUsuario.ADMIN);
         Usuario nuevoUsuario = builderUsuario.crearUsuario();
-        nuevoUsuario.recibirMensaje(new Mensaje("Hola, ¿como va?"));
-        nuevoUsuario.recibirMensaje(new Mensaje("Probando"));
-        nuevoUsuario.recibirMensaje(new Mensaje("Otro mensajeee"));
+        nuevoUsuario.recibirMensaje(new Mensaje("Mensaje 1", "Hola, ¿como va?", LocalDate.now()));
+        nuevoUsuario.recibirMensaje(new Mensaje("Mensaje 2", "Probando", LocalDate.now()));
+        nuevoUsuario.recibirMensaje(new Mensaje("Mensaje 3", "Otro mensajeee", LocalDate.now()));
         RepositorioUsuarios.instance().agregarUsuario(nuevoUsuario);
     }
 
@@ -249,5 +249,8 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
             RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(cat2);
             RepositorioCategoriasDeEntidades.instance().agregarNuevaCategoria(cat3);
         });
+    }
+    public static void main(String[] args) {
+        (new Bootstrap()).run();
     }
 }

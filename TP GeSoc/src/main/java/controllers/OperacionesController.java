@@ -31,6 +31,9 @@ public class OperacionesController {
         if(!new UsuariosController().estaLogueado(request,response)){
             response.redirect("/login");
         }
+        Map<String, Object> modelo = new HashMap<>();
+        modelo.put("organizacion", request.params(":idOrg"));
+        modelo.put("entidad", request.params("idEntidad"));
         return new ModelAndView(null,"crearOperaciones.html.hbs");
     }
 
@@ -66,6 +69,10 @@ public class OperacionesController {
             return null;
         }
         //Putea sin este return
+        return null;
+    }
+    public ModelAndView crearOperacion(Request request, Response response){
+        //TODO - Implementar cuando esté hecho el formulario de creación
         return null;
     }
 }
