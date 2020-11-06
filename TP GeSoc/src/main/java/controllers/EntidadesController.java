@@ -148,8 +148,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
             Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
             organizacion.agregarEntidad(nuevaEntidad);
-
-
+            
             withTransaction(() ->{
                 RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
                 RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);

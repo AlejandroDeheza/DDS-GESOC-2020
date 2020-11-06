@@ -1,5 +1,5 @@
 {{# partial "titulo" }}
-    <title xmlns="http://www.w3.org/1999/html">Gesoc - Login</title>
+    <title xmlns="http://www.w3.org/1999/html">Gesoc - Alta Operacion</title>
 {{/partial}}
 
 
@@ -12,8 +12,51 @@
                 <span class="nombre-campo">Fecha: </span>
                 <input type="date" name="nombreFicticio" placeholder="Ingrese fecha">
             </div>
+            <div>
+               <span class="nombre-campo">Proveedor: </span>
+               <select name="proveedor">
+                  {{#proveedores}}
+                       <option>{{razonSocial}}</option>
+                  {{/proveedores}}
+               </select>
+            </div>
+            <div>
+               <span class="nombre-campo">Documento comercial: </span>
+               <select name="documentoComercial">
+                  {{#tiposDocumentoComercial}}
+                       <option>{{razonSocial}}</option>
+                  {{/tiposDocumentoComercial}}
+               </select>
+            </div>
+            <div>
+               <span class="nombre-campo">Medio de pago: </span>
+               <select name="medioDePago">
+                  {{#mediosDePago}}
+                       <option>{{medio}}</option>
+                  {{/mediosDePago}}
+               </select>
+            </div>
+            <div>
+               <span class="nombre-campo">Presupuestos mínimos </span>
+               <input type="text" name="presupuestosMinimo" placeholder="Ejemplo: 1">
+            </div>
+            <div>
+                <span class="nombre-campo">Etiqueta: </span>
+                <select name="etiqueta">
+                    {{#etiquetas}}
+                        <option>{{texto}}</option>
+                    {{/etiquetas}}
+                </select>
+            </div>
         </form>
     </section>
+    <!--<section>
+        <h1>Items</h1>
+         TODO // Hacer form para crear Items
+        <form>
+
+        </form>
+    </section>-->
 
 {{/partial}}
 
