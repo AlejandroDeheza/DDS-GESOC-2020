@@ -49,7 +49,11 @@ public class Proveedor {
 	public void setCuil(int cuil) {
 		this.cuil = cuil;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
 	public Proveedor() {}
 
 }

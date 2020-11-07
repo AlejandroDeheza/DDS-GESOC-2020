@@ -42,10 +42,10 @@
             </div><br>
             <div>
                 <span class="nombre-campo">Etiqueta: </span><br>
-                <input list="etiquetas">
+                <input list="etiquetas" name="etiqueta">
                 <datalist id="etiquetas">
                     {{#etiquetas}}
-                        <option>{{texto}}</option>
+                        <option value={{texto}}>{{texto}}</option>
                     {{/etiquetas}}
                 </datalist>
             </div><br>
@@ -55,6 +55,7 @@
                 <label><input type="checkbox" name="presupuestoBarato" value="seleccionado">Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
                 <label><input type="checkbox" name="cantidadMinima" value="seleccionado">Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
             </div><br><br>
+
             <input type="submit" value="Crear operación">
         </form>
 

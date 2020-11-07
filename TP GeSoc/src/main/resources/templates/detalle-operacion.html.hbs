@@ -4,87 +4,108 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
+
         <div>
             {{#compra}}
-            <span>Id:</span><span>{{id}}</span>
+            <span>ID compra: </span><br>
+                <span>{{id}}</span>
             {{/compra}}
-        </div>
+        </div><br>
+
         <div>
-            <span>Items:</span>
+            <span>Items: </span><br>
             <ul>
             {{#items}}
                 <li>{{descripcion}}</li>
             {{/items}}
             </ul>
-        </div>
+        </div><br>
+
         <div>
             {{#documentoComercial}}
-            <span>Documento Comercial:</span><span>{{id}}</span>
+            <span>Documento comercial: </span><br>
+                <span>{{tipoDoc}}</span>
             {{/documentoComercial}}
-        </div>
+        </div><br>
+
         <div>
             {{#compra}}
-            <span>Fecha de Operacion:</span><span>{{fechaOperacion}}</span>
+            <span>Fecha de Operacion:</span><br>
+                <span>{{fechaOperacion}}</span>
             {{/compra}}
-        </div>
+        </div><br>
+
         <div>
             {{#compra}}
-            <span>Medio de Pago:</span><span>{{medio}}</span>
+            <span>Medio de Pago:</span><br>
+                <span>{{medio}}</span>
             {{/compra}}
-        </div>
+        </div><br>
+
         <div>
             {{#proveedor}}
-            <span>Proveedor:</span><span>{{razonSocial}}</span>
+            <span>Proveedor:</span><br>
+                <span>{{razonSocial}}</span>
             {{/proveedor}}
-        </div>
+        </div><br>
+
         <div>
-            <span>Presupuestos:</span>
+            <span>Presupuestos: </span><br>
             <ul>
                 {{#presupuestos}}
                     <li>{{id}}</li>
                 {{/presupuestos}}
             </ul>
-        </div>
+        </div><br>
+
         <div>
-            <!--Ver que onda con esto porke no puedo hacer display del objeto Presupuesto /-->
             {{#presupuestoElegido}}
-            <span>Presupuesto Elegido:</span><span>{{id}}</span>
+            <span>Presupuesto Elegido:</span><br>
+                <span>{{id}}</span>
             {{/presupuestoElegido}}
-        </div>
+        </div><br>
+
         <div>
-            <span>Revisores:</span>
+            <span>Revisores:</span><br>
             <ul>
                 {{#revisores}}
                     <li>{{username}}</li>
                 {{/revisores}}
             </ul>
-        </div>
+        </div><br>
+
         <div>
-            <span>Validaciones:</span>
+            <span>Validaciones: </span><br>
             <ul>
                 {{#validaciones}}
-                    <li>{{id}}</li>
+                    <li>{{descripcion}}</li>
                 {{/validaciones}}
             </ul>
-        </div>
+        </div><br>
+
         <div>
-            <span>Etiquetas:</span>
+            <span>Etiquetas:</span><br>
             <ul>
                 {{#etiquetas}}
                     <li>{{texto}}</li>
                 {{/etiquetas}}
             </ul>
-        </div>
+        </div><br>
+
         <div>
             {{#compra}}
-            <span>Presupuestos Minimos:</span><span>{{presupuestosMinimos}}</span>
+             <span>Presupuestos Minimos:</span><br>
+                <span>{{presupuestosMinimos}}</span>
             {{/compra}}
-        </div>
+        </div><br>
+
         <div>
             {{#compra}}
-            <span>Estado de la Operacion:</span><span>{{estado}}</span>
+            <span>Estado de la Operacion:</span><br>
+                <span>{{estado}}</span>
             {{/compra}}
-        </div>
+        </div><br>
+
     </section>
 {{/partial}}
 

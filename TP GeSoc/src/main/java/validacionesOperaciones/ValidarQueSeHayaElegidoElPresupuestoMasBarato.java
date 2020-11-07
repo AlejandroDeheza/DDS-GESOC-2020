@@ -17,4 +17,8 @@ public class ValidarQueSeHayaElegidoElPresupuestoMasBarato extends ValidacionDeO
 		this.descripcion = "Validar que se haya elegido el presupuesto más barato de los disponibles";
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
 }

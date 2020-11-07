@@ -237,6 +237,49 @@ public class OperacionDeEgreso {
 		return validacionesVigentes;
 	}
 
+	public List<ValidacionDeOperaciones> getValidacionesVigentes() {
+		return validacionesVigentes;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public void setFechaOperacion(LocalDate fechaOperacion) {
+		this.fechaOperacion = fechaOperacion;
+	}
+
+	public void setMedio(IDMedioDePago medio) {
+		this.medio = medio;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public void setPresupuestos(List<Presupuesto> presupuestos) {
+		this.presupuestos = presupuestos;
+	}
+
+	public void setRevisores(List<Usuario> revisores) {
+		this.revisores = revisores;
+	}
+
+	public void setValidacionesVigentes(List<ValidacionDeOperaciones> validacionesVigentes) {
+		this.validacionesVigentes = validacionesVigentes;
+	}
+
+	public void setEtiquetas(List<EtiquetaOperacion> etiquetas) {
+		this.etiquetas = etiquetas;
+	}
+
+	public void setPresupuestosMinimos(int presupuestosMinimos) {
+		this.presupuestosMinimos = presupuestosMinimos;
+	}
 	//---------------------------------------------------------------------------------------------------
 
 }

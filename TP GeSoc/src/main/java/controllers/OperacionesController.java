@@ -92,29 +92,45 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         }
 
         LocalDate fecha = LocalDate.parse(request.queryParams("fecha"));
-        Proveedor proveedor = entityManager().find(Proveedor.class, request.queryParams("proveedor"));
+        Proveedor proveedor = entityManager().find(Proveedor.class, Long.parseLong(request.queryParams("proveedor")));
         DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
         IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
         int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
 
         List<ValidacionDeOperaciones> validacionesActivas = new ArrayList<>();
-        if(request.queryParams("todosLosItems").equals("seleccionado"))
+        if(request.queryParams("todosLosItems")!=null && request.queryParams("todosLosItems").equals("seleccionado"))
             validacionesActivas.add(new ValidarQueLaOperacionContengaTodosLosItems());
-        if(request.queryParams("presupuestoBarato").equals("seleccionado"))
+        if(request.queryParams("presupuestoBarato")!=null && request.queryParams("presupuestoBarato").equals("seleccionado"))
             validacionesActivas.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
-        if(request.queryParams("cantidadMinima").equals("seleccionado"))
+        if(request.queryParams("cantidadMinima")!=null && request.queryParams("cantidadMinima").equals("seleccionado"))
             validacionesActivas.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 
         //Busco la etiqueta en el repositorio y la agrego a la lista.
-        List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
-        etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));
+        //Gonzalo: No hace falta porque esta embebida, lo unico que importa es el texto que tiene
+        /*List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
+        etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));*/
 
         // Me agrego por defecto a mi mismo como revisor.
         List<Usuario> revisores = new ArrayList<Usuario>();
         revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
 
-        OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso(null,docComercial,fecha,medioDePago,proveedor,null,
-                null,revisores,null,etiquetas,presupuestosMinimos,EstadoOperacion.PENDIENTE);
+        EtiquetaOperacion etiqueta = new EtiquetaOperacion(request.queryParams("etiqueta"));
+        List<EtiquetaOperacion> etiquetas = new ArrayList<>();
+        etiquetas.add(etiqueta);
+
+        /*OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso(null,docComercial,fecha,medioDePago,proveedor,null,
+                null,revisores,null,etiquetas,presupuestosMinimos,EstadoOperacion.PENDIENTE);*/
+        OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
+        nuevaOperacion.setDocumentoComercial(docComercial);
+        nuevaOperacion.setFechaOperacion(fecha);
+        nuevaOperacion.setMedio(medioDePago);
+        nuevaOperacion.setProveedor(proveedor);
+        nuevaOperacion.setRevisores(revisores);
+        nuevaOperacion.setPresupuestosMinimos(presupuestosMinimos);
+        nuevaOperacion.setValidacionesVigentes(validacionesActivas);
+        nuevaOperacion.setEtiquetas(etiquetas);
+        nuevaOperacion.setEstado(EstadoOperacion.PENDIENTE);
+
 
         Long idEntidad = Long.valueOf(request.params(":idEntidad"));
         Entidad entidad = RepositorioEntidades.instance().obtenerEntidad(idEntidad);

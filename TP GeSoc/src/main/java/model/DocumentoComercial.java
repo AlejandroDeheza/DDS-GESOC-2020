@@ -27,5 +27,12 @@ public class DocumentoComercial {
 	public DocumentoComercial(){
 		
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public TipoDocumentoComercial getTipoDoc() {
+		return tipoDoc;
+	}
 }

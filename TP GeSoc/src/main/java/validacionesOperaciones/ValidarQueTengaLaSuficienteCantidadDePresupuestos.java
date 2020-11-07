@@ -17,4 +17,8 @@ public class ValidarQueTengaLaSuficienteCantidadDePresupuestos extends Validacio
 	public ValidarQueTengaLaSuficienteCantidadDePresupuestos(){
 		this.descripcion = "Validar que la operación tenga cargada la cantidad mínima definida de presupuestos";
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
 }

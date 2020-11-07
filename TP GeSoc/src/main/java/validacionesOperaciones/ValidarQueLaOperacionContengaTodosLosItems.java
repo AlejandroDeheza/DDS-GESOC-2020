@@ -19,4 +19,8 @@ public class ValidarQueLaOperacionContengaTodosLosItems extends ValidacionDeOper
 		this.descripcion = "Validar que la operación contenga todos los items del presupuesto elegido";
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
 }
