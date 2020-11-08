@@ -4,21 +4,23 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
-        <h2>Iniciar Sesión</h2>
+        <h2>Inicio de sesión</h2>
 
         <form action="/login" method="POST">
             <div class="campo">
-                <span class="nombre-campo">Nombre de usuario:</span><input type="text" name="username" placeholder="Ingrese nombre de usuario">
+                <span class="nombre-campo">Nombre de usuario:</span><br>
+                <input type="text" name="username" placeholder="Ingrese nombre de usuario">
             </div>
             <div class="campo">
-                <span class="nombre-campo">Contraseña:</span><input type="password" name="password" placeholder="Ingrese contraseña">
-            </div>
-            <input type="submit" value="Iniciar Sesión">
+                <span class="nombre-campo">Contraseña:</span><br>
+                <input type="password" name="password" placeholder="Ingrese contraseña">
+            </div><br>
+            <input type="submit" value="Iniciar sesión" class="redStyle">
         </form>
 
         {{#if loginFailed}}
             <div>
-                <p style="color:#ff0000"> Usuario o contraseña incorrecta  </p>
+                <p style="color:#b74848"> Usuario o contraseña incorrecta  </p>
             </div>
         {{/if}}
 

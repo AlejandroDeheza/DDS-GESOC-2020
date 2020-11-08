@@ -1,6 +1,11 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
 {{# partial "titulo" }}
     <title>GESOC - Operaciones</title>
 {{/partial}}
+
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
@@ -12,9 +17,12 @@
             <input type="submit" value="Buscar">
         </form>
 
-        <ul>
+        <ul class="listas">
             {{#operaciones}}
-                <li><a href="operaciones/{{id}}">{{id}}</a></li>
+                <li>
+                    <i class="fas fa-hand-point-right"></i>
+                    <a href="operaciones/{{id}}">{{id}}</a>
+                </li>
             {{/operaciones}}
         </ul>
 

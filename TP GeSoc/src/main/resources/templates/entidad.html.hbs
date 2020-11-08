@@ -4,6 +4,8 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
+        <h1>Datos de la entidad</h1>
+
         {{#entidadBase}}
              <li>Tipo entidad: base</li>
              <li>Nombre ficticio:{{nombreFicticio}}</li>
@@ -34,8 +36,8 @@
             {{/direccion}}
         {{/entidadJuridica}}
 
-        <div><a href="{{idEnt}}/operaciones">Ver operaciones de egreso</a></div>
-        <div><a href="{{idEnt}}/operaciones/nueva">Agregar una nueva operación de egreso</a></div>
+        <br><div><a href="{{idEnt}}/operaciones" class="greenStyle">Ver operaciones de egreso</a></div><br>
+        <div><a href="{{idEnt}}/operaciones/nueva" class="redStyle">Nueva operación de egreso</a></div>
     </section>
 {{/partial}}
 

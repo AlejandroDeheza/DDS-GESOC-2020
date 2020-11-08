@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: Lato, sans-serif;
@@ -63,4 +64,50 @@ table, th, td {
     width: 100%;
     border-collapse: collapse;
     border: 3px solid #30377e;
+}
+
+.redStyle {
+    box-shadow:inset 0px 34px 0px -15px #b54b3a;
+    background-color:#a73f2d;
+    border:1px solid #241d13;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:2px 4px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #7a2a1d;
+}
+
+
+.greenStyle:link, greenStyle:visited{
+    background-color: white;
+    color: black;
+    border: 2px solid #069848;
+    padding: 2px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.greenStyle:hover, .greenStyle:active {
+    background-color: #069848;
+    color: white;
+
+}
+
+input[type=text], select {
+    padding: 2px 4px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.listas{
+    list-style-type: none;
+    list-style-position: inside;
 }

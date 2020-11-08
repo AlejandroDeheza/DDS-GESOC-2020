@@ -1,27 +1,29 @@
-{{# partial "titulo" }}
-    <title>Gesoc - Home</title>
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+
+{{#partial "titulo" }}
+    <title>GeSoc</title>
 {{/partial}}
 
-{{# partial "contenido" }}
+{{#partial "contenido" }}
 
-<div class = "Imagen-Centrada">
-    <img src="descarga.jpg" alt="F">
-</div>
-
-{{#if usuarioLogeado }}
-    <div>
-        <a href="/organizaciones">Organizaciones</a>
-        <a href="/inbox">Bandeja de mensajes</a>
-        <form action="/cerrarSesion" method="POST">
-            <input type="submit" value="Cerrar sesion" />
-        </form>
+    <div class = "Imagen-Centrada">
+        <img src="descarga.jpg" alt="F">
     </div>
-{{else}}
-    <a href="/login">Inciar sesion</a>
-{{/if}}
+
+    {{#if usuarioLogeado }}
+     <div>
+         <a href="/organizaciones" class="greenStyle">Organizaciones</a><br>
+         <a href="/inbox" class="greenStyle">Bandeja de mensajes</a><br><br>
+         <form action="/cerrarSesion" method="POST">
+            <input class="redStyle" type="submit" value="Cerrar sesion" />
+         </form>
+     </div>
+    {{else}}
+        <a class="redStyle" href="/login">Inciar sesión</a>
+    {{/if}}
 
 {{/partial}}
-
-
 
 {{> layout.html.hbs }}

@@ -5,8 +5,8 @@
 {{# partial "contenido" }}
     {{#organizacion}}
     <section class="fondo-gris">
-        <h2>Organizacion: {{nombre}}</h2>
-        <h2>Descripción: {{descripcion}}</h2>
+        <h2>{{nombre}}</h2>
+        <h3>{{descripcion}}</h3><br>
 
         <!--<h3>Entidades asociadas:
         <ul>
@@ -15,8 +15,8 @@
             {{/entidades}}
         </ul>
         </h3>-->
-        <div><a href="/organizaciones/{{id}}/entidades">Listado de entidades</a></div>
-        <div><a href="/organizaciones/{{id}}/entidades/nueva">Crear nueva entidad</a></div>
+        <div><a href="/organizaciones/{{id}}/entidades" class="greenStyle">Listado de entidades</a></div><br>
+        <div><a href="/organizaciones/{{id}}/entidades/nueva" class="redStyle">Crear nueva entidad</a></div>
     </section>
     {{/organizacion}}
 {{/partial}}

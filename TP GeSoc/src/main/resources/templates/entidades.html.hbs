@@ -1,3 +1,7 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
 {{# partial "titulo" }}
     <title>GESOC - Entidades</title>
 {{/partial}}
@@ -17,9 +21,12 @@
             <input type="submit" value="Filtrar">
         </form>
 
-        <ul>
+        <ul class="listas">
             {{#entidades}}
-                <li><a href="entidades/{{id}}">{{nombreFicticio}}</a></li>
+                <li>
+                    <i class="fas fa-hand-point-right"></i>
+                    <a href="entidades/{{id}}">{{nombreFicticio}}</a>
+                </li>
             {{/entidades}}
         </ul>
 
