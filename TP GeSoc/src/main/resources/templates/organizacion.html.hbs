@@ -1,23 +1,33 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
 {{# partial "titulo" }}
     <title>GESOC - Organizacion</title>
 {{/partial}}
 
 {{# partial "contenido" }}
     {{#organizacion}}
-    <section class="fondo-gris">
-        <h2>{{nombre}}</h2>
-        <h3>{{descripcion}}</h3><br>
+        <section class="fondo-gris">
+            <h2>{{nombre}}</h2>
+            <p>{{descripcion}}</p><br>
 
-        <!--<h3>Entidades asociadas:
-        <ul>
-            {{#entidades}}
-                <li>{{nombreFicticio}}</li>
-            {{/entidades}}
-        </ul>
-        </h3>-->
-        <div><a href="/organizaciones/{{id}}/entidades" class="greenStyle">Listado de entidades</a></div><br>
-        <div><a href="/organizaciones/{{id}}/entidades/nueva" class="redStyle">Crear nueva entidad</a></div>
-    </section>
+            <!--<h3>Entidades asociadas:
+            <ul>
+                {{#entidades}}
+                    <li>{{nombreFicticio}}</li>
+                {{/entidades}}
+            </ul>
+            </h3>-->
+            <div>
+
+                <a href="/organizaciones/{{id}}/entidades" class="greenStyle"><i class="fas fa-columns"></i> Listado de entidades</a>
+            </div><br>
+
+            <div>
+                <a href="/organizaciones/{{id}}/entidades/nueva" class="redStyle">Crear nueva entidad</a>
+            </div>
+        </section>
     {{/organizacion}}
 {{/partial}}
 

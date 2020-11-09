@@ -3,8 +3,8 @@ body {
   margin: auto;
   font-family: Lato, sans-serif;
   font-weight: 300;
-    background: #155592;
-
+    /*background: #155592;*/
+    background: #F4F6F2;
 }
 
 main {
@@ -14,6 +14,7 @@ main {
 
 h1 {
  font-weight: 300;
+    font-family: Bahnschrift;
 }
 
 h2 {
@@ -22,12 +23,12 @@ h2 {
 
 footer {
     position: relative;
-    left:1%;
     top: 5%;
 }
 
 section.fondo-gris {
-    background: #b9314f;
+    /*background: #b9314f;*/
+    background: #544E55;
     border-radius: 10px;
     border-style: solid;
     margin: 50px;
@@ -45,10 +46,12 @@ footer.fondo-gris {
 }
 
 .Imagen-Centrada{
+    padding-top: 20px;
     display: block;
-    margin-left: auto;
     margin-right: auto;
-    width: 26%;
+    margin-left: auto;
+    padding-bottom: 60px;
+    width: 20%;
 }
 
 .info-base {
@@ -93,6 +96,9 @@ footer.fondo-gris {
     text-shadow:0px -1px 0px #7a2a1d;
 }
 
+.greenStyle{
+   color: #636d7c;
+}
 
 .greenStyle:link, greenStyle:visited{
     background-color: white;
@@ -110,9 +116,9 @@ footer.fondo-gris {
 
 }
 
-.link_navegacion{
-    background-image: url(flecha.png);
-}
+/*.link_navegacion{*/
+/*    background-image: url(flecha.png);*/
+/*}*/
 
 input, select {
     padding: 2px 4px;
@@ -168,10 +174,12 @@ input, select {
 }
 
 .links_navegacion{
-    color: #000000;
+    color:#241d13;
+    box-shadow: -3px 3px #ffd27d, -2px 2px #917645, -1px 1px #b59151;
+    border: 1px solid #ddc393;
 }
 .links_navegacion:link, .link_navegacion:visited{
-    background-color: #f87e7e;
+    background: #b54b3a;
     color: black;
     border: 2px solid green;
     padding: 10px 20px;

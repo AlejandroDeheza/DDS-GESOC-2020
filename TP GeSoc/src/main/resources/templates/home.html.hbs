@@ -8,17 +8,17 @@
 {{/partial}}
 
 {{#partial "header" }}
-    <h1>GeSoc - Home</h1>
+    <h1 style="text-align: center">GeSoc - Home</h1>
 {{/partial}}
 
 {{#partial "contenido" }}
 
-    <div class = "Imagen-Centrada">
-        <img src="descarga.jpg" alt="F">
+    <div>
+        <img class="Imagen-Centrada" src="background.png" alt="F">
     </div>
 
     {{#if usuarioLogeado }}
-     <div>
+     <div style="text-align: center">
          <a href="/organizaciones" class="greenStyle"><i class="fas fa-sitemap"></i> Organizaciones</a><br>
          <a href="/inbox" class="greenStyle"><i class="fas fa-envelope"></i> Bandeja de mensajes</a><br><br>
          <form action="/cerrarSesion" method="POST">
@@ -26,7 +26,10 @@
          </form>
      </div>
     {{else}}
-        <a class="redStyle" href="/login">Inciar sesión</a>
+        <div style="text-align: center">
+            <a class="redStyle" href="/login">Inciar sesión</a>
+        </div>
+
     {{/if}}
 
 {{/partial}}

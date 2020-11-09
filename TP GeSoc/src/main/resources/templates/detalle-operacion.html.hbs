@@ -4,13 +4,9 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
-
-        <div>
-            {{#compra}}
-            <span>ID compra: </span><br>
-                <span>{{id}}</span>
-            {{/compra}}
-        </div><br>
+        {{#compra}}
+            <h2>Operación Nº{{id}}</h2>
+        {{/compra}}
 
         <div>
             <span>Items: </span><br>
