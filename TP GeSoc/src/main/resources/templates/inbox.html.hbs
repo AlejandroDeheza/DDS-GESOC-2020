@@ -2,7 +2,7 @@
     <title>GESOC - Mensajes</title>
 {{/partial}}
 
-<html>
+
 
 <head>
     <link rel="stylesheet" type="text/css" href="/main.css">
@@ -22,29 +22,22 @@
                        background: -webkit-linear-gradient(top, #86a3ba 0%, #859aac 66%, #5b8db7 100%);
                        background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #6aa4cb 100%);-->
 
-        <table style=" table-layout: fixed;
-                       width: 100%;
-                       border-collapse: collapse;
-                       border: 3px solid #30377e;
-                       background: #9ba2a9;
-                       border-bottom: 2px solid #444444;">
-            <tr>
-                <th>Asunto</th>
-                <th>Fecha</th>
-                <th>Cuerpo</th>
+        <table class="inbox">
+            <tr class="tr_inbox">
+                <th class="th_inbox">Asunto</th>
+                <th class="th_inbox">Fecha</th>
+                <th class="th_inbox">Cuerpo</th>
             </tr>
             {{#mensajes}}
-                <tr>
-                    <th style = "font-size: small">{{asunto}}</th>
-                    <th style = "font-size: small">{{fecha}}</th>
-                    <th style = "font-size: small">{{cuerpo}}</th>
+                <tr class="tr_inbox">
+                    <td class="td_inbox">{{asunto}}</td>
+                    <td class="td_inbox">{{fecha}}</td>
+                    <td class="td_inbox">{{cuerpo}}</td>
                 </tr>
             {{/mensajes}}
         </table>
 
     </section>
-
-</html>
 
 {{/partial}}
 

@@ -7,13 +7,22 @@
 </head>
 
 <body>
-    <nav style="position: relative; top: 1%; left:1%">
-        <a href="/">Home</a>
+    <nav style="padding: 20px;
+    background: aliceblue;
+    font-size:20px;
+    border-bottom-color: black;
+    border-bottom-style: groove;">
+        <a class="links_navegacion" href="/">Home</a>
     </nav>
 
+
+
 	<main>
-            {{#block "contenido" }}
-            {{/block}}
+        {{#block "header"}}
+        {{/block}}
+
+        {{#block "contenido" }}
+        {{/block}}
 	</main>
 
 	<footer>

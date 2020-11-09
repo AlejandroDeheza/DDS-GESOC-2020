@@ -1,9 +1,14 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 {{#partial "titulo" }}
-    <title>GeSoc</title>
+    <title>GeSoc - Home</title>
+{{/partial}}
+
+{{#partial "header" }}
+    <h1>GeSoc - Home</h1>
 {{/partial}}
 
 {{#partial "contenido" }}
@@ -14,8 +19,8 @@
 
     {{#if usuarioLogeado }}
      <div>
-         <a href="/organizaciones" class="greenStyle">Organizaciones</a><br>
-         <a href="/inbox" class="greenStyle">Bandeja de mensajes</a><br><br>
+         <a href="/organizaciones" class="greenStyle"><i class="fas fa-sitemap"></i> Organizaciones</a><br>
+         <a href="/inbox" class="greenStyle"><i class="fas fa-envelope"></i> Bandeja de mensajes</a><br><br>
          <form action="/cerrarSesion" method="POST">
             <input class="redStyle" type="submit" value="Cerrar sesion" />
          </form>

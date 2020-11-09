@@ -1,8 +1,10 @@
 
 body {
-  margin: 0;
+  margin: auto;
   font-family: Lato, sans-serif;
   font-weight: 300;
+    background: #155592;
+
 }
 
 main {
@@ -25,7 +27,16 @@ footer {
 }
 
 section.fondo-gris {
-    background: lightgrey;
+    background: #b9314f;
+    border-radius: 10px;
+    border-style: solid;
+    margin: 50px;
+    font: message-box;
+    padding-left: 25px;
+    color: whitesmoke;
+    border-color: black;
+    padding-bottom: 25px;
+    padding-right: 25px;
 }
 
 footer.fondo-gris {
@@ -59,17 +70,18 @@ footer.fondo-gris {
     display: none;
 }
 
-table, th, td {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 3px solid #30377e;
-}
+/*table, th, td {*/
+/*    table-layout: fixed;*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*    border: 3px solid #30377e;*/
+/*}*/
 
 .redStyle {
     box-shadow:inset 0px 34px 0px -15px #b54b3a;
     background-color:#a73f2d;
     border:1px solid #241d13;
+    border-radius: 7px;
     display:inline-block;
     cursor:pointer;
     color:#ffffff;
@@ -98,16 +110,77 @@ table, th, td {
 
 }
 
-input[type=text], select {
+.link_navegacion{
+    background-image: url(flecha.png);
+}
+
+input, select {
     padding: 2px 4px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 7px;
     box-sizing: border-box;
 }
 
 .listas{
     list-style-type: none;
     list-style-position: inside;
+}
+
+.inbox{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.th_inbox{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #2a2d2a;
+    color: white;
+}
+.tr_inbox:hover{
+    background-color: #ddd;
+}
+
+.tr_inbox:nth-child(even){
+    background-color: #f2f2f2;
+}
+.tr_inbox:nth-child(odd){
+    background-color: #bab9b9;
+}
+
+.td_inbox, .th_inbox {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.link_blanco{
+    text-decoration: none;
+    font-size: larger;
+    color: white;
+}
+
+.link_blanco:hover, .link_blanco:active{
+    color: darkslateblue;
+}
+
+.links_navegacion{
+    color: #000000;
+}
+.links_navegacion:link, .link_navegacion:visited{
+    background-color: #f87e7e;
+    color: black;
+    border: 2px solid green;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 6px;
+}
+.links_navegacion:hover, .links_navegacion:active {
+    background-color: green;
+    color: white;
 }
