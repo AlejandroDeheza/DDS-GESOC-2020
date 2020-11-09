@@ -118,16 +118,18 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         List<EtiquetaOperacion> etiquetas = new ArrayList<>();
         etiquetas.add(etiqueta);
 
-       /* List<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
 
-        for(Integer parametroActual = 0; parametroActual < 10; parametroActual++){
-            if(request.queryParams("itemD"+parametroActual).isEmpty() || request.queryParams("itemN"+parametroActual).isEmpty())
-                items.add(new Item(request.queryParams("itemN"+parametroActual) //Nico | Item no lleva precio, lleva la moneda.
-                                  ,request.queryParams("itemD"+parametroActual)));
-        }*/
+        for(int i = 0; i < 10; i++){
+            String descripcion = request.queryParams(("itemD"+i));
+            String precio = request.queryParams(("itemN"+i));
 
-        /*OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso(null,docComercial,fecha,medioDePago,proveedor,null,
-                null,revisores,null,etiquetas,presupuestosMinimos,EstadoOperacion.PENDIENTE);*/
+            if(descripcion != null && precio != null){
+                items.add(new Item(new Moneda(Double.parseDouble(precio),"ARS")
+                                  ,descripcion));
+            }
+        }
+
         OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
         nuevaOperacion.setDocumentoComercial(docComercial);
         nuevaOperacion.setFechaOperacion(fecha);
@@ -137,8 +139,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         nuevaOperacion.setPresupuestosMinimos(presupuestosMinimos);
         nuevaOperacion.setValidacionesVigentes(validacionesActivas);
         nuevaOperacion.setEtiquetas(etiquetas);
-        //nuevaOperacion.setEstado(EstadoOperacion.PENDIENTE); Ya se inicializa como PENDIENTE
-        //nuevaOperacion.setItems(items);
+        nuevaOperacion.setItems(items);
 
 
         Long idEntidad = Long.valueOf(request.params(":idEntidad"));
@@ -150,7 +151,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             RepositorioEntidades.instance().actualizarEntidad(entidad);
         });
 
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + nuevaOperacion.getId());
+//        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + nuevaOperacion.getId());
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
         return null;
     }
 }
