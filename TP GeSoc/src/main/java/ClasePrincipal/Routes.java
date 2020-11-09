@@ -17,8 +17,6 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.staticFileLocation("/public");
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
-
-		new Bootstrap().run();
 	     
 		HomeController homeController = new HomeController();
 		UsuariosController usuarioController = new UsuariosController();
@@ -43,6 +41,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		//Cuando quieras crear una entidad se te hace un display de las categorias existentes.
 		//Si queres agregar una categoria habria un boton de agregar.
+
 
 		//Creacion de objetos
 

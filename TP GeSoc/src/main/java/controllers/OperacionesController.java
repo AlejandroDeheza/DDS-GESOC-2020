@@ -155,5 +155,4 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
         return null;
     }
-
 }
