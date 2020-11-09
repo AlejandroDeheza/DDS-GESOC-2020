@@ -118,13 +118,9 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         List<EtiquetaOperacion> etiquetas = new ArrayList<>();
         etiquetas.add(etiqueta);
 
-       /* List<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
 
-        for(Integer parametroActual = 0; parametroActual < 10; parametroActual++){
-            if(request.queryParams("itemD"+parametroActual).isEmpty() || request.queryParams("itemN"+parametroActual).isEmpty())
-                items.add(new Item(request.queryParams("itemN"+parametroActual) //Nico | Item no lleva precio, lleva la moneda.
-                                  ,request.queryParams("itemD"+parametroActual)));
-        }*/
+        instanciarItems(request, response, items);
 
         /*OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso(null,docComercial,fecha,medioDePago,proveedor,null,
                 null,revisores,null,etiquetas,presupuestosMinimos,EstadoOperacion.PENDIENTE);*/
@@ -138,7 +134,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         nuevaOperacion.setValidacionesVigentes(validacionesActivas);
         nuevaOperacion.setEtiquetas(etiquetas);
         //nuevaOperacion.setEstado(EstadoOperacion.PENDIENTE); Ya se inicializa como PENDIENTE
-        //nuevaOperacion.setItems(items);
+        nuevaOperacion.setItems(items);
 
 
         Long idEntidad = Long.valueOf(request.params(":idEntidad"));
@@ -152,5 +148,21 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + nuevaOperacion.getId());
         return null;
+    }
+
+    private void instanciarItems(Request request, Response response, List<Item> items) {
+        for(Integer parametroActual = 0; parametroActual < 10; parametroActual++){
+            try { //TODO Ver que onda la moneda
+                if (request.queryParams("itemD" + parametroActual).isEmpty() || request.queryParams("itemN" + parametroActual).isEmpty()) {
+                    response.status(400); //Bad request
+                    // TODO: armar rutas de error.
+                    //response.redirect();
+                } else {
+                    items.add(new Item(new Moneda(Double.parseDouble(request.queryParams("itemN" + parametroActual)), "ARS")
+                            , request.queryParams("itemD" + parametroActual)));
+                }
+            }
+            catch(Exception exception){}
+        }
     }
 }
