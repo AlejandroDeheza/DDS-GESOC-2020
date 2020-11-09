@@ -1,8 +1,7 @@
-
 body {
-  margin: auto;
-  font-family: Lato, sans-serif;
-  font-weight: 300;
+    margin: auto;
+    font-family: Lato, sans-serif;
+    font-weight: 300;
     /*background: #155592;*/
     background: #F4F6F2;
 }
@@ -13,12 +12,12 @@ main {
 }
 
 h1 {
- font-weight: 300;
+    font-weight: 300;
     font-family: Bahnschrift;
 }
 
 h2 {
- font-weight: 300;
+    font-weight: 300;
 }
 
 footer {
@@ -128,6 +127,9 @@ input, select {
     border-radius: 7px;
     box-sizing: border-box;
 }
+input.checkbox{
+    margin-right: 5px;
+}
 
 .listas{
     list-style-type: none;
@@ -191,4 +193,20 @@ input, select {
 .links_navegacion:hover, .links_navegacion:active {
     background-color: green;
     color: white;
+}
+
+.delete{
+    background-color: #fd1200;
+    border: white;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 7px;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

@@ -2,6 +2,7 @@
     <title xmlns="http://www.w3.org/1999/html">Gesoc - Alta Operacion</title>
 {{/partial}}
 
+<script src="/comportamientoDinamico.js"></script>
 
 {{# partial "contenido" }}
 
@@ -51,24 +52,25 @@
             </div><br>
             <div>
                 <span class="nombre-campo">Validaciones activas:</span><br>
-                <label><input type="checkbox" name="todosLosItems" value="seleccionado">Validar que la operación contenga todos los items del presupuesto elegido</label><br>
-                <label><input type="checkbox" name="presupuestoBarato" value="seleccionado">Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
-                <label><input type="checkbox" name="cantidadMinima" value="seleccionado">Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
-            </div><br><br>
+                <label><input class="checkbox" type="checkbox" name="todosLosItems" value="seleccionado">Validar que la operación contenga todos los items del presupuesto elegido</label><br>
+                <label><input class="checkbox" type="checkbox" name="presupuestoBarato" value="seleccionado">Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
+                <label><input class="checkbox" type="checkbox" name="cantidadMinima" value="seleccionado">Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
+            </div><br>
+
+            <div>
+                <span class="nombre-campo">Items</span>
+                <button type="button" class="redStyle" style="margin-left: 7px" onclick="crearItem()">Agregar nuevo item +</button>
+                <div id="items">
+                </div>
+            </div><br>
 
             <input type="submit" value="Crear operación" class="redStyle">
         </form>
 
     </section>
-    <!--<section>
-        <h1>Items</h1>
-         TODO // Hacer form para crear Items
-         TODO // Hacer form para cargar Validaciones
-         TODO // Hacer form para cargar mas de una etiqueta
-        <form>
 
-        </form>
-    </section>-->
+<!--    TODO // Hacer form para cargar Validaciones-->
+<!--    TODO // Hacer form para cargar mas de una etiqueta>-->
 
 {{/partial}}
 

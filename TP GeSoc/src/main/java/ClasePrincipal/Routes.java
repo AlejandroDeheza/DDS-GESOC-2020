@@ -16,9 +16,6 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.port(8080);
 		Spark.staticFileLocation("/public");
 
-		//Lleno la base con datos iniciales
-		//new Bootstrap().run();
-
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
 	     
 		HomeController homeController = new HomeController();
