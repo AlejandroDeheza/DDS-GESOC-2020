@@ -118,6 +118,14 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         List<EtiquetaOperacion> etiquetas = new ArrayList<>();
         etiquetas.add(etiqueta);
 
+       /* List<Item> items = new ArrayList<>();
+
+        for(Integer parametroActual = 0; parametroActual < 10; parametroActual++){
+            if(request.queryParams("itemD"+parametroActual).isEmpty() || request.queryParams("itemN"+parametroActual).isEmpty())
+                items.add(new Item(request.queryParams("itemN"+parametroActual) //Nico | Item no lleva precio, lleva la moneda.
+                                  ,request.queryParams("itemD"+parametroActual)));
+        }*/
+
         /*OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso(null,docComercial,fecha,medioDePago,proveedor,null,
                 null,revisores,null,etiquetas,presupuestosMinimos,EstadoOperacion.PENDIENTE);*/
         OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
@@ -129,7 +137,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         nuevaOperacion.setPresupuestosMinimos(presupuestosMinimos);
         nuevaOperacion.setValidacionesVigentes(validacionesActivas);
         nuevaOperacion.setEtiquetas(etiquetas);
-        nuevaOperacion.setEstado(EstadoOperacion.PENDIENTE);
+        //nuevaOperacion.setEstado(EstadoOperacion.PENDIENTE); Ya se inicializa como PENDIENTE
+        //nuevaOperacion.setItems(items);
 
 
         Long idEntidad = Long.valueOf(request.params(":idEntidad"));
