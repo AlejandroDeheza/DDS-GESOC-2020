@@ -75,7 +75,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
                 detalleCompra.put("validaciones", compra.getValidaciones());
                 detalleCompra.put("etiquetas", compra.getEtiquetas());
                 detalleCompra.put("presupuestosMinimos", compra.getPresupuestosMinimos());
-                return new ModelAndView(detalleCompra, "detalle-operacion.html.hbs");
+                return new ModelAndView(detalleCompra, "operacion.html.hbs");
             }
         } catch (NumberFormatException e) {
             response.status(400);

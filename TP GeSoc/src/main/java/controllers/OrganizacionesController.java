@@ -8,6 +8,7 @@ import spark.Response;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OrganizacionesController {
 
@@ -27,8 +28,16 @@ public class OrganizacionesController {
         }
 
         Map<String, Object> modelo = new HashMap<>();
-        //Obtener del repo las organizaciones
-        modelo.put("organizaciones", RepositorioOrganizaciones.instance().obtenerTodasLasOrganizaciones());
+        String filtro = request.queryParams("filtro");
+        if(filtro!=null)
+        {
+            modelo.put("organizaciones", RepositorioOrganizaciones.instance().obtenerTodasLasOrganizaciones()
+            .stream().filter(org -> org.getNombre().contains(filtro)).collect(Collectors.toList()));
+        }
+        else{
+            modelo.put("organizaciones", RepositorioOrganizaciones.instance().obtenerTodasLasOrganizaciones());
+        }
+
 
         return new ModelAndView(modelo, "organizaciones.html.hbs");
     }
