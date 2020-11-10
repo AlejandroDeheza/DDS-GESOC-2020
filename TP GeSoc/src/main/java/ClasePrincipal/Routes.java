@@ -23,13 +23,14 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		OperacionesController operacionController = new OperacionesController();
 		EntidadesController entidadController = new EntidadesController();
 		OrganizacionesController organizacionController = new OrganizacionesController();
-	     
+
+		//GET
 		Spark.get("/", (request, response) -> homeController.getHome(request,response), engine);
+		Spark.get("/inbox", (request, response) -> usuarioController.getBandejaDeMensajes(request,response),engine);
 		Spark.get("/login", (request, response) -> usuarioController.getFormLogin(request,response), engine);
 		Spark.get("/login/:status", (request, response) -> usuarioController.getFormLogin(request,response), engine);
-
-		//Consulta sobre objetos
 		Spark.get("/organizaciones", (request, response) -> organizacionController.getOrganizaciones(request,response), engine);
+		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(request, response), engine);
 		Spark.get("/organizaciones/:idOrg", (request, response) -> organizacionController.getOrganizacion(request, response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.getEntidades(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/nueva", (request, response) -> entidadController.getFormEntidades(request,response), engine);
@@ -37,20 +38,26 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.getOperaciones(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
-		Spark.get("/inbox", (request, response) -> usuarioController.getBandejaDeMensajes(request,response),engine);
+
 
 		//Cuando quieras crear una entidad se te hace un display de las categorias existentes.
 		//Si queres agregar una categoria habria un boton de agregar.
 
-
-		//Creacion de objetos
-
-		Spark.get("/organizaciones/nueva", (request, response) -> organizacionController.getFormOrganizaciones(request, response), engine);
-
-		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.crearOperacion(request,response), engine);
-		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
+		//POST
 		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response));
 		Spark.post("/cerrarSesion", (request, response) -> usuarioController.closeSession(request,response));
+
+		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.crearOperacion(request,response), engine);
+
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/agregarRevisor", (request, response) -> operacionController.agregarRevisor(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/quitarRevisor", (request, response) -> operacionController.quitarRevisor(request,response), engine);
+
+
+
+
+
+
 	     
 	}
 }

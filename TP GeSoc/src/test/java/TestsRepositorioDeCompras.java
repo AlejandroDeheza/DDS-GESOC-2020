@@ -1,16 +1,11 @@
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mockito;
 
-import exceptions.*;
 import model.*;
-import organizacion.*;
-import repositorios.RepositorioCompras;
+import repositorios.RepositorioOperaciones;
 import usuarios.Usuario;
 import validacionesOperaciones.ValidacionDeOperaciones;
 import validacionesOperaciones.ValidarQueLaOperacionContengaTodosLosItems;
@@ -120,11 +115,11 @@ public class TestsRepositorioDeCompras {
 		operacionInvalida3.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,15.0)));
 		operacionInvalida3.agregarNuevoPresupuesto(crearPresupuesto(crearListaDeTresItems(5.0,10.0,16.0)));
 		
-		RepositorioCompras.instance().agregarCompra(operacionInvalida1);
-		RepositorioCompras.instance().agregarCompra(operacionValida1);
-		RepositorioCompras.instance().agregarCompra(operacionInvalida3);
-		RepositorioCompras.instance().agregarCompra(operacionInvalida2);
-		RepositorioCompras.instance().agregarCompra(operacionValida2);
+		RepositorioOperaciones.instance().agregarCompra(operacionInvalida1);
+		RepositorioOperaciones.instance().agregarCompra(operacionValida1);
+		RepositorioOperaciones.instance().agregarCompra(operacionInvalida3);
+		RepositorioOperaciones.instance().agregarCompra(operacionInvalida2);
+		RepositorioOperaciones.instance().agregarCompra(operacionValida2);
 		
 		
 

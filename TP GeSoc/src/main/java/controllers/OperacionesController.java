@@ -1,18 +1,14 @@
 package controllers;
 
-import medioDePago.MedioDePago;
 import model.*;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import organizacion.CategoriaEntidadJuridica;
 import organizacion.Entidad;
-import organizacion.Organizacion;
 import paymentMethods.IDMedioDePago;
 import repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.TemplateEngine;
 import usuarios.Usuario;
 import validacionesOperaciones.ValidacionDeOperaciones;
 import validacionesOperaciones.ValidarQueLaOperacionContengaTodosLosItems;
@@ -32,7 +28,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las operaciones relacionadas a la entidad actual
-        modelo.put("operaciones", RepositorioCompras.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));
+        modelo.put("operaciones", RepositorioOperaciones.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));
 
         return new ModelAndView(modelo, "operaciones.html.hbs");
     }
@@ -61,7 +57,9 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 
         try {
-            OperacionDeEgreso compra = RepositorioCompras.instance().buscar(idOperacion);
+            OperacionDeEgreso compra = RepositorioOperaciones.instance().buscar(idOperacion);
+            Usuario usuarioLogeado =
+                    RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario"));
             if (compra != null) {
                 Map<String, Object> detalleCompra = new HashMap<>();
 
@@ -75,6 +73,17 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
                 detalleCompra.put("validaciones", compra.getValidaciones());
                 detalleCompra.put("etiquetas", compra.getEtiquetas());
                 detalleCompra.put("presupuestosMinimos", compra.getPresupuestosMinimos());
+                if(compra.getRevisores().stream().anyMatch(revisor -> revisor.getId()==usuarioLogeado.getId())){
+                    detalleCompra.put("usuarioEsRevisor", true);
+                }
+                else{
+                    detalleCompra.put("usuarioEsRevisor", false);
+                }
+
+                detalleCompra.put("idOrg", request.params(":idOrg"));
+                detalleCompra.put("idEntidad", request.params(":idEntidad"));
+                detalleCompra.put("idOperacion", request.params(":idOperacion"));
+
                 return new ModelAndView(detalleCompra, "operacion.html.hbs");
             }
         } catch (NumberFormatException e) {
@@ -86,6 +95,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         //Putea sin este return
         return null;
     }
+
+
     public ModelAndView crearOperacion(Request request, Response response){
         if(!new UsuariosController().estaLogueado(request,response)){
             response.redirect("/login");
@@ -112,7 +123,10 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         // Me agrego por defecto a mi mismo como revisor.
         List<Usuario> revisores = new ArrayList<Usuario>();
-        revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
+        String agregarRevisor = request.queryParams("revisor");
+        if(agregarRevisor!=null && agregarRevisor.equals("seleccionado")) {
+            revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
+        }
 
         EtiquetaOperacion etiqueta = new EtiquetaOperacion(request.queryParams("etiqueta"));
         List<EtiquetaOperacion> etiquetas = new ArrayList<>();
@@ -147,7 +161,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         entidad.agregarOperacionDeEgreso(nuevaOperacion);
 
         withTransaction(() ->{
-            RepositorioCompras.instance().agregarCompra(nuevaOperacion);
+            RepositorioOperaciones.instance().agregarCompra(nuevaOperacion);
             RepositorioEntidades.instance().actualizarEntidad(entidad);
         });
 
@@ -156,4 +170,46 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
         return null;
     }
+
+    public ModelAndView agregarRevisor(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
+        Long idOperacion = Long.parseLong(request.params(":idOperacion"));
+
+        OperacionDeEgreso operacion = RepositorioOperaciones.instance().buscar(idOperacion);
+        Usuario usuario = RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario"));
+        operacion.agregarRevisor(usuario);
+
+        withTransaction(() ->{
+            RepositorioOperaciones.instance().actualizarCompra(operacion);
+        });
+
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacion.getId());
+        return null;
+    }
+
+    public ModelAndView quitarRevisor(Request request, Response response) {
+
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+
+        Long idOperacion = Long.parseLong(request.params(":idOperacion"));
+
+        OperacionDeEgreso operacion = RepositorioOperaciones.instance().buscar(idOperacion);
+        Usuario usuario = RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario"));
+        operacion.quitarRevisor(usuario);
+
+        withTransaction(() ->{
+            RepositorioOperaciones.instance().actualizarCompra(operacion);
+        });
+
+
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacion.getId());
+        return null;
+    }
+
 }

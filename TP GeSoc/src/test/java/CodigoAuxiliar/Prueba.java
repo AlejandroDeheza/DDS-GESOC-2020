@@ -9,7 +9,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import model.*;
-import repositorios.RepositorioCompras;
+import repositorios.RepositorioOperaciones;
 
 
 public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityManager {
@@ -24,11 +24,11 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 
 		List<OperacionDeEgreso> oEgreso = new Bootstrap().crearLista3Operaciones();
 
-		RepositorioCompras.instance().agregarCompra(oEgreso.get(0));
+		RepositorioOperaciones.instance().agregarCompra(oEgreso.get(0));
 
-		RepositorioCompras.instance().agregarCompra(oEgreso.get(1));
+		RepositorioOperaciones.instance().agregarCompra(oEgreso.get(1));
 	
-		RepositorioCompras.instance().agregarCompra(oEgreso.get(2));
+		RepositorioOperaciones.instance().agregarCompra(oEgreso.get(2));
 		
 		//Usuario usuario = crearUsuario("Jorge");
 	    /*	

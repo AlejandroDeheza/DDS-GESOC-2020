@@ -1,20 +1,17 @@
 package repositorios;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import model.OperacionDeEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import usuarios.Usuario;
 
 
-public final class RepositorioCompras implements WithGlobalEntityManager {
+public final class RepositorioOperaciones implements WithGlobalEntityManager {
 	
-	private static final RepositorioCompras INSTANCE = new RepositorioCompras();
+	private static final RepositorioOperaciones INSTANCE = new RepositorioOperaciones();
 	
-	public static final RepositorioCompras instance() {
+	public static final RepositorioOperaciones instance() {
 		return INSTANCE;
 	}
 	
@@ -50,6 +47,9 @@ public final class RepositorioCompras implements WithGlobalEntityManager {
 	}
 
 	public OperacionDeEgreso buscar(long id){
+		//Agrego este clear porque nos trajo problemas de consistencia. Ciertas entidades que persistiamos previamente
+		//con withTransaction, al usar el find venian con info desactualizada. 
+		entityManager().clear();
 		return entityManager().find(OperacionDeEgreso.class, id);
 	}
 	

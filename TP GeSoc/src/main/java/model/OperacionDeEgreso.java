@@ -3,9 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import exceptions.*;
-import organizacion.Organizacion;
 import paymentMethods.IDMedioDePago;
-import repositorios.RepositorioCompras;
 import usuarios.*;
 import validacionesOperaciones.*;
 
@@ -207,6 +205,10 @@ public class OperacionDeEgreso {
 
 	public void agregarRevisor(Usuario revisorNuevo) {
 		this.revisores.add(revisorNuevo);
+	}
+
+	public void quitarRevisor(Usuario revisor){
+		this.revisores.removeIf(r -> r.getId() == revisor.getId());
 	}
 
 	public List<Item> getItems() {

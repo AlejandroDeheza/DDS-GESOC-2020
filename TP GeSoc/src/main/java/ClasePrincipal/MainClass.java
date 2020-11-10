@@ -1,10 +1,7 @@
 package ClasePrincipal;
 
-import java.util.Scanner;
 import java.util.concurrent.*;
 
-import model.*;
-import repositorios.RepositorioCompras;
 import validacionesOperaciones.ValidadorDeOperaciones;
 
 public class MainClass{

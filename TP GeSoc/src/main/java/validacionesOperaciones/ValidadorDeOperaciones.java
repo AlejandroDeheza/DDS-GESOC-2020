@@ -6,7 +6,7 @@ import model.EstadoOperacion;
 import model.OperacionDeEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import repositorios.RepositorioCompras;
+import repositorios.RepositorioOperaciones;
 
 public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager, TransactionalOps {
 
@@ -19,7 +19,7 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 	}
 	
 	public void validarComprasPendientes(){
-		List<OperacionDeEgreso> comprasPendientes = RepositorioCompras.instance().obtenerOperaciones("estado = 'PENDIENTE'");
+		List<OperacionDeEgreso> comprasPendientes = RepositorioOperaciones.instance().obtenerOperaciones("estado = 'PENDIENTE'");
 		
 		comprasPendientes.stream().forEach(compra -> this.validarCompra(compra));
 		
@@ -36,7 +36,7 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 			compra.notificarRevisores("Validacion compra Nº"+compra.getId(),"La operacion no es valida");
 		}
 		withTransaction(() ->{
-			RepositorioCompras.instance().actualizarCompra(compra);
+			RepositorioOperaciones.instance().actualizarCompra(compra);
 		});
 	}
 	
