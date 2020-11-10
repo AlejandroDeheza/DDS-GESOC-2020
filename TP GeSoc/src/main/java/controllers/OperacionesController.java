@@ -151,8 +151,9 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             RepositorioEntidades.instance().actualizarEntidad(entidad);
         });
 
-//        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + nuevaOperacion.getId());
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
+        Long operacionCreada = nuevaOperacion.getId();
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacionCreada);
+        //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
         return null;
     }
 }
