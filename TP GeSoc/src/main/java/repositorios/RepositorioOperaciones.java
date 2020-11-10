@@ -48,7 +48,7 @@ public final class RepositorioOperaciones implements WithGlobalEntityManager {
 
 	public OperacionDeEgreso buscar(long id){
 		//Agrego este clear porque nos trajo problemas de consistencia. Ciertas entidades que persistiamos previamente
-		//con withTransaction, al usar el find venian con info desactualizada. 
+		//con withTransaction, al usar el find venian con info desactualizada.
 		entityManager().clear();
 		return entityManager().find(OperacionDeEgreso.class, id);
 	}
