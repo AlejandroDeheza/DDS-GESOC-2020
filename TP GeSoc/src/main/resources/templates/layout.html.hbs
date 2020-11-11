@@ -16,10 +16,17 @@
     border-bottom-style: groove;
     margin-bottom: 1%">
         <a class="links_navegacion" href="/"><i class="fas fa-home"></i> Home</a>
-        <span >
+        <span>
             {{#usuarioLogeado}}
-                <span style="margin-left: 78%; font-family: Bahnschrift;">{{username}}</span>
-                <a class="links_navegacion" style="margin-left: 10px" href="/cerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                <div class="dropdown" style="margin-left: 85%;">
+                    <a class="links_navegacion" href="#"><i class="fas fa-user"></i> {{username}}</a>
+                    <div class="dropdown-content">
+                        <a href="/inbox" class="greenStyle"><i class="fas fa-envelope"></i> <span>Bandeja de mensajes</span></a>
+                        <a href="/cerrarSesion" class="greenStyle"><i class="fas fa-sign-out-alt"></i> <span>Cerrar sesión</span></a>
+                    </div>
+                </div>
+
+<!--                <a class="links_navegacion" style="margin-left: 10px" href="/cerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>-->
             {{else}}
                 <a class="links_navegacion" style="margin-left: 82%" href="/login"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
             {{/usuarioLogeado}}
