@@ -52,12 +52,5 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/agregarRevisor", (request, response) -> operacionController.agregarRevisor(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/quitarRevisor", (request, response) -> operacionController.quitarRevisor(request,response), engine);
-
-
-
-
-
-
-	     
 	}
 }

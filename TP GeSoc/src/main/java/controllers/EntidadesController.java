@@ -56,7 +56,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         }
 
         modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
-        modelo.put("organizacion",request.params(":idOrg"));
+        modelo.put("organizacion",RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))));
 
         return new ModelAndView(modelo, "entidades.html.hbs");
     }
@@ -87,6 +87,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         }
         //modelo.put("idOrg", request.params(":idOrg"));
         modelo.put("idEnt",request.params(":idEntidad"));
+        modelo.put("organizacion",RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))));
 
         return new ModelAndView(modelo, "entidad.html.hbs");
     }

@@ -4,6 +4,7 @@ import model.OperacionDeEgreso;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import organizacion.Entidad;
 import organizacion.Organizacion;
 
 import javax.persistence.EntityManager;
@@ -35,6 +36,8 @@ public class RepositorioOrganizaciones implements WithGlobalEntityManager {
         List<Organizacion> organizaciones = session.createQuery("FROM Organizacion WHERE " + condicion).list();
         return organizaciones;
     }
+
+    public Organizacion obtenerOrganizacion(long id) { return entityManager().find(Organizacion.class,id); }
     public void agregarOrganizacion(Organizacion organizacion) {
         entityManager().persist(organizacion);
     }

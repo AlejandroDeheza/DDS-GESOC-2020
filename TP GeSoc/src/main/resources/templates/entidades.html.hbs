@@ -6,11 +6,19 @@
     <title>GESOC - Entidades</title>
 {{/partial}}
 
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    {{#organizacion}}
+    <a class="links_navegacion" href="/organizaciones/{{id}}"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+    {{/organizacion}}
+{{/partial}}
+
 {{# partial "contenido" }}
     <section class="fondo-gris">
         <h2>Entidades</h2>
-
-        <form action="/organizaciones/{{organizacion}}/entidades" method="GET">
+        {{#organizacion}}
+        <form action="/organizaciones/{{id}}/entidades" method="GET">
+        {{/organizacion}}
            Filtrar por categoria:
             <select name="categoria">
                 <option value = "Cualquiera" selected>Cualquier categoria</option>

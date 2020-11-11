@@ -29,8 +29,16 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las operaciones relacionadas a la entidad actual
         modelo.put("operaciones", RepositorioOperaciones.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));
+        cargarDatosParaHistorico(request, modelo);
 
         return new ModelAndView(modelo, "operaciones.html.hbs");
+    }
+
+    private void cargarDatosParaHistorico(Request request, Map<String, Object> modelo) {
+        modelo.put("organizacionID",request.params(":idOrg"));
+        modelo.put("organizacionNombre",RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))).getNombre());
+        modelo.put("entidadID",request.params(":idEntidad"));
+        modelo.put("entidadNombre",RepositorioEntidades.instance().obtenerEntidad(Long.parseLong(request.params(":idEntidad"))).getNombreFicticio());
     }
 
     public ModelAndView getFormOperaciones(Request request, Response response){
@@ -38,6 +46,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             response.redirect("/login");
         }
         Map<String, Object> modelo = new HashMap<>();
+        cargarDatosParaHistorico(request, modelo);
         modelo.put("organizacion", request.params(":idOrg"));
         modelo.put("entidad", request.params("idEntidad"));
         modelo.put("tiposDocumentoComercial", Arrays.asList(TipoDocumentoComercial.values()));
@@ -62,6 +71,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
                     RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario"));
             if (compra != null) {
                 Map<String, Object> detalleCompra = new HashMap<>();
+                cargarDatosParaHistorico(request, detalleCompra);
 
                 detalleCompra.put("compra", compra);
                 detalleCompra.put("items", compra.getItems());

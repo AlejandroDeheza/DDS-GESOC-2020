@@ -4,6 +4,13 @@
 
 <script src="/comportamientoDinamico.js"></script>
 
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Operaciones</a>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+{{/partial}}
+
 {{# partial "contenido" }}
 
     <section class="fondo-gris">

@@ -50,7 +50,7 @@ public class OrganizacionesController {
 
         Map<String, Object> modelo = new HashMap<>();
 
-        modelo.put("organizacion", RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + request.params(":idOrg")));
+        modelo.put("organizacion", RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))));
 
         modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg")));
 
