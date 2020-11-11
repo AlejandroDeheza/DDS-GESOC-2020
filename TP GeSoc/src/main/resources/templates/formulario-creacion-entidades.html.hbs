@@ -4,6 +4,14 @@
 
 {{# partial "nav"}}
     <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    {{#organizacion}}
+        <a class="links_navegacion" href="/organizaciones/{{id}}"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+    {{/organizacion}}
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-building"></i> Nueva entidad</a>
 {{/partial}}
 
 <head>
@@ -14,7 +22,9 @@
 
     <section class="fondo-gris">
         <h2>Nueva entidad</h2>
-        <form action="/organizaciones/{{organizacion}}/entidades" method="POST">
+        {{#organizacion}}
+        <form action="/organizaciones/{{id}}/entidades" method="POST">
+        {{/organizacion}}
             <div class="campo">
                 <span class="nombre-campo">Nombre ficticio: </span>
                 <input type="text" name="nombreFicticio" placeholder="Ingrese un nombre">

@@ -38,6 +38,7 @@ public class OrganizacionesController {
             modelo.put("organizaciones", RepositorioOrganizaciones.instance().obtenerTodasLasOrganizaciones());
         }
 
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
 
         return new ModelAndView(modelo, "organizaciones.html.hbs");
     }
@@ -55,6 +56,7 @@ public class OrganizacionesController {
         modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades("entidad_organizacion = " + request.params(":idOrg")));
 
 //        modelo.put("entidades", RepositorioEntidades.instance().obtenerEntidades(request.params(":idOrg")));
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
 
         return new ModelAndView(modelo, "organizacion.html.hbs");
     }

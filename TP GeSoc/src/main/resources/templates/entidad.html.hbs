@@ -8,10 +8,20 @@
 
 {{# partial "nav"}}
     <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
     {{#organizacion}}
         <a class="links_navegacion" href="/organizaciones/{{id}}"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+        <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
         <a class="links_navegacion" href="/organizaciones/{{id}}/entidades"><i class="fas fa-building"></i> Entidades</a>
     {{/organizacion}}
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <!--Elemento actual-->
+    {{#entidadBase}}
+        <span class="links_navegacion"><i class="fas fa-building"></i> {{nombreFicticio}}</span>
+    {{/entidadBase}}
+    {{#entidadJuridica}}
+        <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-building"></i> {{nombreFicticio}}</a>
+    {{/entidadJuridica}}
 {{/partial}}
 
 {{# partial "contenido" }}
@@ -48,7 +58,7 @@
             {{/direccion}}
         {{/entidadJuridica}}
 
-        <br><div><a href="{{idEnt}}/operaciones" class="greenStyle"><i class="fas fa-credit-card"></i> <span>Operaciones</span></a></div><br>
+        <br><div><a href="{{idEnt}}/operaciones" class="greenStyle"><i class="fas fa-money-check-alt"></i> <span>Operaciones</span></a></div><br>
         <div><a href="{{idEnt}}/operaciones/nueva" class="redStyle">Nueva operación</a></div>
     </section>
 {{/partial}}

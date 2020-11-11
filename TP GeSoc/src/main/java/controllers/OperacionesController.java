@@ -31,6 +31,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         modelo.put("operaciones", RepositorioOperaciones.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));
         cargarDatosParaHistorico(request, modelo);
 
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
+
         return new ModelAndView(modelo, "operaciones.html.hbs");
     }
 
@@ -54,6 +56,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         modelo.put("proveedores",RepositorioProveedores.instance().obtenerTodosLosProveedores());
         List<EtiquetaOperacion> etiquetas = RepositorioEtiquetas.instance().obtenerTodasLasEtiquetas();
         modelo.put("etiquetas",etiquetas);
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
         return new ModelAndView(modelo,"formulario-creacion-operaciones.html.hbs");
     }
 
@@ -93,6 +96,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
                 detalleCompra.put("idOrg", request.params(":idOrg"));
                 detalleCompra.put("idEntidad", request.params(":idEntidad"));
                 detalleCompra.put("idOperacion", request.params(":idOperacion"));
+
+                detalleCompra.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
 
                 return new ModelAndView(detalleCompra, "operacion.html.hbs");
             }

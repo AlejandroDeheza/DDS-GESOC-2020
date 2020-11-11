@@ -13,13 +13,27 @@
     background: #B69C7B;
     font-size:20px;
     border-bottom-color: black;
-    border-bottom-style: groove;">
+    border-bottom-style: groove;
+    margin-bottom: 1%">
         <a class="links_navegacion" href="/"><i class="fas fa-home"></i> Home</a>
-        {{#block "nav"}}
-        {{/block}}
+        <span >
+            {{#usuarioLogeado}}
+                <span style="margin-left: 78%; font-family: Bahnschrift;">{{username}}</span>
+                <a class="links_navegacion" style="margin-left: 10px" href="/cerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            {{else}}
+                <a class="links_navegacion" style="margin-left: 82%" href="/login"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+            {{/usuarioLogeado}}
+        </span>
+
+
     </nav>
 
+    <span style="padding-left: 8%">
+        {{#block "nav"}}
+        {{/block}}
+    </span>
 	<main>
+
         {{#block "header"}}
         {{/block}}
 

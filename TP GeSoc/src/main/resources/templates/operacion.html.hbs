@@ -3,11 +3,21 @@
 {{/partial}}
 
 {{# partial "nav"}}
-    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Operaciones</a>
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
     <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
     <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
     <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
     <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones"><i class="fas fa-money-check-alt"></i> Operaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    {{#compra}}
+         <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-money-check-alt"></i> {{id}}</a>
+    {{/compra}}
 {{/partial}}
 
 {{# partial "contenido" }}

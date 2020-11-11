@@ -28,12 +28,14 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         }
 
         Map<String, Object> modelo = new HashMap<>();
-        modelo.put("organizacion",request.params(":idOrg"));
+        Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg")));
+        modelo.put("organizacion",organizacion);
         //Aca habria que agregar la parte de cada entidad especifica juridica/base
         modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
         modelo.put("categoriasEntidadJuridicaDisponibles", Arrays.asList(CategoriaEntidadJuridica.values()));
         modelo.put("entidadesJuridicasDisponibles", RepositorioEntidades.instance().obtenerTodasLasEntidadesJuridicas());
 
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
         //TODO - ¿deberia enviarse la info de la API para generar un listado que permita cargar la ubicacion?
         return new ModelAndView(modelo, "formulario-creacion-entidades.html.hbs");
     }
@@ -57,6 +59,8 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
         modelo.put("categoriasDisponibles", RepositorioCategoriasDeEntidades.instance().obtenerTodasLasCategorias());
         modelo.put("organizacion",RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))));
+
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
 
         return new ModelAndView(modelo, "entidades.html.hbs");
     }
@@ -88,13 +92,13 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         //modelo.put("idOrg", request.params(":idOrg"));
         modelo.put("idEnt",request.params(":idEntidad"));
         modelo.put("organizacion",RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))));
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
 
         return new ModelAndView(modelo, "entidad.html.hbs");
     }
 
 
     public ModelAndView crearEntidad(Request request, Response response){
-        System.out.println("Entra aca");
         if(!new UsuariosController().estaLogueado(request,response)){
             response.redirect("/login");
         }

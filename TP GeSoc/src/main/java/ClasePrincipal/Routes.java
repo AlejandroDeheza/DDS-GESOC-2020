@@ -45,7 +45,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		//POST
 		Spark.post("/login", (request, response) -> usuarioController.handleSession(request,response));
-		Spark.post("/cerrarSesion", (request, response) -> usuarioController.closeSession(request,response));
+		Spark.get("/cerrarSesion", (request, response) -> usuarioController.closeSession(request,response));
 
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.crearOperacion(request,response), engine);

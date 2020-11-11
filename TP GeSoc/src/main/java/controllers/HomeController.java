@@ -15,8 +15,8 @@ public class HomeController {
         Map<String, Object> modelo = new HashMap<>();
 
         modelo.put("anio", LocalDate.now().getYear());
-        modelo.put("usuarioLogeado", (new UsuariosController()).estaLogueado(request,response));
-
+        //modelo.put("usuarioLogeado", (new UsuariosController()).estaLogueado(request,response));
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
         return new ModelAndView(modelo, "home.html.hbs");
     }
 }

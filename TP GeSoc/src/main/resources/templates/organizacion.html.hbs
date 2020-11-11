@@ -8,6 +8,12 @@
 
 {{# partial "nav"}}
     <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <!--Elemento actual-->
+    {{#organizacion}}
+        <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+    {{/organizacion}}
 {{/partial}}
 
 {{# partial "contenido" }}
@@ -25,7 +31,7 @@
             </h3>-->
             <div>
 
-                <a href="/organizaciones/{{id}}/entidades" class="greenStyle"><i class="fas fa-columns"></i> <span>Entidades</span></a>
+                <a href="/organizaciones/{{id}}/entidades" class="greenStyle"><i class="fas fa-building"></i> <span>Entidades</span></a>
             </div><br>
 
             <div>
