@@ -20,6 +20,14 @@ h2 {
     font-weight: 300;
 }
 
+.barraNavegacion{
+    padding: 20px;
+    /*background: aliceblue;*/
+    background: #B69C7B;
+    font-size:20px;
+    border-bottom-color: black;
+    border-bottom-style: groove;"
+}
 footer {
     position: relative;
     top: 5%;
@@ -258,8 +266,3 @@ input.checkbox{
     margin: 4px 2px;
     cursor: pointer;
 }
-
-body{
-    margin:100px;
-}
-
