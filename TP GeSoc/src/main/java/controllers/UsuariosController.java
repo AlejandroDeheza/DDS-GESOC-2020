@@ -91,7 +91,7 @@ public class UsuariosController {
         }
 
         modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
-        
+
         return new ModelAndView(modelo, "inbox.html.hbs");
     }
 
