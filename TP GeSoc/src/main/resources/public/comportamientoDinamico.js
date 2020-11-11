@@ -11,9 +11,6 @@ function show2(){
 var i = 0;
 var maxFields = 10;
 
-var i = 0;
-var maxFields = 10;
-
 function crearItem() {
     var container = document.getElementById('items');
     var textField = document.createElement("input");

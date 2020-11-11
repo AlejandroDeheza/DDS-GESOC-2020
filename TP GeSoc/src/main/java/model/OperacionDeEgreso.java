@@ -267,6 +267,10 @@ public class OperacionDeEgreso {
 		this.presupuestos = presupuestos;
 	}
 
+	public void agregarPresupuesto(Presupuesto presupuesto){
+		this.presupuestos.add(presupuesto);
+	}
+
 	public void setRevisores(List<Usuario> revisores) {
 		this.revisores = revisores;
 	}

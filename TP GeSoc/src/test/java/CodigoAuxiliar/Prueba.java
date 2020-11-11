@@ -21,8 +21,9 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 
 	@Test
 	public void updateEstadoOperacion() {
+		Proveedor proveedor = new Bootstrap().crearProveedor();
 
-		List<OperacionDeEgreso> oEgreso = new Bootstrap().crearLista3Operaciones();
+		List<OperacionDeEgreso> oEgreso = new Bootstrap().crearLista3Operaciones(proveedor);
 
 		RepositorioOperaciones.instance().agregarCompra(oEgreso.get(0));
 

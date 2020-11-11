@@ -45,9 +45,8 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
 
     }
 
-    public Presupuesto crearPresupuesto(List<Item> items) {
+    public Presupuesto crearPresupuesto(List<Item> items,Proveedor proveedor ){
         DocumentoComercial documento = new DocumentoComercial(Long.valueOf(5),TipoDocumentoComercial.FACTURA);
-        Proveedor proveedor = crearProveedor();
         return new Presupuesto(items,documento,proveedor);
     }
 
@@ -87,9 +86,9 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         return etiquetas;
     }
 
-    public List<OperacionDeEgreso> crearLista3Operaciones(){
+    public List<OperacionDeEgreso> crearLista3Operaciones(Proveedor proveedor){
         List<Presupuesto> listaPresupuestos = new ArrayList<>();
-        Presupuesto presupuesto = crearPresupuesto(crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)));
+        Presupuesto presupuesto = crearPresupuesto(crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)),proveedor);
         listaPresupuestos.add(presupuesto);
 
         OperacionDeEgreso operacion1 = new OperacionDeEgreso(
@@ -97,7 +96,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
                 new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
                 LocalDate.now(),
                 IDMedioDePago.ACCOUNT_MONEY,
-                crearProveedor(),
+                proveedor,
                 listaPresupuestos,
                 presupuesto,
                 crearLista3Usuarios("Pepe","Daniela","Jose"),
@@ -108,7 +107,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         );
 
         List<Presupuesto> listaPresupuestos2 = new ArrayList<>();
-        Presupuesto presupuesto2 = crearPresupuesto(crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)));
+        Presupuesto presupuesto2 = crearPresupuesto(crearLista3Items(crearItem("Z",20.0), crearItem("X",30.0), crearItem("Y",40.0)),proveedor);
         listaPresupuestos2.add(presupuesto2);
 
         OperacionDeEgreso operacion2 = new OperacionDeEgreso(
@@ -116,7 +115,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
                 new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
                 LocalDate.now(),
                 IDMedioDePago.AMEX,
-                crearProveedor(),
+                proveedor,
                 listaPresupuestos2,
                 presupuesto2,
                 crearLista3Usuarios("Pepe","Daniela","Jose"),
@@ -128,8 +127,8 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
 
 
         List<Presupuesto> listaPresupuestos3 = new ArrayList<>();
-        Presupuesto presupuesto3 = crearPresupuesto(crearLista3Items(crearItem("Z",30.0), crearItem("X",30.0), crearItem("Y",40.0)));
-        Presupuesto presupuesto4 = crearPresupuesto(crearLista3Items(crearItem("Z",40.0), crearItem("X",30.0), crearItem("Y",40.0)));
+        Presupuesto presupuesto3 = crearPresupuesto(crearLista3Items(crearItem("Z",30.0), crearItem("X",30.0), crearItem("Y",40.0)),proveedor);
+        Presupuesto presupuesto4 = crearPresupuesto(crearLista3Items(crearItem("Z",40.0), crearItem("X",30.0), crearItem("Y",40.0)),proveedor);
         listaPresupuestos3.add(presupuesto3);
         listaPresupuestos3.add(presupuesto4);
 
@@ -138,7 +137,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
                 new DocumentoComercial(Long.valueOf(1),TipoDocumentoComercial.FACTURA),
                 LocalDate.now(),
                 IDMedioDePago.ARGENCARD,
-                crearProveedor(),
+                proveedor,
                 listaPresupuestos3,
                 presupuesto4,
                 crearLista3Usuarios("Pepe","Daniela","Jose"),
@@ -157,7 +156,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         return oEgreso;
     }
 
-    public List<EntidadJuridica> crearLista2Entidades(){
+    public List<EntidadJuridica> crearLista2Entidades(Proveedor proveedor){
         /*----------------------------------Creacion de Entidades Juridicas----------------------------*/
         List<EntidadJuridica> listaEntidades = new ArrayList<EntidadJuridica>();
         List<Comportamiento> comportamientos1 = new ArrayList<Comportamiento>();
@@ -177,17 +176,17 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         EntidadJuridica entidad2 = new EntidadJuridica("Martilleros",new CategoriaEntidad(comportamientos2,"Poder agregar egresos"),"Martilleros SA",2012333119,direccionPostal2,1202, CategoriaEntidadJuridica.EMPRESA_MEDIANA_TRAMO_1);
         listaEntidades.add(entidad2);
 
-        List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+        List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones(proveedor);
         entidad1.agregarOperacionDeEgreso(operacionDeEgreso.get(0));
         entidad2.agregarOperacionDeEgreso(operacionDeEgreso.get(1));
         entidad2.agregarOperacionDeEgreso(operacionDeEgreso.get(2));
 
         return listaEntidades;
     }
-    public List<Organizacion> crearLista2Organizaciones(){
+    public List<Organizacion> crearLista2Organizaciones(Proveedor proveedor){
         List<Organizacion> listaOrganizaciones = new ArrayList<Organizacion>();
 
-        List<EntidadJuridica> entidades = crearLista2Entidades();
+        List<EntidadJuridica> entidades = crearLista2Entidades(proveedor);
 
         /*----------------------------------Creacion de Entidad Base-----------------------------------*/
         EntidadBase entidadBase = new EntidadBase("Jueves",null,"Me estoy muriendo del aburrimiento",null);
@@ -220,16 +219,19 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
     }
 
     public void run(){
+        Proveedor proveedor = crearProveedor();
         /*withTransaction(() ->{
              List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
              this.agregarUsuarios();
         });*/
 
         withTransaction(() -> {
-            List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones();
+            entityManager().persist(proveedor);
+
+            List<OperacionDeEgreso> operacionDeEgreso = this.crearLista3Operaciones(proveedor);
             this.agregarUsuarios();
 
-            List<Organizacion> organizaciones = crearLista2Organizaciones();
+            List<Organizacion> organizaciones = crearLista2Organizaciones(proveedor);
             RepositorioOrganizaciones.instance().agregarOrganizaciones(organizaciones);
 
             //Para probar listado

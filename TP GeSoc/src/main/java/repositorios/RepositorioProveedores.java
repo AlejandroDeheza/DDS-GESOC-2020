@@ -41,6 +41,10 @@ public class RepositorioProveedores implements WithGlobalEntityManager {
         return proveedores;
     }
 
+    public Proveedor buscar(Long id){
+        return entityManager().find(Proveedor.class,id);
+    }
+
     public void actualizarProveedor(Proveedor proveedor) {
         entityManager().merge(proveedor);
     }

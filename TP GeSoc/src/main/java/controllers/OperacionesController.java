@@ -118,7 +118,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         }
 
         LocalDate fecha = LocalDate.parse(request.queryParams("fecha"));
-        Proveedor proveedor = entityManager().find(Proveedor.class, Long.parseLong(request.queryParams("proveedor")));
+        Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
         DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
         IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
         int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
@@ -149,15 +149,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         List<Item> items = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++){
-            String descripcion = request.queryParams(("itemD"+i));
-            String precio = request.queryParams(("itemN"+i));
-
-            if(descripcion != null && precio != null){
-                items.add(new Item(new Moneda(Double.parseDouble(precio),"ARS")
-                                  ,descripcion));
-            }
-        }
+        items = obtenerItems(request,"ARS");
 
         OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
         nuevaOperacion.setDocumentoComercial(docComercial);
@@ -183,6 +175,57 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         Long operacionCreada = nuevaOperacion.getId();
         response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacionCreada);
         //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
+        return null;
+    }
+
+    public List<Item> obtenerItems(Request request,String currency) {
+        List<Item> items = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++){
+            String descripcion = request.queryParams(("itemD"+i));
+            String precio = request.queryParams(("itemN"+i));
+
+            if(descripcion != null && precio != null){
+                items.add(new Item(new Moneda(Double.parseDouble(precio),currency)
+                                  ,descripcion));
+            }
+        }
+        return items;
+    }
+
+    public ModelAndView getFormPresupuestos(Request request, Response response){
+        if(!new UsuariosController().estaLogueado(request,response)){
+            response.redirect("/login");
+        }
+        Map<String, Object> modelo = new HashMap<>();
+        cargarDatosParaHistorico(request, modelo);
+
+        modelo.put("organizacion", request.params(":idOrg"));
+        modelo.put("entidad", request.params(":idEntidad"));
+        modelo.put("operacionID", request.params(":idOperacion"));
+
+        modelo.put("tiposDocumentoComercial", Arrays.asList(TipoDocumentoComercial.values()));
+        modelo.put("proveedores",RepositorioProveedores.instance().obtenerTodosLosProveedores());
+
+        return new ModelAndView(modelo,"formulario-creacion-presupuestos.html.hbs");
+    }
+
+
+    public ModelAndView crearPresupuesto(Request request, Response response){
+        List<Item> items = obtenerItems(request,"ARS");
+        DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
+        Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
+
+        Presupuesto presupuesto = new Presupuesto(items,docComercial,proveedor);
+
+        OperacionDeEgreso operacionAsociada = RepositorioOperaciones.instance().buscar(Long.parseLong(request.params(":idOperacion")));
+        operacionAsociada.agregarPresupuesto(presupuesto);
+
+        withTransaction(() ->{
+            RepositorioOperaciones.instance().actualizarCompra(operacionAsociada);
+        });
+
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacionAsociada.getId());
         return null;
     }
 
@@ -226,5 +269,6 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacion.getId());
         return null;
     }
+
 
 }
