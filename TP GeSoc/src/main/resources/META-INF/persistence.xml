@@ -33,25 +33,25 @@
         
             
             <!-- mySQL Nico -->
-            <!--property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gesoc?useLegacyDatetimeCode=false&amp;serverTimezone=UTC" /> 
             <property name="hibernate.connection.username" value="admin" /> 
             <property name="hibernate.connection.password" value="admin" /> 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             
             <!-- mySQL Rama -->
-            <!--property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <!--<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gesoc?useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="root" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/-->
             
             <!-- SQL Server Gonzalo -->
-            <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+         <!--  <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
             <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost:1433;databaseName=GeSoc;instance=SQLEXPRESS" />
             <property name="hibernate.connection.username" value="sa" />
             <property name="hibernate.connection.password" value="123456" />
-		    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>
+		    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>-->
 
             <!-- PseudoSQL catedra-->
             <!--<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />

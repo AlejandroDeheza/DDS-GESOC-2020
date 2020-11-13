@@ -1,25 +1,18 @@
-<html>
-
 <head>
-	<link rel="stylesheet" type="text/css" href="/main.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
-<body>
-	<nav>
-        <a href="/">Home</a>
-        <a href="/consultoras">Nuestras Consultoras</a>
-	</nav>
-	<main>
-		<h1>Consultorea.me</h1>
+{{# partial "titulo" }}
+    <title>GESOC - Error</title>
+{{/partial}}
 
-        <div>
-            Hubo un error mostrando la página anterior
-        </div>
+{{# partial "contenido" }}
+    <!--TODO: Pasarle el código de error para dar un poco más de detalle-->
+        <section class="fondo-gris">
+            <h2>Algo salió mal</h2>
+            <p>Hubo un problema procesando tu solicitud.</p>
+            <p>Por favor, haz click <a href="/">aquí</a> para volver a la página principal.</p><br>
+        </section>
+{{/partial}}
 
-
-	<footer>
-		Copyright {{anio}} Consultorea.me
-	</footer>
-</body>
-
-</html>
+{{> layout.html.hbs }}

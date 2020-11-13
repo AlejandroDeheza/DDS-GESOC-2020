@@ -20,11 +20,8 @@ import java.util.*;
 
 public class OperacionesController implements WithGlobalEntityManager, TransactionalOps {
 
-
     public ModelAndView getOperaciones(Request request, Response response) {
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las operaciones relacionadas a la entidad actual
@@ -36,6 +33,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         return new ModelAndView(modelo, "operaciones.html.hbs");
     }
 
+
     private void cargarDatosParaHistorico(Request request, Map<String, Object> modelo) {
         modelo.put("organizacionID",request.params(":idOrg"));
         modelo.put("organizacionNombre",RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg"))).getNombre());
@@ -44,9 +42,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
     }
 
     public ModelAndView getFormOperaciones(Request request, Response response){
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
+
         Map<String, Object> modelo = new HashMap<>();
         cargarDatosParaHistorico(request, modelo);
         modelo.put("organizacion", request.params(":idOrg"));
@@ -103,8 +100,9 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             }
         } catch (NumberFormatException e) {
             response.status(400);
+            response.body("Bad Request");
             System.out.println("El id ingresado (" + idOperacion + ") no es un número");
-           // return "Bad Request";
+            response.redirect("/error");
             return null;
         }
         //Putea sin este return
@@ -113,69 +111,84 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
 
     public ModelAndView crearOperacion(Request request, Response response){
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
+        checkearUsuarioLogueado(request, response);
+
+        if(request.queryParams("fecha").isEmpty()){
+            response.status(400);
+            response.body("Bad Request");
+            System.out.println("Debe ingresar una fecha");
+            response.redirect("/error");
+            return null;
         }
 
-        LocalDate fecha = LocalDate.parse(request.queryParams("fecha"));
-        Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
-        DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
-        IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
-        int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
+        try {
+            LocalDate fecha = LocalDate.parse(request.queryParams("fecha"));
+            Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
+            DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
+            IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
+            int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
 
-        List<ValidacionDeOperaciones> validacionesActivas = new ArrayList<>();
-        if(request.queryParams("todosLosItems")!=null && request.queryParams("todosLosItems").equals("seleccionado"))
-            validacionesActivas.add(new ValidarQueLaOperacionContengaTodosLosItems());
-        if(request.queryParams("presupuestoBarato")!=null && request.queryParams("presupuestoBarato").equals("seleccionado"))
-            validacionesActivas.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
-        if(request.queryParams("cantidadMinima")!=null && request.queryParams("cantidadMinima").equals("seleccionado"))
-            validacionesActivas.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
+            List<ValidacionDeOperaciones> validacionesActivas = new ArrayList<>();
+            if (request.queryParams("todosLosItems") != null && request.queryParams("todosLosItems").equals("seleccionado"))
+                validacionesActivas.add(new ValidarQueLaOperacionContengaTodosLosItems());
+            if (request.queryParams("presupuestoBarato") != null && request.queryParams("presupuestoBarato").equals("seleccionado"))
+                validacionesActivas.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
+            if (request.queryParams("cantidadMinima") != null && request.queryParams("cantidadMinima").equals("seleccionado"))
+                validacionesActivas.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 
-        //Busco la etiqueta en el repositorio y la agrego a la lista.
-        //Gonzalo: No hace falta porque esta embebida, lo unico que importa es el texto que tiene
+            //Busco la etiqueta en el repositorio y la agrego a la lista.
+            //Gonzalo: No hace falta porque esta embebida, lo unico que importa es el texto que tiene
         /*List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
         etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));*/
 
-        // Me agrego por defecto a mi mismo como revisor.
-        List<Usuario> revisores = new ArrayList<Usuario>();
-        String agregarRevisor = request.queryParams("revisor");
-        if(agregarRevisor!=null && agregarRevisor.equals("seleccionado")) {
-            revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
+            // Me agrego por defecto a mi mismo como revisor.
+            List<Usuario> revisores = new ArrayList<Usuario>();
+            String agregarRevisor = request.queryParams("revisor");
+            if (agregarRevisor != null && agregarRevisor.equals("seleccionado")) {
+                revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
+            }
+
+            EtiquetaOperacion etiqueta = new EtiquetaOperacion(request.queryParams("etiqueta"));
+            List<EtiquetaOperacion> etiquetas = new ArrayList<>();
+            etiquetas.add(etiqueta);
+
+            List<Item> items = new ArrayList<>();
+
+            items = obtenerItems(request, "ARS");
+
+            OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
+            nuevaOperacion.setDocumentoComercial(docComercial);
+            nuevaOperacion.setFechaOperacion(fecha);
+            nuevaOperacion.setMedio(medioDePago);
+            nuevaOperacion.setProveedor(proveedor);
+            nuevaOperacion.setRevisores(revisores);
+            nuevaOperacion.setPresupuestosMinimos(presupuestosMinimos);
+            nuevaOperacion.setValidacionesVigentes(validacionesActivas);
+            nuevaOperacion.setEtiquetas(etiquetas);
+            nuevaOperacion.setItems(items);
+
+
+            Long idEntidad = Long.valueOf(request.params(":idEntidad"));
+            Entidad entidad = RepositorioEntidades.instance().obtenerEntidad(idEntidad);
+            entidad.agregarOperacionDeEgreso(nuevaOperacion);
+
+            withTransaction(() -> {
+                RepositorioOperaciones.instance().agregarCompra(nuevaOperacion);
+                RepositorioEntidades.instance().actualizarEntidad(entidad);
+            });
+
+            Long operacionCreada = nuevaOperacion.getId();
+            response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacionCreada);
+            //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
+            return null;
         }
-
-        EtiquetaOperacion etiqueta = new EtiquetaOperacion(request.queryParams("etiqueta"));
-        List<EtiquetaOperacion> etiquetas = new ArrayList<>();
-        etiquetas.add(etiqueta);
-
-        List<Item> items = new ArrayList<>();
-
-        items = obtenerItems(request,"ARS");
-
-        OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
-        nuevaOperacion.setDocumentoComercial(docComercial);
-        nuevaOperacion.setFechaOperacion(fecha);
-        nuevaOperacion.setMedio(medioDePago);
-        nuevaOperacion.setProveedor(proveedor);
-        nuevaOperacion.setRevisores(revisores);
-        nuevaOperacion.setPresupuestosMinimos(presupuestosMinimos);
-        nuevaOperacion.setValidacionesVigentes(validacionesActivas);
-        nuevaOperacion.setEtiquetas(etiquetas);
-        nuevaOperacion.setItems(items);
-
-
-        Long idEntidad = Long.valueOf(request.params(":idEntidad"));
-        Entidad entidad = RepositorioEntidades.instance().obtenerEntidad(idEntidad);
-        entidad.agregarOperacionDeEgreso(nuevaOperacion);
-
-        withTransaction(() ->{
-            RepositorioOperaciones.instance().agregarCompra(nuevaOperacion);
-            RepositorioEntidades.instance().actualizarEntidad(entidad);
-        });
-
-        Long operacionCreada = nuevaOperacion.getId();
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacionCreada);
-        //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones");
-        return null;
+        catch(Exception e) {
+            response.status(400);
+            response.body("Bad Request");
+            System.out.println("Los campos no fueron completados correctamente");
+            response.redirect("/error");
+            return null;
+        }
     }
 
     public List<Item> obtenerItems(Request request,String currency) {
@@ -194,9 +207,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
     }
 
     public ModelAndView getFormPresupuestos(Request request, Response response){
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
         Map<String, Object> modelo = new HashMap<>();
         cargarDatosParaHistorico(request, modelo);
 
@@ -212,6 +223,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
 
     public ModelAndView crearPresupuesto(Request request, Response response){
+
         List<Item> items = obtenerItems(request,"ARS");
         DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
         Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
@@ -231,9 +243,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
     public ModelAndView agregarRevisor(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 
@@ -251,9 +261,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
     public ModelAndView quitarRevisor(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 
@@ -268,6 +276,12 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacion.getId());
         return null;
+    }
+
+    private void checkearUsuarioLogueado(Request request, Response response) {
+        if (!new UsuariosController().estaLogueado(request, response)) {
+            response.redirect("/login");
+        }
     }
 
 

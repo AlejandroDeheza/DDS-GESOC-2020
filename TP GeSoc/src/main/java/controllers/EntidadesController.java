@@ -23,9 +23,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
     public ModelAndView getFormEntidades(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Map<String, Object> modelo = new HashMap<>();
         Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizacion(Long.parseLong(request.params(":idOrg")));
@@ -42,9 +40,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
     public ModelAndView getEntidades(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Map<String, Object> modelo = new HashMap<>();
         String categoriaSeleccionada = request.queryParams("categoria");
@@ -67,9 +63,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
     public ModelAndView getEntidad(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Map<String, Object> modelo = new HashMap<>();
 
@@ -99,70 +93,83 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
 
     public ModelAndView crearEntidad(Request request, Response response){
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
-        String tipo = request.queryParams("tipo");
-        String nombreFicticio = request.queryParams("nombreFicticio");
-        Long idCategoria = Long.parseLong(request.queryParams("categoria"));
+        try {
+            String tipo = request.queryParams("tipo");
+            String nombreFicticio = request.queryParams("nombreFicticio");
+            Long idCategoria = Long.parseLong(request.queryParams("categoria"));
 
-        if(tipo.equals("Base")){
-            EntidadBase nuevaEntidad = new EntidadBase();
-            nuevaEntidad.setNombreFicticio(nombreFicticio);
-            nuevaEntidad.setCategoriaEntidad(RepositorioCategoriasDeEntidades.instance().buscar(idCategoria));
-            nuevaEntidad.setDescripcion(request.queryParams("descripcion-base"));
-            if (!request.queryParams("entidad-juridica-asociada").equals("Ninguna"))
-            {
-                nuevaEntidad.setEntidadJuridica(RepositorioEntidades.instance().obtenerEntidadJuridica(Long.parseLong(request.queryParams("entidad-juridica-asociada"))));
+            if (tipo.equals("Base")) {
+                EntidadBase nuevaEntidad = new EntidadBase();
+                nuevaEntidad.setNombreFicticio(nombreFicticio);
+                nuevaEntidad.setCategoriaEntidad(RepositorioCategoriasDeEntidades.instance().buscar(idCategoria));
+                nuevaEntidad.setDescripcion(request.queryParams("descripcion-base"));
+                if (!request.queryParams("entidad-juridica-asociada").equals("Ninguna")) {
+                    nuevaEntidad.setEntidadJuridica(RepositorioEntidades.instance().obtenerEntidadJuridica(Long.parseLong(request.queryParams("entidad-juridica-asociada"))));
+                }
+
+                Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
+                Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
+                organizacion.agregarEntidad(nuevaEntidad);
+
+                withTransaction(() -> {
+                    RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
+                    RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
+                });
+
+                response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
+
+            } else if (tipo.equals("Juridica")) {
+                EntidadJuridica nuevaEntidad = new EntidadJuridica();
+                nuevaEntidad.setNombreFicticio(nombreFicticio);
+                nuevaEntidad.setCategoriaEntidad(RepositorioCategoriasDeEntidades.instance().buscar(idCategoria));
+                nuevaEntidad.setCategoriaEntidadJuridica(CategoriaEntidadJuridica.valueOf(request.queryParams("categoria-entidad-juridica")));
+                nuevaEntidad.setCodInscIGJ(Integer.parseInt(request.queryParams("codigo-igj-juridica")));
+                nuevaEntidad.setCuit(Integer.parseInt(request.queryParams("cuit-juridica")));
+                nuevaEntidad.setRazonSocial(request.queryParams("razon-social-juridica"));
+
+                String pais = request.queryParams("pais");
+                String provincia = request.queryParams("provincia");
+                String ciudad = request.queryParams("ciudad");
+                String calle = request.queryParams("calle");
+                String altura = request.queryParams("altura");
+                String piso = request.queryParams("piso");
+                String departamento = request.queryParams("departamento");
+                nuevaEntidad.setDireccionPostal(new DireccionPostal(new Direccion(calle, altura, piso, departamento), new Ubicacion(pais, provincia, ciudad)));
+                //TODO - Los datos tendrian que salir de la API, ¿habra que hacer alguna conversion aca?
+                //RAMA - Podriamos hacer algo con Js para que haya un dropdown list de lo q tenemos de la api.
+
+                Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
+                Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
+                organizacion.agregarEntidad(nuevaEntidad);
+
+                withTransaction(() -> {
+                    RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
+                    RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
+                });
+                response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
+            } else {
+                response.status(400);
+                response.body("Bad Request");
+                System.out.println("El tipo de entidad no es correcto");
+                response.redirect("/error");
             }
-
-            Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
-            Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
-            organizacion.agregarEntidad(nuevaEntidad);
-
-            withTransaction(() ->{
-                RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
-                RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
-            });
-
-            response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
-
         }
-        else if (tipo.equals("Juridica")){
-            EntidadJuridica nuevaEntidad = new EntidadJuridica();
-            nuevaEntidad.setNombreFicticio(nombreFicticio);
-            nuevaEntidad.setCategoriaEntidad(RepositorioCategoriasDeEntidades.instance().buscar(idCategoria));
-            nuevaEntidad.setCategoriaEntidadJuridica(CategoriaEntidadJuridica.valueOf(request.queryParams("categoria-entidad-juridica")));
-            nuevaEntidad.setCodInscIGJ(Integer.parseInt(request.queryParams("codigo-igj-juridica")));
-            nuevaEntidad.setCuit(Integer.parseInt(request.queryParams("cuit-juridica")));
-            nuevaEntidad.setRazonSocial(request.queryParams("razon-social-juridica"));
-
-            String pais = request.queryParams("pais");
-            String provincia = request.queryParams("provincia");
-            String ciudad = request.queryParams("ciudad");
-            String calle = request.queryParams("calle");
-            String altura = request.queryParams("altura");
-            String piso = request.queryParams("piso");
-            String departamento = request.queryParams("departamento");
-            nuevaEntidad.setDireccionPostal(new DireccionPostal(new Direccion(calle,altura,piso,departamento), new Ubicacion(pais,provincia,ciudad)));
-            //TODO - Los datos tendrian que salir de la API, ¿habra que hacer alguna conversion aca?
-            //RAMA - Podriamos hacer algo con Js para que haya un dropdown list de lo q tenemos de la api.
-
-            Long idOrganizacion = Long.valueOf(request.params(":idOrg"));
-            Organizacion organizacion = RepositorioOrganizaciones.instance().obtenerOrganizaciones("id_organizacion = " + idOrganizacion).get(0);
-            organizacion.agregarEntidad(nuevaEntidad);
-            
-            withTransaction(() ->{
-                RepositorioEntidades.instance().agregarEntidad(nuevaEntidad);
-                RepositorioOrganizaciones.instance().actualizarOrganizacion(organizacion);
-            });
-            response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + nuevaEntidad.getId());
-        }
-        else{
-            throw new RuntimeException("No se ha seleccionado tipo de entidad");
+        catch(Exception e) {
+                response.status(400);
+                response.body("Bad Request");
+                System.out.println("Los campos no fueron completados correctamente");
+                response.redirect("/error");
+                return null;
         }
 
         return null;
+    }
+
+    private void checkearUsuarioLogueado(Request request, Response response) {
+        if (!new UsuariosController().estaLogueado(request, response)) {
+            response.redirect("/login");
+        }
     }
 }

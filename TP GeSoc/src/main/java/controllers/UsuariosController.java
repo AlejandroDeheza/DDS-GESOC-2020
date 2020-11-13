@@ -45,8 +45,9 @@ public class UsuariosController {
         List<Usuario> posibleUsuario = RepositorioUsuarios.instance().obtenerUsuarios("nombre_usuario = '" + username + "'");
 
         if(posibleUsuario.isEmpty()) {
-            //TODO HTTP Error code y redirect a pagina de error
-            //Por ahora
+            response.status(401);
+            response.body("Failed Login");
+            System.out.println("El usuario ingresado no existe");
             response.redirect("/login/failed");
             return null;
         }
@@ -58,8 +59,9 @@ public class UsuariosController {
         passConSalt[1] = usuario.getSaltActual();
 
         if(!Hasher.sonCorrespondientes(password,passConSalt)) {
-            //TODO HTTP Error code y redirect a pagina de error
-            //Por ahora
+            response.status(401);
+            response.body("Failed Login");
+            System.out.println("La contraseña es incorrecta");
             response.redirect("/login/failed");
             return null;
         }

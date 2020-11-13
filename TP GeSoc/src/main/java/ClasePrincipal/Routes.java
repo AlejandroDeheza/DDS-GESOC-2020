@@ -23,6 +23,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		OperacionesController operacionController = new OperacionesController();
 		EntidadesController entidadController = new EntidadesController();
 		OrganizacionesController organizacionController = new OrganizacionesController();
+		ErrorController errorController = new ErrorController();
 
 		//GET
 		Spark.get("/", (request, response) -> homeController.getHome(request,response), engine);
@@ -54,5 +55,8 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/agregarRevisor", (request, response) -> operacionController.agregarRevisor(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/quitarRevisor", (request, response) -> operacionController.quitarRevisor(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/presupuesto", (request, response) -> operacionController.crearPresupuesto(request,response), engine);
+
+		//ERROR
+		Spark.get("/error", (request, response) -> errorController.getError(request, response), engine);
 	}
 }

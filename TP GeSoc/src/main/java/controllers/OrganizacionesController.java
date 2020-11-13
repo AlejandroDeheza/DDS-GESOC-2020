@@ -14,18 +14,14 @@ public class OrganizacionesController {
 
     public ModelAndView getFormOrganizaciones(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         return null;
     }
 
     public ModelAndView getOrganizaciones(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Map<String, Object> modelo = new HashMap<>();
         String filtro = request.queryParams("filtro");
@@ -45,9 +41,7 @@ public class OrganizacionesController {
 
     public ModelAndView getOrganizacion(Request request, Response response) {
 
-        if(!new UsuariosController().estaLogueado(request,response)){
-            response.redirect("/login");
-        }
+        checkearUsuarioLogueado(request, response);
 
         Map<String, Object> modelo = new HashMap<>();
 
@@ -59,6 +53,12 @@ public class OrganizacionesController {
         modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
 
         return new ModelAndView(modelo, "organizacion.html.hbs");
+    }
+
+    private void checkearUsuarioLogueado(Request request, Response response) {
+        if (!new UsuariosController().estaLogueado(request, response)) {
+            response.redirect("/login");
+        }
     }
 
 
