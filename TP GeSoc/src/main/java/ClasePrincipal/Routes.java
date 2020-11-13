@@ -52,9 +52,9 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.post("/organizaciones/:idOrg/entidades", (request, response) -> entidadController.crearEntidad(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones", (request, response) -> operacionController.crearOperacion(request,response), engine);
 
-		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/agregarRevisor", (request, response) -> operacionController.agregarRevisor(request,response), engine);
-		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/quitarRevisor", (request, response) -> operacionController.quitarRevisor(request,response), engine);
-		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/presupuesto", (request, response) -> operacionController.crearPresupuesto(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/altaRevisor", (request, response) -> operacionController.agregarRevisor(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/bajaRevisor", (request, response) -> operacionController.quitarRevisor(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/nuevoPresupuesto", (request, response) -> operacionController.crearPresupuesto(request,response), engine);
 
 		//ERROR
 		Spark.get("/error", (request, response) -> errorController.getError(request, response), engine);

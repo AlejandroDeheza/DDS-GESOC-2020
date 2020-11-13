@@ -122,11 +122,11 @@
         </div><br>
 
         {{#if usuarioEsRevisor}}
-            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/quitarRevisor" method="POST">
+            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/bajaRevisor" method="POST">
                 <input type="submit" name="revisor" value="Quitarme como revisor" class="redStyle">
             </form>
         {{else}}
-            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/agregarRevisor" method="POST">
+            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/altaRevisor" method="POST">
                 <input type="submit" name="revisor" value="Agregarme como revisor" class="redStyle">
             </form>
         {{/if}}
