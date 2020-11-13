@@ -117,11 +117,10 @@ public class OperacionDeEgreso {
 	}
 
 	public void notificarRevisores(String asunto, String mensaje) {
-		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(asunto,mensaje + ", " + this.id,LocalDate.now())));
+		this.revisores.forEach(revisor -> revisor.recibirMensaje(new Mensaje(asunto,mensaje,LocalDate.now())));
 	}
 
 	//---------------------------------------------------------------------------------------------------
-
 	//Constructores, getters y setters
 	//---------------------------------------------------------------------------------------------------
 
