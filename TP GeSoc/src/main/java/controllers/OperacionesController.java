@@ -63,10 +63,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
     }
 
     public ModelAndView getOperacion(Request request, Response response) {
-        if (!new UsuariosController().estaLogueado(request, response)) {
-            response.redirect("/login");
-            return null;
-        }
+        checkearUsuarioLogueado(request,response);
 
         Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 
