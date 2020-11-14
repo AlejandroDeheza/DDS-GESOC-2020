@@ -10,6 +10,9 @@ import javax.ws.rs.core.*;
 
 import org.json.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MercadoLibreApi implements InfoDeUbicacionYMoneda {
 	
 	public ClientResponse obtenerJSON(String Url) {
@@ -103,11 +106,22 @@ public class MercadoLibreApi implements InfoDeUbicacionYMoneda {
 	public String obtenerInfoProvincia(String Provincia, String Pais) {
 		return obtenerJSONProvincia(Provincia, Pais).toString();
 	}
+	public List<String> obtenerListaCurrencies(){
+		List<String> monedas = new ArrayList<String>();
+
+		JSONArray array = this.obtenerMonedas();
+		for(int i = 0 ;i < array.length() ;i++) {
+			JSONObject item = array.getJSONObject(i);
+			monedas.add((String)item.get("id"));
+		}
+
+		return monedas;
+	}
 	
 	public String obtenerInfoCiudad(String Ciudad, String Provincia, String Pais) {
 		return obtenerJSONCiudad(Ciudad, Provincia, Pais).toString();
 	}
-	
+
 	public String obtenerInfoMoneda(String Pais) {
 		return obtenerJSONMoneda(Pais).toString();
 	}

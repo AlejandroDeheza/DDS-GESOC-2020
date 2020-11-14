@@ -69,8 +69,8 @@
                 {{#presupuestos}}
                     <li>{{id}}</li>
                 {{/presupuestos}}
-            </ul><br>
-            <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/nuevoPresupuesto" class="redStyle">Agregar Presupuesto</a>
+            </ul>
+           <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/nuevoPresupuesto" class="redStyle">Agregar Presupuesto</a>
         </div><br>
 
         <div>
@@ -78,6 +78,11 @@
             <span>Presupuesto elegido:</span><br>
                 <span>{{id}}</span>
             {{/presupuestoElegido}}
+        </div><br>
+        <div>
+            <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/cambioPresupuestoElegido" class="redStyle">
+                Cambiar presupuesto elegido
+            </a>
         </div><br>
 
         <div>
@@ -87,7 +92,17 @@
                     <li>{{username}}</li>
                 {{/revisores}}
             </ul>
-        </div><br>
+
+        </div>
+        {{#if usuarioEsRevisor}}
+            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/bajaRevisor" method="POST">
+                <input type="submit" name="revisor" value="Quitarme como revisor" class="redStyle">
+            </form>
+        {{else}}
+            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/altaRevisor" method="POST">
+                <input type="submit" name="revisor" value="Agregarme como revisor" class="redStyle">
+            </form>
+        {{/if}}<br>
 
         <div>
             <span>Validaciones: </span><br>
@@ -120,20 +135,8 @@
                 <span>{{estado}}</span>
             {{/compra}}
         </div><br>
-
-        {{#if usuarioEsRevisor}}
-            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/bajaRevisor" method="POST">
-                <input type="submit" name="revisor" value="Quitarme como revisor" class="redStyle">
-            </form>
-        {{else}}
-            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/altaRevisor" method="POST">
-                <input type="submit" name="revisor" value="Agregarme como revisor" class="redStyle">
-            </form>
-        {{/if}}
-
-
-
     </section>
+
 {{/partial}}
 
 {{> layout.html.hbs }}

@@ -40,7 +40,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/nueva", (request, response) -> operacionController.getFormOperaciones(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion", (request, response) -> operacionController.getOperacion(request,response), engine);
 		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/nuevoPresupuesto", (request, response) -> operacionController.getFormPresupuestos(request,response), engine);
-
+		Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/cambioPresupuestoElegido", (request, response) -> operacionController.getFormCambioPrespuestoElegido(request,response), engine);
 
 		//Cuando quieras crear una entidad se te hace un display de las categorias existentes.
 		//Si queres agregar una categoria habria un boton de agregar.
@@ -55,6 +55,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/altaRevisor", (request, response) -> operacionController.agregarRevisor(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/bajaRevisor", (request, response) -> operacionController.quitarRevisor(request,response), engine);
 		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/nuevoPresupuesto", (request, response) -> operacionController.crearPresupuesto(request,response), engine);
+		Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/operaciones/:idOperacion/cambioPresupuestoElegido", (request, response) -> operacionController.cambiarPresupuestoElegido(request,response), engine);
 
 		//ERROR
 		Spark.get("/error", (request, response) -> errorController.getError(request, response), engine);

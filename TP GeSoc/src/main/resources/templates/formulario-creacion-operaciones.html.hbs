@@ -52,9 +52,7 @@
                </select>
             </div><br>
             <div>
-               <span class="nombre-campo">Presupuestos mínimos: </span><br>
-               <input type="number" name="presupuestosMinimos" placeholder="Ejemplo: 1">
-            </div><br>
+            </div>
             <div>
                 <span class="nombre-campo">Etiqueta: </span><br>
                 <input list="etiquetas" name="etiqueta">
@@ -66,13 +64,22 @@
             </div><br>
             <div>
                 <span class="nombre-campo">Validaciones activas:</span><br>
-                <label><input class="checkbox" type="checkbox" name="todosLosItems" value="seleccionado">Validar que la operación contenga todos los items del presupuesto elegido</label><br>
-                <label><input class="checkbox" type="checkbox" name="presupuestoBarato" value="seleccionado">Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
-                <label><input class="checkbox" type="checkbox" name="cantidadMinima" value="seleccionado">Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
+                <label><input class="checkbox" type="checkbox" name="todosLosItems" value="seleccionado"/>Validar que la operación contenga todos los items del presupuesto elegido</label><br>
+                <label><input class="checkbox" type="checkbox" name="presupuestoBarato" value="seleccionado"/>Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
+                <label><input onclick="checkAddress(this);" class="checkbox" type="checkbox" name="cantidadMinima" value="seleccionado"/>Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
+                <div class="hide" id="presupuestosMinimos">
+                    <span class="nombre-campo">Presupuestos mínimos: </span>
+                    <input type="number" name="presupuestosMinimos" placeholder="Ejemplo: 1">
+                </div><br>
             </div><br>
 
             <div>
                 <span class="nombre-campo">Items</span>
+                <select class="nombre-campo" name="currency">
+                    {{#listaCurrencies}}
+                        <option>{{this}}</option>
+                    {{/listaCurrencies}}
+               </select>
                 <div id="items">
                 </div>
                 <button type="button" class="redStyle" style="margin-left: 7px" onclick="crearItem()">  Agregar nuevo item +</button>

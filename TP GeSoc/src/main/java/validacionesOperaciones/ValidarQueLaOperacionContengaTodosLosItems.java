@@ -12,7 +12,7 @@ import model.OperacionDeEgreso;
 public class ValidarQueLaOperacionContengaTodosLosItems extends ValidacionDeOperaciones {
 
 	public boolean operacionValida(OperacionDeEgreso operacion) {
-		return operacion.getPresupuestosMinimos() == 0 || operacion.contieneItemsDelPresupuesto(operacion.getPresupuestoElegido());
+		return operacion.getPresupuestosMinimos() == 0 || operacion.contieneItemsDelPrespuestoElegido();
 	}
 
 	public ValidarQueLaOperacionContengaTodosLosItems(){

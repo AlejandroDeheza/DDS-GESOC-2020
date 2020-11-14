@@ -13,6 +13,8 @@ public class Presupuesto {
 	@GeneratedValue
 	@Column(name = "id_presupuesto")
 	Long id;
+
+	public String displayName;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "presupesto_asociado")
@@ -31,6 +33,7 @@ public class Presupuesto {
 		this.items = items;
 		this.documentoComercial = documento;
 		this.proveedor = proveedorEmisor;
+		this.displayName = documento.getTipoDoc() + " por " + items.get(0).getDescripcion() + " de " + proveedor.getRazonSocial();
 	}// en el sistema real, este constructor solo deberia ser usado en el metodo agregarNuevoPresupuesto(...) de clase OperacionDeEgreso.
 	//Así respetamos el punto 2 de la entrega 2.
 	
@@ -43,6 +46,10 @@ public class Presupuesto {
 	}
 
 	public Presupuesto() {}
+
+	public String getDisplayName() {
+		return displayName;
+	}
 
 	public Long getId() {
 		return id;

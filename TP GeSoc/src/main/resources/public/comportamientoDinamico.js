@@ -8,6 +8,21 @@ function show2(){
     document.getElementById('div1').style.display ='none';
 }
 
+function showPresupuestosMinimos(){
+    document.getElementById('presupuestosMinimos').style.display ='block';
+}
+function hidePresupuestosMinimos(){
+    document.getElementById('presupuestosMinimos').style.display ='none';
+}
+
+function checkAddress(checkbox)
+{
+    if (checkbox.checked)
+       showPresupuestosMinimos();
+    else
+        hidePresupuestosMinimos();
+}
+
 var i = 0;
 var maxFields = 10;
 

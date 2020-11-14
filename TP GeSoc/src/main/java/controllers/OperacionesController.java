@@ -1,6 +1,8 @@
 package controllers;
 
 import model.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.Entidad;
@@ -17,6 +19,7 @@ import validacionesOperaciones.ValidarQueTengaLaSuficienteCantidadDePresupuestos
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class OperacionesController implements WithGlobalEntityManager, TransactionalOps {
 
@@ -54,6 +57,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         List<EtiquetaOperacion> etiquetas = RepositorioEtiquetas.instance().obtenerTodasLasEtiquetas();
         modelo.put("etiquetas",etiquetas);
         modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
+        modelo.put("listaCurrencies",new MercadoLibreApi().obtenerListaCurrencies());
+
         return new ModelAndView(modelo,"formulario-creacion-operaciones.html.hbs");
     }
 
@@ -152,9 +157,10 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             List<EtiquetaOperacion> etiquetas = new ArrayList<>();
             etiquetas.add(etiqueta);
 
-            List<Item> items = new ArrayList<>();
+            List<Item> items;
+            String currency = request.queryParams("currency");
 
-            items = obtenerItems(request, "ARS");
+            items = obtenerItems(request, currency);
 
             OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
             nuevaOperacion.setDocumentoComercial(docComercial);
@@ -217,6 +223,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         modelo.put("tiposDocumentoComercial", Arrays.asList(TipoDocumentoComercial.values()));
         modelo.put("proveedores",RepositorioProveedores.instance().obtenerTodosLosProveedores());
+        modelo.put("listaCurrencies",new MercadoLibreApi().obtenerListaCurrencies());
 
         return new ModelAndView(modelo,"formulario-creacion-presupuestos.html.hbs");
     }
@@ -224,7 +231,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
     public ModelAndView crearPresupuesto(Request request, Response response){
 
-        List<Item> items = obtenerItems(request,"ARS");
+        String currency = request.queryParams("currency");
+        List<Item> items = obtenerItems(request,currency);
         DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
         Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
 
@@ -232,6 +240,38 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         OperacionDeEgreso operacionAsociada = RepositorioOperaciones.instance().buscar(Long.parseLong(request.params(":idOperacion")));
         operacionAsociada.agregarPresupuesto(presupuesto);
+
+        withTransaction(() ->{
+            RepositorioOperaciones.instance().actualizarCompra(operacionAsociada);
+        });
+
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/operaciones/" + operacionAsociada.getId());
+        return null;
+    }
+
+    public ModelAndView getFormCambioPrespuestoElegido(Request request, Response response) {
+        checkearUsuarioLogueado(request, response);
+        Map<String, Object> modelo = new HashMap<>();
+        cargarDatosParaHistorico(request, modelo);
+
+        modelo.put("organizacion", request.params(":idOrg"));
+        modelo.put("entidad", request.params(":idEntidad"));
+        modelo.put("operacionID", request.params(":idOperacion"));
+
+        List<Presupuesto> presupuestos = RepositorioOperaciones.instance().buscar(Long.parseLong(request.params(":idOperacion"))).getPresupuestos();
+        System.out.println(presupuestos.get(0).displayName);
+
+        modelo.put("presupuestos", presupuestos);
+
+        return new ModelAndView(modelo,"formulario-cambio-presupuesto-elegido.html.hbs");
+    }
+
+    public ModelAndView cambiarPresupuestoElegido(Request request, Response response) {
+        OperacionDeEgreso operacionAsociada = RepositorioOperaciones.instance().buscar(Long.parseLong(request.params(":idOperacion")));
+
+        Presupuesto presupuestoElegido = operacionAsociada.getPresupuestos().stream().filter(p -> p.getId().equals(Long.parseLong(request.queryParams("presupuestoElegido")))).collect(Collectors.toList()).get(0);
+
+        operacionAsociada.setPresupuestoElegido(presupuestoElegido);
 
         withTransaction(() ->{
             RepositorioOperaciones.instance().actualizarCompra(operacionAsociada);
@@ -283,6 +323,5 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             response.redirect("/login");
         }
     }
-
 
 }

@@ -100,6 +100,13 @@ public class OperacionDeEgreso {
 		return contieneItems(presupuesto.getItems());
 	}
 
+	public boolean contieneItemsDelPrespuestoElegido(){
+		if (presupuestoElegido != null || !presupuestos.isEmpty())
+			return contieneItemsDelPresupuesto(presupuestoElegido);
+		else
+			return false;
+	}
+
 	public BigDecimal menorPrecioDePresupuestos() {
 		return this.presupuestos.stream().map(presupuesto -> presupuesto.valorTotal()).min(Comparator.naturalOrder()).orElse(BigDecimal.ZERO);
 	}
