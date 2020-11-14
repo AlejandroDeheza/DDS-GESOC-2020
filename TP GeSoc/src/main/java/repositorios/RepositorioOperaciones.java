@@ -33,7 +33,6 @@ public final class RepositorioOperaciones implements WithGlobalEntityManager {
 		return compras;
 	}
 	
-
 	public void agregarCompra(OperacionDeEgreso compra) {
 		entityManager().persist(compra);
 	}

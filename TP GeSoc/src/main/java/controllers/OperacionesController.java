@@ -138,12 +138,6 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             if (request.queryParams("cantidadMinima") != null && request.queryParams("cantidadMinima").equals("seleccionado"))
                 validacionesActivas.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
 
-            //Busco la etiqueta en el repositorio y la agrego a la lista.
-            //Gonzalo: No hace falta porque esta embebida, lo unico que importa es el texto que tiene
-        /*List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
-        etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));*/
-
-            // Me agrego por defecto a mi mismo como revisor.
             List<Usuario> revisores = new ArrayList<Usuario>();
             String agregarRevisor = request.queryParams("revisor");
             if (agregarRevisor != null && agregarRevisor.equals("seleccionado")) {
