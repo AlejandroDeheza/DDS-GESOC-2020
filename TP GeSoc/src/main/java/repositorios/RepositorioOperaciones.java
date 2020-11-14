@@ -32,7 +32,6 @@ public final class RepositorioOperaciones implements WithGlobalEntityManager {
 		List<OperacionDeEgreso> compras = session.createQuery("FROM OperacionDeEgreso WHERE " + condicion).list();
 		return compras;
 	}
-	
 
 	public void agregarCompra(OperacionDeEgreso compra) {
 		entityManager().persist(compra);

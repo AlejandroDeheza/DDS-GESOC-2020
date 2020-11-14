@@ -58,10 +58,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
     }
 
     public ModelAndView getOperacion(Request request, Response response) {
-        if (!new UsuariosController().estaLogueado(request, response)) {
-            response.redirect("/login");
-            return null;
-        }
+        checkearUsuarioLogueado(request, response);
 
         Long idOperacion = Long.parseLong(request.params(":idOperacion"));
 
@@ -138,8 +135,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
             //Busco la etiqueta en el repositorio y la agrego a la lista.
             //Gonzalo: No hace falta porque esta embebida, lo unico que importa es el texto que tiene
-        /*List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
-        etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));*/
+            /*List<EtiquetaOperacion> etiquetas = new ArrayList<EtiquetaOperacion>();
+            etiquetas.add(RepositorioEtiquetas.instance().encontrarEtiqueta(request.queryParams("etiqueta")));*/
 
             // Me agrego por defecto a mi mismo como revisor.
             List<Usuario> revisores = new ArrayList<Usuario>();
