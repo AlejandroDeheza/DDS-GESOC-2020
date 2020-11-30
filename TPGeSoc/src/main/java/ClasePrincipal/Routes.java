@@ -10,10 +10,18 @@ import usuarios.TipoUsuario;
 import usuarios.Usuario;
 
 public class Routes implements WithGlobalEntityManager, TransactionalOps {
+	static int getHerokuPort() {
+		ProcessBuilder processBuilder = new ProcessBuilder();
+		if (processBuilder.environment().get("PORT") != null) {
+			return Integer.parseInt(processBuilder.environment().get("PORT"));
+		}
+		return 8080;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Iniciando servidor");
 
-		Spark.port(8080);
+		Spark.port(getHerokuPort());
 		Spark.staticFileLocation("/public");
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
