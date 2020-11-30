@@ -125,6 +125,7 @@
 					<archive>
 						<manifest>
 							<mainClass>ClasePrincipal.MainClass</mainClass>
+							<mainClass>ClasePrincipal.Routes</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

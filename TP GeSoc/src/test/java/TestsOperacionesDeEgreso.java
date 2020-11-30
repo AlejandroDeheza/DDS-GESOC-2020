@@ -44,7 +44,6 @@ public class TestsOperacionesDeEgreso {
 	     ListaItems2 = crearListaDeTresItems(20.0,30.0,40.0);
 	     ListaItems3 = crearListaDeTresItems(30.0,30.0,40.0);
 	     
-		 presupuesto1 = new Presupuesto(ListaItems, null,  null); //Solo deberiamos hacer esto en un test...
 		 //En el sistema real no deberia ser posible. Así respetamos el punto 2 de la entrega 2.
 
 		 //Mocks
@@ -52,7 +51,11 @@ public class TestsOperacionesDeEgreso {
 		 //LocalDate mockFechaOperacion = Mockito.mock(LocalDate.class);
 		 //IDMedioDePago mockMedio = Mockito.mock(IDMedioDePago.class);
 		 Proveedor mockProveedor = Mockito.mock(Proveedor.class);
-		 
+		 Mockito.when(mockDocComercial.getTipoDoc()).thenReturn(TipoDocumentoComercial.FACTURA);
+		 Mockito.when(mockProveedor.getRazonSocial()).thenReturn("Razon Social de Prueba");
+
+		 presupuesto1 = new Presupuesto(ListaItems, mockDocComercial,  mockProveedor); //Solo deberiamos hacer esto en un test...
+
 		 Usuario mockUsuario = Mockito.mock(Usuario.class);
 		 List<Usuario> mockRevisores = new ArrayList<Usuario>();
 		 mockRevisores.add(mockUsuario);

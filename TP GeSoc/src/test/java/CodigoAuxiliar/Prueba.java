@@ -18,7 +18,7 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 	public void init() {
 	   
 	}
-
+/*
 	@Test
 	public void updateEstadoOperacion() {
 		Proveedor proveedor = new Bootstrap().crearProveedor();
@@ -44,7 +44,7 @@ public class Prueba extends AbstractPersistenceTest implements WithGlobalEntityM
 		u.setUsername("Jorge");
 		em.merge(u);
 		
-		em.getTransaction().commit();*/
-		
-	}
+		em.getTransaction().commit();
+
+	}*/
 }
