@@ -1,1 +1,1 @@
-web: java -jar ".\TP GeSoc\target\TPGeSocGrupo6-0.1-jar-with-dependencies.jar"
+web: java -jar .\TPGeSoc\target\TPGeSocGrupo6-0.1-jar-with-dependencies.jar
