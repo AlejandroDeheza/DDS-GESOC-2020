@@ -1,6 +1,9 @@
 package validacionesOperaciones;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import model.EstadoOperacion;
 import model.OperacionDeEgreso;
@@ -39,6 +42,12 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 			RepositorioOperaciones.instance().actualizarCompra(compra);
 		});
 	}
-	
+	public static void main(String[] args) {
+		ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+		Runnable tareaAEjecutar = new ValidadorDeOperaciones();
+		int delayInicial = 5;
+		int delayPeriodico = 30;
+		scheduler.scheduleAtFixedRate(tareaAEjecutar, delayInicial, delayPeriodico, TimeUnit.SECONDS);
+	}
 	
 }

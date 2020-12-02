@@ -54,7 +54,7 @@ public class OperacionDeEgreso {
 	private Presupuesto presupuestoElegido;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
-	@JoinTable(name = "revisor_operacion",
+	@JoinTable(name = "usuarioXoperacion",
 			joinColumns=
             @JoinColumn(name="id_operacion", referencedColumnName="id_operacion"),
             inverseJoinColumns=

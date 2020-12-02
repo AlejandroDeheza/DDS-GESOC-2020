@@ -24,7 +24,7 @@ public class CategoriaEntidad {
 	
 	@ManyToMany(cascade =  {CascadeType.ALL})
 	@JoinTable(
-	        name = "comportamientos_aplicados", 
+	        name = "comportamientoXcategoria",
 	        joinColumns = { @JoinColumn(name = "id_categoria") }, 
 	        inverseJoinColumns = { @JoinColumn(name = "id_comportamiento") }
 	    )
