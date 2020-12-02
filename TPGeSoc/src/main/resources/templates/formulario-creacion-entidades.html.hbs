@@ -49,8 +49,15 @@
                             {{/categoriasEntidadJuridicaDisponibles}}
                         </select>
                     </div>
-                    <span class="nombre-campo">País: </span>
-                    <input type="text" name="pais" placeholder="Ingrese país">
+                    <div>
+                        <span class="nombre-campo">Pais: </span>
+                        <select name="pais">
+                            {{#paises}}
+                                <option>{{this}}</option>
+                            {{/paises}}
+                        </select>
+                    </div>
+
                     <span class="nombre-campo">Provincia: </span>
                     <input type="text" name="provincia" placeholder="Ingrese provincia">
                     <span class="nombre-campo">Ciudad: </span>

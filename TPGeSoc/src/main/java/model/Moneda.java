@@ -25,7 +25,15 @@ public class Moneda {
 		return currency;
 	}
 	public Moneda() {}
-	
+
+	public BigDecimal getMonto() {
+		return monto;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
 	public BigDecimal valorEnPesos(InfoDeUbicacionYMoneda apiMoneda){
 			
 		System.out.println(apiMoneda.obtenerRatioAPesos(currency).toString());
@@ -34,5 +42,7 @@ public class Moneda {
 		
 		return monto.multiply(ratio);
 	}
+
+
 	
 }

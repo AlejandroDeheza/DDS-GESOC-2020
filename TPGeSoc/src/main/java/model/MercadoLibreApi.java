@@ -97,15 +97,7 @@ public class MercadoLibreApi implements InfoDeUbicacionYMoneda {
 	public JSONArray obtenerCiudades(String Provincia, String Pais){
 		return obtenerJSONProvincia(Provincia, Pais).getJSONArray("cities");
 	}
-	
-	//No hace falta usar @override cuando usamos una Interface
-	public String obtenerInfoPais(String Pais) {
-		return obtenerJSONPais(Pais).toString();
-	}
-	
-	public String obtenerInfoProvincia(String Provincia, String Pais) {
-		return obtenerJSONProvincia(Provincia, Pais).toString();
-	}
+
 	public List<String> obtenerListaCurrencies(){
 		List<String> monedas = new ArrayList<String>();
 
@@ -117,12 +109,39 @@ public class MercadoLibreApi implements InfoDeUbicacionYMoneda {
 
 		return monedas;
 	}
-	
-	public String obtenerInfoCiudad(String Ciudad, String Provincia, String Pais) {
-		return obtenerJSONCiudad(Ciudad, Provincia, Pais).toString();
+
+	public List<String> obtenerListaPaises(){
+		List<String> paises = new ArrayList<String>();
+
+		JSONArray array = this.obtenerPaises();
+		for(int i = 0 ;i < array.length() ;i++) {
+			JSONObject item = array.getJSONObject(i);
+			paises.add((String)item.get("id"));
+		}
+
+		return paises;
+	}
+	public List<String> obtenerListaProvincias(String pais){
+		List<String> provincias = new ArrayList<String>();
+
+		JSONArray array = this.obtenerProvincias(pais);
+		for(int i = 0 ;i < array.length() ;i++) {
+			JSONObject item = array.getJSONObject(i);
+			provincias.add((String)item.get("id"));
+		}
+
+		return provincias;
+	}
+	public List<String> obtenerListaCiudades(String provincia){
+		List<String> ciudades = new ArrayList<String>();
+
+		JSONArray array = this.obtenerProvincias(provincia);
+		for(int i = 0 ;i < array.length() ;i++) {
+			JSONObject item = array.getJSONObject(i);
+			ciudades.add((String)item.get("id"));
+		}
+
+		return ciudades;
 	}
 
-	public String obtenerInfoMoneda(String Pais) {
-		return obtenerJSONMoneda(Pais).toString();
-	}
 }

@@ -1,5 +1,6 @@
 package controllers;
 
+import model.MercadoLibreApi;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
@@ -34,6 +35,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         modelo.put("entidadesJuridicasDisponibles", RepositorioEntidades.instance().obtenerTodasLasEntidadesJuridicas());
 
         modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
+        modelo.put("paises", (new MercadoLibreApi()).obtenerListaPaises());
         //TODO - ¿deberia enviarse la info de la API para generar un listado que permita cargar la ubicacion?
         return new ModelAndView(modelo, "formulario-creacion-entidades.html.hbs");
     }
