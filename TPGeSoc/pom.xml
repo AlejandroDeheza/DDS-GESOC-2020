@@ -124,7 +124,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ClasePrincipal.MainClass</mainClass>
+							<!--mainClass>ClasePrincipal.Validador</mainClass-->
 							<mainClass>ClasePrincipal.Routes</mainClass>
 						</manifest>
 					</archive>

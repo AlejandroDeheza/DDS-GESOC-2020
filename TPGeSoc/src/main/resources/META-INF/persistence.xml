@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
+    version="2.0"> 
+  
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<class>organizacion.CategoriaEntidad</class>
+		<class>model.DocumentoComercial</class>
+		<class>model.Item</class>
+		<class>model.OperacionDeEgreso</class>
+        <class>model.Presupuesto</class>
+        <class>model.Proveedor</class>
+        
+        <class>organizacion.Entidad</class>
+        <class>organizacion.EntidadBase</class>
+        <class>organizacion.EntidadJuridica</class>
+        <class>organizacion.Organizacion</class>
+        
+        <class>usuarios.Usuario</class>
+        
+        <class>comportamientoEntidad.Comportamiento</class>
+        <class>comportamientoEntidad.PoderAgregarEgresos</class>
+        <class>comportamientoEntidad.PoderAgregarEntidadesBaseAJuridica</class>
+        <class>comportamientoEntidad.PoderAsociarEntidadJuridicaABase</class>
+        
+        <properties> 
+	    <property name="hibernate.archive.autodetection" value="class"/>        
+	   
+        
+            
+            <!-- mySQL Nico -->
+            <!--property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gesoc?useLegacyDatetimeCode=false&amp;serverTimezone=UTC" /> 
+            <property name="hibernate.connection.username" value="admin" /> 
+            <property name="hibernate.connection.password" value="admin" /> 
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/-->
+            
+            <!-- mySQL Rama -->
+            <!--property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gesoc?useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="root" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/-->
+            
+            <!-- SQL Server Gonzalo -->
+      <!--      <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+            <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost:1433;databaseName=GeSoc;instance=SQLEXPRESS" />
+            <property name="hibernate.connection.username" value="sa" />
+            <property name="hibernate.connection.password" value="123456" />
+		    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>-->
+			
+			<!-- mySQL Heroku DEPLOY -->
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://de1tmi3t63foh7fa.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/dxhqx4vr9394vksz?useLegacyDatetimeCode=false&amp;serverTimezone=UTC" /> 
+            <property name="hibernate.connection.username" value="krt2r34ko1mk7lrw" /> 
+            <property name="hibernate.connection.password" value="d5lx78grqgzv892l" /> 
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+
+            <!-- PseudoSQL catedra-->
+            <!--<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" />
+            <property name="hibernate.connection.username" value="sa" />
+            <property name="hibernate.connection.password" value="" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />-->
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="use_sql_comments" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+
+
+        </properties>
+          
+    </persistence-unit> 
+  
+</persistence> 
