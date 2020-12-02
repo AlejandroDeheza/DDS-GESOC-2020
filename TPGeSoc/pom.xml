@@ -94,6 +94,17 @@
           <artifactId>mssql-jdbc</artifactId>
           <version>8.4.1.jre14</version>
 	 </dependency>
+	 <dependency>
+		  <groupId>org.thymeleaf</groupId>
+		  <artifactId>thymeleaf</artifactId>
+		  <version>${thymeleaf.version}</version>
+		  <exclusions>
+			<exclusion>
+              <artifactId>javassist</artifactId>
+              <groupId>org.javassist</groupId>
+		    </exclusion>
+		  </exclusions>
+	 </dependency>
 	 
 	</dependencies>
 
