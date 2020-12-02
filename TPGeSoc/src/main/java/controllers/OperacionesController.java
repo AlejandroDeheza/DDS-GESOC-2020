@@ -208,6 +208,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         Map<String, Object> modelo = new HashMap<>();
         cargarDatosParaHistorico(request, modelo);
 
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
         modelo.put("organizacion", request.params(":idOrg"));
         modelo.put("entidad", request.params(":idEntidad"));
         modelo.put("operacionID", request.params(":idOperacion"));
@@ -245,6 +246,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         Map<String, Object> modelo = new HashMap<>();
         cargarDatosParaHistorico(request, modelo);
 
+        modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));
         modelo.put("organizacion", request.params(":idOrg"));
         modelo.put("entidad", request.params(":idEntidad"));
         modelo.put("operacionID", request.params(":idOperacion"));

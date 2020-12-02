@@ -74,15 +74,16 @@
             </div><br>
 
             <div>
-                <span class="nombre-campo">Items</span>
+                <span class="nombre-campo">Items:</span><br><br>
+                <span class="nombre-campo">Moneda:</span>
                 <select class="nombre-campo" name="currency">
                     {{#listaCurrencies}}
                         <option>{{this}}</option>
                     {{/listaCurrencies}}
-               </select>
+               </select><br>
                 <div id="items">
                 </div>
-                <button type="button" class="redStyle" style="margin-left: 7px" onclick="crearItem()">  Agregar nuevo item +</button>
+                <button type="button" class="redStyle" onclick="crearItem()">  Agregar nuevo item +</button>
             </div><br>
 
             <div>
