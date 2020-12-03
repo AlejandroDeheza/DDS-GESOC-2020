@@ -30,7 +30,7 @@ public abstract class Entidad {
 	@JoinColumn(name = "entidad")
 	public List<OperacionDeEgreso> egresos = new ArrayList<>();
 	
-	@ManyToOne(cascade =  {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.LAZY, cascade =  {CascadeType.ALL})
 	@JoinColumn(name = "categoria_entidad", referencedColumnName = "id_categoria_entidad")
 	public CategoriaEntidad categoriaEntidad;
 	

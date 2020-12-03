@@ -24,7 +24,7 @@ public class Presupuesto {
 	@Embedded
 	private DocumentoComercial documentoComercial;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
 	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 	

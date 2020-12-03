@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class EntidadBase extends Entidad{
 	private String descripcion;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_juridica")
 	public EntidadJuridica entidadJuridica;
 	

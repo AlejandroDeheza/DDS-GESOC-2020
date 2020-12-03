@@ -41,7 +41,7 @@ public class OperacionDeEgreso {
 	@Column(name = "medio_de_pago")
 	private IDMedioDePago medio;
 
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 
@@ -49,7 +49,7 @@ public class OperacionDeEgreso {
 	@JoinColumn(name = "operacion_asociada")
 	private List<Presupuesto> presupuestos = new ArrayList<>();
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "presupuesto_elegido")
 	private Presupuesto presupuestoElegido;
 

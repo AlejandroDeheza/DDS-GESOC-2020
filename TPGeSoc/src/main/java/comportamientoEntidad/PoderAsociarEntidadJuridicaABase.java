@@ -10,7 +10,7 @@ import javax.persistence.*;
 @DiscriminatorValue("IMPEDIR_ASOCIAR_JURIDICA")
 public class PoderAsociarEntidadJuridicaABase extends Comportamiento {
 
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "entidad_bloqueada")
 	EntidadJuridica entidadALaQueNoPuedePertenecer;
 	
