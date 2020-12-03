@@ -143,7 +143,7 @@
                     <jdkVersion>1.8</jdkVersion>
                     <appName>gesocgrp06</appName>
                     <processTypes>
-                        <web>java -jar ./target/TPGeSocGrupo6-0.1-jar-with-dependencies.jar</web>
+                        <web>java -Xmx64m -Xss256K -XX:+UseContainerSupport -jar ./target/TPGeSocGrupo6-0.1-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
