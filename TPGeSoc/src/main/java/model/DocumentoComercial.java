@@ -1,6 +1,9 @@
 package model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /*@Entity
 @Table(name = "documentos_comerciales")*/

@@ -1,12 +1,11 @@
 package comportamientoEntidad;
 
-import organizacion.*;
+import exceptions.LaEntidadJuridicaNoAdmiteEntidadesBaseException;
+import organizacion.EntidadBase;
+import organizacion.EntidadJuridica;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
-import exceptions.*;
 
 @Entity
 @DiscriminatorValue("LIMITAR_AGREGADO_BASES")

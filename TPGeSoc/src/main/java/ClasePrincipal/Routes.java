@@ -1,13 +1,10 @@
 package ClasePrincipal;
+
 import controllers.*;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import repositorios.RepositorioUsuarios;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-import usuarios.BuilderUsuario;
-import usuarios.TipoUsuario;
-import usuarios.Usuario;
 
 public class Routes implements WithGlobalEntityManager, TransactionalOps {
 	static int getHerokuPort() {

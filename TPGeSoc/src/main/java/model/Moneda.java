@@ -1,10 +1,9 @@
 package model;
 
-import java.math.BigDecimal;
+import ubicacion.InfoDeUbicacionYMoneda;
 
 import javax.persistence.Embeddable;
-
-import ubicacion.InfoDeUbicacionYMoneda;
+import java.math.BigDecimal;
 
 @Embeddable
 public class Moneda {

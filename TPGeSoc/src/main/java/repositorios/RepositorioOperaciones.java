@@ -1,10 +1,12 @@
 package repositorios;
-import java.util.List;
-import javax.persistence.Persistence;
+
+import model.OperacionDeEgreso;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import model.OperacionDeEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+import javax.persistence.Persistence;
+import java.util.List;
 
 
 public final class RepositorioOperaciones implements WithGlobalEntityManager {

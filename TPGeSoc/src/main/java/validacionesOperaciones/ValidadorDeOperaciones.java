@@ -1,15 +1,15 @@
 package validacionesOperaciones;
 
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import model.EstadoOperacion;
 import model.OperacionDeEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import repositorios.RepositorioOperaciones;
+
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager, TransactionalOps {
 

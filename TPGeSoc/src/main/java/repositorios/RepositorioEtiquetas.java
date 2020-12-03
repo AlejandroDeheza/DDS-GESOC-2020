@@ -1,17 +1,13 @@
 package repositorios;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
 import model.EtiquetaOperacion;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
+import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RepositorioEtiquetas implements WithGlobalEntityManager {
 	//public List<EtiquetaOperacion> etiquetasDelSistema = new ArrayList<>();

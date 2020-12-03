@@ -1,16 +1,10 @@
 package comportamientoEntidad;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import exceptions.LaEntidadBaseNoPuedeAsociarseALaEntidadJuridicaException;
 import organizacion.EntidadBase;
 import organizacion.EntidadJuridica;
+
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("IMPEDIR_ASOCIAR_JURIDICA")

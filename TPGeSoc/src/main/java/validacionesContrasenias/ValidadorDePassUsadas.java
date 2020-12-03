@@ -1,9 +1,10 @@
 package validacionesContrasenias;
 
-import java.util.List;
-import java.util.ArrayList;
 import exceptions.contraseniaUsadaPreviamenteException;
 import usuarios.Hasher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ValidadorDePassUsadas implements Validador {
 	private List<String[]> passwordsUsadas = new ArrayList<>();

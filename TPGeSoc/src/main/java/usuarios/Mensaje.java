@@ -1,6 +1,5 @@
 package usuarios;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 

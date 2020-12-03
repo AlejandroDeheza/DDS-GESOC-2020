@@ -1,5 +1,7 @@
 package ubicacion;
-import org.json.*;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public interface InfoDeUbicacionYMoneda{
 	public JSONArray obtenerPaises();

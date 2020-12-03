@@ -1,4 +1,5 @@
 package ClasePrincipal;
+
 import comportamientoEntidad.Comportamiento;
 import comportamientoEntidad.PoderAgregarEgresos;
 import comportamientoEntidad.PoderAgregarEntidadesBaseAJuridica;
@@ -7,7 +8,9 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.*;
 import paymentMethods.IDMedioDePago;
-import repositorios.*;
+import repositorios.RepositorioCategoriasDeEntidades;
+import repositorios.RepositorioOrganizaciones;
+import repositorios.RepositorioUsuarios;
 import ubicacion.Direccion;
 import ubicacion.DireccionPostal;
 import ubicacion.Ubicacion;
@@ -15,8 +18,10 @@ import usuarios.BuilderUsuario;
 import usuarios.Mensaje;
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
-import validacionesOperaciones.*;
-
+import validacionesOperaciones.ValidacionDeOperaciones;
+import validacionesOperaciones.ValidarQueLaOperacionContengaTodosLosItems;
+import validacionesOperaciones.ValidarQueSeHayaElegidoElPresupuestoMasBarato;
+import validacionesOperaciones.ValidarQueTengaLaSuficienteCantidadDePresupuestos;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

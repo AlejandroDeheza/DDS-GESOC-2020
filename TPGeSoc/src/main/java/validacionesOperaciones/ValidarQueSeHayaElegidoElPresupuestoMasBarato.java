@@ -1,9 +1,9 @@
 package validacionesOperaciones;
 
+import model.OperacionDeEgreso;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
-import model.OperacionDeEgreso;
 
 @Entity
 //@DiscriminatorValue("presupuesto_mas_barato")

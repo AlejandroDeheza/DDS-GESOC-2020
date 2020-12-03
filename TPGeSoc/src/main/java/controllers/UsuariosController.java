@@ -1,6 +1,5 @@
 package controllers;
 
-import repositorios.RepositorioOrganizaciones;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
@@ -11,7 +10,6 @@ import usuarios.Usuario;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class UsuariosController {

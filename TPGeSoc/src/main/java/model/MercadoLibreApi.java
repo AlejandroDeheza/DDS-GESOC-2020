@@ -3,13 +3,12 @@ package model;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
 import ubicacion.InfoDeUbicacionYMoneda;
 
-import javax.ws.rs.core.*;
-
-import org.json.*;
-
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import java.util.ArrayList;
 import java.util.List;
 

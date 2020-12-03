@@ -1,8 +1,8 @@
 package organizacion;
 
-import javax.persistence.*;
-
 import ubicacion.DireccionPostal;
+
+import javax.persistence.*;
 
 
 @Entity

@@ -1,8 +1,8 @@
 package organizacion;
 
-import java.math.BigDecimal;
-
 import model.EtiquetaOperacion;
+
+import java.math.BigDecimal;
 
 public class ReportadorDeEgresos{
 	public BigDecimal gastosDeEtiqueta(Entidad entidad,EtiquetaOperacion etiqueta) {

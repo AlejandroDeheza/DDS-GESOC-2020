@@ -1,15 +1,15 @@
 package repositorios;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import organizacion.*;
-import usuarios.Usuario;
+import organizacion.Entidad;
+import organizacion.EntidadBase;
+import organizacion.EntidadJuridica;
 
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RepositorioEntidades implements WithGlobalEntityManager {
 

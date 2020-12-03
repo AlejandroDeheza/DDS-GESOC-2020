@@ -1,9 +1,11 @@
 package comportamientoEntidad;
 
-import javax.persistence.*;
+import model.OperacionDeEgreso;
+import organizacion.Entidad;
+import organizacion.EntidadBase;
+import organizacion.EntidadJuridica;
 
-import model.*;
-import organizacion.*;
+import javax.persistence.*;
 
 @Entity
 @Table (name = "comportamientos_categorias")

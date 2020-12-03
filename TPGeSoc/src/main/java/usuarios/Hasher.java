@@ -1,9 +1,10 @@
 package usuarios;
 
+import exceptions.hasherException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import exceptions.hasherException;
 
 public class Hasher {
 

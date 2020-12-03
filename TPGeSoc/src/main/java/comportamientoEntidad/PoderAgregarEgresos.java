@@ -1,15 +1,13 @@
 package comportamientoEntidad;
 
-import java.math.BigDecimal;
-
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
-import exceptions.*;
+import exceptions.LaCantidadDeEgresosSuperaElMontoMaximoException;
 import model.OperacionDeEgreso;
 import organizacion.Entidad;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import java.math.BigDecimal;
 
 @Entity
 @DiscriminatorValue("LIMITAR_EGRESOS")

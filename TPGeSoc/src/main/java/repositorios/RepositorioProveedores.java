@@ -1,13 +1,10 @@
 package repositorios;
 
-import model.OperacionDeEgreso;
 import model.Proveedor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import organizacion.Organizacion;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.util.List;
 

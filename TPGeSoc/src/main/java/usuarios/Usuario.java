@@ -1,11 +1,10 @@
 package usuarios;
 
-import java.util.ArrayList;
-import java.util.List;
+import validacionesContrasenias.ValidarTodo;
 
 import javax.persistence.*;
-
-import validacionesContrasenias.ValidarTodo;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")

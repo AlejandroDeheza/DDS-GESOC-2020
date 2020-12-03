@@ -1,13 +1,13 @@
 package organizacion;
 
+import model.EtiquetaOperacion;
+import model.OperacionDeEgreso;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.persistence.*;
-
-import model.*;
 
 @Entity
 @Table(name = "entidades")

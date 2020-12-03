@@ -1,14 +1,11 @@
 package organizacion;
 
-import java.util.ArrayList;
-import java.util.List;
+import comportamientoEntidad.Comportamiento;
+import model.OperacionDeEgreso;
 
 import javax.persistence.*;
-
-import comportamientoEntidad.*;
-import exceptions.*;
-import model.OperacionDeEgreso;
-import organizacion.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categoria_entidades")
