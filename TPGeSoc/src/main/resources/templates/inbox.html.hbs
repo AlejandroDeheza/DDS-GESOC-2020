@@ -1,0 +1,44 @@
+{{#partial "titulo" }}
+    <title>GESOC - Mensajes</title>
+{{/partial}}
+
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h2>Mensajes</h2>
+
+        <form action="/inbox" method="GET">
+            Buscar por palabra clave
+            <input type="text" name="filtro" placeholder="Ingrese palabra clave">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <!--background: -moz-linear-gradient(top, #647077 0%, #a1b9c8 66%, #457ba0 100%);
+                       background: -webkit-linear-gradient(top, #86a3ba 0%, #859aac 66%, #5b8db7 100%);
+                       background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #6aa4cb 100%);-->
+
+        <table class="inbox">
+            <tr class="tr_inbox">
+                <th class="th_inbox">Asunto</th>
+                <th class="th_inbox">Fecha</th>
+                <th class="th_inbox">Cuerpo</th>
+            </tr>
+            {{#mensajes}}
+                <tr class="tr_inbox">
+                    <td class="td_inbox">{{asunto}}</td>
+                    <td class="td_inbox">{{fecha}}</td>
+                    <td class="td_inbox">{{cuerpo}}</td>
+                </tr>
+            {{/mensajes}}
+        </table>
+
+    </section>
+
+{{/partial}}
+
+{{> layout.html.hbs }}

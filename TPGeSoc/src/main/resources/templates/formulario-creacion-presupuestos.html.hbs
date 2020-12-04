@@ -1,0 +1,66 @@
+{{# partial "titulo" }}
+    <title xmlns="http://www.w3.org/1999/html">Gesoc - Alta Presupuesto</title>
+{{/partial}}
+
+<script src="/comportamientoDinamico.js"></script>
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones"><i class="fas fa-building"></i> Operaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}"><i class="fas fa-money-check-alt"></i> {{operacionID}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-money-check-alt"></i> Nuevo Presupuesto</a>
+{{/partial}}
+
+{{# partial "contenido" }}
+
+    <section class="fondo-gris">
+        <h2>Nueva Presupuesto</h2>
+        <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}/nuevoPresupuesto" method="POST">
+            <div>
+               <span class="nombre-campo">Proveedor: </span><br>
+               <select name="proveedor">
+                  {{#proveedores}}
+                      <option value={{id}}>{{razonSocial}}</option>
+                  {{/proveedores}}
+               </select>
+            </div><br>
+            <div>
+               <span class="nombre-campo">Documento comercial: </span><br>
+               <select name="documentoComercial">
+                  {{#tiposDocumentoComercial}}
+                      <option>{{DisplayName}}</option>
+                  {{/tiposDocumentoComercial}}
+               </select>
+            </div><br>
+            <div>
+                <span class="nombre-campo">Items:</span><br><br>
+                <span class="nombre-campo">Moneda:</span>
+                <select class="nombre-campo" name="currency">
+                    {{#listaCurrencies}}
+                        <option>{{this}}</option>
+                    {{/listaCurrencies}}
+                </select><br>
+                <div id="items">
+                </div>
+                <button type="button" class="redStyle" onclick="crearItem()">  Agregar nuevo item +</button>
+            </div><br>
+
+            <input type="submit" value="Crear presupuesto" class="redStyle">
+        </form>
+
+    </section>
+
+{{/partial}}
+
+{{> layout.html.hbs }}

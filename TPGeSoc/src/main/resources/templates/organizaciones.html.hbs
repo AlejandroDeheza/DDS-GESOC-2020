@@ -1,0 +1,41 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+{{# partial "titulo" }}
+    <title>GESOC - Organizaciones</title>
+{{/partial}}
+
+{{#partial "header" }}
+
+{{/partial}}
+
+{{# partial "nav"}}
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-sitemap"></i> Organizaciones</a>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+
+        <h2>Organizaciones</h2>
+
+        <form action="/organizaciones" method="GET">
+            Buscar por nombre
+            <input type="text" name="filtro" placeholder="Ingrese el nombre de la organizacion a buscar">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <ul class="listas">
+            {{#organizaciones}}
+                <li>
+                    <i class="fas fa-hand-point-right"></i>
+                    <a class="link_blanco" href="organizaciones/{{id}}"> {{nombre}}</a>
+                </li>
+            {{/organizaciones}}
+        </ul>
+
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

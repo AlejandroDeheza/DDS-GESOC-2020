@@ -1,0 +1,66 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+{{# partial "titulo" }}
+    <title>GESOC - Entidad</title>
+{{/partial}}
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    {{#organizacion}}
+        <a class="links_navegacion" href="/organizaciones/{{id}}"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+        <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+        <a class="links_navegacion" href="/organizaciones/{{id}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    {{/organizacion}}
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <!--Elemento actual-->
+    {{#entidadBase}}
+        <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-building"></i> {{nombreFicticio}}</a>
+    {{/entidadBase}}
+    {{#entidadJuridica}}
+        <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-building"></i> {{nombreFicticio}}</a>
+    {{/entidadJuridica}}
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h1>Datos de la entidad</h1>
+
+        {{#entidadBase}}
+             <li>Tipo entidad: base</li>
+             <li>Nombre ficticio:{{nombreFicticio}}</li>
+             {{#categoria}}
+               <li>Categoria: {{descripcion}}</li>
+             {{/categoria}}
+             <li>Descripción: {{descripcion}}</li>
+             {{#entidadJuridicaAsociada}}
+                 <li>Entidad juridica asociada: <a href="{{id}}">{{nombreFicticio}}</a></li>
+             {{/entidadJuridicaAsociada}}
+        {{/entidadBase}}
+
+        {{#entidadJuridica}}
+            <li>Tipo entidad: juridica</li>
+            <li>Nombre ficticio:{{nombreFicticio}}</li>
+            {{#categoria}}
+                <li>Categoria: {{descripcion}}</li>
+            {{/categoria}}
+            <li>Razon social: {{razonSocial}}</li>
+            <li>CUIT: {{cuit}}</li>
+            <li>Código inscripción IGJ: {{codInscIGJ}}</li>
+            <li>Categoria jurídica: {{categoriaEntidadJuridica}}</li>
+            {{#ubicacion}}
+                <li>Ubicacion: {{pais}} - {{provincia}} - {{ciudad}}</li>
+            {{/ubicacion}}
+            {{#direccion}}
+                <li>Direccion: {{calle}} {{altura}} {{piso}} {{depto}}</li>
+            {{/direccion}}
+        {{/entidadJuridica}}
+
+        <br><div><a href="{{idEnt}}/operaciones" class="greenStyle"><i class="fas fa-money-check-alt"></i> <span>Operaciones</span></a></div><br>
+        <div><a href="{{idEnt}}/operaciones/nueva" class="redStyle">Nueva operación</a></div>
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

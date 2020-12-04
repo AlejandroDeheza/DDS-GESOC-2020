@@ -1,0 +1,45 @@
+{{# partial "titulo" }}
+    <title xmlns="http://www.w3.org/1999/html">Gesoc - Alta Presupuesto</title>
+{{/partial}}
+
+<script src="/comportamientoDinamico.js"></script>
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones"><i class="fas fa-building"></i> Operaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}"><i class="fas fa-money-check-alt"></i> {{operacionID}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-money-check-alt"></i> Nuevo Presupuesto</a>
+{{/partial}}
+
+{{# partial "contenido" }}
+
+    <section class="fondo-gris">
+        <h2>Cambio del presupuesto elegido</h2>
+        <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}/cambioPresupuestoElegido" method="POST">
+            <div>
+               <span class="nombre-campo">Presupuestos: </span><br>
+               <select name="presupuestoElegido">
+                  {{#presupuestos}}
+                      <option value={{id}}>{{id}} - {{displayName}}</option>
+                  {{/presupuestos}}
+               </select>
+            </div><br>
+            <input type="submit" value="Cambiar" class="redStyle">
+        </form>
+
+    </section>
+
+{{/partial}}
+
+{{> layout.html.hbs }}

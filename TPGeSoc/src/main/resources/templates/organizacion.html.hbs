@@ -1,0 +1,44 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+{{# partial "titulo" }}
+    <title>GESOC - Organizacion</title>
+{{/partial}}
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <!--Elemento actual-->
+    {{#organizacion}}
+        <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+    {{/organizacion}}
+{{/partial}}
+
+{{# partial "contenido" }}
+    {{#organizacion}}
+        <section class="fondo-gris">
+            <h2>{{nombre}}</h2>
+            <p>{{descripcion}}</p><br>
+
+            <!--<h3>Entidades asociadas:
+            <ul>
+                {{#entidades}}
+                    <li>{{nombreFicticio}}</li>
+                {{/entidades}}
+            </ul>
+            </h3>-->
+            <div>
+
+                <a href="/organizaciones/{{id}}/entidades" class="greenStyle"><i class="fas fa-building"></i> <span>Entidades</span></a>
+            </div><br>
+
+            <div>
+                <a href="/organizaciones/{{id}}/entidades/nueva" class="redStyle">Nueva entidad</a>
+            </div>
+        </section>
+    {{/organizacion}}
+{{/partial}}
+
+{{> layout.html.hbs }}

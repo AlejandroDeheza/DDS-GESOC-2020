@@ -1,0 +1,142 @@
+{{# partial "titulo" }}
+    <title>Gesoc - Detalle de Operacion</title>
+{{/partial}}
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones"><i class="fas fa-money-check-alt"></i> Operaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    {{#compra}}
+         <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-money-check-alt"></i> {{id}}</a>
+    {{/compra}}
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        {{#compra}}
+            <h2>Operación Nº{{id}}</h2>
+        {{/compra}}
+
+        <div>
+            <span>Items: </span><br>
+            <ul>
+            {{#items}}
+                <li>{{descripcion}} - {{#moneda}}{{currency}}{{monto}}{{/moneda}}</li>
+            {{/items}}
+            </ul>
+        </div><br>
+
+        <div>
+            {{#documentoComercial}}
+            <span>Documento comercial: </span><br>
+                <span>{{tipoDoc}}</span>
+            {{/documentoComercial}}
+        </div><br>
+
+        <div>
+            {{#compra}}
+            <span>Fecha de operación:</span><br>
+                <span>{{fechaOperacion}}</span>
+            {{/compra}}
+        </div><br>
+
+        <div>
+            {{#compra}}
+            <span>Medio de pago:</span><br>
+                <span>{{medio}}</span>
+            {{/compra}}
+        </div><br>
+
+        <div>
+            {{#proveedor}}
+            <span>Proveedor:</span><br>
+                <span>{{razonSocial}}</span>
+            {{/proveedor}}
+        </div><br>
+
+        <div>
+            <span>Presupuestos: </span><br>
+            <ul>
+                {{#presupuestos}}
+                    <li>{{id}} - {{displayName}}</li>
+                {{/presupuestos}}
+            </ul>
+           <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/nuevoPresupuesto" class="redStyle">Agregar Presupuesto</a>
+        </div><br>
+
+        <div>
+            {{#presupuestoElegido}}
+            <span>Presupuesto elegido:</span><br>
+                <span>{{id}}</span>
+            {{/presupuestoElegido}}
+        </div><br>
+        <div>
+            <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/cambioPresupuestoElegido" class="redStyle">
+                Cambiar presupuesto elegido
+            </a>
+        </div><br>
+
+        <div>
+            <span>Revisores:</span><br>
+            <ul>
+                {{#revisores}}
+                    <li>{{username}}</li>
+                {{/revisores}}
+            </ul>
+
+        </div>
+        {{#if usuarioEsRevisor}}
+            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/bajaRevisor" method="POST">
+                <input type="submit" name="revisor" value="Quitarme como revisor" class="redStyle">
+            </form>
+        {{else}}
+            <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/altaRevisor" method="POST">
+                <input type="submit" name="revisor" value="Agregarme como revisor" class="redStyle">
+            </form>
+        {{/if}}<br>
+
+        <div>
+            <span>Validaciones: </span><br>
+            <ul>
+                {{#validaciones}}
+                    <li>{{descripcion}}</li>
+                {{/validaciones}}
+            </ul>
+        </div><br>
+
+        <div>
+            <span>Etiquetas:</span><br>
+            <ul>
+                {{#etiquetas}}
+                    <li>{{texto}}</li>
+                {{/etiquetas}}
+            </ul>
+        </div><br>
+
+        <div>
+            {{#compra}}
+             <span>Presupuestos mínimos:</span><br>
+                <span>{{presupuestosMinimos}}</span>
+            {{/compra}}
+        </div><br>
+
+        <div>
+            {{#compra}}
+            <span>Estado de la operación:</span><br>
+                <span>{{estado}}</span>
+            {{/compra}}
+        </div><br>
+    </section>
+
+{{/partial}}
+
+{{> layout.html.hbs }}

@@ -1,0 +1,45 @@
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+{{# partial "titulo" }}
+    <title>GESOC - Operaciones</title>
+{{/partial}}
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-money-check-alt"></i> Operaciones</a>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <section class="fondo-gris">
+        <h2>Operaciones</h2>
+
+        <form action="/operaciones" method="GET">
+            Buscar por ID
+            <input type="text" name="filtro" placeholder="Ingrese el ID de la operacion a buscar">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <ul class="listas">
+            {{#operaciones}}
+                <li>
+                    <i class="fas fa-hand-point-right"></i>
+                <a class="link_blanco" href="operaciones/{{id}}">{{id}} - {{#documentoComercial}}{{tipoDoc}}{{/documentoComercial}} - {{fechaOperacion}}</a>
+                </li>
+            {{/operaciones}}
+        </ul>
+
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

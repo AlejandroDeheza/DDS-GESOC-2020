@@ -1,0 +1,120 @@
+@startuml
+class OperacionDeEgreso{
+fechaOperacion
+presupuestosMinimos
+valorTotal()
+menorPrecioDePresupuestos()
+estaBasadaEnAlgunPresupuesto()
+tieneLaSuficienteCantidadDePresupuestos() 
+seEligioElPresupuestoMasBarato()
+compraValidada()
+esValida() 
+}
+class Presupuesto{
+valorTotal()
+}
+class Item{
+valor
+descripcion
+}
+class DocumentoComercial{
+ID
+}
+enum TipoDocumentoComercial{
+FACTURA
+TICKET
+RECIBO
+}
+class Mensaje{
+cuerpo
+}
+interface MedioDePago{
+abonarOperacion(valor)
+}
+class Organizacion{
+...
+...()
+}
+class Usuario{
+username
+hashedPasswordActual
+saltActual
+hashedPasswordUsadasConSalt
+agregarPasswordUsada()
+cambiarContrasenia()
+recibirMensaje(Mensaje)
+}
+enum TipoUsuario{
+ADMIN
+ESTANDAR
+}
+
+class Proveedor{
+razonSocial
+cuil
+}
+
+class DireccionPostal{
+}
+
+interface InfoDeUbicacion{
+obtenerInfoPais(pais)
+obtenerInfoProvincia(provincia,pais)
+obtenerInfoCiudad(ciudad,provincia,pais)
+obtenerInfoMoneda(pais)
+}
+
+class MercadoLibreApi{
+obtenerJSON(url)
+obtenerJSONPais(pais)
+obtenerJSONProvincia(provincia,pais)
+obtenerJSONCiudad(ciudad,provincia,pais)
+obtenerJSONMoneda(pais)
+obtenerInfoPais(pais)
+obtenerInfoProvincia(provincia,pais)
+obtenerInfoCiudad(ciudad,provincia,pais)
+obtenerMoneda(pais)
+}
+
+class RepositorioCompras{
+INSTANCE
+agregarNuevaCompra(compra)
+validarComprasPendientes()
+}
+
+class Direccion{
+calle
+altura
+piso
+depto
+}
+
+class Ubicacion{
+pais
+provincia
+ciudad
+obtenerInfoDePais(APIDeUbicacion)
+obtenerInfoDeProvincia(APIDeUbicacion)
+obtenerInfoDeCiudad(APIDeUbicacion)
+}
+
+OperacionDeEgreso ..> Mensaje
+OperacionDeEgreso --> "*" Item: items
+OperacionDeEgreso --> "1" DocumentoComercial: documentoComercial
+OperacionDeEgreso -->"1" MedioDePago: medio  
+OperacionDeEgreso --> "1" Organizacion: organizacion
+OperacionDeEgreso --> "1" Proveedor: proveedor
+OperacionDeEgreso --> "*" Presupuesto: presupuestos
+OperacionDeEgreso --> "*" Usuario: revisores
+Presupuesto --> "*" Item: items
+DocumentoComercial --> "1" TipoDocumentoComercial: tipoDoc 
+Usuario --> "*" Mensaje: mensajes
+Usuario --> "1" TipoUsuario: tipoUser
+Proveedor --> "1" DireccionPostal: direccionPostal
+InfoDeUbicacion <|.. MercadoLibreApi 
+DireccionPostal --> "1" Direccion: direccion
+DireccionPostal --> "1" Ubicacion: ubicacion
+Ubicacion ..> InfoDeUbicacion
+RepositorioCompras --> "*" OperacionDeEgreso: comprasPendientes
+RepositorioCompras --> "*" OperacionDeEgreso: comprasAceptadas
+@enduml

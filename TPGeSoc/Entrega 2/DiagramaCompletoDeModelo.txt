@@ -1,0 +1,261 @@
+@startuml
+
+package "Entrega 2"{
+ Class MercadoLibreApi
+ Interface InfoDeUbicacion
+ Class Ubicacion
+ Class Direccion
+ Class DireccionPostal
+ Class Proveedor
+ Class Presupuesto
+ Class Usuario
+ Class Mensaje
+ Class RepositorioCompras
+ Enum TipoUsuario
+ Class Item
+}
+
+
+class Usuario [[java:usuarios.Usuario]] {
+	-String username
+	-String hashedPasswordActual
+	-String saltActual
+	-List<String[]> hashedPasswordUsadasConSalt
+	+Usuario(String username, TipoUsuario tipoUser, String hashedPassword, String salt)
+	-void agregarPasswordUsada()
+	+void cambiarContrasenia(String password)
+	+void recibirMensaje(Mensaje mensaje)
+}
+
+class Mensaje [[java:usuarios.Mensaje]] {
+	~String cuerpo
+	+Mensaje(String cuerpo)
+}
+
+Usuario --> "*" Mensaje: mensajes
+Usuario --> "1" TipoUsuario: tipoUser
+
+enum TipoUsuario [[java:usuarios.TipoUsuario]] {
+	ADMIN
+	ESTANDAR
+}
+
+interface InfoDeUbicacion [[java:model.InfoDeUbicacion]] {
+	String obtenerInfoPais(String Pais)
+	String obtenerInfoProvincia(String Provincia, String Pais)
+	String obtenerInfoCiudad(String Ciudad, String Provincia, String Pais)
+	String obtenerInfoMoneda(String Pais)
+}
+class RepositorioCompras [[java:model.RepositorioCompras]] {
+	-{static}RepositorioCompras INSTANCE
+	+{static}RepositorioCompras instance()
+	+void agregarNuevaCompra(OperacionDeEgreso compra)
+	+void validarComprasPendientes()
+}
+class OperacionDeEgreso [[java:model.OperacionDeEgreso]] {
+}
+RepositorioCompras --> "*" OperacionDeEgreso : comprasPendientes
+class OperacionDeEgreso [[java:model.OperacionDeEgreso]] {
+}
+RepositorioCompras --> "*" OperacionDeEgreso : comprasAceptadas
+class TarjetaDeCredito [[java:model.TarjetaDeCredito]] {
+	-int numeroTarjeta
+	-String titular
+	-int codigoSeguridad
+	-int cuotas
+	+void abonarOperacion(float valor)
+}
+interface MedioDePago [[java:model.MedioDePago]] {
+}
+MedioDePago <|.. TarjetaDeCredito
+class TarjetaDeDebito [[java:model.TarjetaDeDebito]] {
+	-int numeroTarjeta
+	-String titular
+	-int codigoSeguridad
+	+void abonarOperacion(float valor)
+}
+interface MedioDePago [[java:model.MedioDePago]] {
+}
+MedioDePago <|.. TarjetaDeDebito
+class DocumentoComercial [[java:model.DocumentoComercial]] {
+	-int ID
+}
+class TipoDocumentoComercial [[java:model.TipoDocumentoComercial]] {
+}
+DocumentoComercial --> "1" TipoDocumentoComercial : tipoDoc
+class DineroEnCuenta [[java:model.DineroEnCuenta]] {
+	+void abonarOperacion(float valor)
+}
+interface MedioDePago [[java:model.MedioDePago]] {
+}
+MedioDePago <|.. DineroEnCuenta
+interface MedioDePago [[java:model.MedioDePago]] {
+	void abonarOperacion(float valor)
+}
+class OperacionDeEgreso [[java:model.OperacionDeEgreso]] {
+	-LocalDateTime fechaOperacion
+	-List<Usuario> revisores
+	+int presupuestosMinimos
+	+void setDocumentoComercial(DocumentoComercial codDocumentoComercial)
+	+OperacionDeEgreso(List<Item> items)
+	+OperacionDeEgreso(DocumentoComercial documentoComercial, LocalDateTime fechaOperacion, MedioDePago medio, List<Item> items, Organizacion organizacion, Proveedor proveedor, List<Presupuesto> presupuestos, List<Usuario> revisores)
+	+void agregarNuevoPresupuesto(Presupuesto presupuesto)
+	+BigDecimal valorTotal()
+	+BigDecimal menorPrecioDePresupuestos()
+	+boolean estaBasadaEnAlgunPresupuesto()
+	+boolean tieneLaSuficienteCantidadDePresupuestos()
+	+boolean seEligioElPresupuestoMasBarato()
+	+void enviarMensajeARevisores(Mensaje mensaje)
+	+boolean esValida()
+	+void altaDeUnRevisor(Usuario revisorNuevo)
+}
+class DocumentoComercial [[java:model.DocumentoComercial]] {
+}
+OperacionDeEgreso --> "1" DocumentoComercial : documentoComercial
+class MedioDePago [[java:model.MedioDePago]] {
+}
+OperacionDeEgreso --> "1" MedioDePago : medio
+class Item [[java:model.Item]] {
+}
+OperacionDeEgreso --> "*" Item : items
+class Organizacion [[java:model.Organizacion]] {
+}
+OperacionDeEgreso --> "1" Organizacion : organizacion
+class Proveedor [[java:model.Proveedor]] {
+}
+OperacionDeEgreso --> "1" Proveedor : proveedor
+class Presupuesto [[java:model.Presupuesto]] {
+}
+OperacionDeEgreso --> "*" Presupuesto : presupuestos
+class Item [[java:model.Item]] {
+	-BigDecimal valor
+	-String descripcion
+	+Item(BigDecimal valor, String descripcion)
+	+BigDecimal getValor()
+	+String getDescripcion()
+	+boolean equals(Item item)
+}
+class Organizacion [[java:model.Organizacion]] {
+	+Organizacion(List<EntidadJuridica> entidadesJuridicas, List<EntidadBase> entidadesBase)
+	+List<EntidadJuridica> getEntidadesJuridicas()
+	+void setEntidadesJuridicas(List<EntidadJuridica> entidadesJuridicas)
+	+List<EntidadBase> getEntidadesBase()
+	+void setEntidadesBase(List<EntidadBase> entidadesBase)
+}
+class EntidadJuridica [[java:model.EntidadJuridica]] {
+}
+Organizacion --> "*" EntidadJuridica : entidadesJuridicas
+class EntidadBase [[java:model.EntidadBase]] {
+}
+Organizacion --> "*" EntidadBase : entidadesBase
+enum CategoriaEntidadJuridica [[java:model.CategoriaEntidadJuridica]] {
+	OSC
+	MICRO_EMPRESA
+	PEQUENIA_EMPRESA
+	EMPRESA_MEDIANA_TRAMO_1
+	EMPRESA_MEDIANA_TRAMO_2
+}
+class EntidadJuridica [[java:model.EntidadJuridica]] {
+	-String razonSocial
+	-String nombreFicticio
+	-int cuit
+	-String direccionPostal
+	-int codInscIGJ
+	+EntidadJuridica(String razonSocial, String nombreFicticio, int cuit, String direccionPostal, int codInscIGJ, CategoriaEntidadJuridica categoriaEntidad)
+}
+class CategoriaEntidadJuridica [[java:model.CategoriaEntidadJuridica]] {
+}
+EntidadJuridica --> "1" CategoriaEntidadJuridica : categoriaEntidad
+class Efectivo [[java:model.Efectivo]] {
+	+void abonarOperacion(float valor)
+}
+interface MedioDePago [[java:model.MedioDePago]] {
+}
+MedioDePago <|.. Efectivo
+class Ubicacion [[java:model.Ubicacion]] {
+	~String pais
+	~String provincia
+	~String ciudad
+	+Ubicacion(String pais, String provincia, String ciudad)
+	+String obtenerInfoDePais(InfoDeUbicacion api)
+	+String obtenerInfoDeProvincia(InfoDeUbicacion api)
+	+String obtenerInfoDeCiudad(InfoDeUbicacion api)
+}
+class Presupuesto [[java:model.Presupuesto]] {
+	+BigDecimal valorTotal()
+	+List<Item> getItems()
+	+Presupuesto(List<Item> items)
+}
+class Item [[java:model.Item]] {
+}
+Presupuesto --> "*" Item : items
+class Direccion [[java:model.Direccion]] {
+	~String calle
+	~String altura
+	~String piso
+	~String depto
+	+Direccion(String unaCalle, String unaAltura, String unPiso, String unDepto)
+}
+class EntidadBase [[java:model.EntidadBase]] {
+	-String nombreFicticio
+	-String descripcion
+	+EntidadBase(String nombreFicticio, String descripcion)
+	+EntidadBase(String nombreFicticio, String descripcion, EntidadJuridica entidadJuridica)
+}
+class EntidadJuridica [[java:model.EntidadJuridica]] {
+}
+EntidadBase --> "1" EntidadJuridica : entidadJuridica
+class Proveedor [[java:model.Proveedor]] {
+	-String razonSocial
+	-int cuil
+	+Proveedor(String razonSocial, DireccionPostal direccionPostal, int cuil)
+	+String getRazonSocial()
+	+void setRazonSocial(String razonSocial)
+	+DireccionPostal getDireccionPostal()
+	+void setDireccionPostal(DireccionPostal direccionPostal)
+	+int getCuil()
+	+void setCuil(int cuil)
+}
+class DireccionPostal [[java:model.DireccionPostal]] {
+}
+Proveedor --> "1" DireccionPostal : direccionPostal
+class DireccionPostal [[java:model.DireccionPostal]] {
+	+Ubicacion getUbicacion()
+	+void setUbicacion(Ubicacion ubicacion)
+	+DireccionPostal(Direccion direccion, Ubicacion ubicacion)
+}
+class Direccion [[java:model.Direccion]] {
+}
+DireccionPostal --> "1" Direccion : direccion
+class Ubicacion [[java:model.Ubicacion]] {
+}
+DireccionPostal --> "1" Ubicacion : ubicacion
+enum TipoDocumentoComercial [[java:model.TipoDocumentoComercial]] {
+	FACTURA
+	TICKET
+	RECIBO
+}
+class MercadoLibreApi [[java:model.MercadoLibreApi]] {
+	+ClientResponse ObtenerJSON(String Url)
+	+JSONObject obtenerJSONPais(String Pais)
+	+JSONObject obtenerJSONProvincia(String Provincia, String Pais)
+	+JSONObject obtenerJSONCiudad(String Ciudad, String Provincia, String Pais)
+	+JSONObject obtenerJSONMoneda(String Pais)
+	+String obtenerInfoPais(String Pais)
+	+String obtenerInfoProvincia(String Provincia, String Pais)
+	+String obtenerInfoCiudad(String Ciudad, String Provincia, String Pais)
+	+String obtenerInfoMoneda(String Pais)
+}
+interface InfoDeUbicacion [[java:model.InfoDeUbicacion]] {
+}
+InfoDeUbicacion <|.. MercadoLibreApi
+class CajeroAutomatico [[java:model.CajeroAutomatico]] {
+	+void abonarOperacion(float valor)
+}
+interface MedioDePago [[java:model.MedioDePago]] {
+}
+MedioDePago <|.. CajeroAutomatico
+
+Ubicacion..> "1" InfoDeUbicacion
+OperacionDeEgreso ..> "1" Mensaje
+@enduml

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    {{#block "titulo"}}
+    {{/block}}
+</head>
+
+<body>
+    <nav style="padding: 20px;
+    /*background: aliceblue;*/
+    background: #B69C7B;
+    font-size:20px;
+    border-bottom-color: black;
+    border-bottom-style: groove;
+    margin-bottom: 1%">
+        <a class="links_navegacion" href="/"><i class="fas fa-home"></i> Home</a>
+        <span>
+            {{#usuarioLogeado}}
+                <div class="dropdown" style="margin-left: 86%;">
+                    <a class="links_navegacion" href="#"><i class="fas fa-user"></i> {{username}}</a>
+                    <div class="dropdown-content">
+                        <a href="/inbox" class="greenStyle"><i class="fas fa-envelope"></i> <span>Bandeja de mensajes</span></a>
+                        <a href="/cerrarSesion" class="greenStyle"><i class="fas fa-sign-out-alt"></i> <span>Cerrar sesión</span></a>
+                    </div>
+                </div>
+
+<!--                <a class="links_navegacion" style="margin-left: 10px" href="/cerrarSesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>-->
+            {{else}}
+                <a class="links_navegacion" style="margin-left: 83%" href="/login"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+            {{/usuarioLogeado}}
+        </span>
+
+
+    </nav>
+
+    <span style="padding-left: 8%">
+        {{#block "nav"}}
+        {{/block}}
+    </span>
+	<main>
+
+        {{#block "header"}}
+        {{/block}}
+
+        {{#block "contenido" }}
+        {{/block}}
+	</main>
+
+	<footer style="text-align: center">
+        UTN FRBA - Diseño de sistemas
+	</footer>
+
+</body>
+
+</html>

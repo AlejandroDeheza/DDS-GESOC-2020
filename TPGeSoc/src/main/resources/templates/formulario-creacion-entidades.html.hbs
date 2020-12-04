@@ -1,0 +1,106 @@
+{{# partial "titulo" }}
+    <title>Consultorea.me - Nueva entidad</title>
+{{/partial}}
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    {{#organizacion}}
+        <a class="links_navegacion" href="/organizaciones/{{id}}"><i class="fas fa-sitemap"></i> {{nombre}}</a>
+    {{/organizacion}}
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-building"></i> Nueva entidad</a>
+{{/partial}}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<script src="/comportamientoDinamico.js"></script>
+{{# partial "contenido" }}
+
+    <section class="fondo-gris">
+        <h2>Nueva entidad</h2>
+        {{#organizacion}}
+        <form action="/organizaciones/{{id}}/entidades" method="POST">
+        {{/organizacion}}
+            <div class="campo">
+                <span class="nombre-campo">Nombre ficticio: </span>
+                <input type="text" name="nombreFicticio" placeholder="Ingrese un nombre">
+            </div>
+            <input type="radio" name="tipo" value="Juridica" onclick="show1();" />
+            Juridica
+            <input type="radio" name="tipo" value="Base" onclick="show2();" />
+            Base
+            <div class="campo">
+                <div class="hide" id="div1" class="info-juridica">
+                    <span class="nombre-campo">Razón social: </span>
+                    <input type="text" name="razon-social-juridica" placeholder="Ingrese razon Social">
+                    <span class="nombre-campo">CUIT: </span>
+                    <input type="number" name="cuit-juridica" placeholder="Ingrese CUIT">
+                    <span class="nombre-campo">Código de inscripción IGJ: </span>
+                    <input type="number" name="codigo-igj-juridica" placeholder="Ingrese codigo de inscripción IGJ">
+                    <div>
+                        <span class="nombre-campo">Categoria de entidad juridica: </span>
+                        <select name="categoria-entidad-juridica">
+                            {{#categoriasEntidadJuridicaDisponibles}}
+                                <option>{{DisplayName}}</option>
+                            {{/categoriasEntidadJuridicaDisponibles}}
+                        </select>
+                    </div>
+                    <div>
+                        <span class="nombre-campo">Pais: </span>
+                        <select name="pais">
+                            {{#paises}}
+                                <option>{{this}}</option>
+                            {{/paises}}
+                        </select>
+                    </div>
+
+                    <span class="nombre-campo">Provincia: </span>
+                    <input type="text" name="provincia" placeholder="Ingrese provincia">
+                    <span class="nombre-campo">Ciudad: </span>
+                    <input type="text" name="ciudad" placeholder="Ingrese ciudad">
+                    <span class="nombre-campo">Calle: </span>
+                    <input type="text" name="calle" placeholder="Ingrese calle">
+                    <br>
+                    <span class="nombre-campo">Altura: </span>
+                    <input type="number" name="altura" placeholder="Ingrese altura">
+                    <span class="nombre-campo">Piso: </span>
+                    <input type="number" name="piso" placeholder="Ingrese piso">
+                    <span class="nombre-campo">Departamento: </span>
+                    <input type="text" name="departamento" placeholder="Ingrese departamento">
+
+                </div>
+
+                <div class="hide" id="div2" class="info-base">
+                    <span class="nombre-campo">Descripción: </span>
+                    <input type="text" name="descripcion-base" placeholder="Ingrese descripción">
+                    <!--Aca falta la parte de asociarla a una entidad juridica-->
+                    <span class="nombre-campo">Entidad juridica asociada: </span>
+                    <select name="entidad-juridica-asociada">
+                        <option value="Ninguna" selected>Ninguna</option>
+                        {{#entidadesJuridicasDisponibles}}
+                            <option value={{id}}>{{nombreFicticio}}</option>
+                        {{/entidadesJuridicasDisponibles}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="campo">
+                <span class="nombre-campo">Categoria: </span>
+                <select name="categoria">
+                    {{#categoriasDisponibles}}
+                         <option value={{id}}>{{descripcion}}</option>
+                     {{/categoriasDisponibles}}
+                </select>
+            </div>
+
+            <input type="submit" value="Crear entidad" class="redStyle">
+
+        </form>
+    </section>
+{{/partial}}
+
+{{> layout.html.hbs }}

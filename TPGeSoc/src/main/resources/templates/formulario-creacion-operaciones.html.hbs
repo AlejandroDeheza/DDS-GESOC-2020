@@ -1,0 +1,102 @@
+{{# partial "titulo" }}
+    <title xmlns="http://www.w3.org/1999/html">Gesoc - Alta Operacion</title>
+{{/partial}}
+
+<script src="/comportamientoDinamico.js"></script>
+
+{{# partial "nav"}}
+    <a class="links_navegacion" href="/organizaciones"><i class="fas fa-sitemap"></i> Organizaciones</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}"><i class="fas fa-sitemap"></i> {{organizacionNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades"><i class="fas fa-building"></i> Entidades</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+    <a class="links_navegacion" href="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}"><i class="fas fa-building"></i> {{entidadNombre}}</a>
+    <i class="fas fa-arrow-right" style="padding-right: 3px"></i>
+
+    <!--Elemento actual-->
+    <a class="links_navegacion" href="#" style="background: #069848"><i class="fas fa-money-check-alt"></i> Nueva operación</a>
+{{/partial}}
+
+{{# partial "contenido" }}
+
+    <section class="fondo-gris">
+        <h2>Nueva operación de egreso</h2>
+        <form action="/organizaciones/{{organizacion}}/entidades/{{entidad}}/operaciones" method="POST">
+            <div class="campo">
+                <span class="nombre-campo">Fecha: </span><br>
+                <input type="date" name="fecha">
+            </div><br>
+            <div>
+               <span class="nombre-campo">Proveedor: </span><br>
+               <select name="proveedor">
+                  {{#proveedores}}
+                      <option value={{id}}>{{razonSocial}}</option>
+                  {{/proveedores}}
+               </select>
+            </div><br>
+            <div>
+               <span class="nombre-campo">Documento comercial: </span><br>
+               <select name="documentoComercial">
+                  {{#tiposDocumentoComercial}}
+                      <option>{{DisplayName}}</option>
+                  {{/tiposDocumentoComercial}}
+               </select>
+            </div><br>
+            <div>
+               <span class="nombre-campo">Medio de pago: </span><br>
+               <select name="medioDePago">
+                  {{#mediosDePago}}
+                       <option>{{displayName}}</option>
+                  {{/mediosDePago}}
+               </select>
+            </div><br>
+            <div>
+            </div>
+            <div>
+                <span class="nombre-campo">Etiqueta: </span><br>
+                <input list="etiquetas" name="etiqueta">
+                <datalist id="etiquetas">
+                    {{#etiquetas}}
+                        <option value={{texto}}>{{texto}}</option>
+                    {{/etiquetas}}
+                </datalist>
+            </div><br>
+            <div>
+                <span class="nombre-campo">Validaciones activas:</span><br>
+                <label><input class="checkbox" type="checkbox" name="todosLosItems" value="seleccionado"/>Validar que la operación contenga todos los items del presupuesto elegido</label><br>
+                <label><input class="checkbox" type="checkbox" name="presupuestoBarato" value="seleccionado"/>Validar que se haya elegido el presupuesto más barato de los disponibles</label><br>
+                <label><input onclick="checkAddress(this);" class="checkbox" type="checkbox" name="cantidadMinima" value="seleccionado"/>Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
+                <div class="hide" id="presupuestosMinimos">
+                    <span class="nombre-campo">Presupuestos mínimos: </span>
+                    <input type="number" name="presupuestosMinimos" placeholder="Ejemplo: 1">
+                </div><br>
+            </div><br>
+
+            <div>
+                <span class="nombre-campo">Items:</span><br><br>
+                <span class="nombre-campo">Moneda:</span>
+                <select class="nombre-campo" name="currency">
+                    {{#listaCurrencies}}
+                        <option>{{this}}</option>
+                    {{/listaCurrencies}}
+               </select><br>
+                <div id="items">
+                </div>
+                <button type="button" class="redStyle" onclick="crearItem()">  Agregar nuevo item +</button>
+            </div><br>
+
+            <div>
+                <label><input type="checkbox" name="revisor" value="seleccionado">Agregarme como revisor</label>
+            </div>
+
+            <input type="submit" value="Crear operación" class="redStyle">
+        </form>
+
+    </section>
+
+<!--    TODO // Hacer form para cargar mas de una etiqueta>-->
+
+{{/partial}}
+
+{{> layout.html.hbs }}

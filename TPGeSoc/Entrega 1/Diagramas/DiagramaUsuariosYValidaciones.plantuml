@@ -1,0 +1,114 @@
+@startuml DiagramaUsuario
+class Hasher [[java:usuarios.Hasher]] {
+	+{static}String hashSHA512(String passwordToHash, String salt)
+	+{static}Boolean sonCorrespondientes(String passwordIngresada, String[] hashedPasswordWithSalt)
+	+{static}String generarSalt()
+}
+enum TipoUsuario [[java:usuarios.TipoUsuario]] {
+	ADMIN
+	ESTANDAR
+}
+class BuilderUsuario [[java:usuarios.BuilderUsuario]] {
+	-String username
+	-String hashedPassword
+	-String salt
+	+void setUsername(String username)
+	+void setPassword(String password)
+	+void setTipo(TipoUsuario tipo)
+	+TipoUsuario getTipo()
+	+String getUsername()
+	+String getHashedPassword()
+	+Usuario crearUsuario()
+}
+class TipoUsuario [[java:usuarios.TipoUsuario]] {
+}
+BuilderUsuario --> "1" TipoUsuario : tipo
+BuilderUsuario ..> "1" Usuario
+BuilderUsuario ..> ValidarTodo
+BuilderUsuario ..> Hasher
+
+class Usuario [[java:usuarios.Usuario]] {
+	-String username
+	-String hashedPasswordActual
+	-String saltActual
+	-List<String[]> hashedPasswordUsadasConSalt
+	+Usuario(String username, TipoUsuario tipoUser, String hashedPassword, String salt)
+	-void agregarPasswordUsada()
+	+void cambiarContrasenia(String password)
+}
+class TipoUsuario [[java:usuarios.TipoUsuario]] {
+}
+Usuario --> "1" TipoUsuario : tipoUser
+Usuario ..> ValidarTodo
+Usuario ..> Hasher
+
+
+
+
+
+
+ValidadorDePassUsadas ..> Hasher
+
+
+
+
+
+
+class ValidadorLongitudApropiada [[java:validacionesContrasenias.ValidadorLongitudApropiada]] {
+	+void validar(String password)
+}
+interface Validador [[java:validacionesContrasenias.Validador]] {
+}
+Validador <|.. ValidadorLongitudApropiada
+interface Validador [[java:validacionesContrasenias.Validador]] {
+	void validar(String password)
+}
+class ValidadorDeMayusculas [[java:validacionesContrasenias.ValidadorDeMayusculas]] {
+	+void validar(String password)
+}
+interface Validador [[java:validacionesContrasenias.Validador]] {
+}
+Validador <|.. ValidadorDeMayusculas
+class ValidadorDeMinuscula [[java:validacionesContrasenias.ValidadorDeMinuscula]] {
+	+void validar(String password)
+}
+interface Validador [[java:validacionesContrasenias.Validador]] {
+}
+Validador <|.. ValidadorDeMinuscula
+class ValidadorDePassComun [[java:validacionesContrasenias.ValidadorDePassComun]] {
+	-{static}ValidadorDePassComun INSTANCE
+	-List<String> listaPasswords
+	-BufferedReader archivoPasswords
+	-ValidadorDePassComun()
+	+{static}ValidadorDePassComun instance()
+	+void validar(String password)
+	-List<String> leerArchivo(List<String> lista, BufferedReader archivo)
+	-FileReader archivoPasswords()
+	-void setArchivoPasswords()
+}
+interface Validador [[java:validacionesContrasenias.Validador]] {
+}
+Validador <|.. ValidadorDePassComun
+class ValidarTodo [[java:validacionesContrasenias.ValidarTodo]] {
+	+ValidarTodo(List<String[]> passwordsUsadas)
+	+void validar(String password)
+	+void setValidadorDePassComun(ValidadorDePassComun validadorImpostor)
+}
+class Validador [[java:validacionesContrasenias.Validador]] {
+}
+ValidarTodo --> "*" Validador : validaciones
+class ValidadorDePassUsadas [[java:validacionesContrasenias.ValidadorDePassUsadas]] {
+	-List<String[]> passwordsUsadas
+	+ValidadorDePassUsadas(List<String[]> passwordsUsadas)
+	+void validar(String password)
+}
+interface Validador [[java:validacionesContrasenias.Validador]] {
+}
+Validador <|.. ValidadorDePassUsadas
+class ValidadorDeNumero [[java:validacionesContrasenias.ValidadorDeNumero]] {
+	+void validar(String password)
+}
+interface Validador [[java:validacionesContrasenias.Validador]] {
+}
+Validador <|.. ValidadorDeNumero
+@enduml
