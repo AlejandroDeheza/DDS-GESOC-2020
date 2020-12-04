@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c08e7a77-2449-448f-ace3-7a0dfa24e5e7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_22_0_GA.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_18_1_GA.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TPGeSocGrupo6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TPGeSocGrupo6.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClasePrincipal/Bootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClasePrincipal/Bootstrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comportamientoEntidad/PoderAsociarEntidadJuridicaABase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comportamientoEntidad/PoderAsociarEntidadJuridicaABase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/OperacionDeEgreso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/OperacionDeEgreso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Presupuesto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Presupuesto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/organizacion/Entidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/organizacion/Entidad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/organizacion/EntidadBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/organizacion/EntidadBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repositorios/RepositorioEntidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repositorios/RepositorioEntidades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validacionesOperaciones/ValidadorDeOperaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validacionesOperaciones/ValidadorDeOperaciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1jlON4yToA4PereEJvwaj7fBerr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Usuarios\Nico\Desktop\UTN\Diseño de Sistemas\2020-vi-no-group-06\TP GeSoc\src\main\resources\templates" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Unnamed">
+    <configuration name="Bootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ClasePrincipal.Bootstrap" />
+      <module name="TPGeSocGrupo6" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ClasePrincipal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ClasePrincipal.Routes" />
+      <module name="TPGeSocGrupo6" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in TPGeSocGrupo6 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TPGeSocGrupo6" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in TPGeSocGrupo6 (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TPGeSocGrupo6" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in TPGeSocGrupo6 (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TPGeSocGrupo6" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in TPGeSocGrupo6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TPGeSocGrupo6" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.Bootstrap" />
+      <item itemvalue="JUnit.All in TPGeSocGrupo6 (1)" />
+      <item itemvalue="JUnit.All in TPGeSocGrupo6 (2)" />
+      <item itemvalue="JUnit.All in TPGeSocGrupo6 (3)" />
+      <item itemvalue="JUnit.All in TPGeSocGrupo6" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Bootstrap" />
+        <item itemvalue="JUnit.All in TPGeSocGrupo6" />
+        <item itemvalue="JUnit.All in TPGeSocGrupo6 (3)" />
+        <item itemvalue="JUnit.All in TPGeSocGrupo6 (2)" />
+        <item itemvalue="JUnit.All in TPGeSocGrupo6 (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c08e7a77-2449-448f-ace3-7a0dfa24e5e7" name="Default Changelist" comment="" />
+      <created>1604375169418</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604375169418</updated>
+      <workItem from="1604375170637" duration="2394000" />
+      <workItem from="1604377704515" duration="108000" />
+      <workItem from="1604383597276" duration="797000" />
+      <workItem from="1604408397916" duration="11000" />
+      <workItem from="1604462421392" duration="6698000" />
+      <workItem from="1604524397578" duration="24000" />
+      <workItem from="1604549371764" duration="7398000" />
+      <workItem from="1604556832597" duration="666000" />
+      <workItem from="1604635687012" duration="3351000" />
+      <workItem from="1604932103794" duration="1673000" />
+      <workItem from="1604948597728" duration="1766000" />
+      <workItem from="1605044262120" duration="617000" />
+      <workItem from="1605068082678" duration="6416000" />
+      <workItem from="1605298023524" duration="4467000" />
+      <workItem from="1605557045482" duration="209000" />
+      <workItem from="1605966119151" duration="27000" />
+      <workItem from="1606513375856" duration="6161000" />
+      <workItem from="1606771975152" duration="1147000" />
+      <workItem from="1606775944971" duration="99000" />
+      <workItem from="1606778981993" duration="180000" />
+      <workItem from="1606941246855" duration="3452000" />
+      <workItem from="1607008093011" duration="735000" />
+      <workItem from="1607017373174" duration="1211000" />
+      <workItem from="1607110063438" duration="1193000" />
+      <workItem from="1607111460949" duration="1173000" />
+      <workItem from="1607113592592" duration="1866000" />
+      <workItem from="1607116387148" duration="169000" />
+      <workItem from="1607116881075" duration="6023000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1604375251852">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604375251852" />
+    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604376949426">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604376949426" />
+    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1604553194727">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604553194727" />
+    <state x="689" y="322" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1604376945946">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="322" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604376945946" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1605044284394">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605044284394" />
+    <state width="1503" height="147" key="GridCell.Tab.0.bottom" timestamp="1607124345655">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="518" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
+    <state width="1503" height="147" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607124345655" />
+    <state width="1503" height="147" key="GridCell.Tab.0.center" timestamp="1607124345655">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="518" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
+    <state width="1503" height="147" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607124345655" />
+    <state width="1503" height="147" key="GridCell.Tab.0.left" timestamp="1607124345655">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="518" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
+    <state width="1503" height="147" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607124345655" />
+    <state width="1503" height="147" key="GridCell.Tab.0.right" timestamp="1607124345655">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="518" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
+    <state width="1503" height="147" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607124345655" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1604377584630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604377584630" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1604377584630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604377584630" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1604377584629">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604377584629" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1604377584630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604377584630" />
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1604549442860">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604549442860" />
+    <state x="184" y="86" key="MergeDialog" timestamp="1605298980627">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="MergeDialog/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605298980627" />
+    <state x="775" y="454" key="ReplaceDuplicatesPrompt" timestamp="1605299784268">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="775" y="454" key="ReplaceDuplicatesPrompt/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605299784268" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1604549625293">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604549625293" />
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605298905204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605298905204" />
+    <state x="690" y="281" key="extract.method.dialog" timestamp="1605299782412">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="281" key="extract.method.dialog/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605299782412" />
+    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1607116947493">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="119" width="585" height="801" key="find.popup/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607116947493" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1604636284567">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604636284567" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1607008418468">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607008418468" />
+  </component>
+</project>
