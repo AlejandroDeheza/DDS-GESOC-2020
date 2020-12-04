@@ -117,23 +117,44 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>Routes</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						<archive>
+							<manifest>
+								<!--mainClass>ClasePrincipal.Validador</mainClass-->
+								<mainClass>ClasePrincipal.Routes</mainClass>
+							</manifest>
+						</archive>
+						<finalName>${project.artifactId}</finalName>
+						</configuration>
+					</execution>
+					<execution>
+					<id>Validador</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						<archive>
+							<manifest>
+								<!--mainClass>ClasePrincipal.Validador</mainClass-->
+								<mainClass>validacionesOperaciones.ValidadorDeOperaciones</mainClass>
+							</manifest>
+						</archive>
+						<finalName>${project.artifactId}-validador</finalName>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<!--mainClass>ClasePrincipal.Validador</mainClass-->
-							<mainClass>ClasePrincipal.Routes</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
 			</plugin>
 			<plugin>
                 <groupId>com.heroku.sdk</groupId>
@@ -143,7 +164,8 @@
                     <jdkVersion>1.8</jdkVersion>
                     <appName>gesocgrp06</appName>
                     <processTypes>
-                        <web>java -Xmx64m -Xss256K -XX:+UseContainerSupport -jar ./target/TPGeSocGrupo6-0.1-jar-with-dependencies.jar</web>
+                        <web>java -Xmx64m -Xss256K -XX:+UseContainerSupport -jar ./target/TPGeSocGrupo6-jar-with-dependencies.jar</web>
+						<worker>java -Xmx64m -Xss256K -XX:+UseContainerSupport -jar ./target/TPGeSocGrupo6-validador-jar-with-dependencies.jar</worker>
                     </processTypes>
                 </configuration>
             </plugin>

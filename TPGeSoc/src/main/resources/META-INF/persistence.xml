@@ -57,7 +57,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://de1tmi3t63foh7fa.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/dxhqx4vr9394vksz?useLegacyDatetimeCode=false&amp;serverTimezone=UTC" /> 
             <property name="hibernate.connection.username" value="krt2r34ko1mk7lrw" /> 
-            <property name="hibernate.connection.password" value="d5lx78grqgzv892l" /> 
+            <property name="hibernate.connection.password" value="zh8uohj3294h6ppi" /> 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
 
             <!-- PseudoSQL catedra-->
@@ -70,7 +70,7 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="use_sql_comments" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <!--property name="hibernate.hbm2ddl.auto" value="update" /-->
 
 
 
