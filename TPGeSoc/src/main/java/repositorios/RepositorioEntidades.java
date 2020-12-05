@@ -84,17 +84,14 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
 	}
 
 	public Entidad obtenerEntidad(long id){
-		entityManager().clear();
 		return entityManager().find(Entidad.class,id);
 	}
 
 	public EntidadBase obtenerEntidadBase(long id){
-		entityManager().clear();
 		return entityManager().find(EntidadBase.class,id);
 	}
 
 	public EntidadJuridica obtenerEntidadJuridica(long id){
-		entityManager().clear();
 		return entityManager().find(EntidadJuridica.class,id);
 	}
 

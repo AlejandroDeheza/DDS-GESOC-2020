@@ -25,7 +25,7 @@ public class OperacionDeEgreso {
 	@Column(name = "id_operacion")
 	private Long id;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
 	private List<Item> items = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class OperacionDeEgreso {
 	@JoinColumn(name = "proveedor")
 	private Proveedor proveedor;
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
 	private List<Presupuesto> presupuestos = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class OperacionDeEgreso {
 	@JoinColumn(name = "presupuesto_elegido")
 	private Presupuesto presupuestoElegido;
 
-	@ManyToMany( fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuarioXoperacion",
 			joinColumns=
             @JoinColumn(name="id_operacion", referencedColumnName="id_operacion"),
@@ -62,11 +62,11 @@ public class OperacionDeEgreso {
     )
 	private List<Usuario> revisores = new ArrayList<>();
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "operacion_asociada")
 	private List<ValidacionDeOperaciones> validacionesVigentes = new ArrayList<>();
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection
 	@CollectionTable(name = "etiquetas_operaciones",
 					 joinColumns=@JoinColumn(name = "id_operacion"))
 	private List<EtiquetaOperacion> etiquetas = new ArrayList<>();

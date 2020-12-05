@@ -229,7 +229,7 @@ public class Bootstrap implements WithGlobalEntityManager, TransactionalOps {
         builderUsuarioEmma.setTipo(TipoUsuario.ADMIN);
 
         BuilderUsuario builderUsuarioAle = new BuilderUsuario();
-        builderUsuarioAle.setUsername("Emma");
+        builderUsuarioAle.setUsername("Ale");
         builderUsuarioAle.setPassword("Asd123456");
         builderUsuarioAle.setTipo(TipoUsuario.ADMIN);
 
