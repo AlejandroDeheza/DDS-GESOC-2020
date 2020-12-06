@@ -21,7 +21,7 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 	public static void main(String[] args) {
 		System.out.println("Iniciando servidor");
 
-		Spark.port(8080);
+		Spark.port(443);
 		Spark.staticFileLocation("/public");
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
