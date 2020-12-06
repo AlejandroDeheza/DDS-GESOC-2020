@@ -29,7 +29,18 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
         Map<String, Object> modelo = new HashMap<>();
         //Obtener del repo las operaciones relacionadas a la entidad actual
-        modelo.put("operaciones", RepositorioOperaciones.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));
+        String filtro = request.queryParams("filtro");
+        if(filtro!=null && !filtro.equals("")) {
+            List<OperacionDeEgreso> operacionesAMostrar =
+                    RepositorioOperaciones.instance().
+                            obtenerOperaciones("entidad = " + request.params(":idEntidad")).
+                            stream().
+                            filter(o -> o.getId().toString().equals(filtro)).collect(Collectors.toList());
+            modelo.put("operaciones",operacionesAMostrar);
+        }
+        else {
+            modelo.put("operaciones", RepositorioOperaciones.instance().obtenerOperaciones("entidad = " + request.params(":idEntidad")));
+        }
         cargarDatosParaHistorico(request, modelo);
 
         modelo.put("usuarioLogeado",(new UsuariosController()).getUsuarioLogueado(request));

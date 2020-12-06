@@ -24,7 +24,7 @@
     <section class="fondo-gris">
         <h2>Operaciones</h2>
 
-        <form action="/operaciones" method="GET">
+        <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones" method="GET">
             Buscar por ID
             <input type="text" name="filtro" placeholder="Ingrese el ID de la operacion a buscar">
             <input type="submit" value="Buscar">
@@ -34,7 +34,7 @@
             {{#operaciones}}
                 <li>
                     <i class="fas fa-hand-point-right"></i>
-                <a class="link_blanco" href="operaciones/{{id}}">{{id}} - {{#documentoComercial}}{{tipoDoc}}{{/documentoComercial}} - {{fechaOperacion}}</a>
+                <a class="link_blanco" href="operaciones/{{id}}">{{displayName}}</a>
                 </li>
             {{/operaciones}}
         </ul>

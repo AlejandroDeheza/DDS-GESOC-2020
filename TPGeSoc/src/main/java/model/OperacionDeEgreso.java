@@ -245,6 +245,9 @@ public class OperacionDeEgreso {
 		return validacionesVigentes;
 	}
 
+	public String getDisplayName(){
+		return id + " - " + documentoComercial.getTipoDoc().getDisplayName() + " - " + fechaOperacion;
+	}
 	public List<ValidacionDeOperaciones> getValidacionesVigentes() {
 		return validacionesVigentes;
 	}
