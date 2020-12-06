@@ -1,5 +1,6 @@
 <head>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/comportamientoDinamico.js"></script>
 </head>
 
 {{# partial "titulo" }}
@@ -22,22 +23,27 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
-        <h2>Operaciones</h2>
+        <div id="main">
+            <h2>Operaciones</h2>
 
-        <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones" method="GET">
-            Buscar por ID
-            <input type="text" name="filtro" placeholder="Ingrese el ID de la operacion a buscar">
-            <input type="submit" value="Buscar">
-        </form>
+            <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones" method="GET">
+                Buscar por ID
+                <input type="text" name="filtro" placeholder="Ingrese el ID de la operacion a buscar">
+                <input type="submit" value="Buscar">
+            </form>
 
-        <ul class="listas">
-            {{#operaciones}}
-                <li>
-                    <i class="fas fa-hand-point-right"></i>
-                <a class="link_blanco" href="operaciones/{{id}}">{{displayName}}</a>
-                </li>
-            {{/operaciones}}
-        </ul>
+            <ul class="listas">
+                {{#operaciones}}
+                    <li>
+                        <i class="fas fa-hand-point-right"></i>
+                    <a onclick="showLoader()" class="link_blanco" href="operaciones/{{id}}">{{displayName}}</a>
+                    </li>
+                {{/operaciones}}
+            </ul>
+        </div>
+
+        <div id="loader" class="loader" style="display: none;margin-top: 25px">
+        </div>
 
     </section>
 {{/partial}}

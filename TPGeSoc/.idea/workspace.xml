@@ -24,7 +24,14 @@
   <component name="ChangeListManager">
     <list default="true" id="c08e7a77-2449-448f-ace3-7a0dfa24e5e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error.html.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/comportamientoDinamico.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/comportamientoDinamico.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/entidad.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/entidad.html.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/entidades.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/entidades.html.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/operaciones.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/operaciones.html.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/organizacion.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/organizacion.html.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/organizaciones.html.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/organizaciones.html.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +54,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="D:\Archivos de programa (x86)\JetBrains\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -66,9 +73,16 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Ejercicios/jpa-proof-of-concept-template" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -189,6 +203,7 @@
       <workItem from="1607189968879" duration="1003000" />
       <workItem from="1607191115327" duration="3391000" />
       <workItem from="1607266647603" duration="9301000" />
+      <workItem from="1607293754054" duration="4665000" />
     </task>
     <servers />
   </component>
@@ -243,27 +258,31 @@
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605044284394" />
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607192107445" />
-    <state width="1502" height="422" key="GridCell.Tab.0.bottom" timestamp="1607284270072">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1323" height="138" key="GridCell.Tab.0.bottom" timestamp="1607298338645">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1323" height="138" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1607298338645" />
     <state width="518" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270072" />
     <state width="1877" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607279937329" />
-    <state width="1502" height="422" key="GridCell.Tab.0.center" timestamp="1607284270071">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1323" height="138" key="GridCell.Tab.0.center" timestamp="1607298338644">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1323" height="138" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1607298338644" />
     <state width="518" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270071" />
     <state width="1877" height="289" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607279937329" />
-    <state width="1502" height="422" key="GridCell.Tab.0.left" timestamp="1607284270071">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1323" height="138" key="GridCell.Tab.0.left" timestamp="1607298338644">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1323" height="138" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1607298338644" />
     <state width="518" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270071" />
     <state width="1877" height="289" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607279937329" />
-    <state width="1502" height="422" key="GridCell.Tab.0.right" timestamp="1607284270072">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1323" height="138" key="GridCell.Tab.0.right" timestamp="1607298338644">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1323" height="138" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607298338644" />
     <state width="518" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270072" />
     <state width="1877" height="289" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607279937329" />
@@ -329,7 +348,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controllers/OperacionesController.java</url>
-          <line>29</line>
+          <line>33</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

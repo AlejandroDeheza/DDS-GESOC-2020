@@ -1,5 +1,6 @@
 <head>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/comportamientoDinamico.js"></script>
 </head>
 
 {{# partial "titulo" }}
@@ -19,23 +20,26 @@
 {{# partial "contenido" }}
     {{#organizacion}}
         <section class="fondo-gris">
-            <h2>{{nombre}}</h2>
-            <p>{{descripcion}}</p><br>
+            <div id="main">
+                <h2>{{nombre}}</h2>
+                <p>{{descripcion}}</p><br>
 
-            <!--<h3>Entidades asociadas:
-            <ul>
-                {{#entidades}}
-                    <li>{{nombreFicticio}}</li>
-                {{/entidades}}
-            </ul>
-            </h3>-->
-            <div>
+                <!--<h3>Entidades asociadas:
+                <ul>
+                    {{#entidades}}
+                        <li>{{nombreFicticio}}</li>
+                    {{/entidades}}
+                </ul>
+                </h3>-->
+                <div>
+                    <a onclick="showLoader()" href="/organizaciones/{{id}}/entidades" class="greenStyle"><i class="fas fa-building"></i> <span>Entidades</span></a>
+                </div><br>
 
-                <a href="/organizaciones/{{id}}/entidades" class="greenStyle"><i class="fas fa-building"></i> <span>Entidades</span></a>
-            </div><br>
-
-            <div>
-                <a href="/organizaciones/{{id}}/entidades/nueva" class="redStyle">Nueva entidad</a>
+                <div>
+                    <a onclick="showLoader()" href="/organizaciones/{{id}}/entidades/nueva" class="redStyle">Nueva entidad</a>
+                </div>
+            </div>
+            <div id="loader" class="loader" style="display: none;margin-top: 25px">
             </div>
         </section>
     {{/organizacion}}

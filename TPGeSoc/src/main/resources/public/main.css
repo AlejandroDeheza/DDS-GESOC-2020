@@ -286,3 +286,20 @@ input.checkbox{
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.loader {
+    border-top: 16px solid black;
+    border-right: 16px solid green;
+    border-bottom: 16px solid #b54b3a;
+    border-left: 16px solid #B69C7B;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

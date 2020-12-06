@@ -1,5 +1,6 @@
 <head>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/comportamientoDinamico.js"></script>
 </head>
 
 {{# partial "titulo" }}
@@ -20,29 +21,32 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
-        <h2>Entidades</h2>
-        {{#organizacion}}
-        <form action="/organizaciones/{{id}}/entidades" method="GET">
-        {{/organizacion}}
-           Filtrar por categoria:
-            <select name="categoria">
-                <option value = "Cualquiera" selected>Cualquier categoria</option>
-                {{#categoriasDisponibles}}
-                    <option value={{id}}>{{descripcion}}</option>
-                {{/categoriasDisponibles}}
-            </select>
-            <input type="submit" value="Filtrar">
-        </form>
+        <div id="main">
+            <h2>Entidades</h2>
+            {{#organizacion}}
+            <form action="/organizaciones/{{id}}/entidades" method="GET">
+            {{/organizacion}}
+               Filtrar por categoria:
+                <select name="categoria">
+                    <option value = "Cualquiera" selected>Cualquier categoria</option>
+                    {{#categoriasDisponibles}}
+                        <option value={{id}}>{{descripcion}}</option>
+                    {{/categoriasDisponibles}}
+                </select>
+                <input type="submit" value="Filtrar">
+            </form>
 
-        <ul class="listas">
-            {{#entidades}}
-                <li>
-                    <i class="fas fa-hand-point-right"></i>
-                    <a class="link_blanco" href="entidades/{{id}}">{{nombreFicticio}}</a>
-                </li>
-            {{/entidades}}
-        </ul>
-
+            <ul class="listas">
+                {{#entidades}}
+                    <li>
+                        <i class="fas fa-hand-point-right"></i>
+                        <a onclick="showLoader()" class="link_blanco" href="entidades/{{id}}">{{nombreFicticio}}</a>
+                    </li>
+                {{/entidades}}
+            </ul>
+        </div>
+        <div id="loader" class="loader" style="display: none;margin-top: 25px">
+        </div>
     </section>
 {{/partial}}
 

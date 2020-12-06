@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/main.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/comportamientoDinamico.js"></script>
 </head>
 
 {{#partial "titulo" }}
@@ -20,9 +21,12 @@
 
     {{#if usuarioLogeado }}
      <div style="text-align: center">
-         <a href="/organizaciones" class="greenStyle"><i class="fas fa-sitemap"></i> <span>Organizaciones</span></a><br><br>
+         <a id="main" href="/organizaciones" onclick="showLoader()" class="greenStyle"><i class="fas fa-sitemap"></i> <span>Organizaciones</span></a><br><br>
 <!--         <a href="/inbox" class="greenStyle"><i class="fas fa-envelope"></i> <span>Bandeja de mensajes</span></a><br><br>-->
+         <div id="loader" class="loader" style="display: none">
+         </div>
      </div>
+
     {{/if}}
 
 {{/partial}}

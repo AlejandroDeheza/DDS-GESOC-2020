@@ -1,5 +1,6 @@
 <head>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/comportamientoDinamico.js"></script>
 </head>
 
 {{# partial "titulo" }}
@@ -26,40 +27,46 @@
 
 {{# partial "contenido" }}
     <section class="fondo-gris">
-        <h1>Datos de la entidad</h1>
+        <div id="main">
+            <h1>Datos de la entidad</h1>
 
-        {{#entidadBase}}
-             <li>Tipo entidad: base</li>
-             <li>Nombre ficticio:{{nombreFicticio}}</li>
-             {{#categoria}}
-               <li>Categoria: {{descripcion}}</li>
-             {{/categoria}}
-             <li>Descripción: {{descripcion}}</li>
-             {{#entidadJuridicaAsociada}}
-                 <li>Entidad juridica asociada: <a href="{{id}}">{{nombreFicticio}}</a></li>
-             {{/entidadJuridicaAsociada}}
-        {{/entidadBase}}
+            {{#entidadBase}}
+                 <li>Tipo entidad: base</li>
+                 <li>Nombre ficticio:{{nombreFicticio}}</li>
+                 {{#categoria}}
+                   <li>Categoria: {{descripcion}}</li>
+                 {{/categoria}}
+                 <li>Descripción: {{descripcion}}</li>
+                 {{#entidadJuridicaAsociada}}
+                     <li>Entidad juridica asociada: <a href="{{id}}">{{nombreFicticio}}</a></li>
+                 {{/entidadJuridicaAsociada}}
+            {{/entidadBase}}
 
-        {{#entidadJuridica}}
-            <li>Tipo entidad: juridica</li>
-            <li>Nombre ficticio:{{nombreFicticio}}</li>
-            {{#categoria}}
-                <li>Categoria: {{descripcion}}</li>
-            {{/categoria}}
-            <li>Razon social: {{razonSocial}}</li>
-            <li>CUIT: {{cuit}}</li>
-            <li>Código inscripción IGJ: {{codInscIGJ}}</li>
-            <li>Categoria jurídica: {{categoriaEntidadJuridica}}</li>
-            {{#ubicacion}}
-                <li>Ubicacion: {{pais}} - {{provincia}} - {{ciudad}}</li>
-            {{/ubicacion}}
-            {{#direccion}}
-                <li>Direccion: {{calle}} {{altura}} {{piso}} {{depto}}</li>
-            {{/direccion}}
-        {{/entidadJuridica}}
+            {{#entidadJuridica}}
+                <li>Tipo entidad: juridica</li>
+                <li>Nombre ficticio:{{nombreFicticio}}</li>
+                {{#categoria}}
+                    <li>Categoria: {{descripcion}}</li>
+                {{/categoria}}
+                <li>Razon social: {{razonSocial}}</li>
+                <li>CUIT: {{cuit}}</li>
+                <li>Código inscripción IGJ: {{codInscIGJ}}</li>
+                <li>Categoria jurídica: {{categoriaEntidadJuridica}}</li>
+                {{#ubicacion}}
+                    <li>Ubicacion: {{pais}} - {{provincia}} - {{ciudad}}</li>
+                {{/ubicacion}}
+                {{#direccion}}
+                    <li>Direccion: {{calle}} {{altura}} {{piso}} {{depto}}</li>
+                {{/direccion}}
+            {{/entidadJuridica}}
 
-        <br><div><a href="{{idEnt}}/operaciones" class="greenStyle"><i class="fas fa-money-check-alt"></i> <span>Operaciones</span></a></div><br>
-        <div><a href="{{idEnt}}/operaciones/nueva" class="redStyle">Nueva operación</a></div>
+            <br><div><a onclick="showLoader()" href="{{idEnt}}/operaciones" class="greenStyle"><i class="fas fa-money-check-alt"></i> <span>Operaciones</span></a></div><br>
+            <div><a onclick="showLoader()" href="{{idEnt}}/operaciones/nueva" class="redStyle">Nueva operación</a></div>
+        </div>
+
+        <div id="loader" class="loader" style="display: none;margin-top: 25px">
+        </div>
+
     </section>
 {{/partial}}
 

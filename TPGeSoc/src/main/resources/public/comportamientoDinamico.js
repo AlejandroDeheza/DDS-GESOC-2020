@@ -15,6 +15,12 @@ function hidePresupuestosMinimos(){
     document.getElementById('presupuestosMinimos').style.display ='none';
 }
 
+function showLoader(){
+    document.getElementById('main').style.display = 'none';
+    document.getElementById('loader').style.display = 'block';
+
+}
+
 function checkAddress(checkbox)
 {
     if (checkbox.checked)
