@@ -1,24 +1,27 @@
 package ClasePrincipal;
 
 import controllers.*;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import static spark.Spark.after;
+
 public class Routes implements WithGlobalEntityManager, TransactionalOps {
-	static int getHerokuPort() {
+	/*static int getHerokuPort() {
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		if (processBuilder.environment().get("PORT") != null) {
 			return Integer.parseInt(processBuilder.environment().get("PORT"));
 		}
 		return 8080;
-	}
+	}*/
 
 	public static void main(String[] args) {
 		System.out.println("Iniciando servidor");
 
-		Spark.port(getHerokuPort());
+		Spark.port(8080);
 		Spark.staticFileLocation("/public");
 
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
@@ -64,5 +67,10 @@ public class Routes implements WithGlobalEntityManager, TransactionalOps {
 
 		//ERROR
 		Spark.get("/error", (request, response) -> errorController.getError(request, response), engine);
+
+		after((req, res) -> {
+			PerThreadEntityManagers.getEntityManager();
+			PerThreadEntityManagers.closeEntityManager();
+		});
 	}
 }

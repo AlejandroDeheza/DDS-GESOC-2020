@@ -1,6 +1,7 @@
 package controllers;
 
 import model.*;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import organizacion.Entidad;
@@ -18,6 +19,8 @@ import validacionesOperaciones.ValidarQueTengaLaSuficienteCantidadDePresupuestos
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static spark.Spark.after;
 
 public class OperacionesController implements WithGlobalEntityManager, TransactionalOps {
 
