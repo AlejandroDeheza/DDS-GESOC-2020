@@ -140,15 +140,22 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
             DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
             IDMedioDePago medioDePago = IDMedioDePago.valueOf(request.queryParams("medioDePago"));
-            int presupuestosMinimos = Integer.parseInt(request.queryParams("presupuestosMinimos"));
+
+            OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
 
             List<ValidacionDeOperaciones> validacionesActivas = new ArrayList<>();
             if (request.queryParams("todosLosItems") != null && request.queryParams("todosLosItems").equals("seleccionado"))
                 validacionesActivas.add(new ValidarQueLaOperacionContengaTodosLosItems());
             if (request.queryParams("presupuestoBarato") != null && request.queryParams("presupuestoBarato").equals("seleccionado"))
                 validacionesActivas.add(new ValidarQueSeHayaElegidoElPresupuestoMasBarato());
-            if (request.queryParams("cantidadMinima") != null && request.queryParams("cantidadMinima").equals("seleccionado"))
+
+            if (request.queryParams("cantidadMinima") != null && request.queryParams("cantidadMinima").equals("seleccionado")){
                 validacionesActivas.add(new ValidarQueTengaLaSuficienteCantidadDePresupuestos());
+                nuevaOperacion.setPresupuestosMinimos(Integer.parseInt(request.queryParams("presupuestosMinimos")));
+            }
+            else{
+                nuevaOperacion.setPresupuestosMinimos(0);
+            }
 
             List<Usuario> revisores = new ArrayList<Usuario>();
             String agregarRevisor = request.queryParams("revisor");
@@ -165,13 +172,12 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
 
             items = obtenerItems(request, currency);
 
-            OperacionDeEgreso nuevaOperacion = new OperacionDeEgreso();
+
             nuevaOperacion.setDocumentoComercial(docComercial);
             nuevaOperacion.setFechaOperacion(fecha);
             nuevaOperacion.setMedio(medioDePago);
             nuevaOperacion.setProveedor(proveedor);
             nuevaOperacion.setRevisores(revisores);
-            nuevaOperacion.setPresupuestosMinimos(presupuestosMinimos);
             nuevaOperacion.setValidacionesVigentes(validacionesActivas);
             nuevaOperacion.setEtiquetas(etiquetas);
             nuevaOperacion.setItems(items);
