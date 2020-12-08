@@ -48,7 +48,7 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 		int delayInicial = (24-LocalDateTime.now().getHour())*3600 - LocalDateTime.now().getMinute()*60 - LocalDateTime.MAX.getSecond();
 		int delayPeriodico = 86400;
 		System.out.println("Iniciando validador de operaciones");
-		System.out.println("La validación se ejecutará dentro de "+ delayInicial + " segundos");
+		System.out.println("La validación se ejecutará dentro de " + delayInicial + " segundos");
 		scheduler.scheduleAtFixedRate(tareaAEjecutar, delayInicial, delayPeriodico, TimeUnit.SECONDS);
 	}
 	

@@ -11,8 +11,7 @@ import javax.persistence.Entity;
 public class ValidarQueSeHayaElegidoElPresupuestoMasBarato extends ValidacionDeOperaciones{
 	
 	public boolean operacionValida(OperacionDeEgreso operacion) {
-		return operacion.getPresupuestosMinimos()==0 ||
-				(operacion.getPresupuestoElegido()!=null &&
+		return (operacion.getPresupuestoElegido()!=null &&
 				operacion.menorPrecioDePresupuestos().equals(operacion.valorTotalDelPresupuestoElegido()));
 	}
 	public ValidarQueSeHayaElegidoElPresupuestoMasBarato(){

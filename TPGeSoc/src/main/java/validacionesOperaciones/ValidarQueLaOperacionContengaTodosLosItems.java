@@ -12,9 +12,8 @@ import javax.persistence.Entity;
 public class ValidarQueLaOperacionContengaTodosLosItems extends ValidacionDeOperaciones {
 
 	public boolean operacionValida(OperacionDeEgreso operacion) {
-		return operacion.getPresupuestosMinimos() == 0 ||
-				(operacion.getPresupuestoElegido()!=null &&
-				operacion.contieneItemsDelPrespuestoElegido());
+		return (operacion.getPresupuestoElegido()!=null &&
+						operacion.contieneItemsDelPrespuestoElegido());
 	}
 
 	public ValidarQueLaOperacionContengaTodosLosItems(){
