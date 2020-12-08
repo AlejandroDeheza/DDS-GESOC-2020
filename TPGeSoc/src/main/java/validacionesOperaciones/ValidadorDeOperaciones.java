@@ -17,7 +17,6 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 	public void run() {
 		
 		System.out.println("Ejecutando validacion de compras...");
-		//ValidadorDeOperaciones validador = new ValidadorDeOperaciones();
 		validarComprasPendientes();
 	    System.out.println("Compras validadas.\n");
 	}
@@ -48,6 +47,8 @@ public class ValidadorDeOperaciones implements Runnable, WithGlobalEntityManager
 		Runnable tareaAEjecutar = new ValidadorDeOperaciones();
 		int delayInicial = (24-LocalDateTime.now().getHour())*3600 - LocalDateTime.now().getMinute()*60 - LocalDateTime.MAX.getSecond();
 		int delayPeriodico = 86400;
+		System.out.println("Iniciando validador de operaciones");
+		System.out.println("La validación se ejecutará dentro de "+ delayInicial + " segundos");
 		scheduler.scheduleAtFixedRate(tareaAEjecutar, delayInicial, delayPeriodico, TimeUnit.SECONDS);
 	}
 	
