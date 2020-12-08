@@ -10,9 +10,11 @@ function show2(){
 
 function showPresupuestosMinimos(){
     document.getElementById('presupuestosMinimos').style.display ='block';
+    document.getElementById('campoPresupuestos').setAttribute("required","")
 }
 function hidePresupuestosMinimos(){
     document.getElementById('presupuestosMinimos').style.display ='none';
+    document.getElementById('campoPresupuestos').removeAttribute("required");
 }
 
 function showLoader(){
@@ -85,5 +87,14 @@ function deleteField(html) {
         element4.parentNode.removeChild(element4);
         i--;
     }
+}
+
+function chequearCantidadItems(){
+    if(i==0){
+        document.getElementById("erroritems").style.display='block';
+        return false;
+    }
+    else
+        return true;
 }
 

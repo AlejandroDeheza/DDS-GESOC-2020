@@ -274,8 +274,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         modelo.put("operacionID", request.params(":idOperacion"));
 
         List<Presupuesto> presupuestos = RepositorioOperaciones.instance().buscar(Long.parseLong(request.params(":idOperacion"))).getPresupuestos();
-        System.out.println(presupuestos.get(0).displayName);
-
+        //System.out.println(presupuestos.get(0).displayName);
         modelo.put("presupuestos", presupuestos);
 
         return new ModelAndView(modelo,"formulario-cambio-presupuesto-elegido.html.hbs");

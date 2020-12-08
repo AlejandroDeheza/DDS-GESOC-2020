@@ -37,7 +37,7 @@
 
         <div>
             {{#documentoComercial}}
-            <span>Documento comercial: </span><br>
+            <span>Tipo documento comercial: </span><br>
                 <span>{{tipoDoc}}</span>
             {{/documentoComercial}}
         </div><br>
@@ -65,19 +65,27 @@
 
         <div>
             <span>Presupuestos: </span><br>
-            <ul>
-                {{#presupuestos}}
+            {{#presupuestos}}
+                <ul>
                     <li>{{id}} - {{displayName}}</li>
-                {{/presupuestos}}
-            </ul>
-           <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/nuevoPresupuesto" class="redStyle">Agregar Presupuesto</a>
+                </ul>
+            {{else}}
+                <span>Ninguno</span>
+            {{/presupuestos}}
         </div><br>
 
         <div>
-            {{#presupuestoElegido}}
+            <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/nuevoPresupuesto" class="redStyle">Agregar Presupuesto</a>
+        </div><br>
+
+        <div>
             <span>Presupuesto elegido:</span><br>
+            {{#presupuestoElegido}}
                 <span>{{id}}</span>
+            {{else}}
+                <span>Ninguno</span>
             {{/presupuestoElegido}}
+
         </div><br>
         <div>
             <a href="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/cambioPresupuestoElegido" class="redStyle">
@@ -87,12 +95,13 @@
 
         <div>
             <span>Revisores:</span><br>
+            {{#revisores}}
             <ul>
-                {{#revisores}}
-                    <li>{{username}}</li>
-                {{/revisores}}
+                <li>{{username}}</li>
             </ul>
-
+            {{else}}
+                <span>Ninguno</span>
+            {{/revisores}}
         </div>
         {{#if usuarioEsRevisor}}
             <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/bajaRevisor" method="POST">
@@ -106,20 +115,24 @@
 
         <div>
             <span>Validaciones: </span><br>
+            {{#validaciones}}
             <ul>
-                {{#validaciones}}
-                    <li>{{descripcion}}</li>
-                {{/validaciones}}
+                <li>{{descripcion}}</li>
             </ul>
+            {{else}}
+                <span>Ninguna</span>
+            {{/validaciones}}
         </div><br>
 
         <div>
             <span>Etiquetas:</span><br>
+            {{#etiquetas}}
             <ul>
-                {{#etiquetas}}
-                    <li>{{texto}}</li>
-                {{/etiquetas}}
+                <li>{{texto}}</li>
             </ul>
+            {{else}}
+                <span>Ninguna</span>
+            {{/etiquetas}}
         </div><br>
 
         <div>

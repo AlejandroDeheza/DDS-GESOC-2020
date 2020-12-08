@@ -26,7 +26,7 @@
 
     <section class="fondo-gris">
         <h2>Nuevo presupuesto</h2>
-        <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}/nuevoPresupuesto" method="POST">
+        <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}/nuevoPresupuesto" method="POST" onsubmit="return chequearCantidadItems()">
             <div>
                <span class="nombre-campo">Proveedor: </span><br>
                <select name="proveedor">
@@ -54,6 +54,10 @@
                 <div id="items">
                 </div>
                 <button type="button" class="redStyle" onclick="crearItem()">  Agregar nuevo item +</button>
+            </div><br>
+
+            <div id="erroritems" style="display:none">
+                <span style="color:#c30303">El presupuesto debe contener al menos un item</span>
             </div><br>
 
             <input type="submit" value="Crear presupuesto" class="redStyle">

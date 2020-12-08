@@ -22,7 +22,7 @@
 
     <section class="fondo-gris">
         <h2>Nueva operación de egreso</h2>
-        <form action="/organizaciones/{{organizacion}}/entidades/{{entidad}}/operaciones" method="POST">
+        <form action="/organizaciones/{{organizacion}}/entidades/{{entidad}}/operaciones" method="POST" onsubmit="return chequearCantidadItems()">
             <div class="campo">
                 <span class="nombre-campo">Fecha: </span><br>
                 <input type="date" name="fecha" required>
@@ -69,7 +69,7 @@
                 <label><input onclick="checkAddress(this);" class="checkbox" type="checkbox" name="cantidadMinima" value="seleccionado"/>Validar que la operación tenga cargada la cantidad mínima definida de presupuestos</label><br>
                 <div class="hide" id="presupuestosMinimos">
                     <span class="nombre-campo">Presupuestos mínimos: </span>
-                    <input type="number" name="presupuestosMinimos" placeholder="Ejemplo: 1">
+                    <input type="number" id="campoPresupuestos" name="presupuestosMinimos" placeholder="Ejemplo: 1">
                 </div><br>
             </div><br>
 
@@ -90,6 +90,10 @@
                 <label><input type="checkbox" name="revisor" value="seleccionado">Agregarme como revisor</label>
             </div>
 
+            <div id="erroritems" style="display:none">
+                <span style="color:#c30303">La operación debe contener al menos un item</span>
+            </div><br>
+            
             <input type="submit" value="Crear operación" class="redStyle">
         </form>
 
