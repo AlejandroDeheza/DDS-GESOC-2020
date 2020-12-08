@@ -65,13 +65,16 @@
 
         <div>
             <span>Presupuestos: </span><br>
-            {{#presupuestos}}
+            {{#if presupuestos}}
                 <ul>
-                    <li>{{id}} - {{displayName}}</li>
+                     {{#presupuestos}}
+                        <li>{{id}} - {{displayName}}</li>
+                     {{/presupuestos}}
                 </ul>
             {{else}}
                 <span>Ninguno</span>
-            {{/presupuestos}}
+            {{/if}}
+
         </div><br>
 
         <div>
@@ -95,13 +98,16 @@
 
         <div>
             <span>Revisores:</span><br>
-            {{#revisores}}
+            {{#if revisores}}
             <ul>
-                <li>{{username}}</li>
+                {{#revisores}}
+                    <li>{{username}}</li>
+                 {{/revisores}}
             </ul>
             {{else}}
                 <span>Ninguno</span>
-            {{/revisores}}
+            {{/if}}
+
         </div>
         {{#if usuarioEsRevisor}}
             <form  action="/organizaciones/{{idOrg}}/entidades/{{idEntidad}}/operaciones/{{idOperacion}}/bajaRevisor" method="POST">
@@ -115,24 +121,28 @@
 
         <div>
             <span>Validaciones: </span><br>
-            {{#validaciones}}
+            {{#if validaciones}}
             <ul>
-                <li>{{descripcion}}</li>
+                {{#validaciones}}
+                   <li>{{descripcion}}</li>
+                {{/validaciones}}
             </ul>
             {{else}}
                 <span>Ninguna</span>
-            {{/validaciones}}
+            {{/if}}
         </div><br>
 
         <div>
             <span>Etiquetas:</span><br>
-            {{#etiquetas}}
+            {{#if etiquetas}}
             <ul>
-                <li>{{texto}}</li>
+                {{#etiquetas}}
+                    <li>{{texto}}</li>
+                {{/etiquetas}}
             </ul>
             {{else}}
                 <span>Ninguna</span>
-            {{/etiquetas}}
+            {{/if}}
         </div><br>
 
         <div>

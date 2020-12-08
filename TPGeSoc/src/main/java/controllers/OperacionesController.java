@@ -163,9 +163,11 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
                 revisores.add(RepositorioUsuarios.instance().obtenerUsuario(request.session().attribute("idUsuario")));
             }
 
-            EtiquetaOperacion etiqueta = new EtiquetaOperacion(request.queryParams("etiqueta"));
             List<EtiquetaOperacion> etiquetas = new ArrayList<>();
-            etiquetas.add(etiqueta);
+            if(request.queryParams("etiqueta")!=null && !request.queryParams("etiqueta").equals("")) {
+                EtiquetaOperacion etiqueta = new EtiquetaOperacion(request.queryParams("etiqueta"));
+                etiquetas.add(etiqueta);
+            }
 
             List<Item> items;
             String currency = request.queryParams("currency");

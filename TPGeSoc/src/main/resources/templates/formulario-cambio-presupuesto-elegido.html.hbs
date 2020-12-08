@@ -28,16 +28,19 @@
         <h2>Cambio del presupuesto elegido</h2>
         <form action="/organizaciones/{{organizacionID}}/entidades/{{entidadID}}/operaciones/{{operacionID}}/cambioPresupuestoElegido" method="POST">
             <div>
-               <span class="nombre-campo">Presupuestos: </span><br>
-                {{#presupuestos}}
+                {{#if presupuestos}}
+                    <span class="nombre-campo">Presupuesto a elegir: </span><br>
                     <select name="presupuestoElegido">
-                        <option value={{id}}>{{id}} - {{displayName}}</option>
+                        {{#presupuestos}}
+                            <option value={{id}}>{{id}} - {{displayName}}</option>
+                        {{/presupuestos}}
                      </select><br><br>
-                    <input type="submit" value="Cambiar" class="redStyle">
+                     <input type="submit" value="Cambiar" class="redStyle">
                 {{else}}
                     <span>No hay presupuestos cargados para la operación seleccionada</span><br><br>
                     <input type="button" value="← Volver a la operación" class="redStyle" onclick="history.back()">
-                {{/presupuestos}}
+                {{/if}}
+
             </div><br>
 
         </form>
