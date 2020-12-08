@@ -170,7 +170,7 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
             List<Item> items;
             String currency = request.queryParams("currency");
 
-            items = obtenerItems(request, currency);
+            items = obtenerItems(request,response, currency);
 
 
             nuevaOperacion.setDocumentoComercial(docComercial);
@@ -206,8 +206,8 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
         }
     }
 
-    public List<Item> obtenerItems(Request request,String currency) {
-        List<Item> items = new ArrayList<>();
+    public List<Item> obtenerItems(Request request,Response response,String currency) {
+        List<Item> items = new ArrayList<Item>();
 
         for(int i = 0; i < 10; i++){
             String descripcion = request.queryParams(("itemD"+i));
@@ -218,6 +218,10 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
                                   ,descripcion));
             }
         }
+
+        if(items.isEmpty())
+            response.redirect("/error");
+        
         return items;
     }
 
@@ -242,11 +246,11 @@ public class OperacionesController implements WithGlobalEntityManager, Transacti
     public ModelAndView crearPresupuesto(Request request, Response response){
 
         String currency = request.queryParams("currency");
-        List<Item> items = obtenerItems(request,currency);
+        List<Item> items = obtenerItems(request,response,currency);
         DocumentoComercial docComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("documentoComercial")));
         Proveedor proveedor = RepositorioProveedores.instance().buscar(Long.parseLong(request.queryParams("proveedor")));
 
-        Presupuesto presupuesto = new Presupuesto(items,docComercial,proveedor);
+        Presupuesto presupuesto = new Presupuesto(items, docComercial, proveedor);
 
         OperacionDeEgreso operacionAsociada = RepositorioOperaciones.instance().buscar(Long.parseLong(request.params(":idOperacion")));
         operacionAsociada.agregarPresupuesto(presupuesto);

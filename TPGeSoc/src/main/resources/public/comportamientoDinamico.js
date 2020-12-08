@@ -45,6 +45,8 @@ function crearItem() {
         textField.classList.add("nombre-campo");
         numberField.classList.add("nombre-campo");
         deleteButton.classList.add("delete");
+        textField.required = true;
+        numberField.required = true;
 
         textField.id = 'itemD ' + i;
         textField.setAttribute('name', ('itemD' + i));
