@@ -1,11 +1,35 @@
 function show1(){
     document.getElementById('div1').style.display ='block';
     document.getElementById('div2').style.display ='none';
+
+    document.getElementById('razonSocial').setAttribute("required","");
+    document.getElementById('cuit').setAttribute("required","");
+    document.getElementById('codigoigj').setAttribute("required","");
+    document.getElementById('provincia').setAttribute("required","");
+    document.getElementById('ciudad').setAttribute("required","");
+    document.getElementById('calle').setAttribute("required","");
+    document.getElementById('altura').setAttribute("required","");
+    document.getElementById('piso').setAttribute("required","");
+    document.getElementById('departamento').setAttribute("required","");
+
+    document.getElementById('descripcion').removeAttribute("required");
 }
 
 function show2(){
     document.getElementById('div2').style.display ='block';
     document.getElementById('div1').style.display ='none';
+
+    document.getElementById('razonSocial').removeAttribute("required");
+    document.getElementById('cuit').removeAttribute("required");
+    document.getElementById('codigoigj').removeAttribute("required");
+    document.getElementById('provincia').removeAttribute("required");
+    document.getElementById('ciudad').removeAttribute("required");
+    document.getElementById('calle').removeAttribute("required");
+    document.getElementById('altura').removeAttribute("required");
+    document.getElementById('piso').removeAttribute("required");
+    document.getElementById('departamento').removeAttribute("required");
+
+    document.getElementById('descripcion').setAttribute("required","");
 }
 
 function showPresupuestosMinimos(){
@@ -68,6 +92,7 @@ function crearItem() {
         container.appendChild(bro);
         i++;
     }
+    document.getElementById("erroritems").style.display='none';
 }
 
 function deleteField(html) {
