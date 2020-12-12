@@ -23,8 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c08e7a77-2449-448f-ace3-7a0dfa24e5e7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/db/ContextTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/db/ContextTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +78,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -137,7 +140,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in TPGeSocGrupo6 (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in TPGeSocGrupo6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TPGeSocGrupo6" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -145,10 +148,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in TPGeSocGrupo6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ContextTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TPGeSocGrupo6" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="db.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="db" />
+      <option name="MAIN_CLASS_NAME" value="db.ContextTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,16 +168,16 @@
       <item itemvalue="Application.Bootstrap" />
       <item itemvalue="Application.ValidadorDeOperaciones" />
       <item itemvalue="JUnit.All in TPGeSocGrupo6 (2)" />
-      <item itemvalue="JUnit.All in TPGeSocGrupo6 (3)" />
       <item itemvalue="JUnit.All in TPGeSocGrupo6" />
+      <item itemvalue="JUnit.ContextTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Bootstrap" />
+        <item itemvalue="JUnit.ContextTest" />
         <item itemvalue="JUnit.All in TPGeSocGrupo6 (2)" />
         <item itemvalue="Application.ValidadorDeOperaciones" />
         <item itemvalue="JUnit.All in TPGeSocGrupo6" />
-        <item itemvalue="JUnit.All in TPGeSocGrupo6 (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -219,7 +229,7 @@
       <workItem from="1607464668749" duration="2536000" />
       <workItem from="1607563233021" duration="176000" />
       <workItem from="1607708741181" duration="1541000" />
-      <workItem from="1607792561914" duration="922000" />
+      <workItem from="1607792561914" duration="3420000" />
     </task>
     <servers />
   </component>
@@ -274,34 +284,34 @@
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605044284394" />
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607192107445" />
-    <state width="1877" height="289" key="GridCell.Tab.0.bottom" timestamp="1607723181810">
+    <state width="1877" height="289" key="GridCell.Tab.0.bottom" timestamp="1607795767541">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="150" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1607448084065" />
     <state width="518" height="262" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270072" />
-    <state width="1877" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607723181810" />
-    <state width="1877" height="289" key="GridCell.Tab.0.center" timestamp="1607723181810">
+    <state width="1877" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607795767541" />
+    <state width="1877" height="289" key="GridCell.Tab.0.center" timestamp="1607795767540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="150" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1607448084065" />
     <state width="518" height="262" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270071" />
-    <state width="1877" height="289" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607723181810" />
-    <state width="1877" height="289" key="GridCell.Tab.0.left" timestamp="1607723181810">
+    <state width="1877" height="289" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607795767540" />
+    <state width="1877" height="289" key="GridCell.Tab.0.left" timestamp="1607795767540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="150" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1607448084065" />
     <state width="518" height="262" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270071" />
-    <state width="1877" height="289" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607723181810" />
-    <state width="1877" height="289" key="GridCell.Tab.0.right" timestamp="1607723181810">
+    <state width="1877" height="289" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607795767540" />
+    <state width="1877" height="289" key="GridCell.Tab.0.right" timestamp="1607795767540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="150" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607448084065" />
     <state width="518" height="262" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.-387.1080.1878@-1080.-387.1080.1878" timestamp="1606530018585" />
     <state width="1502" height="422" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1607284270072" />
-    <state width="1877" height="289" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607723181810" />
+    <state width="1877" height="289" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607795767540" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1607467635312">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -334,10 +344,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="775" y="454" key="ReplaceDuplicatesPrompt/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1605299784268" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1604549625293">
+    <state x="440" y="94" key="SettingsEditor" timestamp="1607795321441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040/-1080.-387.1080.1878@0.0.1920.1040" timestamp="1604549625293" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607795321441" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605298905204">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
